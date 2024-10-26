@@ -1,0 +1,12 @@
+[
+  {
+    "Cashflow": {
+      "Cashflow_Id": "1",
+      "Cashflow_Version": 1,
+      "Cashflow_State": "WAITING",
+      "Payment_Currency": "CNO",
+      "Payment_Date": "2022-01-01",
+      "Payment_Amount": 1000
+    }
+  }
+]

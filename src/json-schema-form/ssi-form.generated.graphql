@@ -1,0 +1,311 @@
+type Then {
+  required: [String]
+}
+
+type If {
+  properties: Properties
+}
+
+type AllOf {
+  then: Then
+  if: If
+}
+
+type PatternBicCode {
+  pattern: String
+}
+
+type PatternAlphaBetNumberSpace {
+  pattern: String
+}
+
+type Definitions {
+  patternBicCode: PatternBicCode
+  patternAlphaBetNumberSpace: PatternAlphaBetNumberSpace
+}
+
+type Tpp {
+  type: String
+}
+
+type CoveredPayment {
+  type: String
+}
+
+type SettlementAccount {
+  type: String
+  maxLength: Int
+}
+
+type SettlementMeans {
+  type: String
+  enum: [String]
+}
+
+type SsiType {
+  type: String
+  enum: [String]
+}
+
+type SwiftType {
+  type: String
+  default: String
+  enum: [String]
+}
+
+type SenderToReceiver6 {
+  type: String
+  maxLength: Int
+}
+
+type SenderToReceiver5 {
+  type: String
+  maxLength: Int
+}
+
+type SenderToReceiver4 {
+  type: String
+  maxLength: Int
+}
+
+type SenderToReceiver3 {
+  type: String
+  maxLength: Int
+}
+
+type SenderToReceiver2 {
+  type: String
+  maxLength: Int
+}
+
+type SenderToReceiver1 {
+  type: String
+  maxLength: Int
+}
+
+type RemittanceInfomation4 {
+  type: String
+  maxLength: Int
+}
+
+type RemittanceInfomation3 {
+  type: String
+  maxLength: Int
+}
+
+type RemittanceInfomation2 {
+  type: String
+  maxLength: Int
+}
+
+type RemittanceInfomation1 {
+  type: String
+  maxLength: Int
+}
+
+type ReceiversCorrespondentBic {
+  type: String
+  ref: String
+}
+
+type ReceiversCorrespondentAccount {
+  type: String
+  ref: String
+}
+
+type ReceiversCorrespondentCity {
+  type: String
+  ref: String
+}
+
+type ReceiversCorrespondentName {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type ReceiversCorrespondentAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type OrderCustomerName {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type OrderCustomerAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type OrderCustomerCity {
+  type: String
+  ref: String
+}
+
+type OrderCustomerBic {
+  type: String
+  ref: String
+}
+
+type OrderCustomerAccount {
+  type: String
+  minLength: Int
+  maxLength: Int
+  ref: String
+}
+
+type IntermediaryName {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type IntermediaryPostcode {
+  type: String
+  ref: String
+}
+
+type IntermediaryBic {
+  type: String
+  ref: String
+}
+
+type IntermediaryAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type IntermediaryAccount {
+  type: String
+}
+
+type Charges {
+  type: String
+  enum: [String]
+}
+
+type BeneficiaryName2 {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type BeneficiaryName {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type BeneficiaryBic {
+  type: String
+  ref: String
+}
+
+type BeneficiaryAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type BeneficiaryAccount {
+  type: String
+  minLength: Int
+  maxLength: Int
+  ref: String
+}
+
+type AccountWithInstitutionName {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type AccountWithInstitutionCity {
+  type: String
+  ref: String
+}
+
+type AccountWithInstitutionBic {
+  type: String
+  ref: String
+}
+
+type AccountWithInstitutionAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type AccountWithInstitutionAccount {
+  type: String
+  ref: String
+}
+
+type Properties {
+  tpp: Tpp
+  coveredPayment: CoveredPayment
+  settlementAccount: SettlementAccount
+  settlementMeans: SettlementMeans
+  ssiType: SsiType
+  swiftType: SwiftType
+  senderToReceiver6: SenderToReceiver6
+  senderToReceiver5: SenderToReceiver5
+  senderToReceiver4: SenderToReceiver4
+  senderToReceiver3: SenderToReceiver3
+  senderToReceiver2: SenderToReceiver2
+  senderToReceiver1: SenderToReceiver1
+  remittanceInfomation4: RemittanceInfomation4
+  remittanceInfomation3: RemittanceInfomation3
+  remittanceInfomation2: RemittanceInfomation2
+  remittanceInfomation1: RemittanceInfomation1
+  receiversCorrespondentBic: ReceiversCorrespondentBic
+  receiversCorrespondentAccount: ReceiversCorrespondentAccount
+  receiversCorrespondentCity: ReceiversCorrespondentCity
+  receiversCorrespondentName: ReceiversCorrespondentName
+  receiversCorrespondentAddress: ReceiversCorrespondentAddress
+  orderCustomerName: OrderCustomerName
+  orderCustomerAddress: OrderCustomerAddress
+  orderCustomerCity: OrderCustomerCity
+  orderCustomerBic: OrderCustomerBic
+  orderCustomerAccount: OrderCustomerAccount
+  intermediaryName: IntermediaryName
+  intermediaryPostcode: IntermediaryPostcode
+  intermediaryBic: IntermediaryBic
+  intermediaryAddress: IntermediaryAddress
+  intermediaryAccount: IntermediaryAccount
+  charges: Charges
+  beneficiaryName2: BeneficiaryName2
+  beneficiaryName: BeneficiaryName
+  beneficiaryBic: BeneficiaryBic
+  beneficiaryAddress: BeneficiaryAddress
+  beneficiaryAccount: BeneficiaryAccount
+  accountWithInstitutionName: AccountWithInstitutionName
+  accountWithInstitutionCity: AccountWithInstitutionCity
+  accountWithInstitutionBic: AccountWithInstitutionBic
+  accountWithInstitutionAddress: AccountWithInstitutionAddress
+  accountWithInstitutionAccount: AccountWithInstitutionAccount
+}
+
+type AutogeneratedMainType {
+  schema: String
+  type: String
+  allOf: [AllOf]
+  definitions: Definitions
+  required: [String]
+  properties: Properties
+}
+
+# Types with identical fields:
+# PatternBicCode PatternAlphaBetNumberSpace
+# Tpp CoveredPayment IntermediaryAccount
+# SettlementAccount SenderToReceiver6 SenderToReceiver5 SenderToReceiver4 SenderToReceiver3 SenderToReceiver2 SenderToReceiver1 RemittanceInfomation4 RemittanceInfomation3 RemittanceInfomation2 RemittanceInfomation1
+# SettlementMeans SsiType Charges
+# ReceiversCorrespondentBic ReceiversCorrespondentAccount ReceiversCorrespondentCity OrderCustomerCity OrderCustomerBic IntermediaryPostcode IntermediaryBic BeneficiaryBic AccountWithInstitutionCity AccountWithInstitutionBic AccountWithInstitutionAccount
+# ReceiversCorrespondentName ReceiversCorrespondentAddress OrderCustomerName OrderCustomerAddress IntermediaryName IntermediaryAddress BeneficiaryName2 BeneficiaryName BeneficiaryAddress AccountWithInstitutionName AccountWithInstitutionAddress
+# OrderCustomerAccount BeneficiaryAccount

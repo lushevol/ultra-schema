@@ -1,0 +1,18 @@
+input UltraQueryInput {
+  query: String
+  index: Int
+  offset: Int
+  sorting: [SortModel]
+  rowGroups: [RowGroupModel]
+  groupKeys: [String]
+}
+
+input SortModel {
+  colId: String
+  sort: String
+}
+
+input RowGroupModel {
+  colId: String
+  aggFunc: String
+}

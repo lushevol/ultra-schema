@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "indexedTerm": "Cashflow.Cashflow_Id",
+    "businessTerm": "",
+    "dataType": "String",
+    "subSelection": "Cashflow",
+    "context": ["CASHFLOW_DATA"]
+  },
+  {
+    "id": "2",
+    "indexedTerm": "Cashflow.Cashflow_Version",
+    "businessTerm": "",
+    "dataType": "Integer",
+    "subSelection": "Cashflow",
+    "context": ["CASHFLOW_DATA"]
+  },
+  {
+    "id": "3",
+    "indexedTerm": "Cashflow.Cashflow_State",
+    "businessTerm": "",
+    "dataType": "String",
+    "subSelection": "Cashflow",
+    "context": ["CASHFLOW_DATA"]
+  },
+  {
+    "id": "4",
+    "indexedTerm": "Cashflow.Payment_Date",
+    "businessTerm": "",
+    "dataType": "Date",
+    "subSelection": "Cashflow",
+    "context": ["CASHFLOW_DATA"]
+  },
+  {
+    "id": "5",
+    "indexedTerm": "Cashflow.Payment_Amount",
+    "businessTerm": "",
+    "dataType": "Number",
+    "subSelection": "Cashflow",
+    "context": ["CASHFLOW_DATA"]
+  }
+]

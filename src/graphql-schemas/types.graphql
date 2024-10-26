@@ -1,0 +1,20 @@
+type SettlementSchemaRootType {
+  Cashflow: SettlementCashflowType
+}
+
+type SettlementCashflowType {
+  Cashflow_Id: ID
+  Cashflow_State: CashflowStateEnum
+  Cashflow_Version: Int
+  Payment_Currency: String
+  Payment_Amount: Float
+  Payment_Date: String
+}
+
+enum CashflowStateEnum {
+  WAITING
+  READY
+  QUEUED
+  RELEASED
+  SETTLED
+}

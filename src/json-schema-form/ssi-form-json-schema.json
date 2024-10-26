@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "accountWithInstitutionAccount": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionAddress": {
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionBic": {
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "accountWithInstitutionCity": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionName": {
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "beneficiaryAccount": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 34,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "beneficiaryAddress": {
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "beneficiaryBic": {
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "beneficiaryName": {
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "beneficiaryName2": {
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "charges": {
+      "type": "string",
+      "enum": ["OUR", "SHA", "BEN"]
+    },
+    "intermediaryAccount": {
+      "type": "string"
+    },
+    "intermediaryAddress": {
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "intermediaryBic": {
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "intermediaryPostcode": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "intermediaryName": {
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "orderCustomerAccount": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "orderCustomerBic": {
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "orderCustomerCity": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "orderCustomerAddress": {
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "orderCustomerName": {
+      "type": "string",
+      "maxLength": 70,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentAddress": {
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentName": {
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentCity": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentAccount": {
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentBic": {
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "remittanceInfomation1": {
+      "type": "string",
+      "maxLength": 35
+    },
+    "remittanceInfomation2": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "remittanceInfomation3": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "remittanceInfomation4": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "senderToReceiver1": {
+      "type": "string",
+      "maxLength": 35
+    },
+    "senderToReceiver2": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "senderToReceiver3": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "senderToReceiver4": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "senderToReceiver5": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "senderToReceiver6": {
+      "type": "string",
+      "maxLength": 33
+    },
+    "swiftType": {
+      "type": "string",
+      "default": "MT103",
+      "enum": ["MT103", "MT103 SERIAL", "MT202"]
+    },
+    "ssiType": {
+      "type": "string",
+      "enum": ["Primary", "Secondary"]
+    },
+    "settlementMeans": {
+      "type": "string",
+      "enum": ["CLG", "CLS SUSP", "NOS", "Over-Account", "Non-Nostro"]
+    },
+    "settlementAccount": {
+      "type": "string",
+      "maxLength": 20
+    },
+    "coveredPayment": {
+      "type": "boolean"
+    },
+    "tpp": {
+      "type": "boolean"
+    }
+  },
+  "required": ["settlementAccount", "settlementMeans", "ssiType", "swiftType"],
+  "definitions": {
+    "patternAlphaBetNumberSpace": {
+      "pattern": "^[a-zA-Z0-9 ]*$"
+    },
+    "patternBicCode": {
+      "pattern": "^(([A-Z0-9]{8})|([A-Z0-9]{11}))$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "swiftType": {
+            "const": "MT103"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "accountWithInstitutionBic",
+          "beneficiaryAccount",
+          "beneficiaryAddress",
+          "charges",
+          "orderCustomAccount",
+          "orderCustomAddress",
+          "orderCustomName"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "coveredPayment": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": ["receiversCorrespondentBic"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "swiftType": {
+            "const": "MT202"
+          },
+          "beneficiaryBic": {
+            "pattern": "^$"
+          }
+        }
+      },
+      "then": {
+        "required": ["beneficiaryName"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "swiftType": {
+            "const": "MT202"
+          },
+          "beneficiaryName": {
+            "pattern": "^$"
+          }
+        }
+      },
+      "then": {
+        "required": ["beneficiaryBic"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "swiftType": {
+            "const": "MT202"
+          },
+          "settlementMeans": {
+            "const": "Over-Account"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "beneficiaryAccount": {
+            "description": "Beneficiary Account is mandatory for SCPAY Markets"
+          }
+        },
+        "required": ["beneficiaryAccount"]
+      }
+    }
+  ]
+}

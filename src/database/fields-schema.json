@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "fieldSchemaKey": "Cashflow.Cashflow_Id",
+    "fieldSchemaTitle": "Cashflow Id",
+    "fieldSchemaType": "string",
+    "fieldSchemaFormat": "",
+    "fieldSchemaValues": [],
+    "fieldSchemaValuesType": "",
+    "enable_in": [],
+    "business_config": ""
+  },
+  {
+    "id": "2",
+    "fieldSchemaKey": "Cashflow.Cashflow_Version",
+    "fieldSchemaTitle": "Cashflow Version",
+    "fieldSchemaType": "integer",
+    "fieldSchemaFormat": "",
+    "fieldSchemaValues": [],
+    "fieldSchemaValuesType": "",
+    "enable_in": [],
+    "business_config": ""
+  },
+  {
+    "id": "3",
+    "fieldSchemaKey": "Cashflow.Cashflow_State",
+    "fieldSchemaTitle": "Cashflow State",
+    "fieldSchemaType": "string",
+    "fieldSchemaFormat": "",
+    "fieldSchemaValues": ["WAITING", "READY", "RELEASED", "QUEUED", "SETTLED"],
+    "fieldSchemaValuesType": "enum",
+    "enable_in": [],
+    "business_config": ""
+  },
+  {
+    "id": "4",
+    "fieldSchemaKey": "Cashflow.Payment_Date",
+    "fieldSchemaTitle": "Payment Date",
+    "fieldSchemaType": "string",
+    "fieldSchemaFormat": "date",
+    "fieldSchemaValues": [],
+    "fieldSchemaValuesType": "",
+    "enable_in": [],
+    "business_config": ""
+  },
+  {
+    "id": "5",
+    "fieldSchemaKey": "Cashflow.Payment_Amount",
+    "fieldSchemaTitle": "Amount",
+    "fieldSchemaType": ["number", "string"],
+    "fieldSchemaFormat": "",
+    "fieldSchemaValues": [],
+    "fieldSchemaValuesType": "",
+    "enable_in": [],
+    "business_config": ""
+  },
+  {
+    "id": "6",
+    "fieldSchemaKey": "Cashflow.Payment_Currency",
+    "fieldSchemaTitle": "CCY",
+    "fieldSchemaType": "string",
+    "fieldSchemaFormat": "",
+    "fieldSchemaValues": ["CNO", "HKD", "USD", "EUR"],
+    "fieldSchemaValuesType": "examples",
+    "enable_in": [],
+    "business_config": ""
+  }
+]

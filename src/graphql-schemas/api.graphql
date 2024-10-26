@@ -1,0 +1,12 @@
+type Query {
+  cashflows(queryCriteria: UltraQueryInput!): ResultPageInfo
+  cashflow(cashflowId: ID!): SettlementSchemaRootType
+}
+
+type ResultPageInfo {
+  total: Int
+  index: Int
+  offset: Int
+  latest: Boolean
+  data: [SettlementSchemaRootType]
+}
