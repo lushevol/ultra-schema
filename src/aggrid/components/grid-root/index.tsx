@@ -1,15 +1,18 @@
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { ServerSideRowModelModule } from '@ag-grid-enterprise/server-side-row-model';
+import { AdvancedFilterModule } from '@ag-grid-enterprise/advanced-filter';
 // Theme
 import { type ColDef, ModuleRegistry } from '@ag-grid-community/core';
-import { AgGridReact } from '@ag-grid-community/react';
+import { AgGridReact, type AgGridReactProps } from '@ag-grid-community/react';
 // React Grid Logic
 import '@ag-grid-community/styles/ag-grid.css';
 // Core CSS
 import '@ag-grid-community/styles/ag-theme-quartz.css';
-import type { MyAgGridProps } from '../../types';
 import { Box, css, styled } from '@mui/material';
 
-ModuleRegistry.registerModules([ClientSideRowModelModule]);
+ModuleRegistry.registerModules([
+  ServerSideRowModelModule,
+  AdvancedFilterModule,
+]);
 
 const defaultColDef: ColDef = {
   flex: 1,
@@ -26,17 +29,13 @@ const Wrapper = styled(Box)(
 );
 
 // Create new GridExample component
-const MyAgGridRoot = <T,>({ rowData = [], colDefs = [] }: MyAgGridProps<T>) => {
+const MyAgGridRoot = <T,>(props: AgGridReactProps<T>) => {
   return (
     <Wrapper
       className={'ag-theme-quartz'}
       style={{ width: '100%', height: '100%' }}
     >
-      <AgGridReact<T>
-        rowData={rowData}
-        columnDefs={colDefs}
-        defaultColDef={defaultColDef}
-      />
+      <AgGridReact<T> defaultColDef={defaultColDef} {...props} />
     </Wrapper>
   );
 };

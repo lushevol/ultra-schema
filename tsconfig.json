@@ -1,5 +1,4 @@
 {
-  "extends": "ts-config-single-spa",
   "compilerOptions": {
     "target": "ES2020",
     "lib": ["DOM", "ES2020"],
@@ -10,7 +9,7 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "useDefineForClassFields": true,
     "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true,

@@ -8,5 +8,45 @@
       "Payment_Date": "2022-01-01",
       "Payment_Amount": 1000
     }
+  },
+  {
+    "Cashflow": {
+      "Cashflow_Id": "2",
+      "Cashflow_Version": 1,
+      "Cashflow_State": "WAITING",
+      "Payment_Currency": "CNO",
+      "Payment_Date": "2022-01-01",
+      "Payment_Amount": 1000
+    }
+  },
+  {
+    "Cashflow": {
+      "Cashflow_Id": "3",
+      "Cashflow_Version": 1,
+      "Cashflow_State": "WAITING",
+      "Payment_Currency": "CNO",
+      "Payment_Date": "2022-01-01",
+      "Payment_Amount": 1000
+    }
+  },
+  {
+    "Cashflow": {
+      "Cashflow_Id": "4",
+      "Cashflow_Version": 1,
+      "Cashflow_State": "WAITING",
+      "Payment_Currency": "CNO",
+      "Payment_Date": "2022-01-01",
+      "Payment_Amount": 1000
+    }
+  },
+  {
+    "Cashflow": {
+      "Cashflow_Id": "5",
+      "Cashflow_Version": 1,
+      "Cashflow_State": "WAITING",
+      "Payment_Currency": "CNO",
+      "Payment_Date": "2022-01-01",
+      "Payment_Amount": 1000
+    }
   }
 ]

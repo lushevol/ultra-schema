@@ -4,16 +4,16 @@ import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
 import { produce, type WritableDraft } from 'immer';
 import validator from '@rjsf/validator-ajv8';
-import generatedJsonSchema from '../schema-utils/generate-json-schema-from-ratan-fields';
+import generatedJsonSchema from '../../../schema-utils/generate-json-schema-from-ratan-fields';
 import type { JSONSchema7 } from 'json-schema';
 import { useRef, useState } from 'react';
-import type { SettlementSchemaRootType } from '../rtk-query/types.generated';
+import type { SettlementSchemaRootType } from '../../../rtk-query/types.generated';
 import ssi_form_json_schema from './ssi-form-json-schema.json';
 import ssi_form_ui_schema from './ssi-form-ui-schema.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
 import ssiFormMockData from './ssi-form-mock.generated.json';
-import { templates } from './templates';
-import { widgets } from './widgets';
+import { templates } from '../../templates';
+import { widgets } from '../../widgets';
 
 // const schema = produce(generatedJsonSchema, (draft) => {
 //   (
@@ -80,7 +80,7 @@ export const RSJFDemo = () => {
         },
         wrapperCol: {
           span: 16,
-        }
+        },
       }}
     />
   );
