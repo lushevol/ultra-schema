@@ -5,19 +5,22 @@ import { aggridFilterToOpenSearchFilter } from '../../../blotter-query/utils/agg
 export const serverSideDataSource: IServerSideDatasource = {
   getRows(params) {
     const { api, context, request, success, fail } = params;
-    console.log(params);
+    const queryFields = api.getColumns()?.map((col) => col.getColId()) || [];
     const pageSize = api.paginationGetPageSize();
     const pageNo = api.paginationGetCurrentPage();
     mockOpenSearchQuery({
-      filter: aggridFilterToOpenSearchFilter(request.filterModel),
-      sort: [],
-      index: pageNo,
-      size: pageSize,
+      filters: aggridFilterToOpenSearchFilter(request.filterModel),
+      orderArgs: [],
+      pagingOption: 'PAGE_INDEX',
+      cursor: '',
+      pageIndex: pageNo,
+      itermsPerPage: pageSize,
+      queryFields,
     })
       .then((result) => {
         success({
-          rowData: result.data,
-          rowCount: result.total,
+          rowData: result.results,
+          rowCount: result.totalResult,
         });
       })
       .catch((error) => {

@@ -1,34 +1,49 @@
 import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
 
 export type OpenSearchQuery = {
-  filter: FilterModel;
-  sort: SortModel[];
-  size: number;
-  index: number;
+  filters: FilterModel;
+  queryFields: string[];
+  orderArgs: SortModel[];
+  pagingOption: 'CURSOR' | 'PAGE_INDEX' | 'NO_PAGINATION';
+  cursor: string;
+  itermsPerPage: number;
+  pageIndex: number;
 };
 
 type combinator = 'and' | 'or';
 
-type FilterModel = {
-  [c in combinator]?: (FilterModel | FilterItem)[];
-};
+type FilterModel =
+  | {
+      [c in combinator]?: (FilterModel | { filter: FilterItem[] })[];
+    }
+  | {
+      filter: FilterItem;
+    };
 
-type FilterItem = {
+export type FilterItem = {
   field: string;
   operator: FilterOperator;
   values: Value[];
 };
 
-type Value = string | number | boolean;
+type Value = string;
 
-type FilterOperator = 'EQ' | 'NE' | 'GT' | 'LT' | 'GTE' | 'LTE';
+export type FilterOperator = 'EQ' | 'NE' | 'GT' | 'LT' | 'GTE' | 'LTE' | 'LIKE';
 
 type SortModel = {
-  field: string;
-  order: 'asc' | 'desc';
+  orderField: string;
+  orderType: 'ASC' | 'DESC';
 };
 
+type ResultCursorType = {
+  previous: string;
+  next: string;
+} | null;
+
 export type OpenSearchResult = {
-  total: number;
-  data: SettlementSchemaRootType[];
+  totalResult: number;
+  pageIndex: number;
+  itermsPerPage: number;
+  pagingCursors: ResultCursorType;
+  results: SettlementSchemaRootType[];
 };
