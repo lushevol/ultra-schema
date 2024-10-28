@@ -1,9 +1,9 @@
 import { ratanFields2JsonSchema } from './ratan-fields-json-schema';
-import type { FieldSchemaType } from '../database/field';
+import type { RatanFieldSchemaType } from '../database/field';
 
 describe('ratanFields2JsonSchema', () => {
-  it('should return an empty schema for an empty list of FieldSchemaType objects', () => {
-    const rfs: FieldSchemaType[] = [];
+  it('should return an empty schema for an empty list of RatanFieldSchemaType objects', () => {
+    const rfs: RatanFieldSchemaType[] = [];
     const schema = ratanFields2JsonSchema(rfs);
     expect(schema).toEqual({
       type: 'object',
@@ -11,8 +11,8 @@ describe('ratanFields2JsonSchema', () => {
     });
   });
 
-  it('should return a schema with a single property for a single FieldSchemaType object', () => {
-    const rfs: FieldSchemaType[] = [
+  it('should return a schema with a single property for a single RatanFieldSchemaType object', () => {
+    const rfs: RatanFieldSchemaType[] = [
       {
         fieldSchemaKey: 'foo',
         fieldSchemaType: 'string',
@@ -36,8 +36,8 @@ describe('ratanFields2JsonSchema', () => {
     });
   });
 
-  it('should return a schema with multiple properties for multiple FieldSchemaType objects', () => {
-    const rfs: FieldSchemaType[] = [
+  it('should return a schema with multiple properties for multiple RatanFieldSchemaType objects', () => {
+    const rfs: RatanFieldSchemaType[] = [
       {
         fieldSchemaKey: 'foo',
         fieldSchemaType: 'string',
@@ -75,8 +75,8 @@ describe('ratanFields2JsonSchema', () => {
     });
   });
 
-  it('should return a schema with nested properties for nested FieldSchemaType objects', () => {
-    const rfs: FieldSchemaType[] = [
+  it('should return a schema with nested properties for nested RatanFieldSchemaType objects', () => {
+    const rfs: RatanFieldSchemaType[] = [
       {
         fieldSchemaKey: 'foo.bar',
         fieldSchemaType: 'string',
@@ -105,8 +105,8 @@ describe('ratanFields2JsonSchema', () => {
     });
   });
 
-  it('should return a schema with enum values for FieldSchemaType objects having enum values', () => {
-    const rfs: FieldSchemaType[] = [
+  it('should return a schema with enum values for RatanFieldSchemaType objects having enum values', () => {
+    const rfs: RatanFieldSchemaType[] = [
       {
         fieldSchemaKey: 'foo',
         fieldSchemaType: 'string',
@@ -131,8 +131,8 @@ describe('ratanFields2JsonSchema', () => {
     });
   });
 
-  it('should return a schema with different data types for FieldSchemaType objects having different data types', () => {
-    const rfs: FieldSchemaType[] = [
+  it('should return a schema with different data types for RatanFieldSchemaType objects having different data types', () => {
+    const rfs: RatanFieldSchemaType[] = [
       {
         fieldSchemaKey: 'foo',
         fieldSchemaType: 'string',

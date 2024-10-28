@@ -1,5 +1,5 @@
 import type { AgGridEvent } from '@ag-grid-community/core';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type AggridRootType = {
   aggrid: AgGridEvent | null;
@@ -11,8 +11,11 @@ export const aggridSlice = createSlice({
     aggrid: null,
   } as AggridRootType,
   reducers: {
-    setAggridEvent: (state, action) => {
+    setAggridEvent: (state, action: PayloadAction<AgGridEvent>) => {
       state.aggrid = action.payload;
     },
   },
 });
+
+export const { setAggridEvent } = aggridSlice.actions;
+export default aggridSlice.reducer;

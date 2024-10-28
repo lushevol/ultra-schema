@@ -1,13 +1,12 @@
 import Form from '@rjsf/antd';
+import { Form as AntdForm } from 'antd';
 // import Form from '@rjsf/mui';
 import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
-import { produce, type WritableDraft } from 'immer';
+import { produce } from 'immer';
 import validator from '@rjsf/validator-ajv8';
-import generatedJsonSchema from '../../../schema-utils/generate-json-schema-from-ratan-fields';
 import type { JSONSchema7 } from 'json-schema';
 import { useRef, useState } from 'react';
-import type { SettlementSchemaRootType } from '../../../rtk-query/types.generated';
 import ssi_form_json_schema from './ssi-form-json-schema.json';
 import ssi_form_ui_schema from './ssi-form-ui-schema.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
@@ -34,6 +33,7 @@ const log = (type: string) => console.log.bind(console, type);
 
 export const RSJFDemo = () => {
   const formRef = useRef<FormType>(null);
+  const [antdFormRef] = AntdForm.useForm<SsiFormJsonSchema>();
   const [formData, setFormData] = useState<SsiFormJsonSchema>(
     ssiFormMockData as SsiFormJsonSchema,
   );
@@ -59,30 +59,32 @@ export const RSJFDemo = () => {
   };
 
   return (
-    <Form
-      ref={formRef}
-      schema={schema}
-      uiSchema={uiSchema}
-      formData={formData}
-      validator={validator}
-      templates={templates}
-      widgets={widgets}
-      onChange={handleFormDataChange}
-      onSubmit={log('submitted')}
-      onError={log('errors')}
-      autoComplete="off"
-      noHtml5Validate
-      formContext={{
-        descriptionLocation: 'tooltip',
-        readonlyAsDisabled: false,
-        labelCol: {
-          span: 8,
-        },
-        wrapperCol: {
-          span: 16,
-        },
-      }}
-    />
+    <AntdForm form={antdFormRef}>
+      <Form
+        ref={formRef}
+        schema={schema}
+        uiSchema={uiSchema}
+        formData={formData}
+        validator={validator}
+        templates={templates}
+        widgets={widgets}
+        onChange={handleFormDataChange}
+        onSubmit={log('submitted')}
+        onError={log('errors')}
+        autoComplete="off"
+        noHtml5Validate
+        formContext={{
+          descriptionLocation: 'tooltip',
+          readonlyAsDisabled: false,
+          labelCol: {
+            span: 8,
+          },
+          wrapperCol: {
+            span: 16,
+          },
+        }}
+      />
+    </AntdForm>
   );
 };
 

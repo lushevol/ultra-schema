@@ -13,16 +13,16 @@ export type FieldType = {
 
 type FieldSchemaValuesType = 'enum' | 'examples' | '' | null;
 
-export type FieldSchemaType = {
+export type RatanFieldSchemaType = {
   id: string;
   fieldSchemaKey: string;
   fieldSchemaTitle: string;
   fieldSchemaType: JSONSchema7TypeName | JSONSchema7TypeName[]; // json schema type
   fieldSchemaFormat: string; // json schema format
-  fieldSchemaValues: JSONSchema7Type[];
+  fieldSchemaValues: (string | number | boolean)[];
   fieldSchemaValuesType: FieldSchemaValuesType;
-  enable_in: string[];
-  business_config: string; // yaml
+  tags: string[];
+  config: string; // yaml
 };
 
 export type FreeConfigType = {

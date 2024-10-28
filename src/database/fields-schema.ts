@@ -1,4 +1,4 @@
-import type { FieldSchemaType } from './field';
-import FieldsSchemas from './fields-schema.json';
+import type { RatanFieldSchemaType } from './field';
+import RatanFieldsSchemas from './fields-schema.json';
 
-export default FieldsSchemas as FieldSchemaType[];
+export default RatanFieldsSchemas as RatanFieldSchemaType[];

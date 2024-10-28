@@ -1,14 +1,16 @@
 import type { JSONSchema7, JSONSchema7Definition } from 'json-schema';
-import type { FieldSchemaType } from '../database/field';
+import type { RatanFieldSchemaType } from '../database/field';
 
 /**
- * Convert a list of RatanFieldSchemaType objects into a JSON schema
+ * Convert a list of RatanRatanFieldSchemaType objects into a JSON schema
  * This is typically used to generate a JSON schema that describes the
  * structure of the data in the Ratan database.
- * @param rfs - a list of RatanFieldSchemaType objects
+ * @param rfs - a list of RatanRatanFieldSchemaType objects
  * @returns a JSON schema that describes the structure of the fields in rfs
  */
-export const ratanFields2JsonSchema = (rfs: FieldSchemaType[]): JSONSchema7 => {
+export const ratanFields2JsonSchema = (
+  rfs: RatanFieldSchemaType[],
+): JSONSchema7 => {
   const schema: JSONSchema7 = {
     type: 'object',
     properties: {},

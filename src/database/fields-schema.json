@@ -7,8 +7,8 @@
     "fieldSchemaFormat": "",
     "fieldSchemaValues": [],
     "fieldSchemaValuesType": "",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   },
   {
     "id": "2",
@@ -18,8 +18,8 @@
     "fieldSchemaFormat": "",
     "fieldSchemaValues": [],
     "fieldSchemaValuesType": "",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   },
   {
     "id": "3",
@@ -29,8 +29,8 @@
     "fieldSchemaFormat": "",
     "fieldSchemaValues": ["WAITING", "READY", "RELEASED", "QUEUED", "SETTLED"],
     "fieldSchemaValuesType": "enum",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   },
   {
     "id": "4",
@@ -40,8 +40,8 @@
     "fieldSchemaFormat": "date",
     "fieldSchemaValues": [],
     "fieldSchemaValuesType": "",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   },
   {
     "id": "5",
@@ -51,8 +51,8 @@
     "fieldSchemaFormat": "",
     "fieldSchemaValues": [],
     "fieldSchemaValuesType": "",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   },
   {
     "id": "6",
@@ -62,7 +62,7 @@
     "fieldSchemaFormat": "",
     "fieldSchemaValues": ["CNO", "HKD", "USD", "EUR"],
     "fieldSchemaValuesType": "examples",
-    "enable_in": [],
-    "business_config": ""
+    "tags": [],
+    "config": ""
   }
 ]

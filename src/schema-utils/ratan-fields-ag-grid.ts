@@ -1,7 +1,9 @@
 import type { ColDef } from '@ag-grid-community/core';
-import type { FieldSchemaType } from '../../database/field';
+import type { RatanFieldSchemaType } from '../database/field';
 
-export const ratanFields2AgGridCol = (fields: FieldSchemaType[]): ColDef[] => {
+export const ratanFields2AgGridCol = (
+  fields: RatanFieldSchemaType[],
+): ColDef[] => {
   return fields.map((field) => {
     return {
       field: field.fieldSchemaKey,
@@ -13,7 +15,7 @@ export const ratanFields2AgGridCol = (fields: FieldSchemaType[]): ColDef[] => {
   });
 };
 
-const mapFilter = (field: FieldSchemaType): string => {
+const mapFilter = (field: RatanFieldSchemaType): string => {
   switch (field.fieldSchemaType) {
     case 'string':
       switch (field.fieldSchemaFormat) {
