@@ -12,6 +12,7 @@ import {
   addListener,
 } from '@reduxjs/toolkit';
 import { aggridSlice } from './slices/aggrid';
+import { baseApi } from '../rtk-query/baseApi';
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
@@ -20,8 +21,12 @@ const listenerMiddlewareInstance = createListenerMiddleware({
 const store = configureStore({
   reducer: {
     [aggridSlice.name]: aggridSlice.reducer,
+    [baseApi.reducerPath]: baseApi.reducer,
   },
-  middleware: (gDM) => gDM().prepend(listenerMiddlewareInstance.middleware),
+  middleware: (gDM) =>
+    gDM()
+      .prepend(listenerMiddlewareInstance.middleware)
+      .concat(baseApi.middleware),
 });
 
 export { store };

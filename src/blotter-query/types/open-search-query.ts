@@ -5,8 +5,8 @@ export type OpenSearchQuery = {
   queryFields: string[];
   orderArgs: SortModel[];
   pagingOption: 'CURSOR' | 'PAGE_INDEX' | 'NO_PAGINATION';
-  cursor: string;
-  itermsPerPage: number;
+  cursor?: string;
+  itemsPerPage: number;
   pageIndex: number;
 };
 
@@ -47,7 +47,7 @@ type ResultCursorType = {
 export type OpenSearchResult = {
   totalResult: number;
   pageIndex: number;
-  itermsPerPage: number;
+  itemsPerPage: number;
   pagingCursors: ResultCursorType;
   results: SettlementSchemaRootType[];
 };
