@@ -5,9 +5,9 @@ import type {
   IServerSideGetRowsRequest,
   JoinAdvancedFilterModel,
 } from '@ag-grid-community/core';
-import type { FilterItem, OpenSearchQuery } from '../types/open-search-query';
-import { aggridOperator2OsQueryOperator } from '../../schema-utils/query-builder-to-ag-grid-filter';
 import { merge } from 'lodash';
+import { aggridOperator2OsQueryOperator } from '../../schema-utils/query-builder-to-ag-grid-filter';
+import type { FilterItem, OpenSearchQuery } from '../types/open-search-query';
 
 export const aggridFilterToOpenSearchFilter = (
   filter: IServerSideGetRowsRequest['filterModel'],

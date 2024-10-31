@@ -1,18 +1,18 @@
 import Form from '@rjsf/antd';
-import { Form as AntdForm } from 'antd';
 // import Form from '@rjsf/mui';
 import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
-import { produce } from 'immer';
 import validator from '@rjsf/validator-ajv8';
+import { Form as AntdForm } from 'antd';
+import { produce } from 'immer';
 import type { JSONSchema7 } from 'json-schema';
 import { useRef, useState } from 'react';
-import ssi_form_json_schema from './ssi-form-json-schema.json';
-import ssi_form_ui_schema from './ssi-form-ui-schema.json';
-import type { SsiFormJsonSchema } from './ssi-form-types.generated';
-import ssiFormMockData from './ssi-form-mock.generated.json';
 import { templates } from '../../templates';
 import { widgets } from '../../widgets';
+import ssi_form_json_schema from './ssi-form-json-schema.json';
+import ssiFormMockData from './ssi-form-mock.generated.json';
+import type { SsiFormJsonSchema } from './ssi-form-types.generated';
+import ssi_form_ui_schema from './ssi-form-ui-schema.json';
 
 // const schema = produce(generatedJsonSchema, (draft) => {
 //   (

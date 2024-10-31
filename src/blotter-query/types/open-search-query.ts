@@ -44,10 +44,10 @@ type ResultCursorType = {
   next: string;
 } | null;
 
-export type OpenSearchResult = {
+export type OpenSearchResult<T> = {
   totalResult: number;
   pageIndex: number;
   itemsPerPage: number;
   pagingCursors: ResultCursorType;
-  results: SettlementSchemaRootType[];
+  results: T[];
 };

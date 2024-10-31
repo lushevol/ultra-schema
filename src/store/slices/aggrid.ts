@@ -1,5 +1,5 @@
 import type { AgGridEvent } from '@ag-grid-community/core';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type AggridRootType = {
   aggrid: AgGridEvent | null;

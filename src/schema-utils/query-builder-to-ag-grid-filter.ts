@@ -4,7 +4,7 @@ import type {
   TextAdvancedFilterModel,
 } from '@ag-grid-community/core';
 import { filter } from 'lodash';
-import { isRuleGroup, type RuleGroupType } from 'react-querybuilder';
+import { type RuleGroupType, isRuleGroup } from 'react-querybuilder';
 import type { FilterOperator } from '../blotter-query/types/open-search-query';
 
 export const queryBuilder2AgGridFilter = (

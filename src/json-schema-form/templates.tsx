@@ -1,6 +1,6 @@
+import { Templates } from '@rjsf/antd';
 import type { FormProps } from '@rjsf/core';
 import type { FieldTemplateProps } from '@rjsf/utils';
-import { Templates } from '@rjsf/antd';
 
 const FieldTemplate = Templates.FieldTemplate;
 

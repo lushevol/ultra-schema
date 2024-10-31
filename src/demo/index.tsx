@@ -1,9 +1,9 @@
-import { RSJFDemo } from '../json-schema-form/demo/ssi-form';
-import { AgGridWithSchema } from '../aggrid/demo/cashflow-data-grid';
-import { DemoLayout } from './layout';
 import { Provider } from 'react-redux';
-import { store } from '../store';
+import { AgGridWithSchema } from '../aggrid/demo/cashflow-data-grid';
+import { RSJFDemo } from '../json-schema-form/demo/ssi-form';
 import { MyQueryBuilder } from '../query-builder/demo';
+import { store } from '../store';
+import { DemoLayout } from './layout';
 
 export const Demo = () => {
   return (

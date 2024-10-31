@@ -1,18 +1,18 @@
 import {
+  type ListenerEffectAPI,
+  type TypedAddListener,
+  type TypedStartListening,
+  addListener,
+  configureStore,
+  createListenerMiddleware,
+} from '@reduxjs/toolkit';
+import {
   type TypedUseSelectorHook,
   useDispatch,
   useSelector,
 } from 'react-redux';
-import {
-  configureStore,
-  createListenerMiddleware,
-  type TypedStartListening,
-  type TypedAddListener,
-  type ListenerEffectAPI,
-  addListener,
-} from '@reduxjs/toolkit';
-import { aggridSlice } from './slices/aggrid';
 import { baseApi } from '../rtk-query/baseApi';
+import { aggridSlice } from './slices/aggrid';
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,

@@ -1,5 +1,5 @@
-import { ratanFields2JsonSchema } from './ratan-fields-json-schema';
 import type { RatanFieldSchemaType } from '../database/field';
+import { ratanFields2JsonSchema } from './ratan-fields-json-schema';
 
 describe('ratanFields2JsonSchema', () => {
   it('should return an empty schema for an empty list of RatanFieldSchemaType objects', () => {

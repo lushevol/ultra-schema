@@ -1,12 +1,12 @@
 import { QueryBuilderAntD } from '@react-querybuilder/antd';
 import { useState } from 'react';
 import { QueryBuilder, type RuleGroupType } from 'react-querybuilder';
-import { ratanFields2QueryBuilderFields } from '../../schema-utils/ratan-fields-to-query-builder-fields';
 import RatanFieldSchemas from '../../database/fields-schema';
+import { ratanFields2QueryBuilderFields } from '../../schema-utils/ratan-fields-to-query-builder-fields';
 import 'react-querybuilder/dist/query-builder.css';
 import { Button } from 'antd';
-import { useAppSelector } from '../../store';
 import { queryBuilder2AgGridFilter } from '../../schema-utils/query-builder-to-ag-grid-filter';
+import { useAppSelector } from '../../store';
 
 const fields = ratanFields2QueryBuilderFields(RatanFieldSchemas);
 

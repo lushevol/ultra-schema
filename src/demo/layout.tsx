@@ -1,13 +1,13 @@
 import {
-  ConfigProvider,
-  theme,
   App,
+  ConfigProvider,
   Divider,
+  Layout,
   Space,
   Switch,
-  Layout,
+  theme,
 } from 'antd';
-import { useState, type PropsWithChildren } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 
 export const DemoLayout = ({ children }: PropsWithChildren) => {
   const [themeIsDark, setThemeIsDark] = useState(false);
