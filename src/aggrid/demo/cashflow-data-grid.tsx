@@ -19,7 +19,7 @@ export const AgGridWithSchema = () => {
   };
   const [queryCashflow] = useLazyQueryCashflowBlotterQuery();
 
-  const gridOptions = useAgGridOptions(queryCashflow);
+  const gridOptions = useAgGridOptions((args) => queryCashflow(args).unwrap());
 
   return (
     <MyAgGridRoot
