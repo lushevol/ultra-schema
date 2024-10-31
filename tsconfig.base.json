@@ -1,0 +1,14 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["DOM", "ES2020"],
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "ultra-query": ["packages/ultra-query/src/index.ts"]
+    }
+  }
+}

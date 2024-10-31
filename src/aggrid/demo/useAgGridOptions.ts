@@ -37,7 +37,7 @@ export const useAgGridOptions = <T>(
           },
         },
       ],
-      defaultToolPanel: 'columns',
+      // defaultToolPanel: 'columns',
     },
     allowDragFromColumnsToolPanel: true,
 

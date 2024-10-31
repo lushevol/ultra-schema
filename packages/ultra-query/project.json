@@ -1,0 +1,9 @@
+{
+  "name": "ultra-query",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/ultra-query/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project ultra-query --web",
+  "targets": {}
+}

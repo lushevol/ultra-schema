@@ -1,5 +1,4 @@
 import { defineConfig } from '@rsbuild/core';
-import { DefinePlugin } from '@rspack/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 
 export default defineConfig({

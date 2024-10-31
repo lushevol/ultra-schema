@@ -11,3 +11,9 @@ dist/
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+
+
+.nx/cache
+.nx/workspace-data
+**/vite.config.{js,ts,mjs,mts,cjs,cts}.timestamp*
