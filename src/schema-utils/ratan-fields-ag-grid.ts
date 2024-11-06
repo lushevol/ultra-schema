@@ -9,7 +9,19 @@ export const ratanFields2AgGridCol = (
       field: field.fieldSchemaKey,
       headerName: field.fieldSchemaTitle,
       sortable: true,
-      filter: mapFilter(field),
+      filter: "agMultiColumnFilter",
+      filterParams: {
+        filters: [
+          {
+            filter: mapFilter(field),
+            display: "subMenu",
+            showTooltips: true
+          },
+          {
+            filter: "agSetColumnFilter",
+          }
+        ],
+      },
       resizable: true,
     };
   });
