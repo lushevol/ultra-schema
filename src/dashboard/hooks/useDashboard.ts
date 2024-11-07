@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type {
   RatanDashboardPanel,
   RatanDashboardSchema,
@@ -13,9 +13,13 @@ export default function useDashboard(schema: RatanDashboardSchema) {
 
   const finalPanels: Promise<
     RatanDashboardPanel & { data: PanelTableData | PanelChartData | null }
-  >[] = panels.map(async (panel) => {
-    return refreshPanel(panel);
-  });
+  >[] = useMemo(
+    () =>
+      panels.map(async (panel) => {
+        return refreshPanel(panel);
+      }),
+    [panels, refreshPanel],
+  );
 
   return {
     title: schema.title,

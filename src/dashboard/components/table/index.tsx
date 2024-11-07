@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Table } from 'antd';
 import type { PanelTableData } from '../../types/query-and-respond-types';
 
 export const TablePanel = ({ columns, rows }: PanelTableData) => {

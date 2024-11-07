@@ -6,10 +6,5 @@ import { HighchartsReact } from 'highcharts-react-official';
 // RefObject interface (HighchartsReact.RefObject). All other interfaces
 // like Options come from the Highcharts module itself.
 export const RatanHighcharts = (props: HighchartsReact.Props) => {
-  return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      {...props}
-    />
-  );
+  return <HighchartsReact highcharts={Highcharts} {...props} />;
 };

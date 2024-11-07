@@ -5,29 +5,32 @@ import type { PanelTableData } from '../types/query-and-respond-types';
 import type { PanelChartData } from '../types/query-and-respond-types';
 
 export const usePanel = () => {
-  const refreshPanel = useCallback(async (panel: RatanDashboardPanel) => {
-    const [queryPanel] = useLazyQueryPanelQuery();
-    const response = await queryPanel({
-      dataSource: panel.datasource,
-      queryType: panel.queryType,
-      query: panel.query,
-      panelType: panel.type,
-    }).unwrap();
-    switch (panel.type) {
-      case 'table':
-        return {
-          ...panel,
-          data: response.data as PanelTableData,
-        };
-      case 'chart':
-        return {
-          ...panel,
-          data: response.data as PanelChartData,
-        };
-      default:
-        return { ...panel, data: null };
-    }
-  }, []);
+  const [queryPanel] = useLazyQueryPanelQuery();
+  const refreshPanel = useCallback(
+    async (panel: RatanDashboardPanel) => {
+      const response = await queryPanel({
+        dataSource: panel.datasource,
+        queryType: panel.queryType,
+        query: panel.query,
+        panelType: panel.type,
+      }).unwrap();
+      switch (panel.type) {
+        case 'table':
+          return {
+            ...panel,
+            data: response.data as PanelTableData,
+          };
+        case 'chart':
+          return {
+            ...panel,
+            data: response.data as PanelChartData,
+          };
+        default:
+          return { ...panel, data: null };
+      }
+    },
+    [queryPanel],
+  );
 
   return {
     refreshPanel,

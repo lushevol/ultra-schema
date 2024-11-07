@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import DashboardCanvas from './components/canvas';
 import type { RootState } from 'src/store';
-import useDashboard from './hooks/useDashboard';
+import DashboardCanvas from './components/canvas';
 import { TablePanel } from './components/table';
+import useDashboard from './hooks/useDashboard';
 import { usePromise, usePromiseAll } from './hooks/usePromise';
 
 export default function Demo() {
@@ -12,11 +12,7 @@ export default function Demo() {
   return (
     <DashboardCanvas schema={schema}>
       {panelsData.map((panel) => (
-        <TablePanel
-          key={panel.title}
-          columns={[]}
-          rows={[]}
-        />
+        <TablePanel key={panel.title} columns={[]} rows={[]} />
       ))}
     </DashboardCanvas>
   );
