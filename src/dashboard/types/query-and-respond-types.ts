@@ -12,12 +12,15 @@ export type DashboardPanelQuery = {
 };
 
 export type DashboardPanelResponse = {
-  data: PanelTableData | PanelChartData;
+  data: ResponseListData | ResponseObjectData;
 };
+
+export type ResponseListData = Record<string, string | number | boolean>[];
+type ResponseObjectData = Record<string, string | number | boolean>;
 
 export type PanelTableData = {
   columns: string[];
-  rows: string[][];
+  rows: Record<string, string | number | boolean>[];
 };
 
 export type PanelChartData = {

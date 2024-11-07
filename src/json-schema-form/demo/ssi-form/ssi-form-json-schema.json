@@ -184,6 +184,7 @@
       "type": "boolean"
     }
   },
+  "additionalProperties": false,
   "required": ["settlementAccount", "settlementMeans", "ssiType", "swiftType"],
   "definitions": {
     "patternAlphaBetNumberSpace": {
