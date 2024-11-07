@@ -174,9 +174,7 @@
     "webpack-merge": "^6.0.1"
   },
   "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "workerDirectory": ["public"]
   },
   "nx": {}
 }

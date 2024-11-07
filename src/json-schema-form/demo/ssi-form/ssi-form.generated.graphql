@@ -1,311 +1,311 @@
-type Then {
+type PrefixThen {
   required: [String]
 }
 
-type If {
-  properties: Properties
+type PrefixIf {
+  properties: PrefixProperties
 }
 
-type AllOf {
-  then: Then
-  if: If
+type PrefixAllOf {
+  then: PrefixThen
+  if: PrefixIf
 }
 
-type PatternBicCode {
+type PrefixPatternBicCode {
   pattern: String
 }
 
-type PatternAlphaBetNumberSpace {
+type PrefixPatternAlphaBetNumberSpace {
   pattern: String
 }
 
-type Definitions {
-  patternBicCode: PatternBicCode
-  patternAlphaBetNumberSpace: PatternAlphaBetNumberSpace
+type PrefixDefinitions {
+  patternBicCode: PrefixPatternBicCode
+  patternAlphaBetNumberSpace: PrefixPatternAlphaBetNumberSpace
 }
 
-type Tpp {
+type PrefixTpp {
   type: String
 }
 
-type CoveredPayment {
+type PrefixCoveredPayment {
   type: String
 }
 
-type SettlementAccount {
+type PrefixSettlementAccount {
   type: String
   maxLength: Int
 }
 
-type SettlementMeans {
+type PrefixSettlementMeans {
   type: String
   enum: [String]
 }
 
-type SsiType {
+type PrefixSsiType {
   type: String
   enum: [String]
 }
 
-type SwiftType {
+type PrefixSwiftType {
   type: String
   default: String
   enum: [String]
 }
 
-type SenderToReceiver6 {
+type PrefixSenderToReceiver6 {
   type: String
   maxLength: Int
 }
 
-type SenderToReceiver5 {
+type PrefixSenderToReceiver5 {
   type: String
   maxLength: Int
 }
 
-type SenderToReceiver4 {
+type PrefixSenderToReceiver4 {
   type: String
   maxLength: Int
 }
 
-type SenderToReceiver3 {
+type PrefixSenderToReceiver3 {
   type: String
   maxLength: Int
 }
 
-type SenderToReceiver2 {
+type PrefixSenderToReceiver2 {
   type: String
   maxLength: Int
 }
 
-type SenderToReceiver1 {
+type PrefixSenderToReceiver1 {
   type: String
   maxLength: Int
 }
 
-type RemittanceInfomation4 {
+type PrefixRemittanceInfomation4 {
   type: String
   maxLength: Int
 }
 
-type RemittanceInfomation3 {
+type PrefixRemittanceInfomation3 {
   type: String
   maxLength: Int
 }
 
-type RemittanceInfomation2 {
+type PrefixRemittanceInfomation2 {
   type: String
   maxLength: Int
 }
 
-type RemittanceInfomation1 {
+type PrefixRemittanceInfomation1 {
   type: String
   maxLength: Int
 }
 
-type ReceiversCorrespondentBic {
+type PrefixReceiversCorrespondentBic {
   type: String
   ref: String
 }
 
-type ReceiversCorrespondentAccount {
+type PrefixReceiversCorrespondentAccount {
   type: String
   ref: String
 }
 
-type ReceiversCorrespondentCity {
+type PrefixReceiversCorrespondentCity {
   type: String
   ref: String
 }
 
-type ReceiversCorrespondentName {
-  type: String
-  maxLength: Int
-  ref: String
-}
-
-type ReceiversCorrespondentAddress {
+type PrefixReceiversCorrespondentName {
   type: String
   maxLength: Int
   ref: String
 }
 
-type OrderCustomerName {
+type PrefixReceiversCorrespondentAddress {
   type: String
   maxLength: Int
   ref: String
 }
 
-type OrderCustomerAddress {
+type PrefixOrderCustomerName {
   type: String
   maxLength: Int
   ref: String
 }
 
-type OrderCustomerCity {
+type PrefixOrderCustomerAddress {
+  type: String
+  maxLength: Int
+  ref: String
+}
+
+type PrefixOrderCustomerCity {
   type: String
   ref: String
 }
 
-type OrderCustomerBic {
+type PrefixOrderCustomerBic {
   type: String
   ref: String
 }
 
-type OrderCustomerAccount {
+type PrefixOrderCustomerAccount {
   type: String
   minLength: Int
   maxLength: Int
   ref: String
 }
 
-type IntermediaryName {
+type PrefixIntermediaryName {
   type: String
   maxLength: Int
   ref: String
 }
 
-type IntermediaryPostcode {
+type PrefixIntermediaryPostcode {
   type: String
   ref: String
 }
 
-type IntermediaryBic {
+type PrefixIntermediaryBic {
   type: String
   ref: String
 }
 
-type IntermediaryAddress {
+type PrefixIntermediaryAddress {
   type: String
   maxLength: Int
   ref: String
 }
 
-type IntermediaryAccount {
+type PrefixIntermediaryAccount {
   type: String
 }
 
-type Charges {
+type PrefixCharges {
   type: String
   enum: [String]
 }
 
-type BeneficiaryName2 {
+type PrefixBeneficiaryName2 {
   type: String
   maxLength: Int
   ref: String
 }
 
-type BeneficiaryName {
+type PrefixBeneficiaryName {
   type: String
   maxLength: Int
   ref: String
 }
 
-type BeneficiaryBic {
+type PrefixBeneficiaryBic {
   type: String
   ref: String
 }
 
-type BeneficiaryAddress {
+type PrefixBeneficiaryAddress {
   type: String
   maxLength: Int
   ref: String
 }
 
-type BeneficiaryAccount {
+type PrefixBeneficiaryAccount {
   type: String
   minLength: Int
   maxLength: Int
   ref: String
 }
 
-type AccountWithInstitutionName {
+type PrefixAccountWithInstitutionName {
   type: String
   maxLength: Int
   ref: String
 }
 
-type AccountWithInstitutionCity {
+type PrefixAccountWithInstitutionCity {
   type: String
   ref: String
 }
 
-type AccountWithInstitutionBic {
+type PrefixAccountWithInstitutionBic {
   type: String
   ref: String
 }
 
-type AccountWithInstitutionAddress {
+type PrefixAccountWithInstitutionAddress {
   type: String
   maxLength: Int
   ref: String
 }
 
-type AccountWithInstitutionAccount {
+type PrefixAccountWithInstitutionAccount {
   type: String
   ref: String
 }
 
-type Properties {
-  tpp: Tpp
-  coveredPayment: CoveredPayment
-  settlementAccount: SettlementAccount
-  settlementMeans: SettlementMeans
-  ssiType: SsiType
-  swiftType: SwiftType
-  senderToReceiver6: SenderToReceiver6
-  senderToReceiver5: SenderToReceiver5
-  senderToReceiver4: SenderToReceiver4
-  senderToReceiver3: SenderToReceiver3
-  senderToReceiver2: SenderToReceiver2
-  senderToReceiver1: SenderToReceiver1
-  remittanceInfomation4: RemittanceInfomation4
-  remittanceInfomation3: RemittanceInfomation3
-  remittanceInfomation2: RemittanceInfomation2
-  remittanceInfomation1: RemittanceInfomation1
-  receiversCorrespondentBic: ReceiversCorrespondentBic
-  receiversCorrespondentAccount: ReceiversCorrespondentAccount
-  receiversCorrespondentCity: ReceiversCorrespondentCity
-  receiversCorrespondentName: ReceiversCorrespondentName
-  receiversCorrespondentAddress: ReceiversCorrespondentAddress
-  orderCustomerName: OrderCustomerName
-  orderCustomerAddress: OrderCustomerAddress
-  orderCustomerCity: OrderCustomerCity
-  orderCustomerBic: OrderCustomerBic
-  orderCustomerAccount: OrderCustomerAccount
-  intermediaryName: IntermediaryName
-  intermediaryPostcode: IntermediaryPostcode
-  intermediaryBic: IntermediaryBic
-  intermediaryAddress: IntermediaryAddress
-  intermediaryAccount: IntermediaryAccount
-  charges: Charges
-  beneficiaryName2: BeneficiaryName2
-  beneficiaryName: BeneficiaryName
-  beneficiaryBic: BeneficiaryBic
-  beneficiaryAddress: BeneficiaryAddress
-  beneficiaryAccount: BeneficiaryAccount
-  accountWithInstitutionName: AccountWithInstitutionName
-  accountWithInstitutionCity: AccountWithInstitutionCity
-  accountWithInstitutionBic: AccountWithInstitutionBic
-  accountWithInstitutionAddress: AccountWithInstitutionAddress
-  accountWithInstitutionAccount: AccountWithInstitutionAccount
+type PrefixProperties {
+  tpp: PrefixTpp
+  coveredPayment: PrefixCoveredPayment
+  settlementAccount: PrefixSettlementAccount
+  settlementMeans: PrefixSettlementMeans
+  ssiType: PrefixSsiType
+  swiftType: PrefixSwiftType
+  senderToReceiver6: PrefixSenderToReceiver6
+  senderToReceiver5: PrefixSenderToReceiver5
+  senderToReceiver4: PrefixSenderToReceiver4
+  senderToReceiver3: PrefixSenderToReceiver3
+  senderToReceiver2: PrefixSenderToReceiver2
+  senderToReceiver1: PrefixSenderToReceiver1
+  remittanceInfomation4: PrefixRemittanceInfomation4
+  remittanceInfomation3: PrefixRemittanceInfomation3
+  remittanceInfomation2: PrefixRemittanceInfomation2
+  remittanceInfomation1: PrefixRemittanceInfomation1
+  receiversCorrespondentBic: PrefixReceiversCorrespondentBic
+  receiversCorrespondentAccount: PrefixReceiversCorrespondentAccount
+  receiversCorrespondentCity: PrefixReceiversCorrespondentCity
+  receiversCorrespondentName: PrefixReceiversCorrespondentName
+  receiversCorrespondentAddress: PrefixReceiversCorrespondentAddress
+  orderCustomerName: PrefixOrderCustomerName
+  orderCustomerAddress: PrefixOrderCustomerAddress
+  orderCustomerCity: PrefixOrderCustomerCity
+  orderCustomerBic: PrefixOrderCustomerBic
+  orderCustomerAccount: PrefixOrderCustomerAccount
+  intermediaryName: PrefixIntermediaryName
+  intermediaryPostcode: PrefixIntermediaryPostcode
+  intermediaryBic: PrefixIntermediaryBic
+  intermediaryAddress: PrefixIntermediaryAddress
+  intermediaryAccount: PrefixIntermediaryAccount
+  charges: PrefixCharges
+  beneficiaryName2: PrefixBeneficiaryName2
+  beneficiaryName: PrefixBeneficiaryName
+  beneficiaryBic: PrefixBeneficiaryBic
+  beneficiaryAddress: PrefixBeneficiaryAddress
+  beneficiaryAccount: PrefixBeneficiaryAccount
+  accountWithInstitutionName: PrefixAccountWithInstitutionName
+  accountWithInstitutionCity: PrefixAccountWithInstitutionCity
+  accountWithInstitutionBic: PrefixAccountWithInstitutionBic
+  accountWithInstitutionAddress: PrefixAccountWithInstitutionAddress
+  accountWithInstitutionAccount: PrefixAccountWithInstitutionAccount
 }
 
-type AutogeneratedMainType {
+type BaseType {
   schema: String
   type: String
-  allOf: [AllOf]
-  definitions: Definitions
+  allOf: [PrefixAllOf]
+  definitions: PrefixDefinitions
   required: [String]
-  properties: Properties
+  properties: PrefixProperties
 }
 
 # Types with identical fields:
-# PatternBicCode PatternAlphaBetNumberSpace
-# Tpp CoveredPayment IntermediaryAccount
-# SettlementAccount SenderToReceiver6 SenderToReceiver5 SenderToReceiver4 SenderToReceiver3 SenderToReceiver2 SenderToReceiver1 RemittanceInfomation4 RemittanceInfomation3 RemittanceInfomation2 RemittanceInfomation1
-# SettlementMeans SsiType Charges
-# ReceiversCorrespondentBic ReceiversCorrespondentAccount ReceiversCorrespondentCity OrderCustomerCity OrderCustomerBic IntermediaryPostcode IntermediaryBic BeneficiaryBic AccountWithInstitutionCity AccountWithInstitutionBic AccountWithInstitutionAccount
-# ReceiversCorrespondentName ReceiversCorrespondentAddress OrderCustomerName OrderCustomerAddress IntermediaryName IntermediaryAddress BeneficiaryName2 BeneficiaryName BeneficiaryAddress AccountWithInstitutionName AccountWithInstitutionAddress
-# OrderCustomerAccount BeneficiaryAccount
+# PrefixPatternBicCode PrefixPatternAlphaBetNumberSpace
+# PrefixTpp PrefixCoveredPayment PrefixIntermediaryAccount
+# PrefixSettlementAccount PrefixSenderToReceiver6 PrefixSenderToReceiver5 PrefixSenderToReceiver4 PrefixSenderToReceiver3 PrefixSenderToReceiver2 PrefixSenderToReceiver1 PrefixRemittanceInfomation4 PrefixRemittanceInfomation3 PrefixRemittanceInfomation2 PrefixRemittanceInfomation1
+# PrefixSettlementMeans PrefixSsiType PrefixCharges
+# PrefixReceiversCorrespondentBic PrefixReceiversCorrespondentAccount PrefixReceiversCorrespondentCity PrefixOrderCustomerCity PrefixOrderCustomerBic PrefixIntermediaryPostcode PrefixIntermediaryBic PrefixBeneficiaryBic PrefixAccountWithInstitutionCity PrefixAccountWithInstitutionBic PrefixAccountWithInstitutionAccount
+# PrefixReceiversCorrespondentName PrefixReceiversCorrespondentAddress PrefixOrderCustomerName PrefixOrderCustomerAddress PrefixIntermediaryName PrefixIntermediaryAddress PrefixBeneficiaryName2 PrefixBeneficiaryName PrefixBeneficiaryAddress PrefixAccountWithInstitutionName PrefixAccountWithInstitutionAddress
+# PrefixOrderCustomerAccount PrefixBeneficiaryAccount

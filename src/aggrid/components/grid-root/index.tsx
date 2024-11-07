@@ -37,7 +37,7 @@ ModuleRegistry.registerModules([
   ColumnsToolPanelModule,
   RangeSelectionModule,
   SetFilterModule,
-  MenuModule,
+  // MenuModule,
   MultiFilterModule,
 ]);
 

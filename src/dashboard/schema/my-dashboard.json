@@ -1,0 +1,14 @@
+{
+  "title": "My Dashboard",
+  "description": "This is my dashboard",
+  "panels": [
+    {
+      "title": "Panel 1",
+      "description": "This is panel 1",
+      "type": "table",
+      "datasource": "es",
+      "queryType": "esSQL",
+      "query": "SELECT * FROM my_table"
+    }
+  ]
+}

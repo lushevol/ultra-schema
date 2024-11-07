@@ -216,7 +216,14 @@
     },
     {
       "if": {
+        "description": "Cover Payment Logic",
         "properties": {
+          "swiftType": {
+            "const": "MT103"
+          },
+          "settlementMeans": {
+            "const": "NOS"
+          },
           "coveredPayment": {
             "const": true
           }

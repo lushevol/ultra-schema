@@ -13,7 +13,7 @@ import {
 } from 'react-redux';
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
-
+import { dashboardSlice } from './slices/dashboard';
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
 });
@@ -21,6 +21,7 @@ const listenerMiddlewareInstance = createListenerMiddleware({
 const store = configureStore({
   reducer: {
     [aggridSlice.name]: aggridSlice.reducer,
+    [dashboardSlice.name]: dashboardSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (gDM) =>
