@@ -1,6 +1,8 @@
 import type {
   DashboardPanelQuery,
   DashboardPanelResponse,
+  ESQuery,
+  ResponseESListData,
 } from 'src/dashboard/types/query-and-respond-types';
 import { baseApi as api } from './baseApi';
 
@@ -8,14 +10,26 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     queryPanel: build.query<DashboardPanelResponse, DashboardPanelQuery>({
       query: (queryArg) => ({
-        url: '/api/ratan/dashboard/query/rcsh',
+        url: '/dashboard/query/pg/rcsh/list',
         method: 'POST',
         body: queryArg,
       }),
     }),
+    queryES: build.query<ResponseESListData, DashboardPanelQuery>({
+      query: (arg) => ({
+        headers: {
+          "Kbn-Xsrf": "kibana",
+        },
+        url: '/dashboard/query/es',
+        method: 'POST',
+        body: {
+          query: arg.query,
+        },
+      }),
+    })
   }),
   overrideExisting: false,
 });
 export { injectedRtkApi as dashboardApi };
 
-export const { useLazyQueryPanelQuery } = injectedRtkApi;
+export const { useLazyQueryPanelQuery, useLazyQueryESQuery } = injectedRtkApi;

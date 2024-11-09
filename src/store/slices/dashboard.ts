@@ -1,5 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { RatanDashboardSchema } from 'src/dashboard/types/my-dashboard-types';
+import dashboardSchema from "../../dashboard/schema/my-dashboard.json";
 
 type DashboardRootType = {
   schema: RatanDashboardSchema;
@@ -8,7 +9,7 @@ type DashboardRootType = {
 export const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState: {
-    schema: {},
+    schema: dashboardSchema,
   } as DashboardRootType,
   reducers: {
     setDashboardSchema: (
