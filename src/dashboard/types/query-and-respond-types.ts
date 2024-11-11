@@ -1,41 +1,32 @@
 import type {
   RatanDashboardDataSource,
-  RatanDashboardPanelType,
+  RatanDashboardPanelSchemaType,
   RatanDashboardQueryType,
-} from './my-dashboard-types';
+} from './dashboard-types';
 
 export type DashboardPanelQuery = {
   dataSource: RatanDashboardDataSource;
   queryType: RatanDashboardQueryType;
   query: string;
-  panelType: RatanDashboardPanelType;
+  panelType: RatanDashboardPanelSchemaType;
 };
 
-export type DashboardPanelResponse = {
-  data: ResponseListData;
-};
+// postgres response
+export type ResponseListData = Record<
+  string,
+  string | number | boolean | null
+>[];
+export type ResponseObjectData = Record<
+  string,
+  string | number | boolean | null
+> | null;
+export type ResponseCountData = number;
 
-export type ResponseListData = Record<string, string | number | boolean | null>[];
-type ResponseObjectData = Record<string, string | number | boolean>;
+// es response
 export type ResponseESListData = {
   columns: {
     name: string;
-    type: string;
+    type: string; // es type: text, long, double, date
   }[];
   rows: (string | number | boolean | null)[][];
-}
-
-export type PanelTableData = {
-  columns: string[];
-  rows: Record<string, string | number | boolean | null>[];
-};
-
-export type PanelChartData = {
-  xAxis: {
-    data: string[];
-  };
-  series: {
-    name: string;
-    data: string[];
-  }[];
 };

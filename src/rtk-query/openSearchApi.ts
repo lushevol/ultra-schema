@@ -10,7 +10,11 @@ const injectedRtkApi = api.injectEndpoints({
       OpenSearchResult<SettlementSchemaRootType>,
       OpenSearchQuery
     >({
-      query: (queryArg) => ({ url: '/opensearch/', method: 'POST', body: queryArg }),
+      query: (queryArg) => ({
+        url: '/opensearch/',
+        method: 'POST',
+        body: queryArg,
+      }),
     }),
   }),
   overrideExisting: false,

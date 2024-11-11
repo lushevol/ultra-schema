@@ -1,23 +1,22 @@
 import { useMemo, useState } from 'react';
 import type {
-  RatanDashboardPanel,
+  RatanDashboardPanelSchema,
   RatanDashboardSchema,
-} from '../types/my-dashboard-types';
-import type { PanelChartData } from '../types/query-and-respond-types';
-import type { PanelTableData } from '../types/query-and-respond-types';
+} from '../types/dashboard-types';
+import type { RatanDashboardPanel } from '../types/panel-types';
 import { usePanel } from './usePanel';
 
 export default function useDashboard(schema: RatanDashboardSchema) {
-  const [panels, setPanels] = useState<RatanDashboardPanel[]>(schema.panels);
+  const [panels, setPanels] = useState<RatanDashboardPanelSchema[]>(
+    schema.panels,
+  );
   const { refreshPanel } = usePanel();
 
-  const finalPanels: Promise<
-    RatanDashboardPanel & { data: PanelTableData | PanelChartData | null }
-  >[] = useMemo(
+  const finalPanels = useMemo<Promise<RatanDashboardPanel>[]>(
     () =>
-      panels.map(async (panel) => {
-        return refreshPanel(panel);
-      }),
+      panels
+        .map((panel) => refreshPanel(panel))
+        .filter((panel): panel is Promise<RatanDashboardPanel> => !panel),
     [panels, refreshPanel],
   );
 

@@ -1,16 +1,22 @@
 import { useCallback } from 'react';
-import { useLazyQueryESQuery, useLazyQueryPanelQuery } from 'src/rtk-query/dashboardApi';
-import type { RatanDashboardPanel } from '../types/my-dashboard-types';
-import type { PanelTableData, ResponseESListData, ResponseListData } from '../types/query-and-respond-types';
-import type { PanelChartData } from '../types/query-and-respond-types';
-import { convertESPanelTableData, convertPanelTableData } from '../utils/panelTableDataConvertor';
+import {
+  useLazyQueryESQuery,
+  useLazyQueryPGQuery,
+} from 'src/rtk-query/dashboardApi';
+import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
+import type { RatanDashboardPanel } from '../types/panel-types';
+import type { ResponseListData } from '../types/query-and-respond-types';
+import {
+  convertESPanelTableData,
+  convertPanelTableData,
+} from '../utils/panelTableDataConvertor';
 
 export const usePanel = () => {
-  const [queryPG] = useLazyQueryPanelQuery();
+  const [queryPG] = useLazyQueryPGQuery();
   const [queryES] = useLazyQueryESQuery();
   const refreshPanel = useCallback(
-    async (panel: RatanDashboardPanel) => {
-      if (panel.datasource === "postgres") {
+    async (panel: RatanDashboardPanelSchema): Promise<RatanDashboardPanel> => {
+      if (panel.datasource === 'postgres') {
         const response = await queryPG({
           dataSource: panel.datasource,
           queryType: panel.queryType,
@@ -21,17 +27,13 @@ export const usePanel = () => {
           case 'table':
             return {
               ...panel,
-              data: convertPanelTableData(response.data as ResponseListData),
-            };
-          case 'chart':
-            return {
-              ...panel,
-              data: response.data as PanelChartData,
+              data: convertPanelTableData(response as ResponseListData),
             };
           default:
             return { ...panel, data: null };
         }
-      }if (panel.datasource === "es") {
+      }
+      if (panel.datasource === 'es') {
         const response = await queryES({
           dataSource: panel.datasource,
           queryType: panel.queryType,
@@ -44,15 +46,12 @@ export const usePanel = () => {
               ...panel,
               data: convertESPanelTableData(response),
             };
-          case 'chart':
-            return {
-              ...panel,
-              data: response.data as PanelChartData,
-            };
           default:
             return { ...panel, data: null };
         }
       }
+
+      return { ...panel, data: null };
     },
     [queryPG, queryES],
   );

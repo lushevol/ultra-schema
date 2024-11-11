@@ -1,5 +1,5 @@
 import useDashboard from 'src/dashboard/hooks/useDashboard';
-import type { RatanDashboardSchema } from 'src/dashboard/types/my-dashboard-types';
+import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
 
 const DashboardCanvas = ({
   schema,
@@ -8,10 +8,10 @@ const DashboardCanvas = ({
   const { title, description, refreshInterval } = useDashboard(schema);
   return (
     <div>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      <p>{refreshInterval}</p>
-      {children}
+      {title && <h1>{title}</h1>}
+      {description && <p>{description}</p>}
+      {refreshInterval && <p>{refreshInterval}</p>}
+      <div className="flex flex-col gap-4">{children}</div>
     </div>
   );
 };

@@ -18,7 +18,8 @@ export default defineConfig({
         secure: false,
       },
       '/dashboard/query/es': {
-        target: 'http://10.4.197.146:5601/api/console/proxy?path=%2F_sql&method=POST',
+        target:
+          'http://10.4.197.146:5601/api/console/proxy?path=%2F_sql&method=POST',
         pathRewrite: { '^/dashboard/query/es': '' },
         secure: false,
       },
