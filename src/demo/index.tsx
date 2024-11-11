@@ -10,10 +10,10 @@ export const Demo = () => {
   return (
     <DemoLayout>
       <Provider store={store}>
-        <RSJFDemo />
+        {/* <RSJFDemo /> */}
         {/* <MyQueryBuilder />
-        <AgGridWithSchema />
-        <DashboardDemo /> */}
+        <AgGridWithSchema /> */}
+        <DashboardDemo />
       </Provider>
     </DemoLayout>
   );

@@ -11,7 +11,7 @@ import {
   convertPanelTableData,
 } from '../utils/panelTableDataConvertor';
 
-export const usePanel = () => {
+export const usePanelQuery = () => {
   const [queryPG] = useLazyQueryPGQuery();
   const [queryES] = useLazyQueryESQuery();
   const refreshPanel = useCallback(

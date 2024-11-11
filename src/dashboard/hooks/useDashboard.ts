@@ -4,26 +4,31 @@ import type {
   RatanDashboardSchema,
 } from '../types/dashboard-types';
 import type { RatanDashboardPanel } from '../types/panel-types';
-import { usePanel } from './usePanel';
+import { usePanelQuery } from './usePanel';
+import { usePromiseAll } from './usePromise';
 
 export default function useDashboard(schema: RatanDashboardSchema) {
   const [panels, setPanels] = useState<RatanDashboardPanelSchema[]>(
     schema.panels,
   );
-  const { refreshPanel } = usePanel();
+  const { refreshPanel } = usePanelQuery();
 
   const finalPanels = useMemo<Promise<RatanDashboardPanel>[]>(
     () =>
       panels
         .map((panel) => refreshPanel(panel))
-        .filter((panel): panel is Promise<RatanDashboardPanel> => !panel),
+        .filter((panel): panel is Promise<RatanDashboardPanel> => !!panel),
     [panels, refreshPanel],
   );
+
+  const { data: panelsData, isLoading: panelsLoading } =
+    usePromiseAll(finalPanels);
 
   return {
     title: schema.title,
     description: schema.description,
     refreshInterval: schema.refreshInterval,
-    panels: finalPanels,
+    panels: panelsData,
+    panelsLoading,
   };
 }
