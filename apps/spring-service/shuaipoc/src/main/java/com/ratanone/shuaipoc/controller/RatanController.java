@@ -1,10 +1,9 @@
 package com.ratanone.shuaipoc.controller;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ratanone.shuaipoc.model.DashboardQuery;
-import com.ratanone.shuaipoc.model.RatanCashflow;
-import com.ratanone.shuaipoc.model.RatanCashflowScbmlHistory;
+import com.ratanone.shuaipoc.model.DashboardResponse;
+import com.ratanone.shuaipoc.model.GenericRow;
 //import com.ratanone.shuaipoc.repository.JdbcRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 import com.ratanone.shuaipoc.repository.JdbcRepository;
@@ -26,20 +25,13 @@ public class RatanController {
     JdbcRepository jdbcRepository;
 
     @PostMapping("/rcsh/list")
-    public ResponseEntity<List<RatanCashflowScbmlHistory>> getAllRCSH(@RequestBody DashboardQuery payload) {
+    public ResponseEntity<DashboardResponse> getAllRCSH(@RequestBody DashboardQuery payload) {
         try {
-            List<RatanCashflowScbmlHistory> result = jdbcRepository.queryRCSHList(payload.getQuery());
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PostMapping("/cashflow/list")
-    public ResponseEntity<List<RatanCashflow>> getAllCashflow(@RequestBody DashboardQuery payload) {
-        try {
-            List<RatanCashflow> result = jdbcRepository.queryCashflowList(payload.getQuery());
-            return new ResponseEntity<>(result, HttpStatus.OK);
+            List<GenericRow> result = jdbcRepository.queryList(payload.getQuery());
+            DashboardResponse response = new DashboardResponse();
+            response.setColumns(result);
+            response.setRows(result);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

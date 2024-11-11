@@ -1,20 +1,15 @@
 import type {
   DashboardPanelQuery,
-  ResponseCountData,
   ResponseESListData,
   ResponseListData,
-  ResponseObjectData,
 } from 'src/dashboard/types/query-and-respond-types';
 import { baseApi as api } from './baseApi';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    queryPG: build.query<
-      ResponseListData | ResponseObjectData | ResponseCountData,
-      DashboardPanelQuery
-    >({
+    queryPG: build.query<ResponseListData, DashboardPanelQuery>({
       query: (queryArg) => ({
-        url: '/dashboard/query/pg/rcsh/list',
+        url: '/dashboard/query/pg',
         method: 'POST',
         body: queryArg,
       }),

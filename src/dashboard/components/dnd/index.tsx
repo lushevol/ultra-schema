@@ -5,7 +5,12 @@ export const DnD = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       className="dnd-root"
-      style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 20 }}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 20,
+      }}
     >
       {items.map((item, index) => (
         <div key={index} className="dnd-item">

@@ -1,10 +1,11 @@
 package com.ratanone.shuaipoc.repository;
 
-import com.ratanone.shuaipoc.model.RatanCashflow;
-import com.ratanone.shuaipoc.model.RatanCashflowScbmlHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.ratanone.shuaipoc.model.GenericRow;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import java.util.List;
@@ -14,10 +15,7 @@ public class JdbcRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<RatanCashflowScbmlHistory> queryRCSHList(String sql) {
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(RatanCashflowScbmlHistory.class));
-    }
-    public  List<RatanCashflow> queryCashflowList(String sql) {
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(RatanCashflow.class));
+    public List<GenericRow> queryList(String sql) {
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GenericRow.class));
     }
 }
