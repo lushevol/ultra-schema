@@ -25,13 +25,10 @@ public class RatanController {
     JdbcRepository jdbcRepository;
 
     @PostMapping("/list")
-    public ResponseEntity<DashboardResponse> getAllRCSH(@RequestBody DashboardQuery payload) {
+    public ResponseEntity<DashboardResponse> queryList(@RequestBody DashboardQuery payload) {
         try {
             List<Map<String, String>> result = jdbcRepository.queryList(payload.getQuery());
-            DashboardResponse response = new DashboardResponse();
-            response.setColumns(result);
-            response.setRows(result);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(new DashboardResponse(result), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
