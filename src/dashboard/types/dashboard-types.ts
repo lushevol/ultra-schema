@@ -1,4 +1,8 @@
-export type RatanDashboardPanelSchemaType = 'table' | 'chart';
+export type RatanDashboardPanelSchemaType =
+  | 'table'
+  | 'chart'
+  | 'metrics'
+  | 'pie';
 export type RatanDashboardDataSource = 'es' | 'postgres';
 export type RatanDashboardQueryType = 'esSQL' | 'postgresSQL';
 

@@ -7,6 +7,14 @@ import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
 import type { RatanDashboardPanel } from '../types/panel-types';
 import type { ResponseListData } from '../types/query-and-respond-types';
 import {
+  convertESPanelMetricsData,
+  convertPanelMetricsData,
+} from '../utils/panelMetricsDataConvertor';
+import {
+  convertESPanelPieChartData,
+  convertPanelPieChartData,
+} from '../utils/panelPieDataConvertor';
+import {
   convertESPanelTableData,
   convertPanelTableData,
 } from '../utils/panelTableDataConvertor';
@@ -27,7 +35,17 @@ export const usePanelQuery = () => {
           case 'table':
             return {
               ...panel,
-              data: convertPanelTableData(response as ResponseListData),
+              data: convertPanelTableData(response),
+            };
+          case 'metrics':
+            return {
+              ...panel,
+              data: convertPanelMetricsData(response),
+            };
+          case 'pie':
+            return {
+              ...panel,
+              data: convertPanelPieChartData(response),
             };
           default:
             return { ...panel, data: null };
@@ -45,6 +63,16 @@ export const usePanelQuery = () => {
             return {
               ...panel,
               data: convertESPanelTableData(response),
+            };
+          case 'metrics':
+            return {
+              ...panel,
+              data: convertESPanelMetricsData(response),
+            };
+          case 'pie':
+            return {
+              ...panel,
+              data: convertESPanelPieChartData(response),
             };
           default:
             return { ...panel, data: null };

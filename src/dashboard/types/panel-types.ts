@@ -15,10 +15,22 @@ export type PanelChartData = {
   }[];
 };
 
+export type PanelPieChartData = {
+  series: {
+    name: string;
+    data: number;
+  }[];
+};
+
 export type PanelMetricData = {
   value: string;
 };
 
 export type RatanDashboardPanel = RatanDashboardPanelSchema & {
-  data: PanelTableData | PanelChartData | PanelMetricData | null;
+  data:
+    | PanelTableData
+    | PanelChartData
+    | PanelMetricData
+    | PanelPieChartData
+    | null;
 };
