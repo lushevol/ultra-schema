@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
-import dashboardSchema from '../../dashboard/schema/my-dashboard.json';
+import dashboardSchema from '../../dashboard/schema/ratan-dashboard.json';
 
 type DashboardRootType = {
   schema: RatanDashboardSchema;

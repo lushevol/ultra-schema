@@ -5,6 +5,7 @@ export const BREAKPOINTS = [
   { c: 3, w: 850 },
   { c: 6, w: 950 },
   { c: 8, w: 1100 },
+  { c: 12, w: 1500 },
 ];
 
 export const SUB_GRID_OPTIONS: GridStackOptions = {

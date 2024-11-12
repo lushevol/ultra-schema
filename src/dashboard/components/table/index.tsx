@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
 import type { PanelTableData } from 'src/dashboard/types/panel-types';
 
 export const TablePanel = ({ columns, rows }: PanelTableData) => {
@@ -7,14 +8,15 @@ export const TablePanel = ({ columns, rows }: PanelTableData) => {
       columns={convertColumns(columns)}
       dataSource={rows}
       scroll={{ x: 500 }}
-      style={{ width: '200px' }}
+      pagination={false}
     />
   );
 };
 
-const convertColumns = (columns: string[]) => {
+const convertColumns = (columns: string[]): ColumnsType => {
   return columns.map((column) => ({
     title: column,
     dataIndex: column,
+    key: column,
   }));
 };

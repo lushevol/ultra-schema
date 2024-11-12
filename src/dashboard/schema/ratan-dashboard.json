@@ -12,8 +12,8 @@
       "layout": {
         "x": 0,
         "y": 0,
-        "w": 1,
-        "h": 1
+        "w": 4,
+        "h": 2
       }
     },
     {
@@ -24,10 +24,10 @@
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE",
       "layout": {
-        "x": 2,
+        "x": 4,
         "y": 0,
-        "w": 1,
-        "h": 1
+        "w": 4,
+        "h": 2
       }
     },
     {
@@ -38,10 +38,10 @@
       "queryType": "esSQL",
       "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()",
       "layout": {
-        "x": 4,
-        "y": 1,
-        "w": 1,
-        "h": 1
+        "x": 8,
+        "y": 0,
+        "w": 4,
+        "h": 2
       }
     }
   ]
