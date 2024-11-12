@@ -1,3 +1,4 @@
+import { Card } from 'antd';
 import type {
   PanelTableData,
   RatanDashboardPanel,
@@ -6,10 +7,13 @@ import { TablePanel } from '../table';
 
 export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
   return (
-    <div className="ratan-dashboard-panel">
-      <h3>{panel.title}</h3>
+    <Card
+      className="ratan-dashboard-panel"
+      title={panel.title}
+      style={{ height: '100%' }}
+    >
       <PanelContent panel={panel} />
-    </div>
+    </Card>
   );
 };
 

@@ -8,7 +8,7 @@
       "type": "table",
       "datasource": "postgres",
       "queryType": "postgresSQL",
-      "query": "SELECT cashflow_id, cashflow_status FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history WHERE action = 'Release' ;",
+      "query": "SELECT count(distinct cashflow_id) action FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and create_time BETWEEN CURRENT_DATE AND CURRENT_DATE - 1",
       "layout": {
         "x": 0,
         "y": 0,

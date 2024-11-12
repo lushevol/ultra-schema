@@ -15,7 +15,7 @@
     "json2ts": "json2ts -i src/json-schema-form/demo/ssi-form/ssi-form-json-schema.json -o src/json-schema-form/demo/ssi-form/ssi-form-types.generated.ts",
     "json2mock": "generate-json src/json-schema-form/demo/ssi-form/ssi-form-json-schema.json src/json-schema-form/demo/ssi-form/ssi-form-mock.generated.json",
     "format": "biome format --write",
-    "check": "biome check --write",
+    "check": "biome check --fix --unsafe",
     "preview": "rsbuild preview",
     "depcheck": "npx depcheck",
     "bump": "npx taze"

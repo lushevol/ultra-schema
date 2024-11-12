@@ -13,7 +13,7 @@ export default defineConfig({
         pathRewrite: { '^/opensearch': '' },
         secure: false,
       },
-      '/dashboard/query/pg': {
+      '/dashboard/query/pg/real_time': {
         target: 'http://localhost:8080',
         secure: false,
       },

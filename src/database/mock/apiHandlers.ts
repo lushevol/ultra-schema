@@ -19,7 +19,7 @@ export const apiHandlers = [
       results: Cashflows,
     });
   }),
-  http.post('/dashboard/query/pg', () => {
+  http.post('/dashboard/query/pg/real_time', () => {
     // ...and respond to them using this JSON response.
     return HttpResponse.json<ResponseListData>([
       {

@@ -24,11 +24,11 @@ public class RatanController {
     @Autowired
     JdbcRepository jdbcRepository;
 
-    @PostMapping("/list")
-    public ResponseEntity<DashboardResponse> queryList(@RequestBody DashboardQuery payload) {
+    @PostMapping("/real_time")
+    public ResponseEntity<List<Map<String, String>>> queryList(@RequestBody DashboardQuery payload) {
         try {
             List<Map<String, String>> result = jdbcRepository.queryList(payload.getQuery());
-            return new ResponseEntity<>(new DashboardResponse(result), HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

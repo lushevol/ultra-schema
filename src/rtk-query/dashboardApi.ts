@@ -9,7 +9,7 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     queryPG: build.query<ResponseListData, DashboardPanelQuery>({
       query: (queryArg) => ({
-        url: '/dashboard/query/pg',
+        url: '/dashboard/query/pg/real_time',
         method: 'POST',
         body: queryArg,
       }),
