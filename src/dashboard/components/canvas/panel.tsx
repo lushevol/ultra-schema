@@ -5,10 +5,12 @@ import type {
 import { TablePanel } from '../table';
 
 export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
-  return <div className='ratan-dashboard-panel'>
-    <h3>{panel.title}</h3>
-    <PanelContent panel={panel} />
-  </div>
+  return (
+    <div className="ratan-dashboard-panel">
+      <h3>{panel.title}</h3>
+      <PanelContent panel={panel} />
+    </div>
+  );
 };
 
 const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {

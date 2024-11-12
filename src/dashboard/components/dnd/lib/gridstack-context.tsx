@@ -1,4 +1,8 @@
-import { GridStack, type GridStackWidget,type GridStackOptions } from 'gridstack';
+import {
+  GridStack,
+  type GridStackOptions,
+  type GridStackWidget,
+} from 'gridstack';
 import React, {
   createContext,
   type PropsWithChildren,
@@ -18,20 +22,28 @@ interface GridstackProviderProps extends PropsWithChildren {
   options: GridStackOptions;
 }
 
-export const GridstackContext = createContext<GridStackContextType | null>(null);
+export const GridstackContext = createContext<GridStackContextType | null>(
+  null,
+);
 
-export const GridstackProvider = ({ children, options }: GridstackProviderProps) => {
+export const GridstackProvider = ({
+  children,
+  options,
+}: GridstackProviderProps) => {
   const widgetContentRef = useRef<Record<string, HTMLElement>>({});
   const containerRef = useRef<HTMLDivElement>(null);
   const optionsRef = useRef<GridStackOptions>(options);
 
   const [parentGrid, setParentGrid] = useState<GridStack | null>(null);
 
-  const renderCBFn = useCallback((element: HTMLElement, widget: GridStackWidget) => {
-    if (widget.id) {
-      widgetContentRef.current[widget.id] = element;
-    }
-  }, []);
+  const renderCBFn = useCallback(
+    (element: HTMLElement, widget: GridStackWidget) => {
+      if (widget.id) {
+        widgetContentRef.current[widget.id] = element;
+      }
+    },
+    [],
+  );
 
   const getWidgetContent = useCallback((widgetId: string) => {
     return widgetContentRef.current[widgetId] || null;
@@ -55,7 +67,7 @@ export const GridstackProvider = ({ children, options }: GridstackProviderProps)
 
         setParentGrid(initGrid());
       } catch (e) {
-        console.error("Error reinitializing gridstack", e);
+        console.error('Error reinitializing gridstack', e);
       }
     }
   }, [options, parentGrid, initGrid]);
@@ -65,7 +77,7 @@ export const GridstackProvider = ({ children, options }: GridstackProviderProps)
       try {
         setParentGrid(initGrid());
       } catch (e) {
-        console.error("Error initializing gridstack", e);
+        console.error('Error initializing gridstack', e);
       }
     }
   }, [parentGrid, initGrid]);
