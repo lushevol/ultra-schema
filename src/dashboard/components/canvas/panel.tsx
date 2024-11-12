@@ -1,4 +1,3 @@
-import type { RatanDashboardPanelSchema } from 'src/dashboard/types/dashboard-types';
 import type {
   PanelTableData,
   RatanDashboardPanel,
@@ -6,6 +5,13 @@ import type {
 import { TablePanel } from '../table';
 
 export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
+  return <div className='ratan-dashboard-panel'>
+    <h3>{panel.title}</h3>
+    <PanelContent panel={panel} />
+  </div>
+};
+
+const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {
   switch (panel.type) {
     case 'table':
       return (

@@ -46,7 +46,6 @@
     "@ag-grid-enterprise/sparklines": "^32.3.2",
     "@ag-grid-enterprise/status-bar": "^32.3.2",
     "@ag-grid-enterprise/viewport-row-model": "^32.3.2",
-    "@dnd-kit/core": "^6.1.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.6",
@@ -67,12 +66,15 @@
     "framer-motion": "^11.11.11",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.2",
+    "gridstack": "^11.0.1",
     "highcharts": "^11.4.8",
     "highcharts-react-official": "^3.2.1",
     "immer": "^10.1.1",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-fast-compare": "^3.2.2",
+    "react-grid-layout": "^1.5.0",
     "react-icons": "5.3.0",
     "react-querybuilder": "^7.7.1",
     "react-redux": "^9.1.2",
@@ -175,7 +177,9 @@
     "webpack-merge": "^6.0.1"
   },
   "msw": {
-    "workerDirectory": ["public"]
+    "workerDirectory": [
+      "public"
+    ]
   },
   "nx": {}
 }

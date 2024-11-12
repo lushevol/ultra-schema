@@ -3,12 +3,19 @@ export type RatanDashboardDataSource = 'es' | 'postgres';
 export type RatanDashboardQueryType = 'esSQL' | 'postgresSQL';
 
 export type RatanDashboardPanelSchema = {
+  id: string;
   title: string;
   description: string;
   type: RatanDashboardPanelSchemaType;
   datasource: RatanDashboardDataSource;
   queryType: RatanDashboardQueryType;
   query: string;
+  layout: {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  };
 };
 
 export type RatanDashboardSchema = {

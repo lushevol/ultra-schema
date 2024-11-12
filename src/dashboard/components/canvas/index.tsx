@@ -6,13 +6,13 @@ const DashboardCanvas = ({
   schema,
   children,
 }: { schema: RatanDashboardSchema; children: React.ReactNode }) => {
-  const { title, description, refreshInterval } = useDashboard(schema);
+  const { title, description, refreshInterval, panels } = useDashboard(schema);
   return (
     <div className="dashboard-root">
       {title && <h1>{title}</h1>}
       {description && <p>{description}</p>}
       {refreshInterval && <p>{refreshInterval}</p>}
-      <DnD>{children}</DnD>
+      <DnD panels={panels}>{children}</DnD>
     </div>
   );
 };

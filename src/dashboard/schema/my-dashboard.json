@@ -3,25 +3,46 @@
   "description": "This is my dashboard",
   "panels": [
     {
+      "id": "stp-rate",
       "title": "STP Rate",
       "type": "table",
       "datasource": "postgres",
       "queryType": "postgresSQL",
-      "query": "SELECT cashflow_id, cashflow_status FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history WHERE action = 'Release' ;"
+      "query": "SELECT cashflow_id, cashflow_status FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history WHERE action = 'Release' ;",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
     },
     {
+      "id": "waiting-vd-today",
       "title": "WAITING + VD Today",
       "type": "table",
       "datasource": "postgres",
       "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE"
+      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE",
+      "layout": {
+        "x": 2,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
     },
     {
+      "id": "uv-yesterday",
       "title": "UV Yesterday",
       "type": "table",
       "datasource": "es",
       "queryType": "esSQL",
-      "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()"
+      "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()",
+      "layout": {
+        "x": 4,
+        "y": 1,
+        "w": 1,
+        "h": 1
+      }
     }
   ]
 }
