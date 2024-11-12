@@ -1,9 +1,9 @@
 package com.ratanone.shuaipoc.controller;
 import java.util.List;
+import java.util.Map;
 
 import com.ratanone.shuaipoc.model.DashboardQuery;
 import com.ratanone.shuaipoc.model.DashboardResponse;
-import com.ratanone.shuaipoc.model.GenericRow;
 //import com.ratanone.shuaipoc.repository.JdbcRepository;
 //import org.springframework.beans.factory.annotation.Autowired;
 import com.ratanone.shuaipoc.repository.JdbcRepository;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/dashboard/query")
+@RequestMapping("/dashboard/query/pg")
 public class RatanController {
 
     @Autowired
     JdbcRepository jdbcRepository;
 
-    @PostMapping("/rcsh/list")
+    @PostMapping("/list")
     public ResponseEntity<DashboardResponse> getAllRCSH(@RequestBody DashboardQuery payload) {
         try {
-            List<GenericRow> result = jdbcRepository.queryList(payload.getQuery());
+            List<Map<String, String>> result = jdbcRepository.queryList(payload.getQuery());
             DashboardResponse response = new DashboardResponse();
             response.setColumns(result);
             response.setRows(result);
