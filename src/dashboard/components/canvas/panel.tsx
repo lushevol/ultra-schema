@@ -15,6 +15,6 @@ export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
         />
       );
     default:
-      return null;
+      return <div className="unknown-panel-type">Unknown panel type</div>;
   }
 };
