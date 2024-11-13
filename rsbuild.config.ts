@@ -20,7 +20,7 @@ export default defineConfig({
         secure: false,
       },
       '/dashboard/query/pg/real_time': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:931218',
         secure: false,
       },
       '/dashboard/query/es': {
