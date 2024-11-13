@@ -473,7 +473,7 @@ importers:
         version: 6.0.1
 
   packages/ratan-notification:
-    devDependencies:
+    dependencies:
       '@stomp/rx-stomp':
         specifier: ^2.0.0
         version: 2.0.0(@stomp/stompjs@7.0.0)(rxjs@7.8.1)(uuid@8.3.2)
@@ -486,8 +486,10 @@ importers:
       sockjs-client:
         specifier: ^1.6.1
         version: 1.6.1
-
-  packages/ultra-query: {}
+    devDependencies:
+      '@types/sockjs-client':
+        specifier: ^1.5.4
+        version: 1.5.4
 
 packages:
 
@@ -3661,6 +3663,9 @@ packages:
 
   '@types/serve-static@1.15.7':
     resolution: {integrity: sha512-W8Ym+h8nhuRwaKPaDw34QUkwsGi6Rc4yYqvKFo5rm2FUEhCFbzVWrxXUxuKK8TASjWsysJY0nsmNCGhCOIsrOw==}
+
+  '@types/sockjs-client@1.5.4':
+    resolution: {integrity: sha512-zk+uFZeWyvJ5ZFkLIwoGA/DfJ+pYzcZ8eH4H/EILCm2OBZyHH6Hkdna1/UWL/CFruh5wj6ES7g75SvUB0VsH5w==}
 
   '@types/sockjs@0.3.36':
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
@@ -14303,6 +14308,8 @@ snapshots:
       '@types/http-errors': 2.0.4
       '@types/node': 22.9.0
       '@types/send': 0.17.4
+
+  '@types/sockjs-client@1.5.4': {}
 
   '@types/sockjs@0.3.36':
     dependencies:

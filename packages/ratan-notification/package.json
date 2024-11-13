@@ -13,10 +13,13 @@
     "build": "vite build",
     "dev": "vite dev"
   },
-  "devDependencies": {
+  "dependencies": {
     "@stomp/rx-stomp": "^2.0.0",
     "@stomp/stompjs": "^7.0.0",
     "rxjs": "^7.8.1",
     "sockjs-client": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/sockjs-client": "^1.5.4"
   }
 }

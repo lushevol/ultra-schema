@@ -18,7 +18,7 @@ export const useStompService = () => {
   };
 };
 
-export const useStompServiceStatue = () => {
+export const useStompServiceStatus = () => {
   const { stomp$ } = useStompService();
   const [connectionStatus, setConnectionStatus] = useState<string>();
 
