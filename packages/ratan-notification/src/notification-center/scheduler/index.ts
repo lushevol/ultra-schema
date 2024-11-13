@@ -1,7 +1,7 @@
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 
-import { NotifyResultType } from "../notify/type";
-import { SchedulerBrokerType, SchedulerItemType } from "./type";
+import type { NotifyResultType } from '../notify/type';
+import type { SchedulerBrokerType, SchedulerItemType } from './type';
 
 export class NotificationScheduler {
   queue: SchedulerItemType[];

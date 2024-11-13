@@ -1,6 +1,6 @@
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 
-import { NotifyQueueItemType, NotifyResultType } from "./type";
+import type { NotifyQueueItemType, NotifyResultType } from './type';
 
 export class NotifyQueue {
   queue: NotifyQueueItemType[];
@@ -11,6 +11,7 @@ export class NotifyQueue {
 
   push(notify: NotifyResultType) {
     const notifyQueueItem = {
+      id: crypto.randomUUID(),
       timestamp: Date.now(),
       data: null,
       notify,

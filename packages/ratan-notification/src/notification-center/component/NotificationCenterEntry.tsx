@@ -1,9 +1,9 @@
-import { NotificationOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
-import { useEffect, useState } from "react";
+import { NotificationOutlined } from '@ant-design/icons';
+import { FloatButton } from 'antd';
+import { useEffect, useState } from 'react';
 
-import { useNotificationCenter } from "../index";
-import { NotificationCenterBoard } from "./NotificationBoard";
+import { useNotificationCenter } from '../index';
+import { NotificationCenterBoard } from './NotificationBoard';
 
 export const NotificationCenterEntry = () => {
   const nc = useNotificationCenter();

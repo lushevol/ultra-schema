@@ -86,6 +86,7 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
+    "@ant-design/icons": "^5.5.1",
     "@babel/core": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.25.9",
     "@babel/preset-env": "^7.26.0",

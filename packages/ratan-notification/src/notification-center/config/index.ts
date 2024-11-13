@@ -1,3 +1,3 @@
-import { NotificationCenterConfigType } from "./type";
+import type { NotificationCenterConfigType } from './type';
 
 export const NotificationCenterConfig: NotificationCenterConfigType = {};

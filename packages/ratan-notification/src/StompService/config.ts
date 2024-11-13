@@ -1,4 +1,4 @@
 export const stompConfig = {
-  url: "/api/ratan/rxstomp/notification/subscriptions",
-  topic: "/cashflow/notification",
+  url: '/api/ratan/rxstomp/notification/subscriptions',
+  topic: '/cashflow/notification',
 };

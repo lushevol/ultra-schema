@@ -1,10 +1,10 @@
-import { NotificationInstance } from "antd/es/notification/interface";
+import type { NotificationInstance } from 'antd/es/notification/interface';
 
-import { NotificationCenterConfig } from "../config";
-import { NotifyQueue } from "../notify";
-import { NotifyInstance } from "../notifyInstance";
-import { NotificationScheduler } from "../scheduler";
-import { SchedulerBrokerType } from "../scheduler/type";
+import { NotificationCenterConfig } from '../config';
+import { NotifyQueue } from '../notify';
+import { NotifyInstance } from '../notifyInstance';
+import { NotificationScheduler } from '../scheduler';
+import type { SchedulerBrokerType } from '../scheduler/type';
 
 export class NotificationCenter {
   config = NotificationCenterConfig;

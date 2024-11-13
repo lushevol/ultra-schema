@@ -1,4 +1,4 @@
-import { NoticeType } from "antd/es/message/interface";
+import type { NoticeType } from 'antd/es/message/interface';
 
 export type NotifyParams<T> = {
   data?: T;
@@ -17,6 +17,7 @@ export type NotifyResultType = {
 };
 
 export type NotifyQueueItemType = {
+  id: string;
   timestamp: number;
   data: any;
   notify: NotifyResultType;

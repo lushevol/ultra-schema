@@ -195,6 +195,9 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1
     devDependencies:
+      '@ant-design/icons':
+        specifier: ^5.5.1
+        version: 5.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@babel/core':
         specifier: ^7.26.0
         version: 7.26.0
@@ -468,6 +471,21 @@ importers:
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
+
+  packages/ratan-notification:
+    devDependencies:
+      '@stomp/rx-stomp':
+        specifier: ^2.0.0
+        version: 2.0.0(@stomp/stompjs@7.0.0)(rxjs@7.8.1)(uuid@8.3.2)
+      '@stomp/stompjs':
+        specifier: ^7.0.0
+        version: 7.0.0
+      rxjs:
+        specifier: ^7.8.1
+        version: 7.8.1
+      sockjs-client:
+        specifier: ^1.6.1
+        version: 1.6.1
 
   packages/ultra-query: {}
 
@@ -3259,6 +3277,16 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
 
+  '@stomp/rx-stomp@2.0.0':
+    resolution: {integrity: sha512-3UxTxAA3NWGnwFfIvN8AigJ7BxGXG0u5IK8K12mQ9cCMuaT/MM7xlyZnuV8sDbHiqqLlbwA1wk1fDfUyOTIeug==}
+    peerDependencies:
+      '@stomp/stompjs': ^7.0.0
+      rxjs: ^7.2.0
+      uuid: ^9.0.0
+
+  '@stomp/stompjs@7.0.0':
+    resolution: {integrity: sha512-fGdq4wPDnSV/KyOsjq4P+zLc8MFWC3lMmP5FBgLWKPJTYcuCbAIrnRGjB7q2jHZdYCOD5vxLuFoKIYLy5/u8Pw==}
+
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
     engines: {node: '>=14'}
@@ -5530,6 +5558,10 @@ packages:
   events@3.3.0:
     resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
     engines: {node: '>=0.8.x'}
+
+  eventsource@2.0.2:
+    resolution: {integrity: sha512-IzUmBGPR3+oUG9dUeXynyNmf91/3zUSJg1lCktzKw47OXuhco54U3r9B7O4XX+Rb1Itm9OZ2b0RkTs10bICOxA==}
+    engines: {node: '>=12.0.0'}
 
   evp_bytestokey@1.0.3:
     resolution: {integrity: sha512-/f2Go4TognH/KvCISP7OUsHn85hT9nUkxxA9BEWxFn+Oj9o8ZNLm/40hdlgSLyuOimsrTKLUMEorQexp/aPQeA==}
@@ -8751,6 +8783,10 @@ packages:
 
   snake-case@3.0.4:
     resolution: {integrity: sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==}
+
+  sockjs-client@1.6.1:
+    resolution: {integrity: sha512-2g0tjOR+fRs0amxENLi/q5TiJTqY+WXFOzb5UwXndlK6TO3U/mirZznpx6w34HVMoc3g7cY24yC/ZMIYnDlfkw==}
+    engines: {node: '>=12'}
 
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
@@ -13852,6 +13888,14 @@ snapshots:
       graphql: 16.6.0
       json-schema-merge-allof: 0.8.1
 
+  '@stomp/rx-stomp@2.0.0(@stomp/stompjs@7.0.0)(rxjs@7.8.1)(uuid@8.3.2)':
+    dependencies:
+      '@stomp/stompjs': 7.0.0
+      rxjs: 7.8.1
+      uuid: 8.3.2
+
+  '@stomp/stompjs@7.0.0': {}
+
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.26.0)':
     dependencies:
       '@babel/core': 7.26.0
@@ -16654,6 +16698,8 @@ snapshots:
   eventemitter3@4.0.7: {}
 
   events@3.3.0: {}
+
+  eventsource@2.0.2: {}
 
   evp_bytestokey@1.0.3:
     dependencies:
@@ -20486,6 +20532,16 @@ snapshots:
     dependencies:
       dot-case: 3.0.4
       tslib: 2.8.1
+
+  sockjs-client@1.6.1:
+    dependencies:
+      debug: 3.2.7
+      eventsource: 2.0.2
+      faye-websocket: 0.11.4
+      inherits: 2.0.4
+      url-parse: 1.5.10
+    transitivePeerDependencies:
+      - supports-color
 
   sockjs@0.3.24:
     dependencies:

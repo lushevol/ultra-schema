@@ -1,6 +1,6 @@
-import { Observable, Subscription } from "rxjs";
+import type { Observable, Subscription } from 'rxjs';
 
-import { NotifyConfig } from "../notify/type";
+import type { NotifyConfig } from '../notify/type';
 
 export type SchedulerBrokerType = {
   processor: Observable<any>;

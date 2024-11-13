@@ -1,14 +1,12 @@
-import { RxStomp } from "@stomp/rx-stomp";
-import SockJS from "sockjs-client";
+import { RxStomp } from '@stomp/rx-stomp';
+import SockJS from 'sockjs-client';
 
-import { CommonUtil } from "../import";
-import { stompConfig } from "./config";
+import { stompConfig } from './config';
 
 const getHeaders = () => {
-  const { getLocalStorage } = CommonUtil;
-  const token = (getLocalStorage().getItem("SET_TOKEN") as string) || "";
+  const token = (localStorage.getItem('SET_TOKEN') as string) ?? '';
   const headers = {
-    "Single-UI-Authorization": token,
+    'Single-UI-Authorization': token,
   };
 
   return headers;

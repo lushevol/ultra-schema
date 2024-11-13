@@ -1,26 +1,21 @@
-import { useEffect } from "react";
-import { NotifiedCashflow } from "src/Cashflow_CN/components/CashflowNotification/CashflowNotificationSubscriber/interface";
-
-import { useNotificationCenter } from "../NotificationCenter/v2";
-import { NotifyConfig } from "../NotificationCenter/v2/notify/type";
-import { stompConfig } from "./config";
-import { useStompServiceTopicMessage } from "./useStompService";
-import { featureScopedEnabled } from "../common/utils/featureFlagController";
+import { useEffect } from 'react';
+import { useNotificationCenter } from '../notification-center';
+import type { NotifyConfig } from '../notification-center/notify/type';
+import { stompConfig } from './config';
+import { useStompServiceTopicMessage } from './useStompService';
 
 export const useStompServiceNotificationConnector = () => {
-  const { message$ } = useStompServiceTopicMessage<NotifiedCashflow>(
-    stompConfig.topic,
-  );
+  const { message$ } = useStompServiceTopicMessage<any>(stompConfig.topic);
   const nc = useNotificationCenter();
 
   useEffect(() => {
-    if (message$ && featureScopedEnabled("Enable_Stomp_Notification")) {
-      const notify: NotifyConfig<NotifiedCashflow> = ({ data }) => {
-        const { Cashflow_Id, Cashflow_State } = data!;
+    if (message$) {
+      const notify: NotifyConfig<any> = ({ data }) => {
+        const { Cashflow_Id, Cashflow_State } = data;
         return {
           title: Cashflow_Id,
           body: Cashflow_State,
-          type: "success",
+          type: 'success',
         };
       };
       nc.schedule({
@@ -28,5 +23,5 @@ export const useStompServiceNotificationConnector = () => {
         notify,
       });
     }
-  }, [message$]);
+  }, [message$, nc.schedule]);
 };

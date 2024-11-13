@@ -1,6 +1,6 @@
-import { RxStomp, RxStompState } from "@stomp/rx-stomp";
-import { createContext, useContext, useEffect, useState } from "react";
-import { map, Observable } from "rxjs";
+import { type RxStomp, RxStompState } from '@stomp/rx-stomp';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { type Observable, map } from 'rxjs';
 
 type ContextType = {
   stomp$: RxStomp | null;
@@ -30,7 +30,7 @@ export const useStompServiceStatue = () => {
     return () => {
       subscriptionOb?.unsubscribe();
     };
-  }, []);
+  }, [stomp$]);
 
   return {
     connectionStatus,
@@ -45,7 +45,7 @@ export const useStompServiceTopicMessage = <T>(topic: string) => {
     setMessage$(
       stomp$?.watch(topic).pipe(map((message) => JSON.parse(message.body))),
     );
-  }, []);
+  }, [stomp$, topic]);
 
   return {
     message$,

@@ -1,17 +1,18 @@
-import { NotifyInstance } from "./index";
+import { NotifyInstance } from './index';
 
 describe('notifyInstance', () => {
-  it("notifyInstance - open", () => {
+  it('notifyInstance - open', () => {
     const notifyInstance = new NotifyInstance();
 
     notifyInstance.open({
-        data: null,
-        notify: {
-          title: "test_title",
-          body: "test_desc",
-          type: "success",
-        },
-        timestamp: 0,
+      data: null,
+      notify: {
+        title: 'test_title',
+        body: 'test_desc',
+        type: 'success',
+      },
+      timestamp: 0,
+      id: 'test_id',
     });
   });
 });

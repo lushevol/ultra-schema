@@ -1,8 +1,8 @@
-import { Card, Drawer, Space } from "antd";
-import { useEffect, useState } from "react";
+import { Card, Drawer, Space } from 'antd';
+import { useEffect, useState } from 'react';
 
-import { useNotificationCenter } from "../index";
-import { NotifyQueueItemType } from "../notify/type";
+import { useNotificationCenter } from '../index';
+import type { NotifyQueueItemType } from '../notify/type';
 
 export const NotificationCenterBoard = ({
   open,
@@ -18,7 +18,7 @@ export const NotificationCenterBoard = ({
     nc.notify.subject$.subscribe((item) => {
       setNotifyList((list) => [...list, item]);
     });
-  }, []);
+  }, [nc.notify.subject$]);
 
   return (
     <>
@@ -26,6 +26,7 @@ export const NotificationCenterBoard = ({
         <Space direction="vertical" size={16}>
           {notifyList.map((item) => (
             <Card
+              key={item.id}
               title={item.notify.title}
               bordered={false}
               extra={item.timestamp}

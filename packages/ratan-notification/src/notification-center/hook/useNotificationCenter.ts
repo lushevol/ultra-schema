@@ -1,6 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
-import { NotificationCenter } from "../center";
+import { NotificationCenter } from '../center';
 
 type NotificationCenterContextType = {
   notificationCenter: NotificationCenter;
