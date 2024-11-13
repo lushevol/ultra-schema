@@ -7,8 +7,8 @@ export const TablePanel = ({ columns, rows }: PanelTableData) => {
     <Table
       columns={convertColumns(columns)}
       dataSource={rows}
-      scroll={{ x: 500 }}
       pagination={false}
+      size="small"
     />
   );
 };
