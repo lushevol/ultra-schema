@@ -1,0 +1,9 @@
+{
+  "name": "ratan-notification",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "ratan-notification/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project ratan-notification --web",
+  "targets": {}
+}

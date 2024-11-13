@@ -1,5 +1,5 @@
 {
-  "name": "ultra-query",
+  "name": "ratan-notification",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
@@ -8,5 +8,9 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev"
   }
 }

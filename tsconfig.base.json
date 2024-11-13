@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "ratan-notification": ["packages/ratan-notification/src/index.ts"],
       "ultra-query": ["packages/ultra-query/src/index.ts"]
     }
   }
