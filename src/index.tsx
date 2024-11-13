@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { Demo } from './demo';
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== 'development') {
-    return;
+  if (IS_MOCK) {
+    const { worker } = await import('./database/mock/msw');
+
+    // `worker.start()` returns a Promise that resolves
+    // once the Service Worker is up and ready to intercept requests.
+    return worker.start();
   }
 
-  const { worker } = await import('./database/mock/msw');
-
-  // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
-  return worker.start();
+  return Promise.resolve();
 }
 
 // Initialize the msw worker, wait for the service worker registration to resolve, then mount

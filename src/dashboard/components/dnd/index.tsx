@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import type { RatanDashboardPanel } from 'src/dashboard/types/panel-types';
+import type { RatanDashboardPanelSchema } from 'src/dashboard/types/dashboard-types';
 import { GridstackItem, GridstackProvider } from './lib';
 import { panelSchemas2gridStackOptions } from './utils';
 import 'gridstack/dist/gridstack.min.css';
@@ -7,7 +7,7 @@ import 'gridstack/dist/gridstack.min.css';
 export const DnD = ({
   children,
   panels,
-}: { children: React.ReactNode; panels: RatanDashboardPanel[] }) => {
+}: { children: React.ReactNode; panels: RatanDashboardPanelSchema[] }) => {
   const items = React.Children.toArray(children);
   const gridOptions = useMemo(
     () => panelSchemas2gridStackOptions(panels),

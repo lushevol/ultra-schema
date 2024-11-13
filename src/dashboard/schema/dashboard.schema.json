@@ -1,1 +1,60 @@
-{}
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "refreshInterval": {
+      "type": "string"
+    },
+    "panels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["metrics", "chart", "table", "pie"]
+          },
+          "queryType": {
+            "type": "string",
+            "enum": ["postgresSQL", "esSQL"]
+          },
+          "datasource": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "layout": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "w": {
+                "type": "number"
+              },
+              "h": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "required": ["id", "title", "type", "queryType", "datasource", "query"]
+      }
+    }
+  }
+}

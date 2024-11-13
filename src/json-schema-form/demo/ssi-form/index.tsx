@@ -9,6 +9,7 @@ import type { JSONSchema7 } from 'json-schema';
 import { useRef, useState } from 'react';
 import { templates } from '../../templates';
 import { widgets } from '../../widgets';
+import { SchemaEditor } from './schema-editor';
 import ssi_form_json_schema from './ssi-form-json-schema.json';
 import ssiFormMockData from './ssi-form-mock.generated.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
@@ -59,32 +60,35 @@ export const RSJFDemo = () => {
   };
 
   return (
-    <AntdForm form={antdFormRef}>
-      <Form
-        ref={formRef}
-        schema={schema}
-        uiSchema={uiSchema}
-        formData={formData}
-        validator={validator}
-        templates={templates}
-        widgets={widgets}
-        onChange={handleFormDataChange}
-        onSubmit={log('submitted')}
-        onError={log('errors')}
-        autoComplete="off"
-        noHtml5Validate
-        formContext={{
-          descriptionLocation: 'tooltip',
-          readonlyAsDisabled: false,
-          labelCol: {
-            span: 8,
-          },
-          wrapperCol: {
-            span: 16,
-          },
-        }}
-      />
-    </AntdForm>
+    <div>
+      <SchemaEditor />
+      <AntdForm form={antdFormRef}>
+        <Form
+          ref={formRef}
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={formData}
+          validator={validator}
+          templates={templates}
+          widgets={widgets}
+          onChange={handleFormDataChange}
+          onSubmit={log('submitted')}
+          onError={log('errors')}
+          autoComplete="off"
+          noHtml5Validate
+          formContext={{
+            descriptionLocation: 'tooltip',
+            readonlyAsDisabled: false,
+            labelCol: {
+              span: 8,
+            },
+            wrapperCol: {
+              span: 16,
+            },
+          }}
+        />
+      </AntdForm>
+    </div>
   );
 };
 

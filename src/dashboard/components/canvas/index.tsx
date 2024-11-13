@@ -1,17 +1,23 @@
+import { Space } from 'antd';
 import useDashboard from 'src/dashboard/hooks/useDashboard';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
 import { DnD } from '../dnd';
+import { SchemaEditor } from '../schema-editor';
 
 const DashboardCanvas = ({
   schema,
   children,
 }: { schema: RatanDashboardSchema; children: React.ReactNode }) => {
-  const { title, description, refreshInterval, panels } = useDashboard(schema);
+  const { title, description, refreshInterval, finalPanels, panels } =
+    useDashboard(schema);
   return (
     <div className="dashboard-root">
-      {title && <h1>{title}</h1>}
-      {description && <p>{description}</p>}
-      {refreshInterval && <p>{refreshInterval}</p>}
+      <Space>
+        {title && <h1>{title}</h1>}
+        {description && <p>{description}</p>}
+        {refreshInterval && <p>{refreshInterval}</p>}
+        <SchemaEditor />
+      </Space>
       <DnD panels={panels}>{children}</DnD>
     </div>
   );

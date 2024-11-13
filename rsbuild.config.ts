@@ -1,10 +1,16 @@
 import { defineConfig } from '@rsbuild/core';
+import { pluginNodePolyfill } from '@rsbuild/plugin-node-polyfill';
 import { pluginReact } from '@rsbuild/plugin-react';
 
 export default defineConfig({
-  plugins: [pluginReact()],
+  plugins: [pluginReact(), pluginNodePolyfill()],
   html: {
     template: './public/index.html',
+  },
+  source: {
+    define: {
+      IS_MOCK: process.env.MOCK === 'true',
+    },
   },
   server: {
     proxy: {

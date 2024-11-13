@@ -8,27 +8,24 @@ import { usePanelQuery } from './usePanel';
 import { usePromiseAll } from './usePromise';
 
 export default function useDashboard(schema: RatanDashboardSchema) {
-  const [panels, setPanels] = useState<RatanDashboardPanelSchema[]>(
-    schema.panels,
-  );
   const { refreshPanel } = usePanelQuery();
 
-  const finalPanels = useMemo<Promise<RatanDashboardPanel>[]>(
+  const panelsPromises = useMemo<Promise<RatanDashboardPanel>[]>(
     () =>
-      panels
+      schema.panels
         .map((panel) => refreshPanel(panel))
         .filter((panel): panel is Promise<RatanDashboardPanel> => !!panel),
-    [panels, refreshPanel],
+    [schema.panels, refreshPanel],
   );
 
   const { data: panelsData, isLoading: panelsLoading } =
-    usePromiseAll(finalPanels);
+    usePromiseAll(panelsPromises);
 
   return {
     title: schema.title,
     description: schema.description,
     refreshInterval: schema.refreshInterval,
-    panels,
+    panels: schema.panels,
     finalPanels: panelsData,
     panelsLoading,
   };

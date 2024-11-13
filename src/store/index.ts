@@ -14,6 +14,8 @@ import {
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
 import { dashboardSlice } from './slices/dashboard';
+import { jsonSchemaFormSlice } from './slices/json-schema-form';
+
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
 });
@@ -22,6 +24,7 @@ const store = configureStore({
   reducer: {
     [aggridSlice.name]: aggridSlice.reducer,
     [dashboardSlice.name]: dashboardSlice.reducer,
+    [jsonSchemaFormSlice.name]: jsonSchemaFormSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (gDM) =>
