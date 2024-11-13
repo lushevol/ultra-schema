@@ -4,6 +4,7 @@ import {
   type TypedStartListening,
   addListener,
   configureStore,
+  createAsyncThunk,
   createListenerMiddleware,
 } from '@reduxjs/toolkit';
 import {
@@ -15,6 +16,7 @@ import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
 import { dashboardSlice } from './slices/dashboard';
 import { jsonSchemaFormSlice } from './slices/json-schema-form';
+import { trackUsingSlice } from './slices/track-using';
 
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
@@ -25,6 +27,7 @@ const store = configureStore({
     [aggridSlice.name]: aggridSlice.reducer,
     [dashboardSlice.name]: dashboardSlice.reducer,
     [jsonSchemaFormSlice.name]: jsonSchemaFormSlice.reducer,
+    [trackUsingSlice.name]: trackUsingSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (gDM) =>
@@ -53,3 +56,8 @@ export const addAppListener = addListener as AppAddListener;
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const createAppAsyncThunk = createAsyncThunk.withTypes<{
+  state: RootState;
+  dispatch: AppDispatch;
+}>();
