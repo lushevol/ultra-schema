@@ -6,11 +6,15 @@ import useDashboard from './hooks/useDashboard';
 
 export default function Demo() {
   const schema = useSelector((state: RootState) => state.dashboard.schema);
-  const { panels } = useDashboard(schema);
+  const { panels, finalPanels, panelsLoading } = useDashboard(schema);
   return (
     <DashboardCanvas schema={schema}>
-      {panels.map((panel) => (
-        <Panel key={panel.title} panel={panel} />
+      {panels.map((panel, index) => (
+        <Panel
+          key={panel.id}
+          panel={finalPanels[index] ?? panel}
+          isLoading={panelsLoading[index]}
+        />
       ))}
     </DashboardCanvas>
   );

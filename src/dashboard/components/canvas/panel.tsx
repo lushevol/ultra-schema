@@ -1,16 +1,23 @@
 import { Card } from 'antd';
 import type {
+  PanelMetricData,
   PanelTableData,
   RatanDashboardPanel,
 } from 'src/dashboard/types/panel-types';
+import { MetricPanel } from '../metric';
 import { TablePanel } from '../table';
 
-export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
+export const Panel = ({
+  panel,
+  isLoading,
+}: { panel: RatanDashboardPanel; isLoading: boolean }) => {
   return (
     <Card
       className="ratan-dashboard-panel"
       title={panel.title}
       style={{ height: '100%' }}
+      size="small"
+      loading={isLoading}
     >
       <PanelContent panel={panel} />
     </Card>
@@ -18,6 +25,9 @@ export const Panel = ({ panel }: { panel: RatanDashboardPanel }) => {
 };
 
 const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {
+  if (!panel.data) {
+    return 'No data';
+  }
   switch (panel.type) {
     case 'table':
       return (
@@ -26,6 +36,12 @@ const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {
           columns={(panel.data as PanelTableData).columns}
         />
       );
+    case 'chart':
+      return <div className="panel-chart">Chart</div>;
+    case 'metrics':
+      return <MetricPanel data={panel.data as PanelMetricData} />;
+    case 'pie':
+      return <div className="panel-pie-chart">Pie</div>;
     default:
       return <div className="unknown-panel-type">Unknown panel type</div>;
   }

@@ -28,7 +28,8 @@ export default function useDashboard(schema: RatanDashboardSchema) {
     title: schema.title,
     description: schema.description,
     refreshInterval: schema.refreshInterval,
-    panels: panelsData,
+    panels,
+    finalPanels: panelsData,
     panelsLoading,
   };
 }

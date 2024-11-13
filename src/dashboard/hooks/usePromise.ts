@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useState } from 'react';
 
@@ -15,20 +15,26 @@ export const usePromise = <T>(promise: Promise<T>) => {
 };
 
 export const usePromiseAll = <T>(promises: Promise<T>[]) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState<T[]>([]);
+  const promisesCopy = useRef([...promises]);
+  const [data, setData] = useState<T[]>(Array(promises.length).fill(null));
+  const [isLoading, setIsLoading] = useState<boolean[]>(
+    Array(promises.length).fill(true),
+  );
   useEffect(() => {
-    Promise.allSettled(promises).then((data) => {
-      setData(
-        data
-          .filter(
-            (result): result is PromiseFulfilledResult<Awaited<T>> =>
-              result.status === 'fulfilled',
-          )
-          .map((result) => result.value),
-      );
-      setIsLoading(false);
+    promisesCopy.current.forEach((promise, index) => {
+      promise.then((data) => {
+        setData((prev) => {
+          const res = [...prev];
+          res[index] = data;
+          return res;
+        });
+        setIsLoading((prev) => {
+          const res = [...prev];
+          res[index] = false;
+          return res;
+        });
+      });
     });
-  }, [promises]);
+  }, []);
   return { data, isLoading };
 };

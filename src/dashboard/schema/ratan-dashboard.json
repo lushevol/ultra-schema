@@ -1,11 +1,10 @@
 {
   "title": "My Dashboard",
-  "description": "This is my dashboard",
   "panels": [
     {
       "id": "stp-rate",
       "title": "STP Rate",
-      "type": "table",
+      "type": "metrics",
       "datasource": "postgres",
       "queryType": "postgresSQL",
       "query": "SELECT count(distinct cashflow_id) action FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and create_time BETWEEN CURRENT_DATE AND CURRENT_DATE - 1",
@@ -19,7 +18,7 @@
     {
       "id": "waiting-vd-today",
       "title": "WAITING + VD Today",
-      "type": "table",
+      "type": "metrics",
       "datasource": "postgres",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE",
@@ -33,13 +32,41 @@
     {
       "id": "uv-yesterday",
       "title": "UV Yesterday",
-      "type": "table",
+      "type": "metrics",
       "datasource": "es",
       "queryType": "esSQL",
       "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()",
       "layout": {
         "x": 8,
         "y": 0,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "top-3-users-yesterday",
+      "title": "Top 3 Users Yesterday",
+      "type": "table",
+      "datasource": "es",
+      "queryType": "esSQL",
+      "query": "SELECT userId, COUNT(*) as count FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Full Track Click' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY() GROUP BY userId ORDER BY count DESC LIMIT 3",
+      "layout": {
+        "x": 12,
+        "y": 0,
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "id": "exception-volumne",
+      "title": "Exception Volumne",
+      "type": "table",
+      "datasource": "postgres",
+      "queryType": "postgresSQL",
+      "query": "SELECT Cashflow__NSTP_Exception, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE THEN 1 END) AS today, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '1 day' THEN 1 END) AS tomorrow, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '2 day' THEN 1 END) AS the_day_after_tomorrow FROM cash_settlement_query_cn.cashflow_data WHERE cashflow__cashflow_state = 'WAITING'",
+      "layout": {
+        "x": 0,
+        "y": 2,
         "w": 4,
         "h": 2
       }

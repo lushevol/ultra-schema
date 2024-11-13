@@ -15,14 +15,14 @@ async function enableMocking() {
 }
 
 // Initialize the msw worker, wait for the service worker registration to resolve, then mount
-// enableMocking().then(() => {
-const rootEl = document.getElementById('root');
-if (rootEl) {
-  const root = ReactDOM.createRoot(rootEl);
-  root.render(
-    <React.StrictMode>
-      <Demo />
-    </React.StrictMode>,
-  );
-}
-// });
+enableMocking().then(() => {
+  const rootEl = document.getElementById('root');
+  if (rootEl) {
+    const root = ReactDOM.createRoot(rootEl);
+    root.render(
+      <React.StrictMode>
+        <Demo />
+      </React.StrictMode>,
+    );
+  }
+});
