@@ -15,11 +15,19 @@ export type PanelChartData = {
   }[];
 };
 
-export type PanelPieChartData = {
+export type PanelTimelineChartData = {
+  xAxis: {
+    data: string[];
+  };
   series: {
     name: string;
-    data: number;
+    data: number[];
+    type: 'timeline';
   }[];
+};
+
+export type PanelPieChartData = {
+  series: [string, number][];
 };
 
 export type PanelMetricData = {
@@ -30,6 +38,7 @@ export type RatanDashboardPanel = RatanDashboardPanelSchema & {
   data:
     | PanelTableData
     | PanelChartData
+    | PanelTimelineChartData
     | PanelMetricData
     | PanelPieChartData
     | null;

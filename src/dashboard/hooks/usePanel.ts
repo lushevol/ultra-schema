@@ -5,7 +5,10 @@ import {
 } from 'src/rtk-query/dashboardApi';
 import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
 import type { RatanDashboardPanel } from '../types/panel-types';
-import type { ResponseListData } from '../types/query-and-respond-types';
+import {
+  convertESPanelTimelineChartData,
+  convertPanelTimelineChartData,
+} from '../utils/panelLineChartDataConvertor';
 import {
   convertESPanelMetricsData,
   convertPanelMetricsData,
@@ -47,6 +50,11 @@ export const usePanelQuery = () => {
               ...panel,
               data: convertPanelPieChartData(response),
             };
+          case 'timeline':
+            return {
+              ...panel,
+              data: convertPanelTimelineChartData(response),
+            };
           default:
             return { ...panel, data: null };
         }
@@ -73,6 +81,11 @@ export const usePanelQuery = () => {
             return {
               ...panel,
               data: convertESPanelPieChartData(response),
+            };
+          case 'timeline':
+            return {
+              ...panel,
+              data: convertESPanelTimelineChartData(response),
             };
           default:
             return { ...panel, data: null };

@@ -7,8 +7,9 @@ import type {
 export const convertPanelPieChartData = (
   data: ResponseListData,
 ): PanelPieChartData => {
+  const item = data[0] ?? {};
   return {
-    series: (data as PanelPieChartData['series']) ?? [],
+    series: Object.entries(item).map(([key, value]) => [key, Number(value)]),
   };
 };
 
@@ -16,15 +17,8 @@ export const convertESPanelPieChartData = (
   data: ResponseESListData,
 ): PanelPieChartData => {
   const columns = data.columns.map((i) => i.name);
-  const rows = data.rows.reduce<ResponseListData>((res, cur) => {
-    const item: Record<string, string | number | boolean | null> = {};
-    columns.forEach((k, i) => {
-      item[k] = cur[i];
-    });
-    res.push(item);
-    return res;
-  }, []);
+  const item = data.rows[0] ?? {};
   return {
-    series: rows as PanelPieChartData['series'],
+    series: columns.map((k, i) => [k, Number(item[i])]),
   };
 };

@@ -4,6 +4,7 @@ import type {
   PanelTableData,
   RatanDashboardPanel,
 } from 'src/dashboard/types/panel-types';
+import { RatanHighcharts } from '../charts/highcharts';
 import { MetricPanel } from '../metric';
 import { TablePanel } from '../table';
 
@@ -41,7 +42,17 @@ const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {
     case 'metrics':
       return <MetricPanel data={panel.data as PanelMetricData} />;
     case 'pie':
-      return <div className="panel-pie-chart">Pie</div>;
+      return (
+        <div className="panel-pie-chart">
+          <RatanHighcharts options={panel.data as Highcharts.Options} />
+        </div>
+      );
+    case 'timeline':
+      return (
+        <div className="panel-timeline-chart">
+          <RatanHighcharts options={panel.data as Highcharts.Options} />
+        </div>
+      );
     default:
       return <div className="unknown-panel-type">Unknown panel type</div>;
   }
