@@ -7,7 +7,7 @@ const postImUsing = trackUsingApi.endpoints.postImUsing.initiate;
 let trackingInterval: NodeJS.Timeout | null = null;
 
 type TrackUsingRootType = {
-  keys: string[];
+  keys: Set<string>;
 };
 
 // Helper function to manage interval
@@ -18,7 +18,7 @@ const startTrackingInterval = (state: TrackUsingRootType) => {
 
   trackingInterval = setInterval(
     () => {
-      const keys = state.keys;
+      const keys = Array.from(state.keys);
       if (keys.length > 0) {
         postImUsing({ keys });
       }
@@ -30,15 +30,15 @@ const startTrackingInterval = (state: TrackUsingRootType) => {
 export const trackUsingSlice = createSlice({
   name: 'trackUsing',
   initialState: {
-    keys: [],
+    keys: new Set(),
   } as TrackUsingRootType,
   reducers: {
     addTrackUsingKey: (state, action: PayloadAction<string>) => {
-      state.keys.push(action.payload);
+      state.keys.add(action.payload);
       startTrackingInterval(state);
     },
     removeTrackUsingKey: (state, action: PayloadAction<string>) => {
-      state.keys = state.keys.filter((k) => k !== action.payload);
+      state.keys.delete(action.payload);
       startTrackingInterval(state);
     },
   },

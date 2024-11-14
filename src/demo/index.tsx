@@ -1,6 +1,7 @@
 import { Tabs } from 'antd';
 import { Provider } from 'react-redux';
 import DashboardDemo from 'src/dashboard/demo';
+import { TrackUsingDemo } from '../../packages/ratan-track-using/src/demo';
 import { AgGridWithSchema } from '../aggrid/demo/cashflow-data-grid';
 import { RSJFDemo } from '../json-schema-form/demo/ssi-form';
 import { MyQueryBuilder } from '../query-builder/demo';
@@ -32,6 +33,11 @@ export const Demo = () => {
                   <AgGridWithSchema />
                 </>
               ),
+            },
+            {
+              key: 'track-using',
+              label: 'Track Using',
+              children: <TrackUsingDemo />,
             },
           ]}
         />

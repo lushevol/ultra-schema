@@ -1,9 +1,10 @@
-import { useCallback } from 'react';
-import { useAppDispatch } from '../../../src/store';
+import { useCallback, useEffect } from 'react';
+import { useAppDispatch } from '../../../../src/store';
 import {
   addTrackUsingKey,
+  cleanupTracking,
   removeTrackUsingKey,
-} from '../../../src/store/slices/track-using';
+} from '../../../../src/store/slices/track-using';
 
 export const useTrackUsing = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,12 @@ export const useTrackUsing = () => {
     },
     [dispatch],
   );
+
+  useEffect(() => {
+    return () => {
+      cleanupTracking();
+    };
+  }, []);
 
   return {
     using,

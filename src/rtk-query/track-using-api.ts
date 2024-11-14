@@ -2,7 +2,7 @@ import type {
   ImUsingBody,
   WhoIsUsingQuery,
   WhoIsUsingResponse,
-} from '../../packages/ratan-track-using';
+} from '../../packages/ratan-track-using/src';
 import { baseApi as api } from './baseApi';
 
 const injectedRtkApi = api.injectEndpoints({

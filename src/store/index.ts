@@ -31,7 +31,12 @@ const store = configureStore({
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (gDM) =>
-    gDM()
+    gDM({
+      serializableCheck: {
+        ignoredActions: ['aggrid/setAggridEvent'],
+        ignoredPaths: ['payload.api', 'aggrid.aggrid.api'],
+      },
+    })
       .prepend(listenerMiddlewareInstance.middleware)
       .concat(baseApi.middleware),
 });
