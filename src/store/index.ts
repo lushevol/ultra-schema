@@ -34,7 +34,7 @@ const store = configureStore({
     gDM({
       serializableCheck: {
         ignoredActions: ['aggrid/setAggridEvent'],
-        ignoredPaths: ['payload.api', 'aggrid.aggrid.api'],
+        ignoredPaths: ['payload.api', 'aggrid.aggrid.api', 'trackUsing.keys'],
       },
     })
       .prepend(listenerMiddlewareInstance.middleware)

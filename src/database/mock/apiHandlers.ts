@@ -1,4 +1,5 @@
 import { http, HttpResponse } from 'msw';
+import type { WhoIsUsingResponse } from 'packages/ratan-track-using/src';
 import type {
   ResponseESListData,
   ResponseListData,
@@ -36,6 +37,14 @@ export const apiHandlers = [
         { name: 'name', type: 'string' },
       ],
       rows: [['1', 'Cashflow 1']],
+    });
+  }),
+  http.post('/track-using/im-using', () => {
+    return HttpResponse.json({});
+  }),
+  http.get('/track-using/who-is-using', () => {
+    return HttpResponse.json<WhoIsUsingResponse>({
+      users: [],
     });
   }),
 ];
