@@ -1,3 +1,4 @@
+import type { SeriesLineOptions, SeriesPieOptions } from 'highcharts';
 import type { RatanDashboardPanelSchema } from './dashboard-types';
 
 export type PanelTableData = {
@@ -15,19 +16,32 @@ export type PanelChartData = {
   }[];
 };
 
+// export type PanelTimelineChartData = {
+//   xAxis: {
+//     data: string[];
+//   };
+//   series: {
+//     name: string;
+//     data: number[];
+//     type: 'timeline';
+//   }[];
+// };
+
 export type PanelTimelineChartData = {
+  chart: { type: 'line' };
   xAxis: {
-    data: string[];
+    categories: string[];
   };
-  series: {
-    name: string;
-    data: number[];
-    type: 'timeline';
-  }[];
+  series: SeriesLineOptions[];
 };
 
+// export type PanelPieChartData = {
+//   series: [string, number][];
+// };
+
 export type PanelPieChartData = {
-  series: [string, number][];
+  chart: { type: 'pie' };
+  series: SeriesPieOptions[];
 };
 
 export type PanelMetricData = {

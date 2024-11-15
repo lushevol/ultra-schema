@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 import type {
   PanelMetricData,
   PanelTableData,
@@ -20,6 +20,7 @@ export const Panel = ({
       size="small"
       loading={isLoading}
       hidden={panel.hide}
+      extra={<Button type="link">Refresh</Button>}
     >
       <PanelContent panel={panel} />
     </Card>

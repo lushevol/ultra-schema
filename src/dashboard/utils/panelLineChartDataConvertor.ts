@@ -13,27 +13,29 @@ export const convertPanelTimelineChartData = (
   const otherColumns = columns.filter((i) => i !== timeColumn);
   if (!timeColumn) {
     return {
+      chart: { type: 'line' },
       xAxis: {
-        data: [],
+        categories: [],
       },
       series: [],
     };
   }
   return {
+    chart: { type: 'line' },
     xAxis: {
-      data: data.map((i) => i[timeColumn]) as string[],
+      categories: data.map((i) => i[timeColumn]) as string[],
     },
     series: data.reduce<PanelTimelineChartData['series']>(
       (res, cur) => {
         for (const k of otherColumns) {
-          res.find((i) => i.name === k)?.data.push(Number(cur[k]));
+          res.find((i) => i.name === k)?.data?.push(Number(cur[k]));
         }
         return res;
       },
       otherColumns.map((k) => ({
         name: k,
         data: [],
-        type: 'timeline',
+        type: 'line',
       })),
     ),
   };
@@ -49,28 +51,30 @@ export const convertESPanelTimelineChartData = (
   const otherColumns = data.columns.filter((i) => i.name !== timeColumn?.name);
   if (!timeColumn) {
     return {
+      chart: { type: 'line' },
       xAxis: {
-        data: [],
+        categories: [],
       },
       series: [],
     };
   }
   return {
+    chart: { type: 'line' },
     xAxis: {
-      data: data.rows.map((i) => `${i[timeColumnIndex]}`),
+      categories: data.rows.map((i) => `${i[timeColumnIndex]}`),
     },
     series: data.rows.reduce<PanelTimelineChartData['series']>(
       (res, cur) => {
         for (let i = 0; i < otherColumns.length; i++) {
           const k = otherColumns[i];
-          res.find((i) => i.name === k.name)?.data.push(Number(cur[i]));
+          res.find((i) => i.name === k.name)?.data?.push(Number(cur[i]));
         }
         return res;
       },
       otherColumns.map((k) => ({
         name: k.name,
         data: [],
-        type: 'timeline',
+        type: 'line',
       })),
     ),
   };
