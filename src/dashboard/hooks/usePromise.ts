@@ -15,13 +15,12 @@ export const usePromise = <T>(promise: Promise<T>) => {
 };
 
 export const usePromiseAll = <T>(promises: Promise<T>[]) => {
-  const promisesCopy = useRef([...promises]);
   const [data, setData] = useState<T[]>(Array(promises.length).fill(null));
   const [isLoading, setIsLoading] = useState<boolean[]>(
     Array(promises.length).fill(true),
   );
   useEffect(() => {
-    promisesCopy.current.forEach((promise, index) => {
+    promises.forEach((promise, index) => {
       promise.then((data) => {
         setData((prev) => {
           const res = [...prev];
@@ -35,6 +34,6 @@ export const usePromiseAll = <T>(promises: Promise<T>[]) => {
         });
       });
     });
-  }, []);
+  }, [promises]);
   return { data, isLoading };
 };

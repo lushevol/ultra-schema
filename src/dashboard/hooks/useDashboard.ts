@@ -1,8 +1,5 @@
-import { useMemo, useState } from 'react';
-import type {
-  RatanDashboardPanelSchema,
-  RatanDashboardSchema,
-} from '../types/dashboard-types';
+import { useMemo } from 'react';
+import type { RatanDashboardSchema } from '../types/dashboard-types';
 import type { RatanDashboardPanel } from '../types/panel-types';
 import { usePanelQuery } from './usePanel';
 import { usePromiseAll } from './usePromise';
