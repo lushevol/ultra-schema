@@ -19,6 +19,7 @@ export const Panel = ({
       style={{ height: '100%' }}
       size="small"
       loading={isLoading}
+      hidden={panel.hide}
     >
       <PanelContent panel={panel} />
     </Card>

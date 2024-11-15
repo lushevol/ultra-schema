@@ -35,6 +35,9 @@
           "query": {
             "type": "string"
           },
+          "hide": {
+            "type": "boolean"
+          },
           "layout": {
             "type": "object",
             "properties": {

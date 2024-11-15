@@ -15,6 +15,7 @@ export type RatanDashboardPanelSchema = {
   datasource: RatanDashboardDataSource;
   queryType: RatanDashboardQueryType;
   query: string;
+  hide?: boolean;
   layout: {
     x: number;
     y: number;

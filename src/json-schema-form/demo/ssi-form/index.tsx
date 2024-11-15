@@ -5,16 +5,15 @@ import type { IChangeEvent } from '@rjsf/core';
 import validator from '@rjsf/validator-ajv8';
 import { Form as AntdForm } from 'antd';
 import { produce } from 'immer';
-import type { JSONSchema7 } from 'json-schema';
 import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from 'src/store';
 import { templates } from '../../templates';
 import { widgets } from '../../widgets';
 import { SchemaEditor } from './schema-editor';
-import ssi_form_json_schema from './ssi-form-json-schema.json';
 import ssiFormMockData from './ssi-form-mock.generated.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
 import ssi_form_ui_schema from './ssi-form-ui-schema.json';
-
 // const schema = produce(generatedJsonSchema, (draft) => {
 //   (
 //     (draft.properties as WritableDraft<Record<string, JSONSchema7>>)
@@ -27,12 +26,12 @@ import ssi_form_ui_schema from './ssi-form-ui-schema.json';
 
 // console.log(schema);
 
-const schema = ssi_form_json_schema as unknown as JSONSchema7;
 const uiSchema = ssi_form_ui_schema;
 
 const log = (type: string) => console.log.bind(console, type);
 
 export const RSJFDemo = () => {
+  const schema = useSelector((state: RootState) => state.jsonSchemaForm.schema);
   const formRef = useRef<FormType>(null);
   const [antdFormRef] = AntdForm.useForm<SsiFormJsonSchema>();
   const [formData, setFormData] = useState<SsiFormJsonSchema>(

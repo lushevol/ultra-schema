@@ -138,12 +138,13 @@
         "x": 4,
         "y": 1,
         "w": 3,
-        "h": 1
+        "h": 2
       }
     },
     {
       "id": "exception-volumne",
       "title": "Exception Volumne",
+      "hide": true,
       "type": "table",
       "datasource": "postgres",
       "queryType": "postgresSQL",
