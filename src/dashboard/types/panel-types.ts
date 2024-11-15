@@ -28,6 +28,9 @@ export type PanelChartData = {
 // };
 
 export type PanelTimelineChartData = {
+  title: {
+    text: '';
+  };
   chart: { type: 'line' };
   xAxis: {
     categories: string[];
@@ -40,6 +43,9 @@ export type PanelTimelineChartData = {
 // };
 
 export type PanelPieChartData = {
+  title: {
+    text: '';
+  };
   chart: { type: 'pie' };
   series: SeriesPieOptions[];
 };

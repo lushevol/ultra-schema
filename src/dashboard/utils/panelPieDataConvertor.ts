@@ -9,10 +9,13 @@ export const convertPanelPieChartData = (
 ): PanelPieChartData => {
   const item = data[0] ?? {};
   return {
+    title: {
+      text: '',
+    },
     chart: { type: 'pie' },
     series: Object.entries(item).map(([key, value]) => ({
       name: key,
-      data: [Number(value)],
+      y: Number(value),
       type: 'pie',
     })),
   };
@@ -21,14 +24,20 @@ export const convertPanelPieChartData = (
 export const convertESPanelPieChartData = (
   data: ResponseESListData,
 ): PanelPieChartData => {
-  const columns = data.columns.map((i) => i.name);
-  const item = data.rows[0] ?? {};
   return {
+    title: {
+      text: '',
+    },
     chart: { type: 'pie' },
-    series: columns.map((k, i) => ({
-      name: k,
-      data: [Number(item[i])],
-      type: 'pie',
-    })),
+    series: [
+      {
+        name: '',
+        data: data.rows.map((k) => ({
+          name: `${k[0]}`,
+          y: Number(k[1]),
+        })),
+        type: 'pie',
+      },
+    ],
   };
 };
