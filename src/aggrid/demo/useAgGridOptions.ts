@@ -13,9 +13,10 @@ export const useAgGridOptions = <T>(
   queryCashflow: (
     args: OpenSearchQuery,
   ) => Promise<OpenSearchResult<SettlementSchemaRootType>>,
+  getRowId: GridOptions<T>['getRowId'],
 ) => {
   const gridOptions: GridOptions<T> = {
-    // getRowId: ({ data }) => `${data.Cashflow?.Cashflow_Id}`,
+    getRowId,
     rowSelection: {
       mode: 'multiRow',
     },
@@ -49,7 +50,10 @@ export const useAgGridOptions = <T>(
       getRows(params) {
         const { api, request, success, fail } = params;
         const queryFields =
-          api.getColumns()?.map((col) => col.getColId()) || [];
+          api
+            .getColumns()
+            ?.filter((col) => col.isVisible())
+            .map((col) => col.getColId()) || [];
         const filterModel = request.filterModel;
         const sortModel = request.sortModel;
         const filters = aggridFilterToOpenSearchFilter(filterModel);

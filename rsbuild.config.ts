@@ -15,11 +15,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/opensearch': {
-        target: 'https://uklvadapp1344.uk.dev.net:31525',
+        target: 'https://uklvadapp1342.uk.dev.net:22099',
         pathRewrite: { '^/opensearch': '' },
         secure: false,
       },
-      '/dashboard/query/pg/real_time': {
+      '/dashboard/query/pg': {
         target: 'http://localhost:1218',
         secure: false,
       },

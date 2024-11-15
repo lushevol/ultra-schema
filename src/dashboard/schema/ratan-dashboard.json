@@ -86,14 +86,28 @@
       }
     },
     {
-      "id": "stp-rate",
-      "title": "STP Rate",
+      "id": "stp-rate-7-days",
+      "title": "STP Rate 7 Days",
       "type": "metrics",
       "datasource": "postgres_dailydump",
       "queryType": "postgresSQL",
-      "query": "SELECT count(distinct cashflow_id) action FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and create_time BETWEEN CURRENT_DATE AND CURRENT_DATE - 1",
+      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)) * 100 / (SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)))) as stp_rate",
       "layout": {
         "x": 0,
+        "y": 1,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "stp-rate-yesterday",
+      "title": "STP Rate Yesterday",
+      "type": "metrics",
+      "datasource": "postgres_dailydump",
+      "queryType": "postgresSQL",
+      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)) * 100 / (SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)))) as stp_rate",
+      "layout": {
+        "x": 1,
         "y": 1,
         "w": 1,
         "h": 1
@@ -107,8 +121,8 @@
       "queryType": "esSQL",
       "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()",
       "layout": {
-        "x": 1,
-        "y": 1,
+        "x": 0,
+        "y": 2,
         "w": 1,
         "h": 1
       }

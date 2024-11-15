@@ -11,7 +11,7 @@ const injectedRtkApi = api.injectEndpoints({
       OpenSearchQuery
     >({
       query: (queryArg) => ({
-        url: '/opensearch/',
+        url: '/opensearch/v1/call-sdk-internal/by-queryParameterSchema',
         method: 'POST',
         body: queryArg,
       }),
