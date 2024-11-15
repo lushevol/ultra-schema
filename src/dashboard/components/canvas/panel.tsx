@@ -20,7 +20,6 @@ export const Panel = ({
       size="small"
       loading={isLoading}
       hidden={panel.hide}
-      extra={<Button type="link">Refresh</Button>}
     >
       <PanelContent panel={panel} />
     </Card>

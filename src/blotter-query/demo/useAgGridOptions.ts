@@ -46,6 +46,7 @@ export const useAgGridOptions = <T>(
     rowModelType: 'serverSide',
     pagination: true,
     paginationPageSize: DEFAULT_PAGE_SIZE,
+    paginationPageSizeSelector: [100, 500, 1000, 10000],
     serverSideDatasource: {
       getRows(params) {
         const { api, request, success, fail } = params;
