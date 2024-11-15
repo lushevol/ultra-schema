@@ -14,6 +14,13 @@ const injectedRtkApi = api.injectEndpoints({
         body: queryArg,
       }),
     }),
+    queryPGDailyDump: build.query<ResponseListData, DashboardPanelQuery>({
+      query: (queryArg) => ({
+        url: '/dashboard/query/pg/daily_dump',
+        method: 'POST',
+        body: queryArg,
+      }),
+    }),
     queryES: build.query<ResponseESListData, DashboardPanelQuery>({
       query: (arg) => ({
         headers: {
@@ -31,4 +38,8 @@ const injectedRtkApi = api.injectEndpoints({
 });
 export { injectedRtkApi as dashboardApi };
 
-export const { useLazyQueryPGQuery, useLazyQueryESQuery } = injectedRtkApi;
+export const {
+  useLazyQueryPGQuery,
+  useLazyQueryESQuery,
+  useLazyQueryPGDailyDumpQuery,
+} = injectedRtkApi;

@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import {
   useLazyQueryESQuery,
+  useLazyQueryPGDailyDumpQuery,
   useLazyQueryPGQuery,
 } from 'src/rtk-query/dashboardApi';
 import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
@@ -25,10 +26,44 @@ import {
 export const usePanelQuery = () => {
   const [queryPG] = useLazyQueryPGQuery();
   const [queryES] = useLazyQueryESQuery();
+  const [queryPGDailyDump] = useLazyQueryPGDailyDumpQuery();
   const refreshPanel = useCallback(
     async (panel: RatanDashboardPanelSchema): Promise<RatanDashboardPanel> => {
-      if (panel.datasource === 'postgres') {
+      if (panel.datasource === 'postgres_realtime') {
         const response = await queryPG({
+          dataSource: panel.datasource,
+          queryType: panel.queryType,
+          query: panel.query,
+          panelType: panel.type,
+        }).unwrap();
+        switch (panel.type) {
+          case 'table':
+            return {
+              ...panel,
+              data: convertPanelTableData(response),
+            };
+          case 'metrics':
+            return {
+              ...panel,
+              data: convertPanelMetricsData(response),
+            };
+          case 'pie':
+            return {
+              ...panel,
+              data: convertPanelPieChartData(response),
+            };
+          case 'timeline':
+            return {
+              ...panel,
+              data: convertPanelTimelineChartData(response),
+            };
+          default:
+            return { ...panel, data: null };
+        }
+      }
+
+      if (panel.datasource === 'postgres_dailydump') {
+        const response = await queryPGDailyDump({
           dataSource: panel.datasource,
           queryType: panel.queryType,
           query: panel.query,
@@ -94,7 +129,7 @@ export const usePanelQuery = () => {
 
       return { ...panel, data: null };
     },
-    [queryPG, queryES],
+    [queryPG, queryES, queryPGDailyDump],
   );
 
   return {

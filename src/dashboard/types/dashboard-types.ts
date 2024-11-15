@@ -4,7 +4,10 @@ export type RatanDashboardPanelSchemaType =
   | 'metrics'
   | 'pie'
   | 'timeline';
-export type RatanDashboardDataSource = 'es' | 'postgres';
+export type RatanDashboardDataSource =
+  | 'es'
+  | 'postgres_realtime'
+  | 'postgres_dailydump';
 export type RatanDashboardQueryType = 'esSQL' | 'postgresSQL';
 
 export type RatanDashboardPanelSchema = {

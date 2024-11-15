@@ -1,6 +1,7 @@
 package com.ratanone.shuaipoc.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,22 @@ import java.util.Map;
 @Repository
 public class JdbcRepository {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate realtimeJdbcTemplate;
 
-    public List<Map<String, String>> queryList(String sql) {
-        return jdbcTemplate.query(sql + " LIMIT 1000", new StringMapRowMapper());
+    @Autowired
+    private final JdbcTemplate dailydumpJdbcTemplate;
+
+    public JdbcRepository(@Qualifier("realtimeJdbcTemplate") JdbcTemplate realtimeJdbcTemplate,
+                             @Qualifier("dailydumpJdbcTemplate") JdbcTemplate dailydumpJdbcTemplate) {
+        this.realtimeJdbcTemplate = realtimeJdbcTemplate;
+        this.dailydumpJdbcTemplate = dailydumpJdbcTemplate;
+    }
+
+    public List<Map<String, String>> queryListFromRealtime(String sql) {
+        return realtimeJdbcTemplate.query(sql + " LIMIT 1000", new StringMapRowMapper());
+    }
+
+    public List<Map<String, String>> queryListFromDailyDump(String sql) {
+        return dailydumpJdbcTemplate.query(sql + " LIMIT 1000", new StringMapRowMapper());
     }
 }

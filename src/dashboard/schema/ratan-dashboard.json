@@ -5,7 +5,7 @@
       "id": "waiting-vd-today",
       "title": "Waiting VD Today",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE",
       "layout": {
@@ -19,7 +19,7 @@
       "id": "Failed-vd-today",
       "title": "Failed VD Today",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'FAILED' and cashflow__payment_date = CURRENT_DATE",
       "layout": {
@@ -33,7 +33,7 @@
       "id": "error-vd-7-days",
       "title": "Error",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'ERROR' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
       "layout": {
@@ -47,7 +47,7 @@
       "id": "queued-vd-7-days",
       "title": "Queued",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'QUEUED' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
       "layout": {
@@ -61,7 +61,7 @@
       "id": "hold-vd-7-days",
       "title": "Hold",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'HOLD' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
       "layout": {
@@ -75,7 +75,7 @@
       "id": "group-pending",
       "title": "Group Pending",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "select count(*) FROM ratan_cashflow_group_management_service.ratan_cashflow_group_message where Status = 'PENDING'",
       "layout": {
@@ -89,7 +89,7 @@
       "id": "stp-rate",
       "title": "STP Rate",
       "type": "metrics",
-      "datasource": "postgres",
+      "datasource": "postgres_dailydump",
       "queryType": "postgresSQL",
       "query": "SELECT count(distinct cashflow_id) action FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and create_time BETWEEN CURRENT_DATE AND CURRENT_DATE - 1",
       "layout": {
@@ -131,7 +131,7 @@
       "id": "cashflow-volumne",
       "title": "Cashflow Volumne",
       "type": "table",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "SELECT COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE THEN 1 END) AS today, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '1 day' THEN 1 END) AS tomorrow, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '2 day' THEN 1 END) AS the_day_after_tomorrow FROM cash_settlement_query_cn.cashflow_data WHERE cashflow__cashflow_state not in ('NETTED', 'SETTLED', 'RELEASED', 'DEAD', 'CAMCELLED')",
       "layout": {
@@ -146,7 +146,7 @@
       "title": "Exception Volumne",
       "hide": true,
       "type": "table",
-      "datasource": "postgres",
+      "datasource": "postgres_realtime",
       "queryType": "postgresSQL",
       "query": "SELECT cashflow__nstp_exception, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE THEN 1 END) AS today, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '1 day' THEN 1 END) AS tomorrow, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '2 day' THEN 1 END) AS the_day_after_tomorrow FROM cash_settlement_query_cn.cashflow_data WHERE cashflow__cashflow_state = 'WAITING' group by cashflow__nstp_exception order by cashflow__nstp_exception",
       "layout": {
