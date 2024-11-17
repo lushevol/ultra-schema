@@ -9,9 +9,7 @@ import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
 import Cashflows from '../cashflow';
 
 export const apiHandlers = [
-  // Intercept "GET https://example.com/user" requests...
-  http.post('/opensearch', () => {
-    // ...and respond to them using this JSON response.
+  http.post('/opensearch/v1/call-sdk-internal/by-queryParameterSchema', () => {
     return HttpResponse.json<OpenSearchResult<SettlementSchemaRootType>>({
       totalResult: Cashflows.length,
       pageIndex: 1,
@@ -21,7 +19,14 @@ export const apiHandlers = [
     });
   }),
   http.post('/dashboard/query/pg/real_time', () => {
-    // ...and respond to them using this JSON response.
+    return HttpResponse.json<ResponseListData>([
+      {
+        id: '1',
+        name: 'Cashflow 1',
+      },
+    ]);
+  }),
+  http.post('/dashboard/query/pg/daily_dump', () => {
     return HttpResponse.json<ResponseListData>([
       {
         id: '1',
@@ -30,7 +35,6 @@ export const apiHandlers = [
     ]);
   }),
   http.post('/dashboard/query/es', () => {
-    // ...and respond to them using this JSON response.
     return HttpResponse.json<ResponseESListData>({
       columns: [
         { name: 'id', type: 'string' },

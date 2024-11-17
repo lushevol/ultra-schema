@@ -1,8 +1,8 @@
-import { Templates } from '@rjsf/antd';
+import { generateTemplates } from '@rjsf/antd';
 import type { FormProps } from '@rjsf/core';
 import type { FieldTemplateProps } from '@rjsf/utils';
 
-const FieldTemplate = Templates.FieldTemplate;
+const { FieldTemplate } = generateTemplates();
 
 export function CustomFieldTemplate(props: FieldTemplateProps) {
   return FieldTemplate ? <FieldTemplate {...props} /> : null;

@@ -1,6 +1,6 @@
 import { Space } from 'antd';
-import { MyQueryBuilder } from 'src/query-builder/demo';
 import { AgGridWithSchema } from './cashflow-data-grid';
+import { MyQueryBuilder } from './query-builder';
 
 export default function BlotterQueryDemo() {
   return (

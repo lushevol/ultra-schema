@@ -2,6 +2,7 @@ import Form from '@rjsf/antd';
 // import Form from '@rjsf/mui';
 import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
+import type { UiSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { Form as AntdForm } from 'antd';
 import { produce } from 'immer';
@@ -14,26 +15,15 @@ import { SchemaEditor } from './schema-editor';
 import ssiFormMockData from './ssi-form-mock.generated.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
 import ssi_form_ui_schema from './ssi-form-ui-schema.json';
-// const schema = produce(generatedJsonSchema, (draft) => {
-//   (
-//     (draft.properties as WritableDraft<Record<string, JSONSchema7>>)
-//       .Cashflow as WritableDraft<JSONSchema7>
-//   ).dependencies = {
-//     Payment_Currency: ["Payment_Amount"],
-//     Payment_Amount: ["Payment_Currency"],
-//   };
-// });
+import { SsiFormRoot } from './style';
 
-// console.log(schema);
-
-const uiSchema = ssi_form_ui_schema;
+const uiSchema = ssi_form_ui_schema as UiSchema;
 
 const log = (type: string) => console.log.bind(console, type);
 
 export const RSJFDemo = () => {
   const schema = useSelector((state: RootState) => state.jsonSchemaForm.schema);
   const formRef = useRef<FormType>(null);
-  const [antdFormRef] = AntdForm.useForm<SsiFormJsonSchema>();
   const [formData, setFormData] = useState<SsiFormJsonSchema>(
     ssiFormMockData as SsiFormJsonSchema,
   );
@@ -58,10 +48,12 @@ export const RSJFDemo = () => {
     setFormData(formData);
   };
 
+  console.log(formRef.current);
+
   return (
     <div>
       <SchemaEditor />
-      <AntdForm form={antdFormRef}>
+      <SsiFormRoot className="ssi-form-root">
         <Form
           ref={formRef}
           schema={schema}
@@ -75,6 +67,7 @@ export const RSJFDemo = () => {
           onError={log('errors')}
           autoComplete="off"
           noHtml5Validate
+          showErrorList={false}
           formContext={{
             descriptionLocation: 'tooltip',
             readonlyAsDisabled: false,
@@ -86,7 +79,7 @@ export const RSJFDemo = () => {
             },
           }}
         />
-      </AntdForm>
+      </SsiFormRoot>
     </div>
   );
 };

@@ -50,6 +50,7 @@
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "charges": {
+      "title": "Charges",
       "type": "string",
       "enum": ["OUR", "SHA", "BEN"]
     },
@@ -113,6 +114,7 @@
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "receiversCorrespondentAccount": {
+      "title": "Receivers Correspondent Account",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
@@ -137,50 +139,62 @@
       "maxLength": 33
     },
     "senderToReceiver1": {
+      "title": "Sender to Receiver 1",
       "type": "string",
       "maxLength": 35
     },
     "senderToReceiver2": {
+      "title": "Sender to Receiver 2",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver3": {
+      "title": "Sender to Receiver 3",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver4": {
+      "title": "Sender to Receiver 4",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver5": {
+      "title": "Sender to Receiver 5",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver6": {
+      "title": "Sender to Receiver 6",
       "type": "string",
       "maxLength": 33
     },
     "swiftType": {
+      "title": "Swift Type",
       "type": "string",
       "default": "MT103",
       "enum": ["MT103", "MT103 SERIAL", "MT202"]
     },
     "ssiType": {
+      "title": "SSI Type",
       "type": "string",
       "enum": ["Primary", "Secondary"]
     },
     "settlementMeans": {
+      "title": "Settlement Means",
       "type": "string",
       "enum": ["CLG", "CLS SUSP", "NOS", "Over-Account", "Non-Nostro"]
     },
     "settlementAccount": {
+      "title": "Settlement Account",
       "type": "string",
       "maxLength": 20
     },
     "coveredPayment": {
+      "title": "Covered Payment",
       "type": "boolean"
     },
     "tpp": {
+      "title": "TPP",
       "type": "boolean"
     }
   },

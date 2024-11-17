@@ -49,7 +49,7 @@ const columnAdvancedFilter2OpenSearchFilterItem = (
   return {
     field: filter.colId,
     operator: aggridOperator2OsQueryOperator(filter.type),
-    values: [`${filter.filter}`],
+    values: [filter.filter],
   };
 };
 

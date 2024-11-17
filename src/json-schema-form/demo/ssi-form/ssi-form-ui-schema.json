@@ -2,7 +2,7 @@
   "-ui:title": "Title",
   "-ui:description": "Description",
   "ui:rootFieldId": "ssi-vostro-form",
-  "ui:classNames": "ssi-vostro-form",
+  "-ui:classNames": "ssi-vostro-form",
   "ui:globalOptions": { "copyable": true },
   "ui:order": [
     "ssiType",
@@ -23,6 +23,7 @@
   "ui:submitButtonOptions": {
     "props": {
       "disabled": false,
+      "type": "primary",
       "className": "ssi-vostro-form-submit-button"
     },
     "norender": false,
@@ -30,13 +31,6 @@
   },
 
   "ssiType": {
-    "ui:title": "SSI Type",
-    "ui:classNames": "ssi-vostro-form-ssi-type",
-    "ui:options": {
-      "labels": {
-        "Primary": "Primary",
-        "Secondary": "Secondary"
-      }
-    }
+    "ui:classNames": "ssi-vostro-form-ssi-type"
   }
 }
