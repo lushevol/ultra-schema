@@ -91,7 +91,7 @@
       "type": "metrics",
       "datasource": "postgres_dailydump",
       "queryType": "postgresSQL",
-      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)) * 100 / (SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)))) as stp_rate",
+      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)) * 100 / nullif((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)), 0))) as stp_rate",
       "layout": {
         "x": 0,
         "y": 1,
@@ -105,7 +105,7 @@
       "type": "metrics",
       "datasource": "postgres_dailydump",
       "queryType": "postgresSQL",
-      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)) * 100 / (SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)))) as stp_rate",
+      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)) * 100 / nullif((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)), 0))) as stp_rate",
       "layout": {
         "x": 1,
         "y": 1,
