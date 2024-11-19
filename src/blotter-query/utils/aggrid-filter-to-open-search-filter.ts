@@ -46,10 +46,17 @@ const joinAdvancedFilter2OpenSearchFilter = (
 const columnAdvancedFilter2OpenSearchFilterItem = (
   filter: ColumnAdvancedFilterModel,
 ): FilterItem => {
+  if (filter.filterType === 'boolean') {
+    return {
+      field: filter.colId,
+      operator: 'EQ',
+      values: [filter.type],
+    };
+  }
   return {
     field: filter.colId,
     operator: aggridOperator2OsQueryOperator(filter.type),
-    values: [filter.filter],
+    values: [filter.filter ?? ''],
   };
 };
 

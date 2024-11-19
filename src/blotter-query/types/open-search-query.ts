@@ -30,7 +30,7 @@ export type FilterItem = {
   values: Value[];
 };
 
-type Value = string;
+type Value = string | number | boolean;
 
 export type FilterOperator = 'EQ' | 'NE' | 'GT' | 'LT' | 'GTE' | 'LTE' | 'LIKE';
 
