@@ -5,9 +5,12 @@ import type {
   IServerSideGetRowsRequest,
   JoinAdvancedFilterModel,
 } from '@ag-grid-community/core';
-import { merge } from 'lodash';
 import { aggridOperator2OsQueryOperator } from '../../schema-utils/query-builder-to-ag-grid-filter';
-import type { FilterItem, OpenSearchQuery } from '../types/open-search-query';
+import type {
+  FilterItem,
+  LogicFilter,
+  OpenSearchQuery,
+} from '../types/open-search-query';
 
 export const aggridFilterToOpenSearchFilter = (
   filter: IServerSideGetRowsRequest['filterModel'],
@@ -16,7 +19,7 @@ export const aggridFilterToOpenSearchFilter = (
 
   if (isAdvancedFilterModel(filter)) {
     if (isJoinAdvancedFilterModel(filter)) {
-      return joinAdvancedFilter2OpenSearchFilter(filter);
+      return joinAdvancedFilter2OpenSearchFilter(filter) as FilterModel;
     }
     return {
       filter: columnAdvancedFilter2OpenSearchFilterItem(filter),
@@ -28,17 +31,24 @@ export const aggridFilterToOpenSearchFilter = (
 
 const joinAdvancedFilter2OpenSearchFilter = (
   filter: JoinAdvancedFilterModel,
-): OpenSearchQuery['filters'] => {
+): LogicFilter => {
   return {
     [String.prototype.toLowerCase.call(filter.type)]: filter.conditions.reduce(
       (res, condition) => {
         if (isJoinAdvancedFilterModel(condition)) {
-          return merge(res, joinAdvancedFilter2OpenSearchFilter(condition));
+          res.push(joinAdvancedFilter2OpenSearchFilter(condition));
+          return res;
         }
-        res.filter.push(columnAdvancedFilter2OpenSearchFilterItem(condition));
+        const filterItem = columnAdvancedFilter2OpenSearchFilterItem(condition);
+        const itemWithFilter = res.find((item) => Array.isArray(item.filter));
+        if (itemWithFilter) {
+          itemWithFilter.filter?.push(filterItem);
+        } else {
+          res.push({ filter: [filterItem] });
+        }
         return res;
       },
-      { filter: [] } as { filter: FilterItem[] },
+      [] as LogicFilter[],
     ),
   };
 };
@@ -63,8 +73,7 @@ const columnAdvancedFilter2OpenSearchFilterItem = (
 const isAdvancedFilterModel = (
   filter: FilterModel | AdvancedFilterModel,
 ): filter is AdvancedFilterModel => {
-  // biome-ignore lint/suspicious/noPrototypeBuiltins: <explanation>
-  return filter.hasOwnProperty('filterType');
+  return 'filterType' in filter;
 };
 
 const isJoinAdvancedFilterModel = (

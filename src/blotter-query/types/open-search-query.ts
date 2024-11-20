@@ -12,13 +12,13 @@ export type OpenSearchQuery = {
 
 type combinator = 'and' | 'or';
 
-type FilterModel = {
+export type FilterModel = {
   and?: LogicFilter[];
   or?: LogicFilter[];
   filter?: FilterItem;
 };
 
-type LogicFilter = {
+export type LogicFilter = {
   and?: LogicFilter[];
   or?: LogicFilter[];
   filter?: FilterItem[];
