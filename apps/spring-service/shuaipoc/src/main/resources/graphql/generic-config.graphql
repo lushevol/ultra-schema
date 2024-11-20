@@ -1,0 +1,38 @@
+# version: 1.0.0
+
+type Query {
+  genericConfigs(query: String!): [GenericConfig]
+  genericConfig(key: String!): GenericConfig
+}
+
+type Mutation {
+  addGenericConfig(addGenericConfigInput: AddGenericConfigInput!): GenericConfig
+  removeGenericConfig(key: String!): GenericConfig
+  updateGenericConfig(
+    key: String!
+    payload: MutableGenericConfigInput
+  ): GenericConfig
+}
+
+type Subscription {
+  onGenericConfigUpdated(query: String!): [GenericConfig]
+}
+
+type GenericConfig {
+  id: ID!
+  key: String!
+  config: String!
+  validation: String!
+}
+
+input AddGenericConfigInput {
+  key: String!
+  config: String!
+  validation: String!
+}
+
+input MutableGenericConfigInput {
+  key: String
+  config: String
+  validation: String
+}

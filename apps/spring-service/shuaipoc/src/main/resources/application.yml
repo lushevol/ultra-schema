@@ -1,0 +1,22 @@
+server:
+  port: 1218
+
+spring:
+  application:
+    name: shuaipoc
+  datasource:
+    realtime:
+      url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/RATANONE_UAT
+      username: ratanone_ro
+      password: RatanRO@123
+      driver-class-name: org.postgresql.Driver
+    dailydump:
+      url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/ratanone_daily
+      username: ratanone_dly
+      password: RatanDaily@123
+      driver-class-name: org.postgresql.Driver
+
+dgs:
+  graphql:
+    schema-locations:
+      - classpath*:graphql/**/*.graphql

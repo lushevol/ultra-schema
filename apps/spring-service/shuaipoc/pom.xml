@@ -129,15 +129,20 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
-						<configuration>
-							<schemaPaths>
-								<param>src/main/resources/graphql-client</param>
-							</schemaPaths>
-							<packageName>com.ratanone.shuaipoc.codegen</packageName>
-							<addGeneratedAnnotation>true</addGeneratedAnnotation>
-						</configuration>
 					</execution>
 				</executions>
+				<configuration>
+					<addGeneratedAnnotation>true</addGeneratedAnnotation>
+					<generateClientApiV2>true</generateClientApiV2>
+					<generateDocs>false</generateDocs>
+					<generateBoxedTypes>true</generateBoxedTypes>
+					<writeToFiles>true</writeToFiles>
+					<schemaPaths>
+						<param>src/main/resources/graphql</param>
+					</schemaPaths>
+					<packageName>com.ratanone.shuaipoc.generated</packageName>
+					<outputDir>${project.build.directory}/generated</outputDir>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>

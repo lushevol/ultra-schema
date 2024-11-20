@@ -25,9 +25,9 @@ export type RatanFieldSchemaType = {
   config: string; // yaml
 };
 
-export type FreeConfigType = {
+export type GenericConfigType = {
   id: string;
-  module: string;
   key: string;
-  value: string;
+  config: string;
+  validation: string;
 };
