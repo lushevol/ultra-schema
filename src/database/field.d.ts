@@ -24,10 +24,3 @@ export type RatanFieldSchemaType = {
   tags: string[];
   config: string; // yaml
 };
-
-export type GenericConfigType = {
-  id: string;
-  key: string;
-  config: string;
-  validation: string;
-};

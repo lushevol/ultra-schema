@@ -2,6 +2,7 @@ import { Tabs } from 'antd';
 import { Provider } from 'react-redux';
 import BlotterQueryDemo from 'src/blotter-query/demo';
 import DashboardDemo from 'src/dashboard/demo';
+import { GenericConfigExamples } from 'src/generic-config/examples';
 import { TrackUsingDemo } from '../../packages/ratan-track-using/src/demo';
 import { RSJFDemo } from '../json-schema-form/demo/ssi-form';
 import { store } from '../store';
@@ -12,6 +13,7 @@ export const Demo = () => {
     <DemoLayout>
       <Provider store={store}>
         <Tabs
+          defaultActiveKey="generic-config"
           items={[
             {
               key: 'ssi-form',
@@ -27,6 +29,11 @@ export const Demo = () => {
               key: 'query-builder',
               label: 'Query Builder',
               children: <BlotterQueryDemo />,
+            },
+            {
+              key: 'generic-config',
+              label: 'Generic Config',
+              children: <GenericConfigExamples />,
             },
             {
               key: 'track-using',
