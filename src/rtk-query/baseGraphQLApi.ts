@@ -7,3 +7,5 @@ export const graphqlApi = createApi({
   }),
   endpoints: () => ({}),
 });
+
+export const api = graphqlApi;

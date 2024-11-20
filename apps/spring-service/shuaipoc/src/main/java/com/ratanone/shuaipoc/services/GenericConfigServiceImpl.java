@@ -3,8 +3,9 @@ package com.ratanone.shuaipoc.services;
 import com.ratanone.shuaipoc.generated.types.AddGenericConfigInput;
 import com.ratanone.shuaipoc.generated.types.GenericConfig;
 import com.ratanone.shuaipoc.generated.types.MutableGenericConfigInput;
+import com.ratanone.shuaipoc.generated.types.UltraQueryInput;
+import com.ratanone.shuaipoc.generated.types.UltraResult;
 import com.ratanone.shuaipoc.repository.JdbcRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,8 @@ public class GenericConfigServiceImpl implements GenericConfigService {
   @Autowired private JdbcRepository jdbcRepository;
 
   @Override
-  public List<GenericConfig> fetchGenericConfigs(String query) {
-    return jdbcRepository.queryGenericConfigsFromRealtime(query);
+  public UltraResult fetchGenericConfigs(UltraQueryInput ultraQueryInput) {
+    return jdbcRepository.queryGenericConfigsFromRealtime(ultraQueryInput);
   }
 
   @Override

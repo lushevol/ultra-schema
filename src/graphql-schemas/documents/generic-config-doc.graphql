@@ -1,0 +1,59 @@
+query GenericConfigListQuery($query: UltraQueryInput!) {
+  genericConfigs(query: $query) {
+    data {
+      id
+      key
+      config
+      validation
+    }
+    index
+    offset
+    total
+    latest
+  }
+}
+
+query GenericConfigByKeyQuery($key: String!) {
+  genericConfig(key: $key) {
+    id
+    key
+    config
+    validation
+  }
+}
+
+mutation GenericConfigUpdateMutation(
+  $key: String!
+  $payload: MutableGenericConfigInput!
+) {
+  updateGenericConfig(key: $key, payload: $payload) {
+    id
+    key
+    config
+    validation
+  }
+}
+
+mutation AddGenericConfigMutation(
+  $addGenericConfigInput: AddGenericConfigInput!
+) {
+  addGenericConfig(addGenericConfigInput: $addGenericConfigInput) {
+    id
+    key
+    config
+    validation
+  }
+}
+
+mutation RemoveGenericConfigMutation($key: String!) {
+  removeGenericConfig(key: $key)
+}
+
+subscription OnGenericConfigUpdatedSubscription($query: String!) {
+  onGenericConfigUpdated(query: $query) {
+    id
+    key
+    config
+    validation
+  }
+}

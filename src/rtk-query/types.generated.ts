@@ -27,6 +27,12 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
+export type AddGenericConfigInput = {
+  config: Scalars['String']['input'];
+  key: Scalars['String']['input'];
+  validation: Scalars['String']['input'];
+};
+
 export enum CashflowStateEnum {
   Queued = 'QUEUED',
   Ready = 'READY',
@@ -35,32 +41,57 @@ export enum CashflowStateEnum {
   Waiting = 'WAITING',
 }
 
+export type GenericConfig = {
+  __typename?: 'GenericConfig';
+  config: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  key: Scalars['String']['output'];
+  validation: Scalars['String']['output'];
+};
+
+export type MutableGenericConfigInput = {
+  config?: InputMaybe<Scalars['String']['input']>;
+  key?: InputMaybe<Scalars['String']['input']>;
+  validation?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addGenericConfig?: Maybe<GenericConfig>;
+  removeGenericConfig?: Maybe<Scalars['Boolean']['output']>;
+  updateGenericConfig?: Maybe<GenericConfig>;
+};
+
+export type MutationAddGenericConfigArgs = {
+  addGenericConfigInput: AddGenericConfigInput;
+};
+
+export type MutationRemoveGenericConfigArgs = {
+  key: Scalars['String']['input'];
+};
+
+export type MutationUpdateGenericConfigArgs = {
+  key: Scalars['String']['input'];
+  payload?: InputMaybe<MutableGenericConfigInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
-  cashflow?: Maybe<SettlementSchemaRootType>;
-  cashflows?: Maybe<ResultPageInfo>;
+  genericConfig?: Maybe<GenericConfig>;
+  genericConfigs?: Maybe<UltraResult>;
 };
 
-export type QueryCashflowArgs = {
-  cashflowId: Scalars['ID']['input'];
+export type QueryGenericConfigArgs = {
+  key: Scalars['String']['input'];
 };
 
-export type QueryCashflowsArgs = {
-  queryCriteria: UltraQueryInput;
-};
-
-export type ResultPageInfo = {
-  __typename?: 'ResultPageInfo';
-  data?: Maybe<Array<Maybe<SettlementSchemaRootType>>>;
-  index?: Maybe<Scalars['Int']['output']>;
-  latest?: Maybe<Scalars['Boolean']['output']>;
-  offset?: Maybe<Scalars['Int']['output']>;
-  total?: Maybe<Scalars['Int']['output']>;
+export type QueryGenericConfigsArgs = {
+  query: UltraQueryInput;
 };
 
 export type RowGroupModel = {
-  aggFunc?: InputMaybe<Scalars['String']['input']>;
-  colId?: InputMaybe<Scalars['String']['input']>;
+  aggFunc: Scalars['String']['input'];
+  field: Scalars['String']['input'];
 };
 
 export type SettlementCashflowType = {
@@ -78,9 +109,23 @@ export type SettlementSchemaRootType = {
   Cashflow?: Maybe<SettlementCashflowType>;
 };
 
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC',
+}
+
 export type SortModel = {
-  colId?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  field: Scalars['String']['input'];
+  sort: Sort;
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  onGenericConfigUpdated?: Maybe<Array<Maybe<GenericConfig>>>;
+};
+
+export type SubscriptionOnGenericConfigUpdatedArgs = {
+  query: Scalars['String']['input'];
 };
 
 export type UltraQueryInput = {
@@ -90,4 +135,13 @@ export type UltraQueryInput = {
   query?: InputMaybe<Scalars['String']['input']>;
   rowGroups?: InputMaybe<Array<InputMaybe<RowGroupModel>>>;
   sorting?: InputMaybe<Array<InputMaybe<SortModel>>>;
+};
+
+export type UltraResult = {
+  __typename?: 'UltraResult';
+  data?: Maybe<Array<Maybe<GenericConfig>>>;
+  index?: Maybe<Scalars['Int']['output']>;
+  latest?: Maybe<Scalars['Boolean']['output']>;
+  offset?: Maybe<Scalars['Int']['output']>;
+  total?: Maybe<Scalars['Int']['output']>;
 };

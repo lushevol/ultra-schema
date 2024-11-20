@@ -3,6 +3,8 @@ package com.ratanone.shuaipoc.repository;
 import com.ratanone.shuaipoc.generated.types.AddGenericConfigInput;
 import com.ratanone.shuaipoc.generated.types.GenericConfig;
 import com.ratanone.shuaipoc.generated.types.MutableGenericConfigInput;
+import com.ratanone.shuaipoc.generated.types.UltraQueryInput;
+import com.ratanone.shuaipoc.generated.types.UltraResult;
 import com.ratanone.shuaipoc.model.StringMapRowMapper;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +35,32 @@ public class JdbcRepository {
     return dailydumpJdbcTemplate.query(sql + " LIMIT 1000", new StringMapRowMapper());
   }
 
-  public List<GenericConfig> queryGenericConfigsFromRealtime(String query) {
-    return realtimeJdbcTemplate.query(
-        "SELECT * FROM generic_config WHERE " + query,
-        BeanPropertyRowMapper.newInstance(GenericConfig.class));
+  public UltraResult queryGenericConfigsFromRealtime(UltraQueryInput ultraQueryInput) {
+    List<GenericConfig> genericConfigs =
+        realtimeJdbcTemplate.query(
+            "SELECT * FROM generic_config WHERE "
+                + ultraQueryInput.getQuery()
+                + " OFFSET "
+                + ultraQueryInput.getIndex()
+                + " LIMIT "
+                + ultraQueryInput.getOffset()
+                + " SORT BY "
+                + ultraQueryInput.getSorting().get(0).getField()
+                + " "
+                + ultraQueryInput.getSorting().get(0).getSort(),
+            BeanPropertyRowMapper.newInstance(GenericConfig.class));
+    return UltraResult.newBuilder()
+        .data(genericConfigs)
+        .index(ultraQueryInput.getIndex())
+        .offset(ultraQueryInput.getOffset())
+        .build();
   }
 
   public GenericConfig queryGenericConfigsByKey(String key) {
-    return queryGenericConfigsFromRealtime("key = '" + key + "'").get(0);
+    return queryGenericConfigsFromRealtime(
+            UltraQueryInput.newBuilder().query("key = '" + key + "'").index(0).offset(1).build())
+        .getData()
+        .get(0);
   }
 
   public GenericConfig addGenericConfig(AddGenericConfigInput addGenericConfigInput) {

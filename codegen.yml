@@ -1,6 +1,7 @@
 overwrite: true
 # schema: './src/database/business-schema.js'
-schema: 'src/graphql-schemas/*.graphql'
+schema: 'src/graphql-schemas/schemas/*.graphql'
+documents: 'src/graphql-schemas/documents/*.graphql'
 debug: true
 verbose: true
 watchConfig:
@@ -34,7 +35,7 @@ generates:
           content: 'module.hot?.accept();'
       - typescript-operations
       - typescript-rtk-query:
-          importBaseApiFrom: 'rtk-query/baseGraphQLApi'
+          importBaseApiFrom: 'src/rtk-query/baseGraphQLApi'
           exportHooks: true
           overrideExisting: 'module.hot?.status() === "apply"'
     config:
