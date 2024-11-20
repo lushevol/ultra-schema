@@ -39,6 +39,7 @@ ModuleRegistry.registerModules([
   SetFilterModule,
   // MenuModule,
   MultiFilterModule,
+  ClientSideRowModelModule,
 ]);
 
 const defaultColDef: ColDef = {

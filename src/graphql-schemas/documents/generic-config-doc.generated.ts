@@ -179,6 +179,13 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigListQueryDocument,
         variables,
       }),
+      providesTags: (result) =>
+        Array.isArray(result?.genericConfigs?.data)
+          ? result.genericConfigs.data.map((i) => ({
+              type: 'GenericConfig',
+              id: i.key,
+            }))
+          : [{ type: 'GenericConfig', id: 'LIST' }],
     }),
     GenericConfigByKeyQuery: build.query<
       GenericConfigByKeyQueryQuery,
@@ -188,6 +195,10 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigByKeyQueryDocument,
         variables,
       }),
+      providesTags: (result) =>
+        result?.genericConfig
+          ? [{ type: 'GenericConfig', id: result.genericConfig.key }]
+          : [],
     }),
     GenericConfigUpdateMutation: build.mutation<
       GenericConfigUpdateMutationMutation,
@@ -197,6 +208,10 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigUpdateMutationDocument,
         variables,
       }),
+      invalidatesTags: (result) =>
+        result?.updateGenericConfig
+          ? [{ type: 'GenericConfig', id: result.updateGenericConfig.key }]
+          : [],
     }),
     AddGenericConfigMutation: build.mutation<
       AddGenericConfigMutationMutation,
@@ -206,6 +221,7 @@ const injectedRtkApi = api.injectEndpoints({
         document: AddGenericConfigMutationDocument,
         variables,
       }),
+      invalidatesTags: [{ type: 'GenericConfig', id: 'LIST' }],
     }),
     RemoveGenericConfigMutation: build.mutation<
       RemoveGenericConfigMutationMutation,
@@ -215,6 +231,7 @@ const injectedRtkApi = api.injectEndpoints({
         document: RemoveGenericConfigMutationDocument,
         variables,
       }),
+      invalidatesTags: [{ type: 'GenericConfig', id: 'LIST' }],
     }),
   }),
 });

@@ -1,5 +1,5 @@
 import type { GridOptions } from '@ag-grid-community/core';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatQuery } from 'react-querybuilder';
 import type { RuleGroupType } from 'react-querybuilder';
 import type { RatanFieldSchemaType } from 'src/database/field';
@@ -29,13 +29,17 @@ export const useGenericConfigList = () => {
 
   useEffect(() => {
     aggrid?.api.addEventListener('paginationChanged', (e) => {
-      const pageSize = e.api.paginationGetPageSize();
-      const pageIndex = e.api.paginationGetCurrentPage();
-      setUltraQuery((prev) => ({
-        ...prev,
-        index: pageIndex * pageSize,
-        offset: pageSize,
-      }));
+      console.log(e);
+      const { newPage, newPageSize } = e;
+      if (newPage || newPageSize) {
+        const pageSize = e.api.paginationGetPageSize();
+        const pageIndex = e.api.paginationGetCurrentPage();
+        setUltraQuery((prev) => ({
+          ...prev,
+          index: pageIndex * pageSize,
+          offset: pageSize,
+        }));
+      }
     });
   }, [aggrid]);
 
@@ -83,11 +87,13 @@ export const useGenericConfigMutation = () => {
 const colDefs = ratanFields2AgGridCol(
   GenericConfigFieldsManagementSchema as RatanFieldSchemaType[],
 );
-export const useGenericConfigAggridOptions = (): GridOptions<GenericConfig> => {
-  return {
-    getRowId: ({ data }) => data.key,
-    columnDefs: colDefs,
-    pagination: true,
-    paginationPageSize: DEFAULT_PAGE_SIZE,
-  };
-};
+export const useGenericConfigAggridOptions = (): GridOptions<GenericConfig> =>
+  useMemo(
+    () => ({
+      getRowId: ({ data }) => data.key,
+      columnDefs: colDefs,
+      pagination: true,
+      paginationPageSize: DEFAULT_PAGE_SIZE,
+    }),
+    [],
+  );

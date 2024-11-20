@@ -12,6 +12,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { graphqlApi } from 'src/rtk-query/baseGraphQLApi';
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
 import { dashboardSlice } from './slices/dashboard';
@@ -29,6 +30,7 @@ const store = configureStore({
     [jsonSchemaFormSlice.name]: jsonSchemaFormSlice.reducer,
     [trackUsingSlice.name]: trackUsingSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
+    [graphqlApi.reducerPath]: graphqlApi.reducer,
   },
   middleware: (gDM) =>
     gDM({
@@ -38,7 +40,8 @@ const store = configureStore({
       },
     })
       .prepend(listenerMiddlewareInstance.middleware)
-      .concat(baseApi.middleware),
+      .concat(baseApi.middleware)
+      .concat(graphqlApi.middleware),
 });
 
 export { store };
