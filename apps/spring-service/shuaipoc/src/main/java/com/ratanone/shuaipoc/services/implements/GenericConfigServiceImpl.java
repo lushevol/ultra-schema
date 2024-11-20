@@ -1,20 +1,41 @@
-package com.ratanone.shuaipoc.services.implements;
+package com.ratanone.shuaipoc.services;
 
-import com.ratanone.shuaipoc.services.GenericConfigService;
 import com.ratanone.shuaipoc.generated.types.AddGenericConfigInput;
 import com.ratanone.shuaipoc.generated.types.GenericConfig;
-import graphql.com.google.common.collect.Lists;
+import com.ratanone.shuaipoc.generated.types.MutableGenericConfigInput;
+import com.ratanone.shuaipoc.repository.JdbcRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GenericConfigServiceImpl implements GenericConfigService {
 
-    @Autowired
-    private GenericConfigRepository genericConfigRepo;
-    private List<GenericConfig> genericConfigs = Lists.newArrayList();
+  @Autowired private JdbcRepository jdbcRepository;
 
+  @Override
+  public List<GenericConfig> fetchGenericConfigs(String query) {
+    return jdbcRepository.queryGenericConfigsFromRealtime(query);
+  }
+
+  @Override
+  public GenericConfig fetchGenericConfig(String key) {
+    return jdbcRepository.queryGenericConfigsByKey(key);
+  }
+
+  @Override
+  public GenericConfig addGenericConfig(AddGenericConfigInput addGenericConfigInput) {
+    return jdbcRepository.addGenericConfig(addGenericConfigInput);
+  }
+
+  @Override
+  public Boolean removeGenericConfig(String key) {
+    return jdbcRepository.removeGenericConfig(key);
+  }
+
+  @Override
+  public GenericConfig updateGenericConfig(
+      String key, MutableGenericConfigInput mutableGenericConfigInput) {
+    return jdbcRepository.updateGenericConfig(key, mutableGenericConfigInput);
+  }
 }

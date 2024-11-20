@@ -3,7 +3,6 @@ package com.ratanone.shuaipoc.datafetchers;
 import com.netflix.graphql.dgs.*;
 import com.ratanone.shuaipoc.generated.types.*;
 import com.ratanone.shuaipoc.services.GenericConfigService;
-import com.ratanone.shuaipoc.services.UpdatedGenericConfigsPool;
 import java.util.List;
 import org.reactivestreams.Publisher;
 
@@ -15,34 +14,37 @@ public class GenericConfigDatafetcher {
 
   @DgsQuery
   public List<GenericConfig> genericConfigs(@InputArgument("query") String query) {
-    return null;
+    return genericConfigService.fetchGenericConfigs(query);
   }
 
   @DgsQuery
   public GenericConfig genericConfig(@InputArgument("key") String key) {
-    return null;
+    return genericConfigService.fetchGenericConfig(key);
   }
 
   @DgsMutation
   public GenericConfig addGenericConfig(
       @InputArgument("addGenericConfigInput") AddGenericConfigInput addGenericConfigInput) {
-    return null;
+    GenericConfig gc = genericConfigService.addGenericConfig(addGenericConfigInput);
+    updatedGenericConfigsPool.add(gc);
+    return gc;
   }
 
   @DgsMutation
-  public GenericConfig removeGenericConfig(@InputArgument("key") String key) {
-    return null;
+  public Boolean removeGenericConfig(@InputArgument("key") String key) {
+    return genericConfigService.removeGenericConfig(key);
   }
 
   @DgsMutation
   public GenericConfig updateGenericConfig(
       @InputArgument("key") String key,
       @InputArgument("payload") MutableGenericConfigInput payload) {
-    return null;
+    GenericConfig gc = genericConfigService.updateGenericConfig(key, payload);
+    updatedGenericConfigsPool.add(gc);
+    return gc;
   }
 
   @DgsSubscription
-  // /subscribtions
   public Publisher<List<GenericConfig>> onGenericConfigUpdated(
       @InputArgument("query") String query) {
     return updatedGenericConfigsPool.getPublisher();

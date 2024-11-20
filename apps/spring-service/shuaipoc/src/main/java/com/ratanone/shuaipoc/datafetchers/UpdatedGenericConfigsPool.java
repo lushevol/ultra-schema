@@ -1,4 +1,4 @@
-package com.ratanone.shuaipoc.services;
+package com.ratanone.shuaipoc.datafetchers;
 
 import com.ratanone.shuaipoc.generated.types.GenericConfig;
 import java.util.ArrayList;

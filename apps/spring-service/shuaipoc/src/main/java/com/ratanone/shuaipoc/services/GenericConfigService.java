@@ -6,13 +6,13 @@ import com.ratanone.shuaipoc.generated.types.MutableGenericConfigInput;
 import java.util.List;
 
 public interface GenericConfigService {
-  List<GenericConfig> genericConfigs(String query);
+  List<GenericConfig> fetchGenericConfigs(String query);
 
-  GenericConfig genericConfig(String key);
+  GenericConfig fetchGenericConfig(String key);
 
   GenericConfig addGenericConfig(AddGenericConfigInput addGenericConfigInput);
 
-  GenericConfig removeGenericConfig(String key);
+  Boolean removeGenericConfig(String key);
 
   GenericConfig updateGenericConfig(String key, MutableGenericConfigInput payload);
 }

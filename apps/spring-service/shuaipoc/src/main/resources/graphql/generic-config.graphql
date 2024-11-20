@@ -7,7 +7,7 @@ type Query {
 
 type Mutation {
   addGenericConfig(addGenericConfigInput: AddGenericConfigInput!): GenericConfig
-  removeGenericConfig(key: String!): GenericConfig
+  removeGenericConfig(key: String!): Boolean
   updateGenericConfig(
     key: String!
     payload: MutableGenericConfigInput
