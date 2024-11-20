@@ -46,7 +46,7 @@ export const useAgGridOptions = <T>(
     rowModelType: 'serverSide',
     pagination: true,
     paginationPageSize: DEFAULT_PAGE_SIZE,
-    paginationPageSizeSelector: [100, 500, 1000, 10000],
+    paginationPageSizeSelector: [100, 500, 1000, 5000, 10000],
     serverSideDatasource: {
       getRows(params) {
         const { api, request, success, fail } = params;
@@ -60,7 +60,7 @@ export const useAgGridOptions = <T>(
         const filters = aggridFilterToOpenSearchFilter(filterModel);
         const orderArgs = aggridSortToOpenSearchSort(sortModel);
         const pageSize = api.paginationGetPageSize();
-        const pageNo = api.paginationGetCurrentPage() + 1;
+        const pageNo = api.paginationGetCurrentPage();
         queryCashflow({
           filters,
           queryFields,
