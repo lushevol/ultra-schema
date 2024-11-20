@@ -1,10 +1,12 @@
 import type { GridOptions } from '@ag-grid-community/core';
+import { gql, useSubscription } from '@apollo/client';
 import { useEffect, useMemo, useState } from 'react';
 import { formatQuery } from 'react-querybuilder';
 import type { RuleGroupType } from 'react-querybuilder';
 import type { RatanFieldSchemaType } from 'src/database/field';
 import GenericConfigFieldsManagementSchema from 'src/database/generic-config-management-schema.json';
 import {
+  OnGenericConfigUpdatedSubscriptionDocument,
   useAddGenericConfigMutationMutation,
   useGenericConfigUpdateMutationMutation,
   useLazyGenericConfigListQueryQuery,
@@ -61,6 +63,18 @@ export const useGenericConfigQuery = ({
 }: { ultraQuery: UltraQueryInput }) => {
   const [queryGenericConfigList, { isLoading, data }] =
     useLazyGenericConfigListQueryQuery();
+
+  useSubscription<GenericConfig>(
+    gql(OnGenericConfigUpdatedSubscriptionDocument),
+    {
+      variables: {
+        query: ultraQuery,
+      },
+      onSubscriptionData: ({ subscriptionData }) => {
+        console.log(subscriptionData);
+      },
+    },
+  );
 
   useEffect(() => {
     queryGenericConfigList({ query: ultraQuery });
