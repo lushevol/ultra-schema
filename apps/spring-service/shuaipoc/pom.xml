@@ -141,7 +141,7 @@
 						<param>src/main/resources/graphql</param>
 					</schemaPaths>
 					<packageName>com.ratanone.shuaipoc.generated</packageName>
-					<outputDir>${project.build.directory}/generated</outputDir>
+					<outputDir>${project.build.directory}/generated-sources</outputDir>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -173,6 +173,18 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify.fmt</groupId>
+				<artifactId>fmt-maven-plugin</artifactId>
+				<version>2.21.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>format</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

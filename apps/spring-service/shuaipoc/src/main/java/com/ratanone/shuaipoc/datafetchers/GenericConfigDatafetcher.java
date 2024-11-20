@@ -2,60 +2,49 @@ package com.ratanone.shuaipoc.datafetchers;
 
 import com.netflix.graphql.dgs.*;
 import com.ratanone.shuaipoc.generated.types.*;
-import com.ratanone.shuaipoc.services.RuleService;
-import com.ratanone.shuaipoc.services.UpdatedRulePool;
-import org.reactivestreams.Publisher;
-
+import com.ratanone.shuaipoc.services.GenericConfigService;
+import com.ratanone.shuaipoc.services.UpdatedGenericConfigsPool;
 import java.util.List;
+import org.reactivestreams.Publisher;
 
 @DgsComponent
 public class GenericConfigDatafetcher {
-    private final UpdatedGenericConfigsPool updatedRulePool = new UpdatedGenericConfigsPool();
-    private final RuleService ruleService;
+  private final UpdatedGenericConfigsPool updatedGenericConfigsPool =
+      new UpdatedGenericConfigsPool();
+  private GenericConfigService genericConfigService;
 
-    public GenericConfigDatafetcher(RuleService ruleService) {
-        this.ruleService = ruleService;
-    }
+  @DgsQuery
+  public List<GenericConfig> genericConfigs(@InputArgument("query") String query) {
+    return null;
+  }
 
-    @DgsQuery
-    public List<Rule> rules(@InputArgument("ruleType") String ruleType, @InputArgument("businessFlow") String businessFlow) {
-        return ruleService.rules(ruleType, businessFlow);
-    }
+  @DgsQuery
+  public GenericConfig genericConfig(@InputArgument("key") String key) {
+    return null;
+  }
 
-    @DgsQuery
-    public Rule rule(@InputArgument("id") String id) {
-        return ruleService.rule(id);
-    }
+  @DgsMutation
+  public GenericConfig addGenericConfig(
+      @InputArgument("addGenericConfigInput") AddGenericConfigInput addGenericConfigInput) {
+    return null;
+  }
 
-    @DgsMutation
-    public Rule addRule(@InputArgument("addRuleInput") AddRuleInput addRuleInput) {
-        return ruleService.addRule(addRuleInput);
-    }
+  @DgsMutation
+  public GenericConfig removeGenericConfig(@InputArgument("key") String key) {
+    return null;
+  }
 
-    @DgsMutation
-    public Rule removeRule(@InputArgument("id") String id) {
-        return ruleService.removeRule(id);
-    }
+  @DgsMutation
+  public GenericConfig updateGenericConfig(
+      @InputArgument("key") String key,
+      @InputArgument("payload") MutableGenericConfigInput payload) {
+    return null;
+  }
 
-    @DgsMutation
-    public Rule updateRule(@InputArgument("id") String id, @InputArgument("action") ActionType action, @InputArgument("payload") MutableRuleInput payload) {
-        RuleStatusType status = null;
-        switch (action) {
-            case Create -> status = RuleStatusType.ADD_PENDING;
-            case Reject_Creation -> status = RuleStatusType.DISCARDED;
-            case Update -> status = RuleStatusType.UPDATE_PENDING;
-            case Approve_Creation, Reject_Deletion, Approve_Update, Reject_Update -> status = RuleStatusType.SAVE_CONFIRMED;
-            case Delete -> status = RuleStatusType.DELETE_PENDING;
-            case Approve_Deletion -> status = RuleStatusType.DELETE_CONFIRMED;
-        }
-        Rule updatedRule = ruleService.updateRuleStatus(id, status);
-        updatedRulePool.add(updatedRule);
-        return updatedRule;
-    }
-
-    @DgsSubscription
-    // /subscribtions
-    public Publisher<List<Rule>> onRuleUpdated(@InputArgument("ruleType") String ruleType, @InputArgument("businessFlow") String businessFlow) {
-        return updatedRulePool.getPublisher();
-    }
+  @DgsSubscription
+  // /subscribtions
+  public Publisher<List<GenericConfig>> onGenericConfigUpdated(
+      @InputArgument("query") String query) {
+    return updatedGenericConfigsPool.getPublisher();
+  }
 }

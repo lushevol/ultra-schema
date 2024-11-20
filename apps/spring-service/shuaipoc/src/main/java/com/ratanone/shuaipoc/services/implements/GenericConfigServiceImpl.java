@@ -1,8 +1,6 @@
-package com.scb.ratan.rulev2.services;
+package com.ratanone.shuaipoc.services.implements;
 
-import com.ratanone.shuaipoc.repository.GenericConfigRepository;
 import com.ratanone.shuaipoc.services.GenericConfigService;
-import com.ratanone.shuaipoc.entities.RepoGenericConfig;
 import com.ratanone.shuaipoc.generated.types.AddGenericConfigInput;
 import com.ratanone.shuaipoc.generated.types.GenericConfig;
 import graphql.com.google.common.collect.Lists;
