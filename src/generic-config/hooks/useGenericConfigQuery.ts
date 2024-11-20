@@ -7,6 +7,8 @@ import type { RatanFieldSchemaType } from 'src/database/field';
 import GenericConfigFieldsManagementSchema from 'src/database/generic-config-management-schema.json';
 import {
   OnGenericConfigUpdatedSubscriptionDocument,
+  type OnGenericConfigUpdatedSubscriptionSubscription,
+  type OnGenericConfigUpdatedSubscriptionSubscriptionVariables,
   useAddGenericConfigMutationMutation,
   useGenericConfigUpdateMutationMutation,
   useLazyGenericConfigListQueryQuery,
@@ -64,17 +66,17 @@ export const useGenericConfigQuery = ({
   const [queryGenericConfigList, { isLoading, data }] =
     useLazyGenericConfigListQueryQuery();
 
-  useSubscription<GenericConfig>(
-    gql(OnGenericConfigUpdatedSubscriptionDocument),
-    {
-      variables: {
-        query: ultraQuery,
-      },
-      onSubscriptionData: ({ subscriptionData }) => {
-        console.log(subscriptionData);
-      },
+  useSubscription<
+    OnGenericConfigUpdatedSubscriptionSubscription,
+    OnGenericConfigUpdatedSubscriptionSubscriptionVariables
+  >(gql(OnGenericConfigUpdatedSubscriptionDocument), {
+    variables: {
+      query: ultraQuery.query ?? '',
     },
-  );
+    onData: ({ data }) => {
+      console.log(data?.data?.onGenericConfigUpdated);
+    },
+  });
 
   useEffect(() => {
     queryGenericConfigList({ query: ultraQuery });
