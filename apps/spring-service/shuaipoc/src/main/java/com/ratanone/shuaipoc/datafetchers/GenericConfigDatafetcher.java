@@ -27,12 +27,22 @@ public class GenericConfigDatafetcher {
   public GenericConfig addGenericConfig(
       @InputArgument("addGenericConfigInput") AddGenericConfigInput addGenericConfigInput) {
     GenericConfig gc = genericConfigService.addGenericConfig(addGenericConfigInput);
-    updatedGenericConfigsPool.add(gc);
+    updatedGenericConfigsPool.add(
+        GenericConfigChangeNotification.newBuilder()
+            .data(gc)
+            .status(GenericConfigChangeStatus.ADDED)
+            .build());
     return gc;
   }
 
   @DgsMutation
   public Boolean removeGenericConfig(@InputArgument("key") String key) {
+    GenericConfig gc = genericConfig(key);
+    updatedGenericConfigsPool.add(
+        GenericConfigChangeNotification.newBuilder()
+            .data(gc)
+            .status(GenericConfigChangeStatus.DELETED)
+            .build());
     return genericConfigService.removeGenericConfig(key);
   }
 
@@ -41,12 +51,16 @@ public class GenericConfigDatafetcher {
       @InputArgument("key") String key,
       @InputArgument("payload") MutableGenericConfigInput payload) {
     GenericConfig gc = genericConfigService.updateGenericConfig(key, payload);
-    updatedGenericConfigsPool.add(gc);
+    updatedGenericConfigsPool.add(
+        GenericConfigChangeNotification.newBuilder()
+            .data(gc)
+            .status(GenericConfigChangeStatus.UPDATED)
+            .build());
     return gc;
   }
 
   @DgsSubscription
-  public Publisher<List<GenericConfig>> onGenericConfigUpdated(
+  public Publisher<List<GenericConfigChangeNotification>> onGenericConfigUpdated(
       @InputArgument("query") String query) {
     return updatedGenericConfigsPool.getPublisher();
   }

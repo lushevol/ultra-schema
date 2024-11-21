@@ -1,7 +1,7 @@
 # version: 1.0.0
 
 type Query {
-  genericConfigs(query: UltraQueryInput!): UltraResult
+  genericConfigs(query: UltraQueryInput!): UltraQueryResult
   genericConfig(key: String!): GenericConfig
 }
 
@@ -15,32 +15,32 @@ type Mutation {
 }
 
 type Subscription {
-  onGenericConfigUpdated(query: String!): [GenericConfig]
+  onGenericConfigUpdated(query: String!): [GenericConfigChangeNotification]
 }
 
 type GenericConfig {
-  id: ID!
   key: String!
   config: String!
   validation: String!
+  version: Int!
 }
 
 input AddGenericConfigInput {
   key: String!
   config: String!
-  validation: String!
+  validation: String
 }
 
 input MutableGenericConfigInput {
-  key: String
+  key: String!
   config: String
   validation: String
 }
 
 input UltraQueryInput {
-  query: String
-  index: Int
-  offset: Int
+  query: String!
+  index: Int!
+  offset: Int!
   sorting: [SortModel]
   rowGroups: [RowGroupModel]
   groupKeys: [String]
@@ -56,7 +56,7 @@ input RowGroupModel {
   aggFunc: String!
 }
 
-type UltraResult {
+type UltraQueryResult {
   total: Int
   index: Int
   offset: Int
@@ -67,4 +67,15 @@ type UltraResult {
 enum Sort {
   ASC
   DESC
+}
+
+type GenericConfigChangeNotification {
+  status: GenericConfigChangeStatus!
+  data: GenericConfig
+}
+
+enum GenericConfigChangeStatus {
+  UPDATED
+  DELETED
+  ADDED
 }

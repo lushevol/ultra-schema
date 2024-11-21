@@ -20,17 +20,17 @@ export type GenericConfigListQueryQueryVariables = Types.Exact<{
 export type GenericConfigListQueryQuery = {
   __typename?: 'Query';
   genericConfigs?: {
-    __typename?: 'UltraResult';
+    __typename?: 'UltraQueryResult';
     index?: number;
     offset?: number;
     total?: number;
     latest?: boolean;
     data?: Array<{
       __typename?: 'GenericConfig';
-      id: string;
       key: string;
       config: string;
       validation: string;
+      version: number;
     }>;
   };
 };
@@ -43,10 +43,10 @@ export type GenericConfigByKeyQueryQuery = {
   __typename?: 'Query';
   genericConfig?: {
     __typename?: 'GenericConfig';
-    id: string;
     key: string;
     config: string;
     validation: string;
+    version: number;
   };
 };
 
@@ -59,10 +59,10 @@ export type GenericConfigUpdateMutationMutation = {
   __typename?: 'Mutation';
   updateGenericConfig?: {
     __typename?: 'GenericConfig';
-    id: string;
     key: string;
     config: string;
     validation: string;
+    version: number;
   };
 };
 
@@ -74,10 +74,10 @@ export type AddGenericConfigMutationMutation = {
   __typename?: 'Mutation';
   addGenericConfig?: {
     __typename?: 'GenericConfig';
-    id: string;
     key: string;
     config: string;
     validation: string;
+    version: number;
   };
 };
 
@@ -98,11 +98,15 @@ export type OnGenericConfigUpdatedSubscriptionSubscriptionVariables =
 export type OnGenericConfigUpdatedSubscriptionSubscription = {
   __typename?: 'Subscription';
   onGenericConfigUpdated?: Array<{
-    __typename?: 'GenericConfig';
-    id: string;
-    key: string;
-    config: string;
-    validation: string;
+    __typename?: 'GenericConfigChangeNotification';
+    status: Types.GenericConfigChangeStatus;
+    data?: {
+      __typename?: 'GenericConfig';
+      key: string;
+      config: string;
+      validation: string;
+      version: number;
+    };
   }>;
 };
 
@@ -110,10 +114,10 @@ export const GenericConfigListQueryDocument = `
     query GenericConfigListQuery($query: UltraQueryInput!) {
   genericConfigs(query: $query) {
     data {
-      id
       key
       config
       validation
+      version
     }
     index
     offset
@@ -125,30 +129,30 @@ export const GenericConfigListQueryDocument = `
 export const GenericConfigByKeyQueryDocument = `
     query GenericConfigByKeyQuery($key: String!) {
   genericConfig(key: $key) {
-    id
     key
     config
     validation
+    version
   }
 }
     `;
 export const GenericConfigUpdateMutationDocument = `
     mutation GenericConfigUpdateMutation($key: String!, $payload: MutableGenericConfigInput!) {
   updateGenericConfig(key: $key, payload: $payload) {
-    id
     key
     config
     validation
+    version
   }
 }
     `;
 export const AddGenericConfigMutationDocument = `
     mutation AddGenericConfigMutation($addGenericConfigInput: AddGenericConfigInput!) {
   addGenericConfig(addGenericConfigInput: $addGenericConfigInput) {
-    id
     key
     config
     validation
+    version
   }
 }
     `;
@@ -160,10 +164,13 @@ export const RemoveGenericConfigMutationDocument = `
 export const OnGenericConfigUpdatedSubscriptionDocument = `
     subscription OnGenericConfigUpdatedSubscription($query: String!) {
   onGenericConfigUpdated(query: $query) {
-    id
-    key
-    config
-    validation
+    status
+    data {
+      key
+      config
+      validation
+      version
+    }
   }
 }
     `;
@@ -179,13 +186,6 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigListQueryDocument,
         variables,
       }),
-      providesTags: (result) =>
-        Array.isArray(result?.genericConfigs?.data)
-          ? result.genericConfigs.data.map((i) => ({
-              type: 'GenericConfig',
-              id: i.key,
-            }))
-          : [{ type: 'GenericConfig', id: 'LIST' }],
     }),
     GenericConfigByKeyQuery: build.query<
       GenericConfigByKeyQueryQuery,
@@ -195,10 +195,6 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigByKeyQueryDocument,
         variables,
       }),
-      providesTags: (result) =>
-        result?.genericConfig
-          ? [{ type: 'GenericConfig', id: result.genericConfig.key }]
-          : [],
     }),
     GenericConfigUpdateMutation: build.mutation<
       GenericConfigUpdateMutationMutation,
@@ -208,10 +204,6 @@ const injectedRtkApi = api.injectEndpoints({
         document: GenericConfigUpdateMutationDocument,
         variables,
       }),
-      invalidatesTags: (result) =>
-        result?.updateGenericConfig
-          ? [{ type: 'GenericConfig', id: result.updateGenericConfig.key }]
-          : [],
     }),
     AddGenericConfigMutation: build.mutation<
       AddGenericConfigMutationMutation,
@@ -221,7 +213,6 @@ const injectedRtkApi = api.injectEndpoints({
         document: AddGenericConfigMutationDocument,
         variables,
       }),
-      invalidatesTags: [{ type: 'GenericConfig', id: 'LIST' }],
     }),
     RemoveGenericConfigMutation: build.mutation<
       RemoveGenericConfigMutationMutation,
@@ -231,7 +222,6 @@ const injectedRtkApi = api.injectEndpoints({
         document: RemoveGenericConfigMutationDocument,
         variables,
       }),
-      invalidatesTags: [{ type: 'GenericConfig', id: 'LIST' }],
     }),
   }),
 });

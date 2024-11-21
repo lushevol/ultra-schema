@@ -20,3 +20,6 @@ dist/
 
 .env
 vite.config.*.timestamp*
+
+# graphql codegen
+.introspection.json

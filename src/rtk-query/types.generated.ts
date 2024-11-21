@@ -30,7 +30,7 @@ export type Scalars = {
 export type AddGenericConfigInput = {
   config: Scalars['String']['input'];
   key: Scalars['String']['input'];
-  validation: Scalars['String']['input'];
+  validation?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum CashflowStateEnum {
@@ -44,14 +44,26 @@ export enum CashflowStateEnum {
 export type GenericConfig = {
   __typename?: 'GenericConfig';
   config: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
   key: Scalars['String']['output'];
   validation: Scalars['String']['output'];
+  version: Scalars['Int']['output'];
 };
+
+export type GenericConfigChangeNotification = {
+  __typename?: 'GenericConfigChangeNotification';
+  data?: Maybe<GenericConfig>;
+  status: GenericConfigChangeStatus;
+};
+
+export enum GenericConfigChangeStatus {
+  Added = 'ADDED',
+  Deleted = 'DELETED',
+  Updated = 'UPDATED',
+}
 
 export type MutableGenericConfigInput = {
   config?: InputMaybe<Scalars['String']['input']>;
-  key?: InputMaybe<Scalars['String']['input']>;
+  key: Scalars['String']['input'];
   validation?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -78,7 +90,7 @@ export type MutationUpdateGenericConfigArgs = {
 export type Query = {
   __typename?: 'Query';
   genericConfig?: Maybe<GenericConfig>;
-  genericConfigs?: Maybe<UltraResult>;
+  genericConfigs?: Maybe<UltraQueryResult>;
 };
 
 export type QueryGenericConfigArgs = {
@@ -121,7 +133,7 @@ export type SortModel = {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  onGenericConfigUpdated?: Maybe<Array<Maybe<GenericConfig>>>;
+  onGenericConfigUpdated?: Maybe<Array<Maybe<GenericConfigChangeNotification>>>;
 };
 
 export type SubscriptionOnGenericConfigUpdatedArgs = {
@@ -130,15 +142,15 @@ export type SubscriptionOnGenericConfigUpdatedArgs = {
 
 export type UltraQueryInput = {
   groupKeys?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  index?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  query?: InputMaybe<Scalars['String']['input']>;
+  index: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+  query: Scalars['String']['input'];
   rowGroups?: InputMaybe<Array<InputMaybe<RowGroupModel>>>;
   sorting?: InputMaybe<Array<InputMaybe<SortModel>>>;
 };
 
-export type UltraResult = {
-  __typename?: 'UltraResult';
+export type UltraQueryResult = {
+  __typename?: 'UltraQueryResult';
   data?: Maybe<Array<Maybe<GenericConfig>>>;
   index?: Maybe<Scalars['Int']['output']>;
   latest?: Maybe<Scalars['Boolean']['output']>;
