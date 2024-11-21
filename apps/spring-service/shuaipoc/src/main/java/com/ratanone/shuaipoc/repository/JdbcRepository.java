@@ -20,11 +20,15 @@ public class JdbcRepository {
 
   @Autowired private final JdbcTemplate dailydumpJdbcTemplate;
 
+  @Autowired private final JdbcTemplate supabaseJdbcTemplate;
+
   public JdbcRepository(
       @Qualifier("realtimeJdbcTemplate") JdbcTemplate realtimeJdbcTemplate,
-      @Qualifier("dailydumpJdbcTemplate") JdbcTemplate dailydumpJdbcTemplate) {
+      @Qualifier("dailydumpJdbcTemplate") JdbcTemplate dailydumpJdbcTemplate,
+      @Qualifier("supabaseJdbcTemplate") JdbcTemplate supabaseJdbcTemplate) {
     this.realtimeJdbcTemplate = realtimeJdbcTemplate;
     this.dailydumpJdbcTemplate = dailydumpJdbcTemplate;
+    this.supabaseJdbcTemplate = supabaseJdbcTemplate;
   }
 
   public List<Map<String, String>> queryListFromRealtime(String sql) {
@@ -37,7 +41,7 @@ public class JdbcRepository {
 
   public UltraResult queryGenericConfigsFromRealtime(UltraQueryInput ultraQueryInput) {
     List<GenericConfig> genericConfigs =
-        realtimeJdbcTemplate.query(
+        supabaseJdbcTemplate.query(
             "SELECT * FROM generic_config WHERE "
                 + ultraQueryInput.getQuery()
                 + " OFFSET "
@@ -64,7 +68,7 @@ public class JdbcRepository {
   }
 
   public GenericConfig addGenericConfig(AddGenericConfigInput addGenericConfigInput) {
-    realtimeJdbcTemplate.update(
+    supabaseJdbcTemplate.update(
         "INSERT INTO generic_config (key, config, validation, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
         new Object[] {
           addGenericConfigInput.getKey(),
@@ -77,7 +81,7 @@ public class JdbcRepository {
 
   public GenericConfig updateGenericConfig(
       String key, MutableGenericConfigInput mutableGenericConfigInput) {
-    realtimeJdbcTemplate.update(
+    supabaseJdbcTemplate.update(
         "UPDATE generic_config SET config = ?, validation = ? WHERE key = ?",
         new Object[] {
           mutableGenericConfigInput.getConfig(), mutableGenericConfigInput.getValidation(), key
@@ -86,7 +90,7 @@ public class JdbcRepository {
   }
 
   public boolean removeGenericConfig(String key) {
-    return realtimeJdbcTemplate.update(
+    return supabaseJdbcTemplate.update(
             "DELETE FROM generic_config WHERE key = ?", new Object[] {key})
         > 0;
   }

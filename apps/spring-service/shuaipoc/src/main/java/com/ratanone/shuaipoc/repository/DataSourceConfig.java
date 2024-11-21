@@ -34,6 +34,9 @@ public class DataSourceConfig {
   @Value("${spring.datasource.dailydump.driver-class-name}")
   private String dailydumpDbDriverClassName;
 
+  @Value("${spring.datasource.supabase.url}")
+  private String supabaseUrl;
+
   @Primary
   @Bean(name = "realtimeDataSource")
   public DataSource realtimeDataSource() {
@@ -53,5 +56,10 @@ public class DataSourceConfig {
         .password(dailydumpDbPassword)
         .driverClassName(dailydumpDbDriverClassName)
         .build();
+  }
+
+  @Bean(name = "supabaseDataSource")
+  public DataSource supabaseDataSource() {
+    return DataSourceBuilder.create().url(supabaseUrl).build();
   }
 }
