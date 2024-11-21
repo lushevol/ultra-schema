@@ -1,11 +1,7 @@
-import { gql, useSubscription } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { formatQuery } from 'react-querybuilder';
 import type { RuleGroupType } from 'react-querybuilder';
 import {
-  OnGenericConfigUpdatedSubscriptionDocument,
-  type OnGenericConfigUpdatedSubscriptionSubscription,
-  type OnGenericConfigUpdatedSubscriptionSubscriptionVariables,
   useAddGenericConfigMutationMutation,
   useGenericConfigUpdateMutationMutation,
   useLazyGenericConfigListQueryQuery,
@@ -24,7 +20,7 @@ export const useGenericConfigList = () => {
   });
 
   useEffect(() => {
-    aggrid?.api.addEventListener('paginationChanged', (e) => {
+    aggrid?.api.setGridOption('onPaginationChanged', (e) => {
       const { newPage, newPageSize } = e;
       if (newPage || newPageSize) {
         const pageSize = e.api.paginationGetPageSize();
@@ -56,18 +52,6 @@ export const useGenericConfigQuery = ({
 }: { ultraQuery: UltraQueryInput }) => {
   const [queryGenericConfigList, { isLoading, data }] =
     useLazyGenericConfigListQueryQuery();
-
-  useSubscription<
-    OnGenericConfigUpdatedSubscriptionSubscription,
-    OnGenericConfigUpdatedSubscriptionSubscriptionVariables
-  >(gql(OnGenericConfigUpdatedSubscriptionDocument), {
-    variables: {
-      query: ultraQuery.query ?? '',
-    },
-    onData: ({ data }) => {
-      console.log(data?.data?.onGenericConfigUpdated);
-    },
-  });
 
   useEffect(() => {
     queryGenericConfigList({ ultraQueryInput: ultraQuery });

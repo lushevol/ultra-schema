@@ -1,5 +1,5 @@
 import type { ColDef, GridOptions } from '@ag-grid-community/core';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import {
   type AgGridCustomCellRenderProps,
   JsonSchemaCellGenerator,
@@ -7,8 +7,10 @@ import {
 import { useGenericConfigUpdateMutationMutation } from 'src/graphql-schemas/documents/generic-config-doc.generated';
 import type { GenericConfig } from 'src/rtk-query/types.generated';
 import { DEFAULT_PAGE_SIZE } from '../const/aggrid';
+import { useGenericConfigChangeReactor } from './useGenericConfigChangeReactor';
 
 const useGenericConfigCellUpdate = () => {
+  const { consumeChanges } = useGenericConfigChangeReactor();
   const [updateGenericConfig] = useGenericConfigUpdateMutationMutation();
   const updateGenericConfigWrapper = useCallback(
     async (
@@ -23,9 +25,15 @@ const useGenericConfigCellUpdate = () => {
         },
       });
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      return res.data?.updateGenericConfig!;
+      const updated = res.data?.updateGenericConfig!;
+      consumeChanges({
+        dataToUpdates: [updated],
+        dataToDelete: [],
+        dataToAdd: [],
+      });
+      return updated;
     },
-    [updateGenericConfig],
+    [consumeChanges, updateGenericConfig],
   );
 
   const JsonSchemaCell = JsonSchemaCellGenerator<GenericConfig>({
@@ -36,7 +44,7 @@ const useGenericConfigCellUpdate = () => {
 
   return {
     JsonSchemaCell,
-  }
+  };
 };
 
 export const useGenericConfigAggridOptions = (): GridOptions<GenericConfig> => {
@@ -55,6 +63,7 @@ export const useGenericConfigAggridOptions = (): GridOptions<GenericConfig> => {
     {
       headerName: 'Version',
       field: 'version',
+      width: 50,
     },
   ];
   return {

@@ -14,6 +14,7 @@ import {
   useGenericConfigList,
   useGenericConfigQuery,
 } from '../hooks/useGenericConfigQuery';
+import { useGenericConfigSubscriptions } from '../hooks/useGenericConfigSubscriptions';
 
 const fields = (GenericConfigData as GenericConfig[]).map((i) => ({
   name: i.key,
@@ -33,6 +34,7 @@ export const GenericConfigExamples = () => {
 
   const { ultraQuery, setUltraQueryQuery } = useGenericConfigList();
   const { rowData, isLoading } = useGenericConfigQuery({ ultraQuery });
+  useGenericConfigSubscriptions({ ultraQuery });
   const gridOptions = useGenericConfigAggridOptions();
 
   return (
