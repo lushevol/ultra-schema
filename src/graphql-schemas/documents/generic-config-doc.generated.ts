@@ -14,7 +14,7 @@ import type * as Types from '../../rtk-query/types.generated';
 import { api } from 'src/rtk-query/baseGraphQLApi';
 module.hot?.accept();
 export type GenericConfigListQueryQueryVariables = Types.Exact<{
-  query: Types.UltraQueryInput;
+  ultraQueryInput: Types.UltraQueryInput;
 }>;
 
 export type GenericConfigListQueryQuery = {
@@ -111,8 +111,8 @@ export type OnGenericConfigUpdatedSubscriptionSubscription = {
 };
 
 export const GenericConfigListQueryDocument = `
-    query GenericConfigListQuery($query: UltraQueryInput!) {
-  genericConfigs(query: $query) {
+    query GenericConfigListQuery($ultraQueryInput: UltraQueryInput!) {
+  genericConfigs(ultraQueryInput: $ultraQueryInput) {
     data {
       key
       config

@@ -1,10 +1,6 @@
 package com.ratanone.shuaipoc.repository;
 
-import com.ratanone.shuaipoc.generated.types.AddGenericConfigInput;
-import com.ratanone.shuaipoc.generated.types.GenericConfig;
-import com.ratanone.shuaipoc.generated.types.MutableGenericConfigInput;
-import com.ratanone.shuaipoc.generated.types.UltraQueryInput;
-import com.ratanone.shuaipoc.generated.types.UltraResult;
+import com.ratanone.shuaipoc.generated.types.*;
 import com.ratanone.shuaipoc.model.StringMapRowMapper;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +35,7 @@ public class JdbcRepository {
     return dailydumpJdbcTemplate.query(sql + " LIMIT 1000", new StringMapRowMapper());
   }
 
-  public UltraResult queryGenericConfigsFromRealtime(UltraQueryInput ultraQueryInput) {
+  public UltraQueryResult queryGenericConfigsFromRealtime(UltraQueryInput ultraQueryInput) {
     List<GenericConfig> genericConfigs =
         supabaseJdbcTemplate.query(
             "SELECT * FROM generic_config WHERE "
@@ -53,7 +49,7 @@ public class JdbcRepository {
                 + " "
                 + ultraQueryInput.getSorting().get(0).getSort(),
             BeanPropertyRowMapper.newInstance(GenericConfig.class));
-    return UltraResult.newBuilder()
+    return UltraQueryResult.newBuilder()
         .data(genericConfigs)
         .index(ultraQueryInput.getIndex())
         .offset(ultraQueryInput.getOffset())

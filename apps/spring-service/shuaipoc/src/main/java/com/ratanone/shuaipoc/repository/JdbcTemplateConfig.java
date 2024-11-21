@@ -21,7 +21,7 @@ public class JdbcTemplateConfig {
     return new JdbcTemplate(dailydumpDataSource);
   }
 
-  @Bean(name = "supabase")
+  @Bean(name = "supabaseJdbcTemplate")
   public JdbcTemplate supabaseJdbcTemplate(
       @Qualifier("supabaseDataSource") DataSource supabaseDataSource) {
     return new JdbcTemplate(supabaseDataSource);

@@ -1,7 +1,7 @@
 # version: 1.0.0
 
 type Query {
-  genericConfigs(query: UltraQueryInput!): UltraQueryResult
+  genericConfigs(ultraQueryInput: UltraQueryInput!): UltraQueryResult
   genericConfig(key: String!): GenericConfig
 }
 

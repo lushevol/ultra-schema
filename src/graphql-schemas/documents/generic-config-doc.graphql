@@ -1,5 +1,5 @@
-query GenericConfigListQuery($query: UltraQueryInput!) {
-  genericConfigs(query: $query) {
+query GenericConfigListQuery($ultraQueryInput: UltraQueryInput!) {
+  genericConfigs(ultraQueryInput: $ultraQueryInput) {
     data {
       key
       config

@@ -13,7 +13,7 @@ public class GenericConfigDatafetcher {
   private GenericConfigService genericConfigService;
 
   @DgsQuery
-  public UltraResult genericConfigs(
+  public UltraQueryResult genericConfigs(
       @InputArgument("ultraQueryInput") UltraQueryInput ultraQueryInput) {
     return genericConfigService.fetchGenericConfigs(ultraQueryInput);
   }

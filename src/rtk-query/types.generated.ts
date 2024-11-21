@@ -98,7 +98,7 @@ export type QueryGenericConfigArgs = {
 };
 
 export type QueryGenericConfigsArgs = {
-  query: UltraQueryInput;
+  ultraQueryInput: UltraQueryInput;
 };
 
 export type RowGroupModel = {
