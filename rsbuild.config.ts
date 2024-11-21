@@ -29,6 +29,15 @@ export default defineConfig({
         pathRewrite: { '^/dashboard/query/es': '' },
         secure: false,
       },
+      '/graphql': {
+        target: 'http://localhost:1218',
+        secure: false,
+      },
+      '/subscriptions': {
+        target: 'ws://localhost:1218',
+        secure: false,
+        ws: true,
+      },
     },
   },
   tools: {

@@ -63,7 +63,6 @@ export enum GenericConfigChangeStatus {
 
 export type MutableGenericConfigInput = {
   config?: InputMaybe<Scalars['String']['input']>;
-  key: Scalars['String']['input'];
   validation?: InputMaybe<Scalars['String']['input']>;
 };
 

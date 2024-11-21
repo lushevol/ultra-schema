@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<netflix-dgs.version>9.1.3</netflix-dgs.version>
+		<netflix-dgs-codegen.version>6.2.4</netflix-dgs-codegen.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -65,14 +66,29 @@
 		</dependency>
 		<dependency>
 			<groupId>com.netflix.graphql.dgs</groupId>
-			<artifactId>graphql-dgs-spring-graphql-starter</artifactId>
+			<artifactId>graphql-dgs-spring-boot-starter</artifactId>
 		</dependency>
-            <dependency>
-                <groupId>com.netflix.graphql.dgs.codegen</groupId>
-                <artifactId>graphql-dgs-codegen-shared-core</artifactId>
-                <version>6.2.4</version>
-            </dependency>
-
+		<dependency>
+			<groupId>com.netflix.graphql.dgs</groupId>
+			<artifactId>graphql-dgs-webflux-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.graphql.dgs</groupId>
+			<artifactId>graphql-dgs-subscriptions-websockets-autoconfigure</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.graphql.dgs</groupId>
+			<artifactId>graphql-dgs-pagination</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.graphql.dgs.codegen</groupId>
+			<artifactId>graphql-dgs-codegen-shared-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.netflix.graphql.dgs</groupId>
+			<artifactId>graphql-dgs-spring-graphql-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -95,11 +111,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.netflix.graphql.dgs</groupId>
-			<artifactId>graphql-dgs-spring-graphql-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
@@ -119,6 +130,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+            <dependency>
+                <groupId>com.netflix.graphql.dgs.codegen</groupId>
+                <artifactId>graphql-dgs-codegen-shared-core</artifactId>
+                <version>${netflix-dgs-codegen.version}</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 

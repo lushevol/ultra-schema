@@ -10,7 +10,11 @@ import org.reactivestreams.Publisher;
 public class GenericConfigDatafetcher {
   private final UpdatedGenericConfigsPool updatedGenericConfigsPool =
       new UpdatedGenericConfigsPool();
-  private GenericConfigService genericConfigService;
+  private final GenericConfigService genericConfigService;
+
+  public GenericConfigDatafetcher(GenericConfigService genericConfigService) {
+    this.genericConfigService = genericConfigService;
+  }
 
   @DgsQuery
   public UltraQueryResult genericConfigs(

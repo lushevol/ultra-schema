@@ -1,8 +1,8 @@
 [
   {
-    "id": "1",
     "key": "key",
     "config": "config",
-    "validation": "validation"
+    "validation": "validation",
+    "version": 0
   }
 ]

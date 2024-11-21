@@ -36,19 +36,24 @@ public class JdbcRepository {
   }
 
   public UltraQueryResult queryGenericConfigsFromRealtime(UltraQueryInput ultraQueryInput) {
-    List<GenericConfig> genericConfigs =
-        supabaseJdbcTemplate.query(
+    StringBuilder sb =
+        new StringBuilder(
             "SELECT * FROM generic_config WHERE "
-                + ultraQueryInput.getQuery()
+                + (ultraQueryInput.getQuery().isBlank() ? "1 = 1" : ultraQueryInput.getQuery())
                 + " OFFSET "
                 + ultraQueryInput.getIndex()
                 + " LIMIT "
-                + ultraQueryInput.getOffset()
-                + " SORT BY "
+                + ultraQueryInput.getOffset());
+    if (ultraQueryInput.getSorting() != null && !ultraQueryInput.getSorting().isEmpty()) {
+      sb.append(
+          " SORT BY "
                 + ultraQueryInput.getSorting().get(0).getField()
                 + " "
-                + ultraQueryInput.getSorting().get(0).getSort(),
-            BeanPropertyRowMapper.newInstance(GenericConfig.class));
+              + ultraQueryInput.getSorting().get(0).getSort());
+    }
+    List<GenericConfig> genericConfigs =
+        supabaseJdbcTemplate.query(
+            sb.toString(), BeanPropertyRowMapper.newInstance(GenericConfig.class));
     return UltraQueryResult.newBuilder()
         .data(genericConfigs)
         .index(ultraQueryInput.getIndex())
@@ -65,11 +70,14 @@ public class JdbcRepository {
 
   public GenericConfig addGenericConfig(AddGenericConfigInput addGenericConfigInput) {
     supabaseJdbcTemplate.update(
-        "INSERT INTO generic_config (key, config, validation, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO generic_config (key, config, validation, version, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
         new Object[] {
           addGenericConfigInput.getKey(),
           addGenericConfigInput.getConfig(),
           addGenericConfigInput.getValidation(),
+          0,
+          new Date(System.currentTimeMillis()),
+          new Date(System.currentTimeMillis()),
         },
         BeanPropertyRowMapper.newInstance(GenericConfig.class));
     return queryGenericConfigsByKey(addGenericConfigInput.getKey());
@@ -78,9 +86,9 @@ public class JdbcRepository {
   public GenericConfig updateGenericConfig(
       String key, MutableGenericConfigInput mutableGenericConfigInput) {
     supabaseJdbcTemplate.update(
-        "UPDATE generic_config SET config = ?, validation = ? WHERE key = ?",
+        "UPDATE generic_config SET config = ?, version = version + 1 WHERE key = ?",
         new Object[] {
-          mutableGenericConfigInput.getConfig(), mutableGenericConfigInput.getValidation(), key
+          mutableGenericConfigInput.getConfig(), key
         });
     return queryGenericConfigsByKey(key);
   }

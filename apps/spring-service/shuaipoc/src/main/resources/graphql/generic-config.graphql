@@ -32,7 +32,6 @@ input AddGenericConfigInput {
 }
 
 input MutableGenericConfigInput {
-  key: String!
   config: String
   validation: String
 }

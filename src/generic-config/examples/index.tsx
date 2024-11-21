@@ -9,8 +9,8 @@ import GenericConfigData from 'src/database/generic-config-data.json';
 import type { GenericConfig } from 'src/rtk-query/types.generated';
 import { useAppDispatch } from 'src/store';
 import { setAggridEvent } from 'src/store/slices/aggrid';
+import { useGenericConfigAggridOptions } from '../hooks/useGenericConfigGrid';
 import {
-  useGenericConfigAggridOptions,
   useGenericConfigList,
   useGenericConfigQuery,
 } from '../hooks/useGenericConfigQuery';
