@@ -9,7 +9,10 @@ export const isSameRecord = <T>(a: T, b: T, rowKey: string) => {
   return get(a, rowKey) === get(b, rowKey);
 };
 
-export const consumeNotification = <T extends { [k: string]: any }>(props: {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+type GenericRowType = { [k: string]: any };
+
+export const consumeNotification = <T extends GenericRowType>(props: {
   getCurrentTableDatas: () => T[];
   dataToUpdates: T[];
   dataToDelete: T[];
@@ -92,7 +95,7 @@ export const consumeNotification = <T extends { [k: string]: any }>(props: {
   };
 };
 
-export const updateAggridData = <T extends { [k: string]: any }>({
+export const updateAggridData = <T extends GenericRowType>({
   aggridApi,
   addedDatas,
   flash = false,
@@ -146,7 +149,7 @@ export const updateAggridData = <T extends { [k: string]: any }>({
   return true;
 };
 
-const flashAggrid = <T extends { [k: string]: any }>({
+const flashAggrid = <T extends GenericRowType>({
   aggridApi,
   addedDatas,
   updatedDatas,
@@ -175,10 +178,10 @@ const flashAggrid = <T extends { [k: string]: any }>({
   }
 
   // updated rows flash
-  updatedDatas?.forEach((r) => {
+  for (const r of updatedDatas ?? []) {
     const id = get(r, rowKey);
     const rowNode = aggridApi.api.getRowNode(id);
-    if (!rowNode) return;
+    if (!rowNode) continue;
     const originData = originDatasBeUpdated?.find((o) =>
       isSameRecord(o, r, rowKey),
     );
@@ -190,7 +193,7 @@ const flashAggrid = <T extends { [k: string]: any }>({
       columns,
       fadeDelay: hightlightDuration,
     });
-  });
+  }
 };
 
 export const compareDatas = <T>({
