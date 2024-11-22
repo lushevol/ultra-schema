@@ -2,8 +2,9 @@
 import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
 import type { UiSchema } from '@rjsf/utils';
+import { Button, Divider, Space } from 'antd';
 import { produce } from 'immer';
-import { useRef, useState } from 'react';
+import { createRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { StyledForm } from 'src/json-schema-form/components/styled-form';
 import type { RootState } from 'src/store';
@@ -19,7 +20,7 @@ const log = (type: string) => console.log.bind(console, type);
 
 export const RSJFDemo = () => {
   const schema = useSelector((state: RootState) => state.jsonSchemaForm.schema);
-  const formRef = useRef<FormType>(null);
+  const formRef = createRef<FormType>();
   const [formData, setFormData] = useState<SsiFormJsonSchema>(
     ssiFormMockData as SsiFormJsonSchema,
   );
@@ -44,11 +45,26 @@ export const RSJFDemo = () => {
     setFormData(formData);
   };
 
+  const handleSubmit = () => {
+    console.log(formRef.current?.submit());
+  };
+
+  const handleReset = () => {
+    formRef.current?.reset();
+  };
+
   console.log(formRef.current);
 
   return (
     <div>
-      <SchemaEditor />
+      <Space>
+        <Button type="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
+        <Button onClick={handleReset}>Reset</Button>
+        <SchemaEditor />
+      </Space>
+      <Divider />
       <SsiFormRoot className="ssi-form-root">
         <StyledForm
           ref={formRef}

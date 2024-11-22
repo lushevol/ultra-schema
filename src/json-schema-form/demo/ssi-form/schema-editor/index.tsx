@@ -13,9 +13,7 @@ export const SchemaEditor = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)}>
-        Open Schema Editor
-      </Button>
+      <Button onClick={() => setOpen(true)}>Open Schema Editor</Button>
       <Drawer
         title="SSI Form Schema Editor"
         width={800}

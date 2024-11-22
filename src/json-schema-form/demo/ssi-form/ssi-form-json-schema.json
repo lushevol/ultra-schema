@@ -25,26 +25,36 @@
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryAccount": {
+      "title": "Beneficiary Account",
       "type": "string",
       "minLength": 2,
       "maxLength": 34,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryAddress": {
+      "title": "Beneficiary Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
+    "beneficiaryCity": {
+      "title": "Beneficiary Country",
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
     "beneficiaryBic": {
+      "title": "Beneficiary BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "beneficiaryName": {
+      "title": "Beneficiary Full Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryName2": {
+      "title": "Beneficiary Full Name1",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
@@ -55,18 +65,22 @@
       "enum": ["OUR", "SHA", "BEN"]
     },
     "intermediaryAccount": {
+      "title": "Intermediary Account",
       "type": "string"
     },
     "intermediaryAddress": {
+      "title": "Intermediary Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "intermediaryBic": {
+      "title": "Intermediary BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "intermediaryPostcode": {
+      "title": "Intermediary Postcode",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
@@ -169,7 +183,7 @@
       "maxLength": 33
     },
     "swiftType": {
-      "title": "Swift Type",
+      "title": "Msg",
       "type": "string",
       "default": "MT103",
       "enum": ["MT103", "MT103 SERIAL", "MT202"]

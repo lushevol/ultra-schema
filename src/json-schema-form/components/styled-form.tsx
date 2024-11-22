@@ -1,8 +1,10 @@
 import styled from '@emotion/styled';
 import { Form } from '@rjsf/antd';
 import type { FormProps } from '@rjsf/core';
+import type FormType from '@rjsf/core';
 import type { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
+import { forwardRef } from 'react';
 import { templates } from './templates';
 import { widgets } from './widgets';
 
@@ -21,14 +23,15 @@ const StyledRoot = styled.div`
     border-color: transparent;
   }
 `;
-
-export const StyledForm = (
+export const StyledForm = forwardRef<
+  FormType,
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  props: Omit<FormProps<any, RJSFSchema, any>, 'validator'>,
-) => {
+  Omit<FormProps<any, RJSFSchema, any>, 'validator'>
+>((props, ref) => {
   return (
     <StyledRoot>
       <Form
+        ref={ref}
         validator={validator}
         templates={templates}
         widgets={widgets}
@@ -50,4 +53,4 @@ export const StyledForm = (
       />
     </StyledRoot>
   );
-};
+});
