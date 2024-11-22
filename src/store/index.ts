@@ -15,10 +15,10 @@ import {
 import { graphqlApi } from 'src/rtk-query/baseGraphQLApi';
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
+import { authenticationSlice } from './slices/authentication';
 import { dashboardSlice } from './slices/dashboard';
 import { jsonSchemaFormSlice } from './slices/json-schema-form';
 import { trackUsingSlice } from './slices/track-using';
-
 const listenerMiddlewareInstance = createListenerMiddleware({
   onError: () => console.error,
 });
@@ -29,6 +29,7 @@ const store = configureStore({
     [dashboardSlice.name]: dashboardSlice.reducer,
     [jsonSchemaFormSlice.name]: jsonSchemaFormSlice.reducer,
     [trackUsingSlice.name]: trackUsingSlice.reducer,
+    [authenticationSlice.name]: authenticationSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
     [graphqlApi.reducerPath]: graphqlApi.reducer,
   },
