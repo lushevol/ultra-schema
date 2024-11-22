@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../../src/store';
 import {
   addTrackUsingKey,
   removeTrackUsingKey,
+  setUsersAreUsing,
 } from '../../../../src/store/slices/track-using';
 
 const INTERVAL_TIME = 10 * 1000;
@@ -19,12 +20,15 @@ export const useTrackUsing = () => {
       clearInterval(trackingIntervalRef.current);
     }
 
-    const postIfKeysExist = () => {
+    const postIfKeysExist = async () => {
       if (
         keys.size > 0 ||
         (keys.size === 0 && remainTimesAfterKeysEmptyRef.current > 0)
       ) {
-        postImUsing({ keys: Array.from(keys) });
+        const trackUsingResp = await postImUsing({
+          keys: Array.from(keys),
+        }).unwrap();
+        dispatch(setUsersAreUsing(trackUsingResp));
         if (keys.size === 0) {
           remainTimesAfterKeysEmptyRef.current -= 1;
         } else {
@@ -35,7 +39,7 @@ export const useTrackUsing = () => {
 
     trackingIntervalRef.current = setInterval(postIfKeysExist, INTERVAL_TIME);
     postIfKeysExist(); // Initial post
-  }, [keys, postImUsing]);
+  }, [keys, postImUsing, dispatch]);
 
   const using = useCallback(
     (key: string) => {

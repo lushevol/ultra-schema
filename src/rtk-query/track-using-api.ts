@@ -1,5 +1,6 @@
 import type {
   ImUsingBody,
+  ImUsingResponse,
   WhoIsUsingQuery,
   WhoIsUsingResponse,
 } from '../../packages/ratan-track-using/src';
@@ -7,7 +8,7 @@ import { baseApi as api } from './baseApi';
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
-    postImUsing: build.query<void, ImUsingBody>({
+    postImUsing: build.query<ImUsingResponse, ImUsingBody>({
       query: (queryArg) => ({
         url: '/track-using/im-using',
         method: 'POST',
