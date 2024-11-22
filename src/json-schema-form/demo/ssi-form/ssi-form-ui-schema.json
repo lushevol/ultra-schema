@@ -4,22 +4,6 @@
   "ui:rootFieldId": "ssi-vostro-form",
   "-ui:classNames": "ssi-vostro-form",
   "ui:globalOptions": { "copyable": true },
-  "ui:order": [
-    "ssiType",
-    "settlementAccount",
-    "settlementMeans",
-    "swiftType",
-    "coveredPayment",
-    "beneficiaryBic",
-    "beneficiaryAccount",
-    "beneficiaryName",
-    "beneficiaryName2",
-    "beneficiaryAddress",
-    "tpp",
-    "charges",
-    "remittanceInfomation*",
-    "*"
-  ],
   "ui:submitButtonOptions": {
     "props": {
       "disabled": false,

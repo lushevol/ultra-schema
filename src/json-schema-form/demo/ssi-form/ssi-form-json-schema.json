@@ -2,24 +2,44 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "accountWithInstitutionAccount": {
+    "ssiType": {
+      "title": "SSI Type",
       "type": "string",
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+      "enum": ["Primary", "Secondary"]
     },
-    "accountWithInstitutionAddress": {
+    "swiftType": {
+      "title": "Msg",
       "type": "string",
-      "maxLength": 60,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+      "default": "MT103",
+      "enum": ["MT103", "MT103 SERIAL", "MT202"]
     },
-    "accountWithInstitutionBic": {
+    "settlementMeans": {
+      "title": "Settlement Means",
+      "type": "string",
+      "enum": ["CLG", "CLS SUSP", "NOS", "Over-Account", "Non-Nostro"]
+    },
+    "settlementAccount": {
+      "title": "Settlement Account",
+      "type": "string",
+      "maxLength": 20
+    },
+    "coveredPayment": {
+      "title": "Covered Payment",
+      "type": "boolean"
+    },
+    "beneficiaryBic": {
+      "title": "Beneficiary BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
-    "accountWithInstitutionCity": {
+    "beneficiaryName": {
+      "title": "Beneficiary Full Name",
       "type": "string",
+      "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
-    "accountWithInstitutionName": {
+    "beneficiaryName2": {
+      "title": "Beneficiary Full Name1",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
@@ -42,27 +62,52 @@
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
-    "beneficiaryBic": {
-      "title": "Beneficiary BIC",
-      "type": "string",
-      "$ref": "#/definitions/patternBicCode"
-    },
-    "beneficiaryName": {
-      "title": "Beneficiary Full Name",
-      "type": "string",
-      "maxLength": 35,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "beneficiaryName2": {
-      "title": "Beneficiary Full Name1",
-      "type": "string",
-      "maxLength": 35,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    "tpp": {
+      "title": "TPP",
+      "type": "boolean"
     },
     "charges": {
       "title": "Charges",
       "type": "string",
       "enum": ["OUR", "SHA", "BEN"]
+    },
+    "accountWithInstitutionBic": {
+      "title": "Account with Institution BIC",
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "accountWithInstitutionName": {
+      "title": "Account with Institution Name",
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionAccount": {
+      "title": "Account with Institution Account",
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionAddress": {
+      "title": "Account with Institution Address",
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "accountWithInstitutionCity": {
+      "title": "Account with Institution Country",
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "intermediaryBic": {
+      "title": "Intermediary BIC",
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "intermediaryName": {
+      "title": "Intermediary Name",
+      "type": "string",
+      "maxLength": 35,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "intermediaryAccount": {
       "title": "Intermediary Account",
@@ -74,83 +119,66 @@
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
-    "intermediaryBic": {
-      "title": "Intermediary BIC",
-      "type": "string",
-      "$ref": "#/definitions/patternBicCode"
-    },
     "intermediaryPostcode": {
-      "title": "Intermediary Postcode",
+      "title": "Intermediary Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
-    "intermediaryName": {
+    "receiversCorrespondentBic": {
+      "title": "Receiver's Correspondent BIC",
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "receiversCorrespondentName": {
+      "title": "Receiver's Correspondent Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
+    "receiversCorrespondentAccount": {
+      "title": "Receiver's Correspondent Account",
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentAddress": {
+      "title": "Receiver's Correspondent Address",
+      "type": "string",
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "receiversCorrespondentCity": {
+      "title": "Receiver's Correspondent Country",
+      "type": "string",
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
+    "orderCustomerBic": {
+      "title": "Ordering Customer BIC",
+      "type": "string",
+      "$ref": "#/definitions/patternBicCode"
+    },
+    "orderCustomerName": {
+      "title": "Ordering Customer Name",
+      "type": "string",
+      "maxLength": 70,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
+    },
     "orderCustomerAccount": {
+      "title": "Ordering Customer Account",
       "type": "string",
       "minLength": 1,
       "maxLength": 50,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
-    "orderCustomerBic": {
+    "orderCustomerAddress": {
+      "title": "Ordering Customer Address",
       "type": "string",
-      "$ref": "#/definitions/patternBicCode"
+      "maxLength": 60,
+      "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "orderCustomerCity": {
+      "title": "Ordering Customer Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "orderCustomerAddress": {
-      "type": "string",
-      "maxLength": 60,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "orderCustomerName": {
-      "type": "string",
-      "maxLength": 70,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "receiversCorrespondentAddress": {
-      "type": "string",
-      "maxLength": 60,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "receiversCorrespondentName": {
-      "type": "string",
-      "maxLength": 35,
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "receiversCorrespondentCity": {
-      "type": "string",
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "receiversCorrespondentAccount": {
-      "title": "Receivers Correspondent Account",
-      "type": "string",
-      "$ref": "#/definitions/patternAlphaBetNumberSpace"
-    },
-    "receiversCorrespondentBic": {
-      "type": "string",
-      "$ref": "#/definitions/patternBicCode"
-    },
-    "remittanceInfomation1": {
-      "type": "string",
-      "maxLength": 35
-    },
-    "remittanceInfomation2": {
-      "type": "string",
-      "maxLength": 33
-    },
-    "remittanceInfomation3": {
-      "type": "string",
-      "maxLength": 33
-    },
-    "remittanceInfomation4": {
-      "type": "string",
-      "maxLength": 33
     },
     "senderToReceiver1": {
       "title": "Sender to Receiver 1",
@@ -182,34 +210,25 @@
       "type": "string",
       "maxLength": 33
     },
-    "swiftType": {
-      "title": "Msg",
+    "remittanceInfomation1": {
+      "title": "Remittance Information 1",
       "type": "string",
-      "default": "MT103",
-      "enum": ["MT103", "MT103 SERIAL", "MT202"]
+      "maxLength": 35
     },
-    "ssiType": {
-      "title": "SSI Type",
+    "remittanceInfomation2": {
+      "title": "Remittance Information 2",
       "type": "string",
-      "enum": ["Primary", "Secondary"]
+      "maxLength": 33
     },
-    "settlementMeans": {
-      "title": "Settlement Means",
+    "remittanceInfomation3": {
+      "title": "Remittance Information 3",
       "type": "string",
-      "enum": ["CLG", "CLS SUSP", "NOS", "Over-Account", "Non-Nostro"]
+      "maxLength": 33
     },
-    "settlementAccount": {
-      "title": "Settlement Account",
+    "remittanceInfomation4": {
+      "title": "Remittance Information 4",
       "type": "string",
-      "maxLength": 20
-    },
-    "coveredPayment": {
-      "title": "Covered Payment",
-      "type": "boolean"
-    },
-    "tpp": {
-      "title": "TPP",
-      "type": "boolean"
+      "maxLength": 33
     }
   },
   "additionalProperties": false,
