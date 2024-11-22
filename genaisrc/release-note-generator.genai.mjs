@@ -1,4 +1,5 @@
 script({
+  model: 'deepseek-chat',
   system: ['system'],
   temperature: 0.5,
 });
