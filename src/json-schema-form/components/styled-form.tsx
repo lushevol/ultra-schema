@@ -19,6 +19,17 @@ const uiSchema = {
 const StyledRoot = styled.div`
   height: 100%;
   width: 100%;
+  form.rjsf {
+    > .form-group {
+      > .ant-form-item {
+        > .ant-form-item-row {
+          > .ant-form-item-control {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
   #styled-form {
     border-color: transparent;
   }
