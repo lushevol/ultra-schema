@@ -1,7 +1,6 @@
 script({
   model: 'deepseek-chat',
   system: ['system'],
-  temperature: 0.5,
 });
 
 const product = env.vars.product || "Lu Shuai's Product";
@@ -40,8 +39,11 @@ const diff = await git.diff({
 });
 console.debug(diff);
 
-const commitsName = def('COMMITS', commits, { maxTokens: 3000 });
-const diffName = def('DIFF', diff, { maxTokens: 12000 });
+const commitsName = def('COMMITS', commits, {
+  maxTokens: 3000,
+  ignoreEmpty: true,
+});
+const diffName = def('DIFF', diff, { maxTokens: 12000, ignoreEmpty: true });
 
 $`
 You are an expert software developer and release manager.

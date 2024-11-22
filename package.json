@@ -19,7 +19,8 @@
     "check": "biome check --fix --unsafe",
     "preview": "rsbuild preview",
     "depcheck": "npx depcheck",
-    "bump": "npx taze"
+    "bump": "npx taze",
+    "gen-gcm": "npx genaiscript run git-commit-msg"
   },
   "dependencies": {
     "@ag-grid-community/client-side-row-model": "^32.3.2",
@@ -47,6 +48,7 @@
     "@ag-grid-enterprise/sparklines": "^32.3.2",
     "@ag-grid-enterprise/status-bar": "^32.3.2",
     "@ag-grid-enterprise/viewport-row-model": "^32.3.2",
+    "@apollo/client": "^3.11.10",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.6",
@@ -88,7 +90,6 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^5.5.1",
-    "@apollo/client": "^3.11.10",
     "@babel/core": "^7.26.0",
     "@babel/plugin-transform-runtime": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
@@ -183,9 +184,7 @@
     "webpack-merge": "^6.0.1"
   },
   "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "workerDirectory": ["public"]
   },
   "nx": {}
 }
