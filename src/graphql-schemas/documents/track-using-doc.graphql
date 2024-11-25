@@ -1,0 +1,24 @@
+query TrackingRecordsQuery($keys: [String!]!) {
+  trackingRecords(keys: $keys) {
+    ...TrackingRecordFragment
+  }
+}
+
+mutation UpdateTrackingRecordsMutation($keys: [String!]!) {
+  updateTrackingRecords(keys: $keys) {
+    ...TrackingRecordFragment
+  }
+}
+
+subscription OnTrackingRecordsUpdatedSubscription($keys: [String!]!) {
+  onTrackingRecordsUpdated(keys: $keys) {
+    ...TrackingRecordFragment
+  }
+}
+
+fragment TrackingRecordFragment on TrackingRecord {
+  id
+  key
+  userId
+  timestamp
+}

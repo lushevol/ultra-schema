@@ -1,0 +1,18 @@
+type Query {
+  trackingRecords(keys: [String!]!): [TrackingRecord!]!
+}
+
+type Mutation {
+  updateTrackingRecords(keys: [String!]!): [TrackingRecord!]!
+}
+
+type Subscription {
+  onTrackingRecordsUpdated(keys: [String!]!): [TrackingRecord!]!
+}
+
+type TrackingRecord {
+  id: ID!
+  key: String!
+  userId: String!
+  timestamp: String!
+}

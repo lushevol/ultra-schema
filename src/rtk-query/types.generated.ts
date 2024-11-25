@@ -69,12 +69,17 @@ export type MutableGenericConfigInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addGenericConfig?: Maybe<GenericConfig>;
+  iAmUsing: Array<TrackingRecord>;
   removeGenericConfig?: Maybe<Scalars['Boolean']['output']>;
   updateGenericConfig?: Maybe<GenericConfig>;
 };
 
 export type MutationAddGenericConfigArgs = {
   addGenericConfigInput: AddGenericConfigInput;
+};
+
+export type MutationIAmUsingArgs = {
+  keys: Array<Scalars['String']['input']>;
 };
 
 export type MutationRemoveGenericConfigArgs = {
@@ -90,6 +95,7 @@ export type Query = {
   __typename?: 'Query';
   genericConfig?: Maybe<GenericConfig>;
   genericConfigs?: Maybe<UltraQueryResult>;
+  queryTrackingRecords: Array<TrackingRecord>;
 };
 
 export type QueryGenericConfigArgs = {
@@ -98,6 +104,10 @@ export type QueryGenericConfigArgs = {
 
 export type QueryGenericConfigsArgs = {
   ultraQueryInput: UltraQueryInput;
+};
+
+export type QueryQueryTrackingRecordsArgs = {
+  keys: Array<Scalars['String']['input']>;
 };
 
 export type RowGroupModel = {
@@ -133,10 +143,23 @@ export type SortModel = {
 export type Subscription = {
   __typename?: 'Subscription';
   onGenericConfigUpdated?: Maybe<Array<Maybe<GenericConfigChangeNotification>>>;
+  onTrackingRecordsUpdated: Array<TrackingRecord>;
 };
 
 export type SubscriptionOnGenericConfigUpdatedArgs = {
   query: Scalars['String']['input'];
+};
+
+export type SubscriptionOnTrackingRecordsUpdatedArgs = {
+  keys: Array<Scalars['String']['input']>;
+};
+
+export type TrackingRecord = {
+  __typename?: 'TrackingRecord';
+  id: Scalars['ID']['output'];
+  key: Scalars['String']['output'];
+  timestamp: Scalars['String']['output'];
+  userId: Scalars['String']['output'];
 };
 
 export type UltraQueryInput = {
