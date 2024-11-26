@@ -13,15 +13,15 @@ import type * as Types from '../../rtk-query/types.generated';
 
 import { api } from 'src/rtk-query/baseGraphQLApi';
 module.hot?.accept();
-export type QueryTrackingRecordsQueryQueryVariables = Types.Exact<{
+export type TrackingRecordsQueryQueryVariables = Types.Exact<{
   keys:
     | Array<Types.Scalars['String']['input']>
     | Types.Scalars['String']['input'];
 }>;
 
-export type QueryTrackingRecordsQueryQuery = {
+export type TrackingRecordsQueryQuery = {
   __typename?: 'Query';
-  queryTrackingRecords: Array<{
+  trackingRecords: Array<{
     __typename?: 'TrackingRecord';
     id: string;
     key: string;
@@ -30,15 +30,15 @@ export type QueryTrackingRecordsQueryQuery = {
   }>;
 };
 
-export type IAmUsingMutationMutationVariables = Types.Exact<{
+export type UpdateTrackingRecordsMutationMutationVariables = Types.Exact<{
   keys:
     | Array<Types.Scalars['String']['input']>
     | Types.Scalars['String']['input'];
 }>;
 
-export type IAmUsingMutationMutation = {
+export type UpdateTrackingRecordsMutationMutation = {
   __typename?: 'Mutation';
-  iAmUsing: Array<{
+  updateTrackingRecords: Array<{
     __typename?: 'TrackingRecord';
     id: string;
     key: string;
@@ -57,76 +57,79 @@ export type OnTrackingRecordsUpdatedSubscriptionSubscriptionVariables =
 export type OnTrackingRecordsUpdatedSubscriptionSubscription = {
   __typename?: 'Subscription';
   onTrackingRecordsUpdated: Array<{
-    __typename?: 'TrackingRecord';
-    id: string;
-    key: string;
-    userId: string;
-    timestamp: string;
+    __typename?: 'TrackingRecordChangeNotification';
+    status: Types.TrackingRecordChangeStatus;
+    data: {
+      __typename?: 'TrackingRecord';
+      id: string;
+      key: string;
+      userId: string;
+      timestamp: string;
+    };
   }>;
 };
 
-export type TrackingRecordFragmentFragment = {
-  __typename?: 'TrackingRecord';
-  id: string;
-  key: string;
-  userId: string;
-  timestamp: string;
-};
-
-export const TrackingRecordFragmentFragmentDoc = `
-    fragment TrackingRecordFragment on TrackingRecord {
-  id
-  key
-  userId
-  timestamp
+export const TrackingRecordsQueryDocument = `
+    query TrackingRecordsQuery($keys: [String!]!) {
+  trackingRecords(keys: $keys) {
+    id
+    key
+    userId
+    timestamp
+  }
 }
     `;
-export const QueryTrackingRecordsQueryDocument = `
-    query QueryTrackingRecordsQuery($keys: [String!]!) {
-  queryTrackingRecords(keys: $keys) {
-    ...TrackingRecordFragment
+export const UpdateTrackingRecordsMutationDocument = `
+    mutation UpdateTrackingRecordsMutation($keys: [String!]!) {
+  updateTrackingRecords(keys: $keys) {
+    id
+    key
+    userId
+    timestamp
   }
 }
-    ${TrackingRecordFragmentFragmentDoc}`;
-export const IAmUsingMutationDocument = `
-    mutation IAmUsingMutation($keys: [String!]!) {
-  iAmUsing(keys: $keys) {
-    ...TrackingRecordFragment
-  }
-}
-    ${TrackingRecordFragmentFragmentDoc}`;
+    `;
 export const OnTrackingRecordsUpdatedSubscriptionDocument = `
     subscription OnTrackingRecordsUpdatedSubscription($keys: [String!]!) {
   onTrackingRecordsUpdated(keys: $keys) {
-    ...TrackingRecordFragment
+    status
+    data {
+      id
+      key
+      userId
+      timestamp
+    }
   }
 }
-    ${TrackingRecordFragmentFragmentDoc}`;
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   overrideExisting: module.hot?.status() === 'apply',
   endpoints: (build) => ({
-    QueryTrackingRecordsQuery: build.query<
-      QueryTrackingRecordsQueryQuery,
-      QueryTrackingRecordsQueryQueryVariables
+    TrackingRecordsQuery: build.query<
+      TrackingRecordsQueryQuery,
+      TrackingRecordsQueryQueryVariables
     >({
       query: (variables) => ({
-        document: QueryTrackingRecordsQueryDocument,
+        document: TrackingRecordsQueryDocument,
         variables,
       }),
     }),
-    IAmUsingMutation: build.mutation<
-      IAmUsingMutationMutation,
-      IAmUsingMutationMutationVariables
+    UpdateTrackingRecordsMutation: build.mutation<
+      UpdateTrackingRecordsMutationMutation,
+      UpdateTrackingRecordsMutationMutationVariables
     >({
-      query: (variables) => ({ document: IAmUsingMutationDocument, variables }),
+      query: (variables) => ({
+        document: UpdateTrackingRecordsMutationDocument,
+        variables,
+      }),
     }),
   }),
 });
 
 export { injectedRtkApi as api };
 export const {
-  useQueryTrackingRecordsQueryQuery,
-  useLazyQueryTrackingRecordsQueryQuery,
-  useIAmUsingMutationMutation,
+  useTrackingRecordsQueryQuery,
+  useLazyTrackingRecordsQueryQuery,
+  useUpdateTrackingRecordsMutationMutation,
 } = injectedRtkApi;

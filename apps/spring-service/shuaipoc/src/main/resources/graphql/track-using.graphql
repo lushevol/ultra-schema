@@ -7,7 +7,9 @@ type Mutation {
 }
 
 type Subscription {
-  onTrackingRecordsUpdated(keys: [String!]!): [TrackingRecord!]!
+  onTrackingRecordsUpdated(
+    keys: [String!]!
+  ): [TrackingRecordChangeNotification!]!
 }
 
 type TrackingRecord {
@@ -15,4 +17,15 @@ type TrackingRecord {
   key: String!
   userId: String!
   timestamp: String!
+}
+
+type TrackingRecordChangeNotification {
+  status: TrackingRecordChangeStatus!
+  data: TrackingRecord!
+}
+
+enum TrackingRecordChangeStatus {
+  UPDATED
+  DELETED
+  ADDED
 }

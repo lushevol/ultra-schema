@@ -69,17 +69,13 @@ export type MutableGenericConfigInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   addGenericConfig?: Maybe<GenericConfig>;
-  iAmUsing: Array<TrackingRecord>;
   removeGenericConfig?: Maybe<Scalars['Boolean']['output']>;
   updateGenericConfig?: Maybe<GenericConfig>;
+  updateTrackingRecords: Array<TrackingRecord>;
 };
 
 export type MutationAddGenericConfigArgs = {
   addGenericConfigInput: AddGenericConfigInput;
-};
-
-export type MutationIAmUsingArgs = {
-  keys: Array<Scalars['String']['input']>;
 };
 
 export type MutationRemoveGenericConfigArgs = {
@@ -91,11 +87,15 @@ export type MutationUpdateGenericConfigArgs = {
   payload?: InputMaybe<MutableGenericConfigInput>;
 };
 
+export type MutationUpdateTrackingRecordsArgs = {
+  keys: Array<Scalars['String']['input']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   genericConfig?: Maybe<GenericConfig>;
   genericConfigs?: Maybe<UltraQueryResult>;
-  queryTrackingRecords: Array<TrackingRecord>;
+  trackingRecords: Array<TrackingRecord>;
 };
 
 export type QueryGenericConfigArgs = {
@@ -106,7 +106,7 @@ export type QueryGenericConfigsArgs = {
   ultraQueryInput: UltraQueryInput;
 };
 
-export type QueryQueryTrackingRecordsArgs = {
+export type QueryTrackingRecordsArgs = {
   keys: Array<Scalars['String']['input']>;
 };
 
@@ -143,7 +143,7 @@ export type SortModel = {
 export type Subscription = {
   __typename?: 'Subscription';
   onGenericConfigUpdated?: Maybe<Array<Maybe<GenericConfigChangeNotification>>>;
-  onTrackingRecordsUpdated: Array<TrackingRecord>;
+  onTrackingRecordsUpdated: Array<TrackingRecordChangeNotification>;
 };
 
 export type SubscriptionOnGenericConfigUpdatedArgs = {
@@ -161,6 +161,18 @@ export type TrackingRecord = {
   timestamp: Scalars['String']['output'];
   userId: Scalars['String']['output'];
 };
+
+export type TrackingRecordChangeNotification = {
+  __typename?: 'TrackingRecordChangeNotification';
+  data: TrackingRecord;
+  status: TrackingRecordChangeStatus;
+};
+
+export enum TrackingRecordChangeStatus {
+  Added = 'ADDED',
+  Deleted = 'DELETED',
+  Updated = 'UPDATED',
+}
 
 export type UltraQueryInput = {
   groupKeys?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
