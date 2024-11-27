@@ -86,26 +86,25 @@ public class TrackingRecordDatafetcher {
       for (String key : keys) {
         // Find existing record if present
         Optional<TrackingRecord> existingRecord =
-            inMemoryRecords.stream().filter(record -> record.getKey().equals(key)).findFirst();
-
-        // Create new record
-        TrackingRecord newRecord =
-            TrackingRecord.newBuilder()
-                .id(UUID.randomUUID().toString())
-                .key(key)
-                .userId(userId)
-                .timestamp(Instant.now().toString())
-                .build();
+            inMemoryRecords.stream()
+                .filter(record -> record.getKey().equals(key) && record.getUserId().equals(userId))
+                .findFirst();
 
         // Track changes
         if (existingRecord.isPresent()) {
-          updatedRecords.add(newRecord);
-          inMemoryRecords.remove(existingRecord.get());
+          existingRecord.get().setTimestamp(Instant.now().toString());
+          updatedRecords.add(existingRecord.get());
         } else {
+          TrackingRecord newRecord =
+              TrackingRecord.newBuilder()
+                  .id(UUID.randomUUID().toString())
+                  .key(key)
+                  .userId(userId)
+                  .timestamp(Instant.now().toString())
+                  .build();
           newRecords.add(newRecord);
+          inMemoryRecords.add(newRecord);
         }
-
-        inMemoryRecords.add(newRecord);
       }
     }
 

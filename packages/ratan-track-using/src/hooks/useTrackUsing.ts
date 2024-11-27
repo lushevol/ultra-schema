@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useLazyPostImUsingQuery } from '../../../../src/rtk-query/track-using-api';
-import { useAppDispatch, useAppSelector } from '../../../../src/store';
+import { useUpdateTrackingRecordsMutationMutation } from 'src/graphql-schemas/documents/track-using-doc.generated';
+import type { TrackingRecord } from 'src/rtk-query/types.generated';
+import { useAppDispatch, useAppSelector } from 'src/store';
 import {
   addTrackUsingKey,
   removeTrackUsingKey,
@@ -12,7 +13,7 @@ export const useTrackUsing = () => {
   const trackingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const { keys } = useAppSelector((state) => state.trackUsing);
   const dispatch = useAppDispatch();
-  const [postImUsing] = useLazyPostImUsingQuery();
+  const [updateTrackingRecords] = useUpdateTrackingRecordsMutationMutation();
   const remainTimesAfterKeysEmptyRef = useRef(1);
 
   const startTrackingInterval = useCallback(() => {
@@ -25,10 +26,17 @@ export const useTrackUsing = () => {
         keys.size > 0 ||
         (keys.size === 0 && remainTimesAfterKeysEmptyRef.current > 0)
       ) {
-        const trackUsingResp = await postImUsing({
+        const trackUsingResp = await updateTrackingRecords({
           keys: Array.from(keys),
         }).unwrap();
-        dispatch(setUsersAreUsing(trackUsingResp));
+        const usersAreUsing = trackUsingResp.updateTrackingRecords.reduce(
+          (acc, record) => {
+            acc[record.key] = [...(acc[record.key] ?? []), record];
+            return acc;
+          },
+          {} as Record<string, TrackingRecord[]>,
+        );
+        dispatch(setUsersAreUsing(usersAreUsing));
         if (keys.size === 0) {
           remainTimesAfterKeysEmptyRef.current -= 1;
         } else {
@@ -39,7 +47,7 @@ export const useTrackUsing = () => {
 
     trackingIntervalRef.current = setInterval(postIfKeysExist, INTERVAL_TIME);
     postIfKeysExist(); // Initial post
-  }, [keys, postImUsing, dispatch]);
+  }, [keys, updateTrackingRecords, dispatch]);
 
   const using = useCallback(
     (key: string) => {

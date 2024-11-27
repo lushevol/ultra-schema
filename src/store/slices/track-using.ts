@@ -8,7 +8,7 @@ type TrackUsingRootType = {
   usersAreUsing: {
     [key: string]: {
       userId: string;
-      timestamp: number;
+      timestamp: string;
     }[];
   };
 };

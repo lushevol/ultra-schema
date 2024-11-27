@@ -6,6 +6,15 @@ export const graphqlApi = createApi({
   tagTypes: ['GenericConfig'],
   baseQuery: graphqlRequestBaseQuery({
     url: '/graphql',
+    prepareHeaders: (headers, api) => {
+      // specify RootState here will cause error, because RootState is reasoning from the api, it will cause circular dependency
+      const store = api.getState();
+      const newHeaders = {
+        ...headers,
+        'x-ratan-user-id': store.authentication.userId,
+      };
+      return newHeaders;
+    },
   }),
   endpoints: () => ({}),
 });

@@ -1,12 +1,12 @@
-type Query {
+extend type Query {
   trackingRecords(keys: [String!]!): [TrackingRecord!]!
 }
 
-type Mutation {
+extend type Mutation {
   updateTrackingRecords(keys: [String!]!): [TrackingRecord!]!
 }
 
-type Subscription {
+extend type Subscription {
   onTrackingRecordsUpdated(
     keys: [String!]!
   ): [TrackingRecordChangeNotification!]!
