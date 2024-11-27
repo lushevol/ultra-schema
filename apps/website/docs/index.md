@@ -2,9 +2,9 @@
 pageType: home
 
 hero:
-  name: Lu Shuai\'s Site
-  text: Lu Shuai\'s SSG
-  tagline: Lu Shuai\'s Site tagline
+  name: Lu Shuai's Site
+  text: Lu Shuai's SSG
+  tagline: Lu Shuai's Site tagline
   actions:
     - theme: brand
       text: Quick Start
@@ -14,7 +14,7 @@ hero:
       link: https://github.com/web-infra-dev/rspress
   image:
     src: /rspress-icon.png
-    alt: Lu Shuai\'s Site Logo
+    alt: Lu Shuai's Site Logo
 features:
   - title: Blazing fast build speed
     details: The core compilation module is based on the Rust front-end toolchain, providing a more ultimate development experience.

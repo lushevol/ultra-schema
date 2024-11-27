@@ -5,9 +5,9 @@
     "activeMatch": "/guide/"
   },
   {
-    "text": "Hello World",
-    "link": "/hello/",
-    "activeMatch": "/hello/"
+    "text": "2024 Performance",
+    "link": "/2024-performance/",
+    "activeMatch": "/2024-performance/"
   },
   {
     "text": "API",
