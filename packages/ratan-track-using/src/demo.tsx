@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store';
 import { setUserId } from 'src/store/slices/authentication';
 import { useTrackUsing } from './index';
+import { parseUsersAreUsing } from './utils';
 
 export const TrackUsingDemo = () => {
   const { keys, usersAreUsing } = useAppSelector((state) => state.trackUsing);
@@ -28,7 +29,9 @@ export const TrackUsingDemo = () => {
       </Space>
       <div>
         <p>Keys I'm using: {Array.from(keys).join(', ')}</p>
-        <p>Users are using: {JSON.stringify(usersAreUsing)}</p>
+        <p>
+          Users are using: {JSON.stringify(parseUsersAreUsing(usersAreUsing))}
+        </p>
       </div>
       <Space>
         <Button onClick={() => using('functionA')}>I'm using functionA</Button>

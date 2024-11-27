@@ -8,6 +8,8 @@ import jakarta.annotation.PreDestroy;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
+
 import org.reactivestreams.Publisher;
 import org.springframework.web.bind.annotation.RequestHeader;
 
@@ -119,11 +121,10 @@ public class TrackingRecordDatafetcher {
       updatedTrackingRecordsPool.addAll(newRecords);
     }
 
-    // Return all modified records
-    List<TrackingRecord> allModifiedRecords = new ArrayList<>();
-    allModifiedRecords.addAll(newRecords);
-    allModifiedRecords.addAll(updatedRecords);
-    return allModifiedRecords;
+    // Return all records filtered by keys
+    return inMemoryRecords.stream()
+        .filter(record -> keys.contains(record.getKey()))
+        .collect(Collectors.toList());
   }
 
   @DgsSubscription

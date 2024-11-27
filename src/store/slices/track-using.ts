@@ -1,16 +1,12 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { enableMapSet } from 'immer';
+import type { TrackingRecord } from 'src/rtk-query/types.generated';
 
 enableMapSet();
 
 type TrackUsingRootType = {
   keys: Set<string>;
-  usersAreUsing: {
-    [key: string]: {
-      userId: string;
-      timestamp: string;
-    }[];
-  };
+  usersAreUsing: Record<string, TrackingRecord[]>;
 };
 
 export const trackUsingSlice = createSlice({
