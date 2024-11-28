@@ -5,6 +5,7 @@ import type FormType from '@rjsf/core';
 import type { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import { forwardRef } from 'react';
+import { customValidate, transformErrors } from './custom-error';
 import { templates } from './templates';
 import { widgets } from './widgets';
 
@@ -50,6 +51,8 @@ export const StyledForm = forwardRef<
         autoComplete="off"
         noHtml5Validate
         showErrorList={false}
+        transformErrors={transformErrors}
+        customValidate={customValidate}
         formContext={{
           descriptionLocation: 'tooltip',
           readonlyAsDisabled: false,
