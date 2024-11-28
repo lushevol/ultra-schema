@@ -264,7 +264,7 @@
     },
     {
       "if": {
-        "description": "Cover Payment Logic",
+        "description": "Cover Payment Logic #1",
         "properties": {
           "swiftType": {
             "const": "MT103"
@@ -275,7 +275,8 @@
           "coveredPayment": {
             "const": true
           }
-        }
+        },
+        "required": ["coveredPayment"]
       },
       "then": {
         "required": ["receiversCorrespondentBic"]

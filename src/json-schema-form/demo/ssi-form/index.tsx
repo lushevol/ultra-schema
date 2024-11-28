@@ -3,7 +3,6 @@ import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
 import type { UiSchema } from '@rjsf/utils';
 import { Button, Divider, Space } from 'antd';
-import { produce } from 'immer';
 import { createRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { StyledForm } from 'src/json-schema-form/components/styled-form';
@@ -12,37 +11,27 @@ import { SchemaEditor } from './schema-editor';
 import ssiFormMockData from './ssi-form-mock.generated.json';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
 import ssi_form_ui_schema from './ssi-form-ui-schema.json';
+import { coverPaymentLogic } from './ssi-logic';
 import { SsiFormRoot } from './style';
-
-const uiSchema = ssi_form_ui_schema as UiSchema;
 
 const log = (type: string) => console.log.bind(console, type);
 
 export const RSJFDemo = () => {
   const schema = useSelector((state: RootState) => state.jsonSchemaForm.schema);
+  const [uiSchema, setUiSchema] = useState(ssi_form_ui_schema as UiSchema);
   const formRef = createRef<FormType>();
   const [formData, setFormData] = useState<SsiFormJsonSchema>(
     ssiFormMockData as SsiFormJsonSchema,
   );
 
   const handleFormDataChange = (e: IChangeEvent) => {
-    const formData = produce(e.formData as SsiFormJsonSchema, (draft) => {
-      if (
-        draft.settlementMeans === 'NOS' &&
-        draft.swiftType === 'MT103' &&
-        validateBicCode(draft.receiversCorrespondentBic ?? '')
-      ) {
-        draft.coveredPayment = true;
-      } else draft.coveredPayment = false;
-
-      if (draft.coveredPayment) {
-        if (draft.swiftType !== 'MT103' || draft.settlementMeans !== 'NOS') {
-          draft.coveredPayment = false;
-        }
-      }
+    const newData = coverPaymentLogic({
+      formData: e.formData as SsiFormJsonSchema,
+      uiSchema,
     });
 
-    setFormData(formData);
+    setFormData(newData.formData);
+    setUiSchema(newData.uiSchema);
   };
 
   const handleSubmit = () => {
@@ -71,12 +60,9 @@ export const RSJFDemo = () => {
           schema={schema}
           uiSchema={uiSchema}
           formData={formData}
+          onChange={handleFormDataChange}
         />
       </SsiFormRoot>
     </div>
   );
-};
-
-const validateBicCode = (str: string) => {
-  return /^(([A-Z0-9]{8})|([A-Z0-9]{11}))$/.test(str);
 };
