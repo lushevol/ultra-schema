@@ -1,21 +1,144 @@
 {
-  "-ui:title": "Title",
-  "-ui:description": "Description",
   "ui:rootFieldId": "ssi-vostro-form",
-  "-ui:classNames": "ssi-vostro-form",
   "ui:globalOptions": { "copyable": true },
   "ui:submitButtonOptions": {
-    "props": {
-      "disabled": false,
-      "type": "primary",
-      "className": "ssi-vostro-form-submit-button"
-    },
-    "norender": true,
-    "submitText": "Submit"
+    "norender": true
   },
 
   "ssiType": {
-    "ui:classNames": "ssi-vostro-form-ssi-type",
+    "ui:emptyValue": ""
+  },
+  "swiftType": {
+    "ui:emptyValue": ""
+  },
+  "settlementMeans": {
+    "ui:emptyValue": ""
+  },
+  "settlementAccount": {
+    "ui:emptyValue": ""
+  },
+  "coveredPayment": {
+    "ui:emptyValue": false
+  },
+  "charges": {
+    "ui:emptyValue": ""
+  },
+  "tpp": {
+    "ui:emptyValue": false
+  },
+
+  "orderCustomerBic": {
+    "ui:emptyValue": ""
+  },
+  "orderCustomerName": {
+    "ui:emptyValue": ""
+  },
+  "orderCustomerAccount": {
+    "ui:emptyValue": ""
+  },
+  "orderCustomerAddress": {
+    "ui:emptyValue": ""
+  },
+  "orderCustomerCity": {
+    "ui:emptyValue": ""
+  },
+
+  "beneficiaryBic": {
+    "ui:emptyValue": ""
+  },
+  "beneficiaryName": {
+    "ui:emptyValue": ""
+  },
+  "beneficiaryName2": {
+    "ui:emptyValue": ""
+  },
+  "beneficiaryAccount": {
+    "ui:emptyValue": ""
+  },
+  "beneficiaryAddress": {
+    "ui:emptyValue": ""
+  },
+  "beneficiaryCity": {
+    "ui:emptyValue": ""
+  },
+
+  "accountWithInstitutionBic": {
+    "ui:emptyValue": ""
+  },
+  "accountWithInstitutionName": {
+    "ui:emptyValue": ""
+  },
+  "accountWithInstitutionAccount": {
+    "ui:emptyValue": ""
+  },
+  "accountWithInstitutionAddress": {
+    "ui:emptyValue": ""
+  },
+  "accountWithInstitutionCity": {
+    "ui:emptyValue": ""
+  },
+
+  "intermediaryBic": {
+    "ui:emptyValue": ""
+  },
+  "intermediaryName": {
+    "ui:emptyValue": ""
+  },
+  "intermediaryAccount": {
+    "ui:emptyValue": ""
+  },
+  "intermediaryAddress": {
+    "ui:emptyValue": ""
+  },
+  "intermediaryPostcode": {
+    "ui:emptyValue": ""
+  },
+
+  "receiversCorrespondentBic": {
+    "ui:emptyValue": ""
+  },
+  "receiversCorrespondentName": {
+    "ui:emptyValue": ""
+  },
+  "receiversCorrespondentAccount": {
+    "ui:emptyValue": ""
+  },
+  "receiversCorrespondentAddress": {
+    "ui:emptyValue": ""
+  },
+  "receiversCorrespondentCity": {
+    "ui:emptyValue": ""
+  },
+
+  "senderToReceiver1": {
+    "ui:emptyValue": ""
+  },
+  "senderToReceiver2": {
+    "ui:emptyValue": ""
+  },
+  "senderToReceiver3": {
+    "ui:emptyValue": ""
+  },
+  "senderToReceiver4": {
+    "ui:emptyValue": ""
+  },
+  "senderToReceiver5": {
+    "ui:emptyValue": ""
+  },
+  "senderToReceiver6": {
+    "ui:emptyValue": ""
+  },
+
+  "remittanceInfomation1": {
+    "ui:emptyValue": ""
+  },
+  "remittanceInfomation2": {
+    "ui:emptyValue": ""
+  },
+  "remittanceInfomation3": {
+    "ui:emptyValue": ""
+  },
+  "remittanceInfomation4": {
     "ui:emptyValue": ""
   }
 }

@@ -28,37 +28,37 @@
       "type": "boolean"
     },
     "beneficiaryBic": {
-      "title": "Beneficiary BIC",
+      "title": "BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "beneficiaryName": {
-      "title": "Beneficiary Full Name",
+      "title": "Full Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryName2": {
-      "title": "Beneficiary Full Name1",
+      "title": "Full Name1",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryAccount": {
-      "title": "Beneficiary Account",
+      "title": "Account",
       "type": "string",
       "minLength": 2,
       "maxLength": 34,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryAddress": {
-      "title": "Beneficiary Address",
+      "title": "Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "beneficiaryCity": {
-      "title": "Beneficiary Country",
+      "title": "Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
@@ -72,161 +72,161 @@
       "enum": ["OUR", "SHA", "BEN"]
     },
     "accountWithInstitutionBic": {
-      "title": "Account with Institution BIC",
+      "title": "BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "accountWithInstitutionName": {
-      "title": "Account with Institution Name",
+      "title": "Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "accountWithInstitutionAccount": {
-      "title": "Account with Institution Account",
+      "title": "Account",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "accountWithInstitutionAddress": {
-      "title": "Account with Institution Address",
+      "title": "Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "accountWithInstitutionCity": {
-      "title": "Account with Institution Country",
+      "title": "Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "intermediaryBic": {
-      "title": "Intermediary BIC",
+      "title": "BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "intermediaryName": {
-      "title": "Intermediary Name",
+      "title": "Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "intermediaryAccount": {
-      "title": "Intermediary Account",
+      "title": "Account",
       "type": "string"
     },
     "intermediaryAddress": {
-      "title": "Intermediary Address",
+      "title": "Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "intermediaryPostcode": {
-      "title": "Intermediary Country",
+      "title": "Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "receiversCorrespondentBic": {
-      "title": "Receiver's Correspondent BIC",
+      "title": "BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "receiversCorrespondentName": {
-      "title": "Receiver's Correspondent Name",
+      "title": "Name",
       "type": "string",
       "maxLength": 35,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "receiversCorrespondentAccount": {
-      "title": "Receiver's Correspondent Account",
+      "title": "Account",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "receiversCorrespondentAddress": {
-      "title": "Receiver's Correspondent Address",
+      "title": "Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "receiversCorrespondentCity": {
-      "title": "Receiver's Correspondent Country",
+      "title": "Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "orderCustomerBic": {
-      "title": "Ordering Customer BIC",
+      "title": "BIC",
       "type": "string",
       "$ref": "#/definitions/patternBicCode"
     },
     "orderCustomerName": {
-      "title": "Ordering Customer Name",
+      "title": "Name",
       "type": "string",
       "maxLength": 70,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "orderCustomerAccount": {
-      "title": "Ordering Customer Account",
+      "title": "Account",
       "type": "string",
       "minLength": 1,
       "maxLength": 50,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "orderCustomerAddress": {
-      "title": "Ordering Customer Address",
+      "title": "Address",
       "type": "string",
       "maxLength": 60,
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "orderCustomerCity": {
-      "title": "Ordering Customer Country",
+      "title": "Country",
       "type": "string",
       "$ref": "#/definitions/patternAlphaBetNumberSpace"
     },
     "senderToReceiver1": {
-      "title": "Sender to Receiver 1",
+      "title": "Line1",
       "type": "string",
       "maxLength": 35
     },
     "senderToReceiver2": {
-      "title": "Sender to Receiver 2",
+      "title": "Line2",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver3": {
-      "title": "Sender to Receiver 3",
+      "title": "Line3",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver4": {
-      "title": "Sender to Receiver 4",
+      "title": "Line4",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver5": {
-      "title": "Sender to Receiver 5",
+      "title": "Line5",
       "type": "string",
       "maxLength": 33
     },
     "senderToReceiver6": {
-      "title": "Sender to Receiver 6",
+      "title": "Line6",
       "type": "string",
       "maxLength": 33
     },
     "remittanceInfomation1": {
-      "title": "Remittance Information 1",
+      "title": "Line1",
       "type": "string",
       "maxLength": 35
     },
     "remittanceInfomation2": {
-      "title": "Remittance Information 2",
+      "title": "Line2",
       "type": "string",
       "maxLength": 33
     },
     "remittanceInfomation3": {
-      "title": "Remittance Information 3",
+      "title": "Line3",
       "type": "string",
       "maxLength": 33
     },
     "remittanceInfomation4": {
-      "title": "Remittance Information 4",
+      "title": "Line4",
       "type": "string",
       "maxLength": 33
     }

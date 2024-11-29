@@ -50,6 +50,7 @@ export const StyledForm = forwardRef<
         uiSchema={uiSchema}
         autoComplete="off"
         noHtml5Validate
+        focusOnFirstError
         showErrorList={false}
         transformErrors={transformErrors}
         customValidate={customValidate}
