@@ -15,10 +15,6 @@ export const SsiFormRoot = styled.div`
     }
   }
   #ssi-vostro-form {
-    border-color: transparent;
-    > .ant-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
+    
   }
 `;

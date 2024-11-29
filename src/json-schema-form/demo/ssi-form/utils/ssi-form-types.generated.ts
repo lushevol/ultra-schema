@@ -6,8 +6,6 @@
  */
 
 export type SsiFormJsonSchema = {
-  [k: string]: unknown;
-} & {
   /**
    * Format: Alphabetnumberic
    */
@@ -123,5 +121,4 @@ export type SsiFormJsonSchema = {
   settlementAccount: string;
   coveredPayment?: boolean;
   tpp?: boolean;
-  [k: string]: unknown;
 };

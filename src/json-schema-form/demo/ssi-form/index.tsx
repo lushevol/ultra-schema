@@ -6,15 +6,20 @@ import { Button, Divider, Space } from 'antd';
 import { createRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { StyledForm } from 'src/json-schema-form/components/styled-form';
+import { templates } from 'src/json-schema-form/components/templates';
 import type { RootState } from 'src/store';
-import { SchemaEditor } from './schema-editor';
-import ssiFormMockData from './ssi-form-mock.generated.json';
-import type { SsiFormJsonSchema } from './ssi-form-types.generated';
-import ssi_form_ui_schema from './ssi-form-ui-schema.json';
-import { coverPaymentLogic } from './ssi-logic';
-import { SsiFormRoot } from './style';
+import { SchemaEditor } from './components/schema-editor';
+import { ssiFormTemplates } from './components/templates';
+import { SsiFormRoot } from './components/templates/style';
+import ssi_form_ui_schema from './schema/ssi-form-ui-schema.json';
+import ssiFormMockData from './utils/ssi-form-mock.generated.json';
+import type { SsiFormJsonSchema } from './utils/ssi-form-types.generated';
+import { coverPaymentLogic, extractFieldFromEventId } from './utils/ssi-logic';
 
-const log = (type: string) => console.log.bind(console, type);
+const customTemplates = {
+  ...templates,
+  ...ssiFormTemplates,
+};
 
 export const RSJFDemo = () => {
   const schema = useSelector((state: RootState) => state.jsonSchemaForm.schema);
@@ -24,10 +29,13 @@ export const RSJFDemo = () => {
     ssiFormMockData as SsiFormJsonSchema,
   );
 
-  const handleFormDataChange = (e: IChangeEvent) => {
+  const handleFormDataChange = (e: IChangeEvent, id?: string) => {
+    console.log(e, id);
+    const touchField = extractFieldFromEventId(`${id}`, e.uiSchema);
     const newData = coverPaymentLogic({
       formData: e.formData as SsiFormJsonSchema,
       uiSchema,
+      touchField,
     });
 
     setFormData(newData.formData);
@@ -61,6 +69,7 @@ export const RSJFDemo = () => {
           uiSchema={uiSchema}
           formData={formData}
           onChange={handleFormDataChange}
+          templates={customTemplates}
         />
       </SsiFormRoot>
     </div>

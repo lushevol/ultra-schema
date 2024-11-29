@@ -9,9 +9,11 @@ const validateBicCode = (str: string) => {
 export const coverPaymentLogic = ({
   formData,
   uiSchema,
+  touchField,
 }: {
   formData: SsiFormJsonSchema;
   uiSchema: UiSchema;
+  touchField: string;
 }) => {
   const data = {
     formData,
@@ -41,4 +43,17 @@ export const coverPaymentLogic = ({
   });
 
   return newData;
+};
+
+export const extractFieldFromEventId = (id: string, uiSchema: UiSchema) => {
+  const rootId = uiSchema['ui:rootFieldId'];
+
+  if (rootId && id.startsWith(rootId)) {
+    return id
+      .split('_')
+      .filter((i) => i !== rootId)
+      .join('.');
+  }
+
+  return id;
 };

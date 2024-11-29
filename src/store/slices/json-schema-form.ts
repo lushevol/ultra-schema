@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import type { JSONSchema7 } from 'json-schema';
-import ssi_form_json_schema from '../../json-schema-form/demo/ssi-form/ssi-form-json-schema.json';
+import ssi_form_json_schema from '../../json-schema-form/demo/ssi-form/schema/ssi-form-json-schema.json';
 
 const schema = ssi_form_json_schema as unknown as JSONSchema7;
 
