@@ -1,5 +1,6 @@
+import type { FormProps } from '@rjsf/core';
 import type { ObjectFieldTemplateProps } from '@rjsf/utils';
-import { Col, Row } from 'antd';
+import { Card, Col, Row, Space } from 'antd';
 import { useCallback } from 'react';
 
 const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
@@ -12,7 +13,7 @@ const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   );
 };
 
-export const ssiFormTemplates = {
+export const ssiFormTemplates: FormProps['templates'] = {
   ObjectFieldTemplate,
 };
 
@@ -26,11 +27,14 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
   );
 
   return (
-    <div className="ssi-vostro-form-content">
+    <Space direction="vertical" className="ssi-vostro-form-content">
       {/* Primary Information */}
-      <div className="primary-section">
-        <h3>Primary Information</h3>
-        <div className="grid-2">
+      <Card
+        className="primary-section"
+        title="Primary Information"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>{getPropertyContent('ssiType')}</Col>
             <Col span={12}>{getPropertyContent('swiftType')}</Col>
@@ -39,12 +43,15 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             <Col span={12}>{getPropertyContent('coveredPayment')}</Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
-      {/* Beneficiary Information */}
-      <div className="beneficiary-section">
-        <h3>Beneficiary Information</h3>
-        <div className="grid-2">
+      {/* Beneficiary Customer */}
+      <Card
+        className="beneficiary-section"
+        title="Beneficiary Customer"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>{getPropertyContent('beneficiaryBic')}</Col>
             <Col span={12}>{getPropertyContent('beneficiaryName')}</Col>
@@ -56,12 +63,15 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             <Col span={12}>{getPropertyContent('tpp')}</Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
       {/* Account with Institution */}
-      <div className="account-institution-section">
-        <h3>Account with Institution</h3>
-        <div className="grid-2">
+      <Card
+        className="account-institution-section"
+        title="Account with Institution"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>
               {getPropertyContent('accountWithInstitutionBic')}
@@ -80,12 +90,15 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             </Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
       {/* Intermediary Institution */}
-      <div className="intermediary-institution-section">
-        <h3>Intermediary Institution</h3>
-        <div className="grid-2">
+      <Card
+        className="intermediary-institution-section"
+        title="Intermediary Institution"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>{getPropertyContent('intermediaryBic')}</Col>
             <Col span={12}>{getPropertyContent('intermediaryName')}</Col>
@@ -94,12 +107,15 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             <Col span={12}>{getPropertyContent('intermediaryCity')}</Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
       {/* Receiver's Correspondent */}
-      <div className="receiver-correspondent-section">
-        <h3>Receiver's Correspondent</h3>
-        <div className="grid-2">
+      <Card
+        className="receiver-correspondent-section"
+        title="Receiver's Correspondent"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>
               {getPropertyContent('receiversCorrespondentBic')}
@@ -118,12 +134,15 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             </Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
       {/* Ordering Customer */}
-      <div className="ordering-customer-section">
-        <h3>Ordering Customer</h3>
-        <div className="grid-2">
+      <Card
+        className="ordering-customer-section"
+        title="Ordering Customer"
+        size="small"
+      >
+        <div className="section-content">
           <Row>
             <Col span={12}>{getPropertyContent('orderCustomerBic')}</Col>
             <Col span={12}>{getPropertyContent('orderCustomerName')}</Col>
@@ -132,35 +151,40 @@ const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
             <Col span={12}>{getPropertyContent('orderCustomerCity')}</Col>
           </Row>
         </div>
-      </div>
+      </Card>
 
       {/* Additional Information */}
-      <div className="additional-info-section">
-        <h3>Additional Information</h3>
-        <div className="grid-2">
-          <div className="sender-info-subsection">
-            <h4>Sender to Receiver Information</h4>
-            <Row>
-              <Col span={6}>{getPropertyContent('senderToReceiver1')}</Col>
-              <Col span={6}>{getPropertyContent('senderToReceiver2')}</Col>
-              <Col span={6}>{getPropertyContent('senderToReceiver3')}</Col>
-              <Col span={6}>{getPropertyContent('senderToReceiver4')}</Col>
-              <Col span={6}>{getPropertyContent('senderToReceiver5')}</Col>
-              <Col span={6}>{getPropertyContent('senderToReceiver6')}</Col>
-            </Row>
-          </div>
-          <div className="remittance-info-subsection">
-            <h4>Remittance Information</h4>
-            <Row>
-              <Col span={6}>{getPropertyContent('remittanceInfomation1')}</Col>
-              <Col span={6}>{getPropertyContent('remittanceInfomation2')}</Col>
-              <Col span={6}>{getPropertyContent('remittanceInfomation3')}</Col>
-              <Col span={6}>{getPropertyContent('remittanceInfomation4')}</Col>
-            </Row>
-          </div>
+      <Card
+        className="sender-info-subsection"
+        title="Sender to Receiver Information"
+        size="small"
+      >
+        <div className="section-content">
+          <Row>
+            <Col span={6}>{getPropertyContent('senderToReceiver1')}</Col>
+            <Col span={6}>{getPropertyContent('senderToReceiver2')}</Col>
+            <Col span={6}>{getPropertyContent('senderToReceiver3')}</Col>
+            <Col span={6}>{getPropertyContent('senderToReceiver4')}</Col>
+            <Col span={6}>{getPropertyContent('senderToReceiver5')}</Col>
+            <Col span={6}>{getPropertyContent('senderToReceiver6')}</Col>
+          </Row>
         </div>
-      </div>
-    </div>
+      </Card>
+      <Card
+        className="remittance-info-subsection"
+        title="Remittance Information"
+        size="small"
+      >
+        <div className="section-content">
+          <Row>
+            <Col span={6}>{getPropertyContent('remittanceInfomation1')}</Col>
+            <Col span={6}>{getPropertyContent('remittanceInfomation2')}</Col>
+            <Col span={6}>{getPropertyContent('remittanceInfomation3')}</Col>
+            <Col span={6}>{getPropertyContent('remittanceInfomation4')}</Col>
+          </Row>
+        </div>
+      </Card>
+    </Space>
   );
 };
 

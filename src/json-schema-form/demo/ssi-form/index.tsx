@@ -59,7 +59,7 @@ export const RSJFDemo = () => {
   };
 
   return (
-    <div>
+    <div className="ssi-form-demo">
       <Space>
         <Button type="primary" onClick={programmaticSubmit}>
           Submit

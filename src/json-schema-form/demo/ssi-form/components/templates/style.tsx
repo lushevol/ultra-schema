@@ -9,6 +9,9 @@ export const SsiFormRoot = styled.div`
         > .ant-form-item-row {
           > .ant-form-item-control {
             max-width: 100%;
+            .ant-form-item {
+              margin-bottom: 6px;
+            }
           }
         }
       }
