@@ -1,12 +1,16 @@
 {
-  "intermediaryAccount": "amet quis sit",
-  "intermediaryBic": "RGWG5SCEZ8S",
-  "receiversCorrespondentAccount": "KoI2p",
-  "receiversCorrespondentBic": "MDK78NUX",
-  "remittanceInfomation1": "irure velit ",
-  "remittanceInfomation4": "id dolore dolor",
   "swiftType": "MT202",
-  "ssiType": "Secondary",
-  "settlementMeans": "Over-Account",
-  "settlementAccount": "do"
+  "ssiType": "Primary",
+  "settlementMeans": "NOS",
+  "settlementAccount": "CNO MAIN",
+  "beneficiaryBic": "SCBLCNSXXXX",
+  "beneficiaryName": "SCB CN LTD HEAD OFFICE",
+  "beneficiaryCity": "China",
+  "accountWithInstitutionBic": "SUOORESSXXX",
+  "accountWithInstitutionName": "SCB CN LTD HEAD OFFICE",
+  "orderCustomerBic": "SCBLCNSXXXX",
+  "orderCustomerName": "SCB CN LTD HEAD OFFICE",
+  "orderCustomerAccount": "400899993",
+  "orderCustomerCity": "China",
+  "orderCustomerAddress": "22F STANDARD CHARTERED TOWER SHA"
 }

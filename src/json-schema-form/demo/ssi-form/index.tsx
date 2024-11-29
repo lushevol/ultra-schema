@@ -1,7 +1,7 @@
 // import Form from '@rjsf/mui';
 import type FormType from '@rjsf/core';
 import type { IChangeEvent } from '@rjsf/core';
-import type { UiSchema } from '@rjsf/utils';
+import type { RJSFValidationError, UiSchema } from '@rjsf/utils';
 import { Button, Divider, Space } from 'antd';
 import { createRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -28,9 +28,9 @@ export const RSJFDemo = () => {
   const [formData, setFormData] = useState<SsiFormJsonSchema>(
     ssiFormMockData as SsiFormJsonSchema,
   );
+  const [readOnly, setReadOnly] = useState(false);
 
   const handleFormDataChange = (e: IChangeEvent, id?: string) => {
-    console.log(e, id);
     const touchField = extractFieldFromEventId(`${id}`, e.uiSchema);
     const newData = coverPaymentLogic({
       formData: e.formData as SsiFormJsonSchema,
@@ -42,23 +42,32 @@ export const RSJFDemo = () => {
     setUiSchema(newData.uiSchema);
   };
 
-  const handleSubmit = () => {
-    console.log(formRef.current?.submit());
+  const programmaticSubmit = () => {
+    formRef.current?.submit();
   };
 
   const handleReset = () => {
     formRef.current?.reset();
   };
 
-  console.log(formRef.current);
+  const onSubmit = (e: IChangeEvent) => {
+    console.log(e.formData);
+  };
+
+  const onError = (errors: RJSFValidationError[]) => {
+    console.log(errors);
+  };
 
   return (
     <div>
       <Space>
-        <Button type="primary" onClick={handleSubmit}>
+        <Button type="primary" onClick={programmaticSubmit}>
           Submit
         </Button>
         <Button onClick={handleReset}>Reset</Button>
+        <Button onClick={() => setReadOnly(!readOnly)}>
+          {readOnly ? 'Edit' : 'Read Only'}
+        </Button>
         <SchemaEditor />
       </Space>
       <Divider />
@@ -70,6 +79,9 @@ export const RSJFDemo = () => {
           formData={formData}
           onChange={handleFormDataChange}
           templates={customTemplates}
+          disabled={readOnly}
+          onSubmit={onSubmit}
+          onError={onError}
         />
       </SsiFormRoot>
     </div>

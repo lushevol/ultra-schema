@@ -4,7 +4,6 @@ export const transformErrors: FormProps['transformErrors'] = (
   errors,
   uiSchema,
 ) => {
-  console.log(errors, uiSchema);
   return errors.map((error) => {
     if (error.name === 'pattern') {
       error.message = 'pattern error';

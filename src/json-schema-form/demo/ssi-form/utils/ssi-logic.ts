@@ -26,9 +26,15 @@ export const coverPaymentLogic = ({
       validateBicCode(draft.formData.receiversCorrespondentBic ?? '')
     ) {
       draft.formData.coveredPayment = true;
-      draft.uiSchema.coveredPayment['ui:disabled'] = true;
+      draft.uiSchema.coveredPayment = {
+        ...draft.uiSchema.coveredPayment,
+        'ui:disabled': true,
+      };
     } else {
-      draft.uiSchema.coveredPayment['ui:disabled'] = false;
+      draft.uiSchema.coveredPayment = {
+        ...draft.uiSchema.coveredPayment,
+        'ui:disabled': false,
+      };
     }
 
     if (draft.formData.coveredPayment) {
@@ -37,7 +43,10 @@ export const coverPaymentLogic = ({
         draft.formData.settlementMeans !== 'NOS'
       ) {
         draft.formData.coveredPayment = false;
-        draft.uiSchema.coveredPayment['ui:disabled'] = false;
+        draft.uiSchema.coveredPayment = {
+          ...draft.uiSchema.coveredPayment,
+          'ui:disabled': false,
+        };
       }
     }
   });

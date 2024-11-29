@@ -17,8 +17,5 @@
   "ssiType": {
     "ui:classNames": "ssi-vostro-form-ssi-type",
     "ui:emptyValue": ""
-  },
-  "coveredPayment": {
-    "ui:disabled": false
   }
 }
