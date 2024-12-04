@@ -41,6 +41,12 @@ export enum CashflowStateEnum {
   Waiting = 'WAITING',
 }
 
+export type FilterArg = {
+  field?: InputMaybe<Scalars['String']['input']>;
+  operator?: InputMaybe<Operator>;
+  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type GenericConfig = {
   __typename?: 'GenericConfig';
   config: Scalars['String']['output'];
@@ -60,6 +66,12 @@ export enum GenericConfigChangeStatus {
   Deleted = 'DELETED',
   Updated = 'UPDATED',
 }
+
+export type GraphCashFlowNew = {
+  __typename?: 'GraphCashFlowNew';
+  pageInfo: ResultPageInfo;
+  results: Array<Maybe<SettlementSchemaRootType>>;
+};
 
 export type MutableGenericConfigInput = {
   config?: InputMaybe<Scalars['String']['input']>;
@@ -91,11 +103,30 @@ export type MutationUpdateTrackingRecordsArgs = {
   keys: Array<Scalars['String']['input']>;
 };
 
+export enum Operator {
+  Bet = 'BET',
+  Eq = 'EQ',
+  Gte = 'GTE',
+  In = 'IN',
+  Like = 'LIKE',
+  Lte = 'LTE',
+  Match = 'MATCH',
+  Ne = 'NE',
+  Notin = 'NOTIN',
+}
+
 export type Query = {
   __typename?: 'Query';
+  cashflowsNew: GraphCashFlowNew;
   genericConfig?: Maybe<GenericConfig>;
   genericConfigs?: Maybe<UltraQueryResult>;
   trackingRecords: Array<TrackingRecord>;
+};
+
+export type QueryCashflowsNewArgs = {
+  filter?: InputMaybe<Array<InputMaybe<FilterArg>>>;
+  page: Scalars['Int']['input'];
+  size: Scalars['Int']['input'];
 };
 
 export type QueryGenericConfigArgs = {
@@ -108,6 +139,14 @@ export type QueryGenericConfigsArgs = {
 
 export type QueryTrackingRecordsArgs = {
   keys: Array<Scalars['String']['input']>;
+};
+
+export type ResultPageInfo = {
+  __typename?: 'ResultPageInfo';
+  lastPage: Scalars['Boolean']['output'];
+  pageNo: Scalars['Int']['output'];
+  pageSize: Scalars['Int']['output'];
+  totalHits: Scalars['Float']['output'];
 };
 
 export type RowGroupModel = {

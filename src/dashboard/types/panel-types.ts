@@ -2,32 +2,21 @@ import type { SeriesLineOptions, SeriesPieOptions } from 'highcharts';
 import type { RatanDashboardPanelSchema } from './dashboard-types';
 
 export type PanelTableData = {
-  columns: string[];
-  rows: Record<string, string | number | boolean | null>[];
+  columns?: (string | { field: string; label: string })[];
+  rows: Array<Record<string, string | number | boolean | null>>;
 };
 
-export type PanelChartData = {
+export type PanelTimelineChartData = {
   xAxis: {
-    data: string[];
+    categories: string[];
   };
   series: {
     name: string;
-    data: string[];
+    data: number[];
   }[];
 };
 
-// export type PanelTimelineChartData = {
-//   xAxis: {
-//     data: string[];
-//   };
-//   series: {
-//     name: string;
-//     data: number[];
-//     type: 'timeline';
-//   }[];
-// };
-
-export type PanelTimelineChartData = {
+export type HighchartsLineChartType = {
   title: {
     text: '';
   };
@@ -43,6 +32,10 @@ export type PanelTimelineChartData = {
 // };
 
 export type PanelPieChartData = {
+  data: Array<{ field: string; value: number }>;
+};
+
+export type HighchartsPieChartType = {
   title: {
     text: '';
   };
@@ -52,14 +45,17 @@ export type PanelPieChartData = {
 
 export type PanelMetricData = {
   value: string;
+  unit?: 'percentage' | 'amount';
+  subTitle?: string;
 };
 
+export type RatanDashboardPanelDataTypes =
+  | PanelTableData
+  | PanelTimelineChartData
+  | PanelMetricData
+  | PanelPieChartData
+  | null;
+
 export type RatanDashboardPanel = RatanDashboardPanelSchema & {
-  data:
-    | PanelTableData
-    | PanelChartData
-    | PanelTimelineChartData
-    | PanelMetricData
-    | PanelPieChartData
-    | null;
+  data: RatanDashboardPanelDataTypes;
 };

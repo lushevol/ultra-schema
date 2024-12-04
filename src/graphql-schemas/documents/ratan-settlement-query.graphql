@@ -1,0 +1,19 @@
+query SettlementCashflowsQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
+  cashflowsNew(filter: $filter, page: $page, size: $size) {
+    results {
+      Cashflow {
+        Cashflow_Id
+        Cashflow_State
+        Cashflow_Version
+        Payment_Amount
+        Payment_Date
+      }
+    }
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}

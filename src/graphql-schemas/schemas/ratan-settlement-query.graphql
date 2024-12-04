@@ -1,0 +1,33 @@
+type Query {
+  cashflowsNew(filter: [FilterArg], page: Int!, size: Int!): GraphCashFlowNew!
+}
+
+input FilterArg {
+  field: String
+  operator: Operator
+  values: [String]
+}
+
+enum Operator {
+  EQ
+  NE
+  GTE
+  LTE
+  BET
+  IN
+  NOTIN
+  LIKE
+  MATCH
+}
+
+type GraphCashFlowNew {
+  pageInfo: ResultPageInfo!
+  results: [SettlementSchemaRootType]!
+}
+
+type ResultPageInfo {
+  totalHits: Float!
+  pageNo: Int!
+  pageSize: Int!
+  lastPage: Boolean!
+}

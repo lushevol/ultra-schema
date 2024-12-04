@@ -1,201 +1,40 @@
 {
-  "title": "My Dashboard",
+  "title": "Ratan Dashboard",
+  "description": "Real-time monitoring dashboard for Ratan system",
+  "refreshInterval": "30s",
   "panels": [
     {
       "id": "waiting-vd-today",
       "title": "Waiting VD Today",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'WAITING' and cashflow__payment_date = CURRENT_DATE",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["WAITING"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
       "layout": {
         "x": 0,
         "y": 0,
         "w": 1,
         "h": 1
-      }
-    },
-    {
-      "id": "Failed-vd-today",
-      "title": "Failed VD Today",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'FAILED' and cashflow__payment_date = CURRENT_DATE",
-      "layout": {
-        "x": 1,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "error-vd-7-days",
-      "title": "Error",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'ERROR' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
-      "layout": {
-        "x": 2,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "queued-vd-7-days",
-      "title": "Queued",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'QUEUED' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
-      "layout": {
-        "x": 3,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "hold-vd-7-days",
-      "title": "Hold",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) from cash_settlement_query_cn.cashflow_data where cashflow__cashflow_state = 'HOLD' and cashflow__payment_date between CURRENT_DATE and CURRENT_DATE + 7",
-      "layout": {
-        "x": 4,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "group-pending",
-      "title": "Group Pending",
-      "type": "metrics",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "select count(*) FROM ratan_cashflow_group_management_service.ratan_cashflow_group_message where Status = 'PENDING'",
-      "layout": {
-        "x": 5,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "stp-rate-7-days",
-      "title": "STP Rate 7 Days",
-      "type": "metrics",
-      "datasource": "postgres_dailydump",
-      "queryType": "postgresSQL",
-      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)) * 100 / nullif((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 7)), 0))) as stp_rate",
-      "layout": {
-        "x": 0,
-        "y": 1,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "stp-rate-yesterday",
-      "title": "STP Rate Yesterday",
-      "type": "metrics",
-      "datasource": "postgres_dailydump",
-      "queryType": "postgresSQL",
-      "query": "SELECT (100 - ((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where cashflow_status = 'READY' and action = 'Approve' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)) * 100 / nullif((SELECT count(distinct cashflow_id) FROM ratan_cashflow_lifecycle_service.ratan_cashflow_scbml_history where action = 'Release' and (create_time < CURRENT_DATE AND create_time > CURRENT_DATE - 1)), 0))) as stp_rate",
-      "layout": {
-        "x": 1,
-        "y": 1,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "uv-yesterday",
-      "title": "UV Yesterday",
-      "type": "metrics",
-      "datasource": "es",
-      "queryType": "esSQL",
-      "query": "SELECT COUNT(DISTINCT userId) as uniqueUserCount FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY()",
-      "layout": {
-        "x": 0,
-        "y": 2,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
-      "id": "top-3-users-yesterday",
-      "title": "Top 3 Users Yesterday",
-      "type": "table",
-      "datasource": "es",
-      "queryType": "esSQL",
-      "query": "SELECT userId, COUNT(*) as count FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Full Track Click' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 1 DAY)) AND TODAY() GROUP BY userId ORDER BY count DESC LIMIT 3",
-      "layout": {
-        "x": 2,
-        "y": 1,
-        "w": 2,
-        "h": 2
-      }
-    },
-    {
-      "id": "cashflow-volumne",
-      "title": "Cashflow Volumne",
-      "type": "table",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "SELECT COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE THEN 1 END) AS today, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '1 day' THEN 1 END) AS tomorrow, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '2 day' THEN 1 END) AS the_day_after_tomorrow FROM cash_settlement_query_cn.cashflow_data WHERE cashflow__cashflow_state not in ('NETTED', 'SETTLED', 'RELEASED', 'DEAD', 'CAMCELLED')",
-      "layout": {
-        "x": 4,
-        "y": 1,
-        "w": 3,
-        "h": 2
-      }
-    },
-    {
-      "id": "exception-volumne",
-      "title": "Exception Volumne",
-      "hide": true,
-      "type": "table",
-      "datasource": "postgres_realtime",
-      "queryType": "postgresSQL",
-      "query": "SELECT cashflow__nstp_exception, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE THEN 1 END) AS today, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '1 day' THEN 1 END) AS tomorrow, COUNT(CASE WHEN CAST(Cashflow__Payment_Date AS DATE) = CURRENT_DATE + INTERVAL '2 day' THEN 1 END) AS the_day_after_tomorrow FROM cash_settlement_query_cn.cashflow_data WHERE cashflow__cashflow_state = 'WAITING' group by cashflow__nstp_exception order by cashflow__nstp_exception",
-      "layout": {
-        "x": 8,
-        "y": 1,
-        "w": 4,
-        "h": 2
-      }
-    },
-    {
-      "id": "landing-page-view-trend-timeline",
-      "title": "Landing Page View Trending",
-      "type": "timeline",
-      "datasource": "es",
-      "queryType": "esSQL",
-      "query": "SELECT DATETIME_FORMAT(\"createdAt\", 'yyyy-MM-dd') AS day, COUNT(DISTINCT userId) as user_count FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Page View' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 7 DAY)) AND TODAY() GROUP BY day ORDER BY day ASC",
-      "layout": {
-        "x": 7,
-        "y": 1,
-        "w": 5,
-        "h": 3
-      }
-    },
-    {
-      "id": "gross-exception-fix-action",
-      "title": "Single Payment Exception Fix Action",
-      "type": "pie",
-      "datasource": "es",
-      "queryType": "esSQL",
-      "query": "SELECT attribute2 AS action, COUNT(attribute2) as action_count FROM \"single-ui-bff-analytic\" WHERE \"container\" = 'cashflow_blotter_cn' and \"name\" = 'Multi Exception Fix M/C' and \"createdAt\" BETWEEN DATETRUNC('day', (NOW() - INTERVAL 7 DAY)) AND TODAY() GROUP BY attribute2",
-      "layout": {
-        "x": 7,
-        "y": 1,
-        "w": 4,
-        "h": 3
       }
     }
   ]

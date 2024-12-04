@@ -23,17 +23,41 @@
           },
           "type": {
             "type": "string",
-            "enum": ["metrics", "chart", "table", "pie"]
-          },
-          "queryType": {
-            "type": "string",
-            "enum": ["postgresSQL", "esSQL"]
-          },
-          "datasource": {
-            "type": "string"
+            "enum": ["metric", "chart", "table", "pie", "timeline"]
           },
           "query": {
-            "type": "string"
+            "queries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "queryApi": {
+                    "type": "object",
+                    "properties": {
+                      "endpoint": {
+                        "type": "string",
+                        "enum": ["SettlementCashflowsQuery"]
+                      },
+                      "payload": {
+                        "type": "object"
+                      },
+                      "body": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "resultTransform": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "aggregation": {
+              "type": "string"
+            }
           },
           "hide": {
             "type": "boolean"

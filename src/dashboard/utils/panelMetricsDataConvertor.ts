@@ -15,11 +15,10 @@ const parseMetricFromJSON = (
 };
 
 export const convertPanelMetricsData = (
-  data: ResponseListData,
+  data: string | number | boolean,
 ): PanelMetricData => {
-  const row = data.at(0) ?? {};
   return {
-    value: parseMetricFromJSON(row),
+    value: data.toString(),
   };
 };
 
