@@ -1,6 +1,5 @@
 {
   "title": "Ratan Dashboard",
-  "description": "Real-time monitoring dashboard for Ratan system",
   "refreshInterval": "30s",
   "panels": [
     {
@@ -33,6 +32,40 @@
       "layout": {
         "x": 0,
         "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "cashflow-volume-table",
+      "title": "Cashflow Volume Table",
+      "type": "table",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": ["NETTED", "SETTLED", "CANCELLED", "RELEASED", "DEAD"]
+                  }
+                ],
+                "page": 0,
+                "size": 10
+              },
+              "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exceptions"]
+            },
+            "resultTransform": "response.results"
+          }
+        ],
+        "aggregation": "result"
+      },
+      "layout": {
+        "x": 0,
+        "y": 1,
         "w": 1,
         "h": 1
       }

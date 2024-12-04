@@ -156,14 +156,17 @@ importers:
         specifier: ^11.1.1
         version: 11.1.1
       highcharts:
-        specifier: ^12.0.0
-        version: 12.0.0
+        specifier: ^11.4.8
+        version: 11.4.8
       highcharts-react-official:
         specifier: ^3.2.1
-        version: 3.2.1(highcharts@12.0.0)(react@18.3.1)
+        version: 3.2.1(highcharts@11.4.8)(react@18.3.1)
       immer:
         specifier: ^10.1.1
         version: 10.1.1
+      jexl:
+        specifier: ^2.3.0
+        version: 2.3.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -357,6 +360,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
+      '@types/jexl':
+        specifier: ^2.3.4
+        version: 2.3.4
       '@types/json-schema':
         specifier: ^7.0.15
         version: 7.0.15
@@ -5343,6 +5349,9 @@ packages:
   '@types/jest@29.5.14':
     resolution: {integrity: sha512-ZN+4sdnLUbo8EVvVc2ao0GFW6oVrQRPn4K2lglySj7APvSrgzxHiNNK99us4WDMi57xxA2yggblIAMNhXOotLQ==}
 
+  '@types/jexl@2.3.4':
+    resolution: {integrity: sha512-3BU5DbkPvwqOeW8kZcB9Bvn5bspTFY3Lo0yBS6ephuI8kVSpCjzbGtRPbWnvdbr67tMvXDxiJRcL3fwbz/6+PQ==}
+
   '@types/js-yaml@4.0.9':
     resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
 
@@ -9143,8 +9152,8 @@ packages:
       highcharts: '>=6.0.0'
       react: '>=16.8.0'
 
-  highcharts@12.0.0:
-    resolution: {integrity: sha512-p4TF8uEEjo9hGSSQeE9RlspU+5cx/LYemDATjPmnKUQrXb/wYIYi9QgPqGeRiGkpPR6+A4MMxn0bE7DPB0CNZw==}
+  highcharts@11.4.8:
+    resolution: {integrity: sha512-5Tke9LuzZszC4osaFisxLIcw7xgNGz4Sy3Jc9pRMV+ydm6sYqsPYdU8ELOgpzGNrbrRNDRBtveoR5xS3SzneEA==}
 
   highlight.js@10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
@@ -9976,6 +9985,9 @@ packages:
     peerDependenciesMeta:
       node-notifier:
         optional: true
+
+  jexl@2.3.0:
+    resolution: {integrity: sha512-ecqln4kTWNkMwbFvTukOMDq1jy1GcPzvshhMp/s4pxU86xdLDq7HbDRa87DfMfbSAOS8V6EwvCdfs0S+w/iycA==}
 
   jimp@1.6.0:
     resolution: {integrity: sha512-YcwCHw1kiqEeI5xRpDlPPBGL2EOpBKLwO4yIBJcXWHPj5PnA5urGq0jbyhM5KoNpypQ6VboSoxc9D8HyfvngSg==}
@@ -22122,6 +22134,8 @@ snapshots:
       expect: 29.7.0
       pretty-format: 29.7.0
 
+  '@types/jexl@2.3.4': {}
+
   '@types/js-yaml@4.0.9': {}
 
   '@types/jsdom@20.0.1':
@@ -26959,12 +26973,12 @@ snapshots:
 
   hey-listen@1.0.8: {}
 
-  highcharts-react-official@3.2.1(highcharts@12.0.0)(react@18.3.1):
+  highcharts-react-official@3.2.1(highcharts@11.4.8)(react@18.3.1):
     dependencies:
-      highcharts: 12.0.0
+      highcharts: 11.4.8
       react: 18.3.1
 
-  highcharts@12.0.0: {}
+  highcharts@11.4.8: {}
 
   highlight.js@10.7.3: {}
 
@@ -28037,6 +28051,10 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+
+  jexl@2.3.0:
+    dependencies:
+      '@babel/runtime': 7.26.0
 
   jimp@1.6.0:
     dependencies:
