@@ -1,16 +1,17 @@
 import { graphql } from 'msw';
 import { HttpResponse } from 'msw';
+import Cashflows from '../cashflow';
 
 export const graphqlHandlers = [
   graphql.query('SettlementCashflowsQuery', ({ query, variables }) => {
     console.log(query, variables);
     return HttpResponse.json({
       data: {
-        results: [],
+        results: Cashflows,
         pageInfo: {
-          totalHits: 100,
-          pageNo: 1,
-          pageSize: 10,
+          totalHits: Cashflows.length,
+          pageNo: 0,
+          pageSize: 1000,
           lastPage: true,
         },
       },

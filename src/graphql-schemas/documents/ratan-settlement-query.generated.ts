@@ -34,6 +34,7 @@ export type SettlementCashflowsQueryQuery = {
         Cashflow_Version?: number;
         Payment_Amount?: number;
         Payment_Date?: string;
+        NSTP_Exception?: string;
       };
     }>;
     pageInfo: {
@@ -56,6 +57,7 @@ export const SettlementCashflowsQueryDocument = `
         Cashflow_Version
         Payment_Amount
         Payment_Date
+        NSTP_Exception
       }
     }
     pageInfo {

@@ -9,6 +9,7 @@ type SettlementCashflowType {
   Payment_Currency: String
   Payment_Amount: Float
   Payment_Date: String
+  NSTP_Exception: String
 }
 
 enum CashflowStateEnum {

@@ -7,6 +7,7 @@ query SettlementCashflowsQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
         Cashflow_Version
         Payment_Amount
         Payment_Date
+        NSTP_Exception
       }
     }
     pageInfo {

@@ -1,8 +1,9 @@
+import type { ColumnsType } from 'antd/es/table';
 import type { SeriesLineOptions, SeriesPieOptions } from 'highcharts';
 import type { RatanDashboardPanelSchema } from './dashboard-types';
 
 export type PanelTableData = {
-  columns?: (string | { field: string; label: string })[];
+  columns: ColumnsType;
   rows: Array<Record<string, string | number | boolean | null>>;
 };
 

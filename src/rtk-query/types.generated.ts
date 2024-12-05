@@ -159,6 +159,7 @@ export type SettlementCashflowType = {
   Cashflow_Id?: Maybe<Scalars['ID']['output']>;
   Cashflow_State?: Maybe<CashflowStateEnum>;
   Cashflow_Version?: Maybe<Scalars['Int']['output']>;
+  NSTP_Exception?: Maybe<Scalars['String']['output']>;
   Payment_Amount?: Maybe<Scalars['Float']['output']>;
   Payment_Currency?: Maybe<Scalars['String']['output']>;
   Payment_Date?: Maybe<Scalars['String']['output']>;

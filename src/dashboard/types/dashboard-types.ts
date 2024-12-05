@@ -7,6 +7,8 @@ export type RatanDashboardPanelSchemaType =
 export type RatanDashboardPanelSchema = {
   id: string;
   title: string;
+  subTitle?: string;
+  unit?: 'percentage' | 'amount';
   type: RatanDashboardPanelSchemaType;
   query: RatanDashboardQueryType;
   hide?: boolean;

@@ -5,18 +5,10 @@ import type { PanelTableData } from 'src/dashboard/types/panel-types';
 export const TablePanel = ({ columns, rows }: PanelTableData) => {
   return (
     <Table
-      columns={convertColumns(columns)}
+      columns={columns}
       dataSource={rows}
       pagination={false}
       size="small"
     />
   );
-};
-
-const convertColumns = (columns: string[]): ColumnsType => {
-  return columns.map((column) => ({
-    title: column,
-    dataIndex: column,
-    key: column,
-  }));
 };
