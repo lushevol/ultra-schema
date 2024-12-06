@@ -2,17 +2,16 @@ import {
   App,
   Avatar,
   ConfigProvider,
-  Divider,
   Dropdown,
+  Flex,
   Layout,
   Menu,
   Space,
   Switch,
-  Typography,
   theme,
 } from 'antd';
-import { type PropsWithChildren, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { type PropsWithChildren, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useMFESession } from 'src/authentication/hooks/useMFESession';
 
 const items = [
@@ -53,13 +52,8 @@ const userMenuItems = [
 ];
 
 export const DemoLayout = ({ children }: PropsWithChildren) => {
-  const { login, userInfo } = useMFESession();
-  useEffect(() => {
-    login({
-      username: 'admin',
-      password: 'admin',
-    });
-  }, [login]);
+  const navigate = useNavigate();
+  const { userInfo, logout } = useMFESession();
   const [themeIsDark, setThemeIsDark] = useState(false);
   return (
     <ConfigProvider
@@ -70,34 +64,46 @@ export const DemoLayout = ({ children }: PropsWithChildren) => {
       <App>
         <Layout style={{ minHeight: '100vh' }}>
           <Layout.Header style={{ display: 'flex', alignItems: 'center' }}>
-            <Typography.Title style={{ color: 'white', margin: 0 }}>
-              Shuai's POC
-            </Typography.Title>
-            <Menu
-              mode="horizontal"
-              theme="dark"
-              items={items}
-              selectedKeys={[location.pathname.substring(1)]}
-            />
-            <Space>
-              <Switch
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-                checked={themeIsDark}
-                onChange={setThemeIsDark}
+            <Flex
+              align="center"
+              justify="space-between"
+              style={{ width: '100%' }}
+            >
+              <Menu
+                mode="horizontal"
+                theme="dark"
+                items={items}
+                selectedKeys={[location.pathname.substring(1)]}
               />
-              <div className="user-info">
-                <Dropdown
-                  menu={{
-                    items: userInfo.userId ? userMenuItems : nonLoginMenuItems,
-                  }}
-                >
-                  <Avatar style={{ backgroundColor: '#87d068' }}>
-                    {userInfo.fullName ?? 'UNKNOWN'}
-                  </Avatar>
-                </Dropdown>
-              </div>
-            </Space>
+              <Space>
+                <Switch
+                  checkedChildren="Dark"
+                  unCheckedChildren="Light"
+                  checked={themeIsDark}
+                  onChange={setThemeIsDark}
+                />
+                <div className="user-info">
+                  <Dropdown
+                    menu={{
+                      items: userInfo.userId
+                        ? userMenuItems
+                        : nonLoginMenuItems,
+                      onClick: ({ key }) => {
+                        if (key === 'logout') {
+                          logout();
+                        } else if (key === 'login') {
+                          navigate('/login');
+                        }
+                      },
+                    }}
+                  >
+                    <Avatar style={{ backgroundColor: '#87d068' }}>
+                      {userInfo.fullName ?? 'UNKNOWN'}
+                    </Avatar>
+                  </Dropdown>
+                </div>
+              </Space>
+            </Flex>
           </Layout.Header>
           <Layout.Content style={{ padding: 12 }}>{children}</Layout.Content>
         </Layout>
