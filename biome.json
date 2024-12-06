@@ -32,7 +32,7 @@
     "rules": {
       "recommended": true,
       "complexity": {
-        "noForEach": "info"
+        "noForEach": "off"
       }
     },
     "ignore": ["genaisrc/*"]
