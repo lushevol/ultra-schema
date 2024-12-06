@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { useLazySettlementCashflowsQueryQuery } from 'src/graphql-schemas/documents/ratan-settlement-query.generated';
-import type { RatanDashboardQueryType } from '../types/dashboard-types';
+import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
 import { aggregationResult, transformResult } from '../utils/aggregation';
 
 export const useQueryRouter = () => {
   const [execSettlementCashflowsQuery] = useLazySettlementCashflowsQueryQuery();
   const execQuery = useCallback(
-    async (query: RatanDashboardQueryType) => {
+    async (schema: RatanDashboardPanelSchema) => {
       const result: any[] = [];
-      for (const queryItem of query.queries) {
+      for (const queryItem of schema.query.queries) {
         let response = null;
         switch (queryItem.queryApi.endpoint) {
           case 'SettlementCashflowsQuery':
@@ -26,13 +26,15 @@ export const useQueryRouter = () => {
             response: response,
             resultTransform: queryItem.resultTransform,
             previousResults: result,
+            schema,
           }),
         );
       }
 
       return await aggregationResult({
         result,
-        aggregation: query.aggregation,
+        aggregation: schema.query.aggregation,
+        schema,
       });
     },
     [execSettlementCashflowsQuery],

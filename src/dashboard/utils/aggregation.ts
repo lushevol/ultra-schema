@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import jexl from 'jexl';
-import type { JSONSchema7 } from 'json-schema';
 import type { SettlementSchemaRootType } from 'src/rtk-query/types.generated';
 import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
 import type { RatanDashboardPanelDataTypes } from '../types/panel-types';
@@ -16,7 +15,7 @@ export const transformResult = (params: {
   response: any;
   resultTransform: string;
   previousResults: any[];
-  schema: JSONSchema7;
+  schema: RatanDashboardPanelSchema;
 }) => {
   return jexl.eval(params.resultTransform, {
     response: params.response,
@@ -47,7 +46,11 @@ export const aggregationResult = ({
   result,
   aggregation,
   schema,
-}: { result: any[]; aggregation: string; schema: JSONSchema7 }) => {
+}: {
+  result: any[];
+  aggregation: string;
+  schema: RatanDashboardPanelSchema;
+}) => {
   return jexl.eval(aggregation, { result, schema });
 };
 

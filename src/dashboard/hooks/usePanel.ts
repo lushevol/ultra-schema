@@ -8,7 +8,7 @@ export const usePanelQuery = () => {
   const { execQuery } = useQueryRouter();
   const refreshPanel = useCallback(
     async (panel: RatanDashboardPanelSchema): Promise<RatanDashboardPanel> => {
-      const panelData = await execQuery(panel.query);
+      const panelData = await execQuery(panel);
       return { ...panel, data: panelDataConvertor(panel, panelData) };
     },
     [execQuery],
