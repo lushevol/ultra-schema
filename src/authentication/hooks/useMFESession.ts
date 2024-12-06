@@ -7,12 +7,10 @@ import {
   useLazyRefreshTokenQuery,
 } from 'src/rtk-query/authentication';
 import { useAppSelector } from 'src/store';
-import { setAuthToken, setRefreshToken } from 'src/store/slices/authentication';
 import type { LoginPayload } from '../types/request';
-import { parseAuthToken, parseRefreshToken } from '../utils/parse';
 
 export const useMFESession = () => {
-  const { authToken, refreshToken } = useAppSelector(
+  const { authToken, refreshToken, userInfo } = useAppSelector(
     (state) => state.authentication,
   );
   const [loginQuery] = useLazyLoginQuery();
@@ -24,11 +22,6 @@ export const useMFESession = () => {
   const login = useCallback(
     async (payload: LoginPayload) => {
       const resp = await loginQuery(payload);
-      console.log(resp);
-      const token = parseAuthToken(resp.header);
-      if (token) {
-        setAuthToken(token);
-      }
       return resp.data;
     },
     [loginQuery],
@@ -41,19 +34,11 @@ export const useMFESession = () => {
 
   const refreshSession = useCallback(async () => {
     const resp = await refreshTokenQuery(refreshToken);
-    const token = parseRefreshToken(resp.header);
-    if (token) {
-      setRefreshToken(token);
-    }
     return resp.data;
   }, [refreshTokenQuery, refreshToken]);
 
   const extendSession = useCallback(async () => {
     const resp = await extendSessionQuery(authToken);
-    const token = parseAuthToken(resp.header);
-    if (token) {
-      setAuthToken(token);
-    }
     return resp.data;
   }, [extendSessionQuery, authToken]);
 
@@ -63,6 +48,8 @@ export const useMFESession = () => {
   }, [reLoginQuery]);
 
   return {
+    userInfo,
+    authToken,
     login,
     logout,
     refreshSession,

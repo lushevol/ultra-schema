@@ -7,6 +7,7 @@ import {
 import type { LoginResponse } from 'src/authentication/types/request';
 import type { OpenSearchResult } from '../../blotter-query/types/open-search-query';
 import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import { mockLoginResponse } from '../auth';
 import Cashflows from '../cashflow';
 
 export const apiHandlers = [
@@ -28,22 +29,11 @@ export const apiHandlers = [
     });
   }),
   http.post('/auth/v2/sso/login', () => {
-    return HttpResponse.json<LoginResponse>(
-      {
-        entities: [],
-        entitlementsToken: null,
-        errorMessage: null,
-        expiration: null,
-        oud: null,
-        result: true,
-        userInfo: null,
+    return HttpResponse.json<LoginResponse>(mockLoginResponse, {
+      headers: {
+        [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
       },
-      {
-        headers: {
-          [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
-        },
-      },
-    );
+    });
   }),
   http.post('/auth/v2/sso/logout', () => {
     return HttpResponse.json<LoginResponse>({

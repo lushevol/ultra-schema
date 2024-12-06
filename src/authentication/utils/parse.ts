@@ -1,5 +1,3 @@
-import type { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { AxiosResponse } from 'axios';
 import {
   AUTH_REQUEST_HEADER,
   AUTH_REQUEST_HEADER_LOWER,
@@ -32,26 +30,22 @@ export const parseUserInfo = (response: LoginResponse): UserInfo | null => {
   return null;
 };
 
-export const parseAuthToken = (
-  response: ReturnType<typeof fetchBaseQuery>,
-): string | null => {
-  if (response) {
+export const parseAuthToken = (responseHeaders: Headers): string | null => {
+  if (responseHeaders) {
     return (
-      response.headers[AUTH_REQUEST_HEADER] ??
-      response.headers[AUTH_REQUEST_HEADER_LOWER]
+      responseHeaders.get(AUTH_REQUEST_HEADER) ??
+      responseHeaders.get(AUTH_REQUEST_HEADER_LOWER)
     );
   }
 
   return null;
 };
 
-export const parseRefreshToken = (
-  response: AxiosResponse<LoginResponse>,
-): string | null => {
-  if (response.headers) {
+export const parseRefreshToken = (responseHeaders: Headers): string | null => {
+  if (responseHeaders) {
     return (
-      response.headers[REFRESH_TOKEN_HEADER] ??
-      response.headers[REFRESH_TOKEN_HEADER_LOWER]
+      responseHeaders.get(REFRESH_TOKEN_HEADER) ??
+      responseHeaders.get(REFRESH_TOKEN_HEADER_LOWER)
     );
   }
 

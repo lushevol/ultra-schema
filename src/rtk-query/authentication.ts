@@ -51,7 +51,7 @@ const injectedRtkApi = api.injectEndpoints({
   }),
   overrideExisting: false,
 });
-export { injectedRtkApi as openSearchApi };
+export { injectedRtkApi as authenticationApi };
 
 export const {
   useLazyLoginQuery,

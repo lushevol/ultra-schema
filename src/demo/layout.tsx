@@ -1,9 +1,12 @@
 import {
   App,
+  Avatar,
   ConfigProvider,
   Divider,
+  Dropdown,
   Layout,
   Menu,
+  Space,
   Switch,
   Typography,
   theme,
@@ -35,14 +38,28 @@ const items = [
   },
 ];
 
+const nonLoginMenuItems = [
+  {
+    label: <NavLink to="/login">Login</NavLink>,
+    key: 'login',
+  },
+];
+
+const userMenuItems = [
+  {
+    label: 'Logout',
+    key: 'logout',
+  },
+];
+
 export const DemoLayout = ({ children }: PropsWithChildren) => {
-  const { login } = useMFESession();
+  const { login, userInfo } = useMFESession();
   useEffect(() => {
     login({
       username: 'admin',
       password: 'admin',
     });
-  }, []);
+  }, [login]);
   const [themeIsDark, setThemeIsDark] = useState(false);
   return (
     <ConfigProvider
@@ -56,18 +73,31 @@ export const DemoLayout = ({ children }: PropsWithChildren) => {
             <Typography.Title style={{ color: 'white', margin: 0 }}>
               Shuai's POC
             </Typography.Title>
-            <Switch
-              checkedChildren="Dark"
-              unCheckedChildren="Light"
-              checked={themeIsDark}
-              onChange={setThemeIsDark}
-            />
             <Menu
               mode="horizontal"
               theme="dark"
               items={items}
-              defaultSelectedKeys={[location.pathname.substring(1)]}
+              selectedKeys={[location.pathname.substring(1)]}
             />
+            <Space>
+              <Switch
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+                checked={themeIsDark}
+                onChange={setThemeIsDark}
+              />
+              <div className="user-info">
+                <Dropdown
+                  menu={{
+                    items: userInfo.userId ? userMenuItems : nonLoginMenuItems,
+                  }}
+                >
+                  <Avatar style={{ backgroundColor: '#87d068' }}>
+                    {userInfo.fullName ?? 'UNKNOWN'}
+                  </Avatar>
+                </Dropdown>
+              </div>
+            </Space>
           </Layout.Header>
           <Layout.Content style={{ padding: 12 }}>{children}</Layout.Content>
         </Layout>

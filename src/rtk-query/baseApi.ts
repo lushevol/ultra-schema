@@ -14,15 +14,19 @@ export const baseApi = createApi({
     prepareHeaders: (headers, api) => {
       // specify RootState here will cause error, because RootState is reasoning from the api, it will cause circular dependency
       const store = api.getState();
-      const newHeaders = {
-        ...headers,
-        [AUTH_REQUEST_HEADER]: store.authentication.authToken,
-        [REQUEST_HEADER_USER_ID]: store.authentication.userInfo.userId,
-      };
-      return newHeaders;
+      if (store.authentication.authToken) {
+        headers.set(AUTH_REQUEST_HEADER, store.authentication.authToken);
+      }
+      if (store.authentication.userInfo.userId) {
+        headers.set(
+          REQUEST_HEADER_USER_ID,
+          store.authentication.userInfo.userId,
+        );
+      }
+      return headers;
     },
   }),
   // baseQuery: axiosBaseQuery({ baseUrl: '',  }),
-  tagTypes: ['Cashflow'],
+  // tagTypes: ['Cashflow'],
   endpoints: () => ({}),
 });
