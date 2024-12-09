@@ -186,10 +186,16 @@
     "webpack-cli": "^5.1.4",
     "webpack-config-single-spa-react-ts": "^5.0.3",
     "webpack-dev-server": "^5.1.0",
-    "webpack-merge": "^6.0.1"
+    "webpack-merge": "^6.0.1",
+    "xlsx": "file:xlsx-0.20.2.tgz"
+  },
+  "overrides": {
+    "xlsx": "file:xlsx-0.20.2.tgz"
   },
   "msw": {
-    "workerDirectory": ["public"]
+    "workerDirectory": [
+      "public"
+    ]
   },
   "nx": {}
 }

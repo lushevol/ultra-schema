@@ -495,6 +495,9 @@ importers:
       webpack-merge:
         specifier: ^6.0.1
         version: 6.0.1
+      xlsx:
+        specifier: file:xlsx-0.20.2.tgz
+        version: file:xlsx-0.20.2.tgz
 
   apps/slidev:
     dependencies:
@@ -15224,6 +15227,12 @@ packages:
   xdg-basedir@5.1.0:
     resolution: {integrity: sha512-GCPAHLvrIH13+c0SuacwvRYj2SxJXQ4kaVTT5xgL3kPrz56XxkF21IGhjSE1+W0aw7gpBWRGXLCPnPby6lSpmQ==}
     engines: {node: '>=12'}
+
+  xlsx@file:xlsx-0.20.2.tgz:
+    resolution: {integrity: sha512-+nKZ39+nvK7Qq6i0PvWWRA4j/EkfWOtkP/YhMtupm+lJIiHxUrgTr1CcKv1nBk1rHtkRRQ3O2+Ih/q/sA+FXZA==, tarball: file:xlsx-0.20.2.tgz}
+    version: 0.20.2
+    engines: {node: '>=0.8'}
+    hasBin: true
 
   xlsx@https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz:
     resolution: {tarball: https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz}
@@ -34747,6 +34756,8 @@ snapshots:
 
   xdg-basedir@5.1.0:
     optional: true
+
+  xlsx@file:xlsx-0.20.2.tgz: {}
 
   xlsx@https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz: {}
 
