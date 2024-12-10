@@ -12,6 +12,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { rememberEnhancer } from 'redux-remember';
 import { graphqlApi } from 'src/rtk-query/baseGraphQLApi';
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
@@ -43,6 +44,10 @@ const store = configureStore({
       .prepend(listenerMiddlewareInstance.middleware)
       .concat(baseApi.middleware)
       .concat(graphqlApi.middleware),
+  enhancers: (gDE) =>
+    gDE().concat(
+      rememberEnhancer(window.sessionStorage, [authenticationSlice.name]),
+    ),
 });
 
 export { store };
