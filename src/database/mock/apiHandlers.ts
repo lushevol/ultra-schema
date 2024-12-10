@@ -28,14 +28,14 @@ export const apiHandlers = [
       users: [],
     });
   }),
-  http.post('/auth/v2/sso/login', () => {
+  http.post('/api/auth/v2/sso/login', () => {
     return HttpResponse.json<LoginResponse>(mockLoginResponse, {
       headers: {
         [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
       },
     });
   }),
-  http.post('/auth/v2/sso/logout', () => {
+  http.post('/api/auth/v2/sso/logout', () => {
     return HttpResponse.json<LoginResponse>({
       entities: [],
       entitlementsToken: null,
@@ -46,7 +46,7 @@ export const apiHandlers = [
       userInfo: null,
     });
   }),
-  http.post('/auth/v2/sso/refresh', () => {
+  http.post('/api/auth/v2/sso/refresh', () => {
     return HttpResponse.json<LoginResponse>(
       {
         entities: [],
@@ -64,7 +64,7 @@ export const apiHandlers = [
       },
     );
   }),
-  http.post('/auth/v2/sso/extend', () => {
+  http.post('/api/auth/v2/sso/extend', () => {
     return HttpResponse.json<LoginResponse>(
       {
         entities: [],
@@ -82,7 +82,7 @@ export const apiHandlers = [
       },
     );
   }),
-  http.post('/auth/v2/sso/relogin', () => {
+  http.post('/api/auth/v2/sso/relogin', () => {
     return HttpResponse.json<LoginResponse>(
       {
         entities: [],
