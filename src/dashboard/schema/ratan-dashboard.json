@@ -1,7 +1,45 @@
 {
   "title": "Ratan Dashboard",
-  "refreshInterval": "30s",
   "panels": [
+    {
+      "id": "waiting-vd-today",
+      "title": "Waiting VD Today",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["WAITING"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": "$CURRENT_DATE"
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
     {
       "id": "waiting-vd-today",
       "title": "Waiting VD Today",
@@ -30,7 +68,342 @@
         "aggregation": "result[0]"
       },
       "layout": {
-        "x": 0,
+        "x": 1,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "failed-vd-today",
+      "title": "Failed VD Today",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["FAILED"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": "$CURRENT_DATE"
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 1,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "error-num",
+      "title": "Error",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["ERROR"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 2,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "accounting-error-num",
+      "title": "Accounting Error",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_Accounting_Status",
+                    "operator": "IN",
+                    "values": ["SENT", "REJECTED", "MISSING_INFO"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE -- 1", "$CURRENT_DATE ++ 1"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 3,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "swift-error-num",
+      "title": "Swift Error",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_Swift_Status",
+                    "operator": "IN",
+                    "values": [
+                      "Ratan Internal Error",
+                      "FMSGW Error",
+                      "AMH Error",
+                      "MX Generation Error",
+                      "FMSRE Error",
+                      "SCPAY Error"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE -- 1", "$CURRENT_DATE ++ 1"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 4,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "queued-num",
+      "title": "Queued",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["QUEUED"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 5,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "hold-num",
+      "title": "Hold",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "EQ",
+                    "values": ["HOLD"]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Cashflow_Id"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "group-pending",
+      "title": "Group Pending",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementGroupBlotterQuery",
+              "payload": {
+                "filter": {
+                  "Status": ["PENDING"],
+                  "Group_Status": ["PENDING", "PENDING_PRE_GROUP"]
+                },
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Id"]
+            },
+            "resultTransform": "response.groupMessages.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 7,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "group-error",
+      "title": "Group Error",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementGroupBlotterQuery",
+              "payload": {
+                "filter": {
+                  "Status": ["PENDING"],
+                  "Group_Status": ["PENDING", "PENDING_PRE_GROUP"]
+                },
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Id"]
+            },
+            "resultTransform": "response.groupMessages.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 8,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    {
+      "id": "group-pending-validation",
+      "title": "Group Pending Validation",
+      "type": "metric",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementGroupBlotterQuery",
+              "payload": {
+                "filter": {
+                  "Status": ["PENDING"],
+                  "Group_Status": ["PENDING_TRADE_VALIDATION"],
+                  "Value_Date": "$CURRENT_DATE ++ 1"
+                },
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Id"]
+            },
+            "resultTransform": "response.groupMessages.pageInfo.totalHits"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 9,
         "y": 0,
         "w": 1,
         "h": 1
@@ -55,23 +428,82 @@
                       "SETTLED",
                       "CANCELLED",
                       "RELEASED",
-                      "DEAD"
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
                     ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
                   }
                 ],
                 "page": 0,
-                "size": 10
+                "size": 1000
               },
               "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exception"]
             },
-            "resultTransform": "response.results|transformCashflowVolumeAndException"
+            "resultTransform": "response.cashflowsNew.results|transformCashflowVolumeAndException"
           }
         ],
         "aggregation": "result[0]"
       },
       "layout": {
-        "x": 1,
-        "y": 0,
+        "x": 0,
+        "y": 1,
+        "w": 6,
+        "h": 2
+      }
+    },
+    {
+      "id": "top-exposure-table",
+      "title": "Top Exposure Table",
+      "type": "table",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 1"]
+                  }
+                ],
+                "page": 0,
+                "size": 1000
+              },
+              "body": [
+                "Cashflow.Payment_Amount",
+                "Cashflow.Pay_Receive_Indicator",
+                "Entity.Counterparty_SCI_FMCODE",
+                "Entity.Counterparty_Client_Type"
+              ]
+            },
+            "resultTransform": "response.cashflowsNew.results|transformTopExposure|sortRowsBy('amount')|firstRows(5)"
+          }
+        ],
+        "aggregation": "result[0]"
+      },
+      "layout": {
+        "x": 0,
+        "y": 1,
         "w": 6,
         "h": 2
       }

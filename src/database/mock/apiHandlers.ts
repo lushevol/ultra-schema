@@ -6,13 +6,13 @@ import {
 } from 'src/authentication/const/headers';
 import type { LoginResponse } from 'src/authentication/types/request';
 import type { OpenSearchResult } from '../../blotter-query/types/open-search-query';
-import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import type { ResultNew } from '../../rtk-query/types.generated';
 import { mockLoginResponse } from '../auth';
 import Cashflows from '../cashflow';
 
 export const apiHandlers = [
   http.post('/opensearch/v1/call-sdk-internal/by-queryParameterSchema', () => {
-    return HttpResponse.json<OpenSearchResult<SettlementSchemaRootType>>({
+    return HttpResponse.json<OpenSearchResult<ResultNew>>({
       totalResult: Cashflows.length,
       pageIndex: 1,
       itemsPerPage: Cashflows.length,

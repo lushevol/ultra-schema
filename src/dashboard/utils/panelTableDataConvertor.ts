@@ -1,15 +1,15 @@
 import type { ColumnsType } from 'antd/es/table';
 import type { PanelTableData } from '../types/panel-types';
 
-type SimpleArrayData = Array<Record<string, string | number | boolean>>;
+type SimpleJSON = Record<string, string | number | boolean>;
 
-export type ArrayDataWithHeader = {
+export type ArrayDataWithHeader<T extends SimpleJSON = SimpleJSON> = {
   headers: ColumnsType;
-  rows: SimpleArrayData;
+  rows: T[];
 };
 
 export const convertPanelTableData = (
-  data: SimpleArrayData | ArrayDataWithHeader,
+  data: SimpleJSON[] | ArrayDataWithHeader,
 ): PanelTableData => {
   if ('headers' in data && 'rows' in data) {
     return {

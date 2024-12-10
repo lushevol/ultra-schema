@@ -9,14 +9,14 @@ const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     login: build.query<LoginResponse, LoginPayload>({
       query: (queryArg) => ({
-        url: '/auth/v2/sso/login',
+        url: '/api/auth/v2/sso/login',
         method: 'POST',
         body: queryArg,
       }),
     }),
     logout: build.query<LoginResponse, string>({
       query: (queryArg) => ({
-        url: '/auth/v2/sso/logout',
+        url: '/api/auth/v2/sso/logout',
         method: 'POST',
         body: {
           [EXTEND_SESSION_PAYLOAD]: queryArg,
@@ -25,7 +25,7 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     refreshToken: build.query<LoginResponse, string>({
       query: (queryArg) => ({
-        url: '/auth/v2/sso/refresh',
+        url: '/api/auth/v2/sso/refresh',
         method: 'POST',
         body: {
           [EXTEND_SESSION_PAYLOAD]: queryArg,
@@ -34,7 +34,7 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     extendSession: build.query<LoginResponse, string>({
       query: (queryArg) => ({
-        url: '/auth/v2/sso/extend',
+        url: '/api/auth/v2/sso/extend',
         method: 'POST',
         body: {
           [EXTEND_SESSION_PAYLOAD]: queryArg,
@@ -43,7 +43,7 @@ const injectedRtkApi = api.injectEndpoints({
     }),
     reLogin: build.query<LoginResponse, { entities: string[] }>({
       query: (queryArg) => ({
-        url: '/auth/v2/sso/relogin',
+        url: '/api/auth/v2/sso/relogin',
         method: 'POST',
         body: queryArg,
       }),

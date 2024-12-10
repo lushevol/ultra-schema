@@ -15,7 +15,6 @@
     "json2graphql": "cat src/json-schema-form/demo/ssi-form/ssi-form-json-schema.json | npx json-to-simple-graphql-schema --baseType BaseType --prefix Prefix > src/json-schema-form/demo/ssi-form/ssi-form.generated.graphql",
     "json2ts": "json2ts -i src/json-schema-form/demo/ssi-form/ssi-form-json-schema.json -o src/json-schema-form/demo/ssi-form/ssi-form-types.generated.ts",
     "json2mock": "generate-json src/json-schema-form/demo/ssi-form/ssi-form-json-schema.json src/json-schema-form/demo/ssi-form/ssi-form-mock.generated.json",
-    "format": "biome format --write",
     "check": "biome check --fix --unsafe",
     "preview": "rsbuild preview",
     "depcheck": "npx depcheck",
@@ -188,9 +187,7 @@
     "webpack-merge": "^6.0.1"
   },
   "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "workerDirectory": ["public"]
   },
   "nx": {}
 }

@@ -1,4 +1,4 @@
-import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import type { ResultNew } from '../../rtk-query/types.generated';
 
 export type OpenSearchQuery = {
   filters: FilterModel;

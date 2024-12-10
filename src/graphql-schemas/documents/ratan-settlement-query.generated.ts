@@ -26,17 +26,41 @@ export type SettlementCashflowsQueryQuery = {
   cashflowsNew: {
     __typename?: 'GraphCashFlowNew';
     results: Array<{
-      __typename?: 'SettlementSchemaRootType';
+      __typename?: 'ResultNew';
       Cashflow?: {
-        __typename?: 'SettlementCashflowType';
-        Cashflow_Id?: string;
-        Cashflow_State?: Types.CashflowStateEnum;
-        Cashflow_Version?: number;
-        Payment_Amount?: number;
+        __typename?: 'CashflowInfoNew';
+        Payment_Amount?: string;
         Payment_Date?: string;
         NSTP_Exception?: string;
+        Pay_Receive_Indicator?: string;
+      };
+      Entity?: {
+        __typename?: 'EntityInfo';
+        Counterparty_SCI_FMCODE?: string;
+        Counterparty_Client_Type?: string;
       };
     }>;
+    pageInfo: {
+      __typename?: 'ResultPageInfo';
+      totalHits: number;
+      pageNo: number;
+      pageSize: number;
+      lastPage: boolean;
+    };
+  };
+};
+
+export type SettlementGroupBlotterQueryQueryVariables = Types.Exact<{
+  filter?: Types.InputMaybe<Types.GroupMsgReq>;
+  page: Types.Scalars['Int']['input'];
+  size: Types.Scalars['Int']['input'];
+}>;
+
+export type SettlementGroupBlotterQueryQuery = {
+  __typename?: 'Query';
+  groupMessages: {
+    __typename?: 'GroupMessages';
+    results: Array<{ __typename?: 'GroupInfo'; Id?: string }>;
     pageInfo: {
       __typename?: 'ResultPageInfo';
       totalHits: number;
@@ -52,13 +76,30 @@ export const SettlementCashflowsQueryDocument = `
   cashflowsNew(filter: $filter, page: $page, size: $size) {
     results {
       Cashflow {
-        Cashflow_Id
-        Cashflow_State
-        Cashflow_Version
         Payment_Amount
         Payment_Date
         NSTP_Exception
+        Pay_Receive_Indicator
       }
+      Entity {
+        Counterparty_SCI_FMCODE
+        Counterparty_Client_Type
+      }
+    }
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+    `;
+export const SettlementGroupBlotterQueryDocument = `
+    query SettlementGroupBlotterQuery($filter: GroupMsgReq, $page: Int!, $size: Int!) {
+  groupMessages(filter: $filter, page: $page, size: $size) {
+    results {
+      Id
     }
     pageInfo {
       totalHits
@@ -82,6 +123,15 @@ const injectedRtkApi = api.injectEndpoints({
         variables,
       }),
     }),
+    SettlementGroupBlotterQuery: build.query<
+      SettlementGroupBlotterQueryQuery,
+      SettlementGroupBlotterQueryQueryVariables
+    >({
+      query: (variables) => ({
+        document: SettlementGroupBlotterQueryDocument,
+        variables,
+      }),
+    }),
   }),
 });
 
@@ -89,4 +139,6 @@ export { injectedRtkApi as api };
 export const {
   useSettlementCashflowsQueryQuery,
   useLazySettlementCashflowsQueryQuery,
+  useSettlementGroupBlotterQueryQuery,
+  useLazySettlementGroupBlotterQueryQuery,
 } = injectedRtkApi;

@@ -34,7 +34,7 @@ export type RatanDashboardQueryType = {
 
 export type RatanDashboardSchema = {
   title: string;
-  description: string;
-  refreshInterval: string;
+  description?: string;
+  refreshInterval?: string;
   panels: RatanDashboardPanelSchema[];
 };

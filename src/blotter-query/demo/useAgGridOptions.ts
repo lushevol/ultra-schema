@@ -5,14 +5,14 @@ import type {
 } from '../../blotter-query/types/open-search-query';
 import { aggridFilterToOpenSearchFilter } from '../../blotter-query/utils/aggrid-filter-to-open-search-filter';
 import { aggridSortToOpenSearchSort } from '../../blotter-query/utils/aggrid-sort-to-open-search-sort';
-import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import type { ResultNew } from '../../rtk-query/types.generated';
 
 const DEFAULT_PAGE_SIZE = 100;
 
 export const useAgGridOptions = <T>(
   queryCashflow: (
     args: OpenSearchQuery,
-  ) => Promise<OpenSearchResult<SettlementSchemaRootType>>,
+  ) => Promise<OpenSearchResult<ResultNew>>,
   getRowId: GridOptions<T>['getRowId'],
 ) => {
   const gridOptions: GridOptions<T> = {
