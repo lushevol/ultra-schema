@@ -17,7 +17,11 @@ export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState: {
     userInfo: {
+      id: 0,
+      name: '',
       fullName: '',
+      oud: '',
+      entitlements: {},
       userId: '',
     },
     authToken: '',
@@ -56,6 +60,14 @@ export const authenticationSlice = createSlice({
       (state, action) => {
         state.authToken = '';
         state.refreshToken = '';
+        state.userInfo = {
+          id: 0,
+          name: '',
+          fullName: '',
+          oud: '',
+          entitlements: {},
+          userId: '',
+        };
       },
     );
     builder.addMatcher(
