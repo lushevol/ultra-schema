@@ -1,5 +1,4 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { rememberReducer } from 'redux-remember';
 import type { UserInfo } from 'src/authentication/types/user';
 import {
   parseRefreshToken,
@@ -98,6 +97,6 @@ export const authenticationSlice = createSlice({
 export const { setUserInfo, setAuthToken, setRefreshToken } =
   authenticationSlice.actions;
 
-export default rememberReducer(authenticationSlice.reducer);
+export default authenticationSlice.reducer;
 
 export type AuthenticationSlice = typeof authenticationSlice;
