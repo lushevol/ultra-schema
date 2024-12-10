@@ -41,40 +41,6 @@
       }
     },
     {
-      "id": "waiting-vd-today",
-      "title": "Waiting VD Today",
-      "type": "metric",
-      "query": {
-        "queries": [
-          {
-            "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
-              "payload": {
-                "filter": [
-                  {
-                    "field": "Cashflow.Cashflow_State",
-                    "operator": "EQ",
-                    "values": ["WAITING"]
-                  }
-                ],
-                "page": 0,
-                "size": 1
-              },
-              "body": ["Cashflow.Cashflow_Id"]
-            },
-            "resultTransform": "response.pageInfo.totalHits"
-          }
-        ],
-        "aggregation": "result[0]"
-      },
-      "layout": {
-        "x": 1,
-        "y": 0,
-        "w": 1,
-        "h": 1
-      }
-    },
-    {
       "id": "failed-vd-today",
       "title": "Failed VD Today",
       "type": "metric",
