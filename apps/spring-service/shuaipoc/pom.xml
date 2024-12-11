@@ -120,6 +120,11 @@
 			<artifactId>spring-graphql-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.networknt</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>1.5.4</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
