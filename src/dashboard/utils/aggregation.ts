@@ -224,6 +224,11 @@ const USD_RATE = 1;
 const transformTopExposure = (
   results: ResultNew[],
 ): ArrayDataWithHeader<TopExposureTableRowType> => {
+  if (!Array.isArray(results))
+    return {
+      headers: TopExposureTableHeader,
+      rows: [],
+    };
   return results.reduce<ArrayDataWithHeader<TopExposureTableRowType>>(
     (acc, cur) => {
       const counterpartyFMCODE = cur.Entity?.Counterparty_SCI_FMCODE ?? '';
