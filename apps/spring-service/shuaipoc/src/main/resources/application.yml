@@ -5,16 +5,16 @@ spring:
   application:
     name: shuaipoc
   datasource:
-    realtime:
-      url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/RATANONE_UAT
-      username: ratanone_ro
-      password: RatanRO@123
-      driver-class-name: org.postgresql.Driver
-    dailydump:
-      url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/ratanone_daily
-      username: ratanone_dly
-      password: RatanDaily@123
-      driver-class-name: org.postgresql.Driver
+    # realtime:
+    #   url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/RATANONE_UAT
+    #   username: ratanone_ro
+    #   password: RatanRO@123
+    #   driver-class-name: org.postgresql.Driver
+    # dailydump:
+    #   url: jdbc:postgresql://uklvaddbs097.uk.dev.net:6524/ratanone_daily
+    #   username: ratanone_dly
+    #   password: RatanDaily@123
+    #   driver-class-name: org.postgresql.Driver
     supabase:
       url: jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?user=postgres.cluxchjrvafkpncgrgps&password=HvPqznX7Q9TkNkC
 

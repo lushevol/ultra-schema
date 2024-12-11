@@ -9,17 +9,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @Configuration
 public class JdbcTemplateConfig {
 
-  @Bean(name = "realtimeJdbcTemplate")
-  public JdbcTemplate realtimeJdbcTemplate(
-      @Qualifier("realtimeDataSource") DataSource realtimeDataSource) {
-    return new JdbcTemplate(realtimeDataSource);
-  }
+  // @Bean(name = "realtimeJdbcTemplate")
+  // public JdbcTemplate realtimeJdbcTemplate(
+  //     @Qualifier("realtimeDataSource") DataSource realtimeDataSource) {
+  //   return new JdbcTemplate(realtimeDataSource);
+  // }
 
-  @Bean(name = "dailydumpJdbcTemplate")
-  public JdbcTemplate dailydumpJdbcTemplate(
-      @Qualifier("dailydumpDataSource") DataSource dailydumpDataSource) {
-    return new JdbcTemplate(dailydumpDataSource);
-  }
+  // @Bean(name = "dailydumpJdbcTemplate")
+  // public JdbcTemplate dailydumpJdbcTemplate(
+  //     @Qualifier("dailydumpDataSource") DataSource dailydumpDataSource) {
+  //   return new JdbcTemplate(dailydumpDataSource);
+  // }
 
   @Bean(name = "supabaseJdbcTemplate")
   public JdbcTemplate supabaseJdbcTemplate(
