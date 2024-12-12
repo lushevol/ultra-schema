@@ -13,6 +13,7 @@ import {
 import { type PropsWithChildren, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useMFESession } from 'src/authentication/hooks/useMFESession';
+import './main.css';
 
 const items = [
   {
