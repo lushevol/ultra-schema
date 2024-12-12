@@ -11,6 +11,7 @@ import { useMFESession } from 'src/authentication/hooks/useMFESession';
 import BlotterQueryDemo from 'src/blotter-query/demo';
 import DashboardDemo from 'src/dashboard/demo';
 import { GenericConfigExamples } from 'src/generic-config/examples';
+import JsonSchemaDemo from 'src/json-schema-form/demo/json-schema-demo';
 import { RSJFDemo } from 'src/json-schema-form/demo/ssi-form';
 import { DemoLayout } from './layout';
 
@@ -26,6 +27,14 @@ export const DemoRouter = () => {
             element={
               <RequireAuth>
                 <DashboardDemo />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/json-schema-demo"
+            element={
+              <RequireAuth>
+                <JsonSchemaDemo />
               </RequireAuth>
             }
           />

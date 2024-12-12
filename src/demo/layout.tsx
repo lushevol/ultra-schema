@@ -16,6 +16,10 @@ import { useMFESession } from 'src/authentication/hooks/useMFESession';
 
 const items = [
   {
+    label: <NavLink to="/json-schema-demo">JSON Schema</NavLink>,
+    key: 'json-schema-demo',
+  },
+  {
     label: <NavLink to="/rjsf-demo">SSI Form</NavLink>,
     key: 'rjsf-demo',
   },

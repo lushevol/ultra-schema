@@ -1,4 +1,4 @@
-import { Card, Space } from 'antd';
+import { Space } from 'antd';
 import useDashboard from 'src/dashboard/hooks/useDashboard';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
 import { DnD } from '../dnd';
@@ -13,7 +13,7 @@ const DashboardCanvas = ({
 }) => {
   const { title, description, refreshInterval, panels } = useDashboard(schema);
   return (
-    <Card className="dashboard-root">
+    <div className="dashboard-root">
       <Space>
         {title && <h1>{title}</h1>}
         {description && <p>{description}</p>}
@@ -21,7 +21,7 @@ const DashboardCanvas = ({
         <SchemaEditor />
       </Space>
       <DnD panels={panels}>{children}</DnD>
-    </Card>
+    </div>
   );
 };
 

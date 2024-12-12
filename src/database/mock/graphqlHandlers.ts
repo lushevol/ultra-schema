@@ -4,7 +4,6 @@ import Cashflows from '../cashflow';
 
 export const graphqlHandlers = [
   graphql.query('SettlementCashflowsQuery', ({ query, variables }) => {
-    console.log(query, variables);
     return HttpResponse.json({
       data: {
         results: Cashflows,
