@@ -10,6 +10,7 @@ export const NotificationCenterEntry = () => {
   const [unreadNotifyCount, setUnreadNotifyCount] = useState(0);
   const [openBoard, setOpenBoard] = useState(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     nc.notify.subject$.subscribe(() => {
       setUnreadNotifyCount((i) => i + 1);

@@ -1,1 +1,1 @@
-export * from './lib/ratan-notification';
+export * from './notification-center';
