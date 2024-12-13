@@ -1,0 +1,32 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "exceptionCode": { "type": "string" },
+      "operationLevel": {
+        "type": "string",
+        "enum": ["MAKER_ONLY", "CHECKER_ONLY", "MAKER_CHECKER"]
+      },
+      "exceptionCategory": {
+        "type": "string",
+        "enum": ["NSTP", "HIGH_RISK_NSTP", "OTHER"]
+      },
+      "bulkEligible": { "type": "boolean" }
+    },
+    "required": [
+      "exceptionCode",
+      "operationLevel",
+      "exceptionCategory",
+      "bulkEligible"
+    ]
+  },
+  "minItems": 1,
+  "maxItems": 2,
+  "allOf": [
+    {
+      "type": "array",
+      "uniqueItems": true
+    }
+  ]
+}
