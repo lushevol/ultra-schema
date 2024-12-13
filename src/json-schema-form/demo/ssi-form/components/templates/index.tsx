@@ -1,7 +1,7 @@
 import type { FormProps } from '@rjsf/core';
 import type { ObjectFieldTemplateProps } from '@rjsf/utils';
 import { Card, Col, Row, Space } from 'antd';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   return (
@@ -18,12 +18,21 @@ export const ssiFormTemplates: FormProps['templates'] = {
 };
 
 const SsiVostroFormLayout = (props: ObjectFieldTemplateProps) => {
+  const propertiesNameContentMap = useMemo(() => {
+    return props.properties.reduce(
+      (acc, property) => {
+        acc[property.name] = property.content;
+        return acc;
+      },
+      {} as Record<string, React.ReactNode>,
+    );
+  }, [props.properties]);
+
   const getPropertyContent = useCallback(
     (name: string) => {
-      const property = props.properties.find((p) => p.name === name);
-      return property ? property.content : null;
+      return propertiesNameContentMap[name];
     },
-    [props.properties],
+    [propertiesNameContentMap],
   );
 
   return (
