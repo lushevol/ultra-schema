@@ -43,12 +43,6 @@ export default function JsonSchemaDemo() {
             extensions={[langs.json()]}
             height="500px"
             className="border rounded-lg shadow-sm"
-            basicSetup={{
-              foldGutter: false,
-              dropCursor: false,
-              allowMultipleSelections: false,
-              indentOnInput: false,
-            }}
           />
         </Col>
         <Col span={12}>
@@ -61,12 +55,6 @@ export default function JsonSchemaDemo() {
                 extensions={[langs.json()]}
                 height="200px"
                 className="border rounded-lg shadow-sm"
-                basicSetup={{
-                  foldGutter: false,
-                  dropCursor: false,
-                  allowMultipleSelections: false,
-                  indentOnInput: false,
-                }}
               />
             </div>
             {isValid !== null && (

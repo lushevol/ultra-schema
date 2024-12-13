@@ -1,6 +1,6 @@
-import Form from '@rjsf/antd';
-import validator from '@rjsf/validator-ajv8';
-import { Button, Drawer, Input } from 'antd';
+import { langs } from '@uiw/codemirror-extensions-langs';
+import CodeMirror from '@uiw/react-codemirror';
+import { Button, Drawer } from 'antd';
 import type { JSONSchema7 } from 'json-schema';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'src/store';
@@ -20,11 +20,14 @@ export const SchemaEditor = () => {
         onClose={() => setOpen(false)}
         open={open}
       >
-        <Input.TextArea
+        <CodeMirror
           value={schemaText}
-          onChange={(e) => setSchemaText(e.target.value)}
-          rows={50}
+          onChange={(value) => setSchemaText(value)}
+          extensions={[langs.json()]}
+          height="550px"
+          className="border rounded-lg shadow-sm"
         />
+        <br />
         <Button
           type="primary"
           onClick={() => {
