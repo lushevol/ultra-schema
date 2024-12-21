@@ -14,7 +14,7 @@ export const SchemaEditor = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button type="text" onClick={() => setOpen(true)}>
         Open Schema Editor
       </Button>
       <Drawer

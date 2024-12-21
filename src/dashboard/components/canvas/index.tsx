@@ -15,9 +15,11 @@ const DashboardCanvas = ({
   return (
     <div className="dashboard-root">
       <Space>
-        {title && <h1>{title}</h1>}
-        {description && <p>{description}</p>}
-        {refreshInterval && <p>{refreshInterval}</p>}
+        {title && <h1 className="text-2xl font-bold">{title}</h1>}
+        {description && <p className="text-gray-600">{description}</p>}
+        {refreshInterval && (
+          <p className="text-sm text-gray-500">{refreshInterval}</p>
+        )}
         <SchemaEditor />
       </Space>
       <DnD panels={panels}>{children}</DnD>

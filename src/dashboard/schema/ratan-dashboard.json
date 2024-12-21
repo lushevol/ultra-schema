@@ -1,15 +1,17 @@
 {
   "title": "Ratan Dashboard",
+  "refreshInterval": 60,
   "panels": [
     {
       "id": "waiting-vd-today",
       "title": "Waiting VD Today",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -44,11 +46,12 @@
       "id": "failed-vd-today",
       "title": "Failed VD Today",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -83,11 +86,12 @@
       "id": "error-num",
       "title": "Error",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -122,11 +126,12 @@
       "id": "accounting-error-num",
       "title": "Accounting Error",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -161,11 +166,12 @@
       "id": "swift-error-num",
       "title": "Swift Error",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -207,11 +213,12 @@
       "id": "queued-num",
       "title": "Queued",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -246,11 +253,12 @@
       "id": "hold-num",
       "title": "Hold",
       "type": "metric",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -285,6 +293,7 @@
       "id": "group-pending",
       "title": "Group Pending",
       "type": "metric",
+      "domain": "SettlementGroupBlotter",
       "query": {
         "queries": [
           {
@@ -316,6 +325,7 @@
       "id": "group-error",
       "title": "Group Error",
       "type": "metric",
+      "domain": "SettlementGroupBlotter",
       "query": {
         "queries": [
           {
@@ -347,6 +357,7 @@
       "id": "group-pending-validation",
       "title": "Group Pending Validation",
       "type": "metric",
+      "domain": "SettlementGroupBlotter",
       "query": {
         "queries": [
           {
@@ -379,11 +390,12 @@
       "id": "cashflow-volume-table",
       "title": "Cashflow Volume Table",
       "type": "table",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {
@@ -426,11 +438,12 @@
       "id": "top-exposure-table",
       "title": "Top Exposure Table",
       "type": "table",
+      "domain": "SettlementCashflowBlotter",
       "query": {
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowsQuery",
+              "endpoint": "SettlementCashflowBlotterQuery",
               "payload": {
                 "filter": [
                   {

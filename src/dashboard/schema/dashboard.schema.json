@@ -8,7 +8,59 @@
       "type": "string"
     },
     "refreshInterval": {
-      "type": "string"
+      "type": "number"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "globalFilters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string",
+                "enum": ["SettlementCashflowBlotter", "SettlementGroupBlotter"]
+              },
+              "filter": {
+                "type": "object",
+                "properties": {
+                  "field": {
+                    "type": "string"
+                  },
+                  "operator": {
+                    "type": "string",
+                    "enum": ["IN", "NOTIN", "EQ", "NE", "GT", "LT"]
+                  },
+                  "values": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deferredData": {
+          "type": "object",
+          "properties": {
+            "spotRateMap": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["api"]
+                },
+                "endpoint": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "panels": {
       "type": "array",
@@ -25,6 +77,10 @@
             "type": "string",
             "enum": ["metric", "chart", "table", "pie", "timeline"]
           },
+          "domain": {
+            "type": "string",
+            "enum": ["SettlementCashflowBlotter", "SettlementGroupBlotter"]
+          },
           "query": {
             "type": "object",
             "properties": {
@@ -39,7 +95,7 @@
                         "endpoint": {
                           "type": "string",
                           "enum": [
-                            "SettlementCashflowsQuery",
+                            "SettlementCashflowBlotterQuery",
                             "SettlementGroupBlotterQuery"
                           ]
                         },
