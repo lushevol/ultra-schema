@@ -7,6 +7,7 @@ import { createRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { StyledForm } from 'src/json-schema-form/components/styled-form';
 import { templates } from 'src/json-schema-form/components/templates';
+import { extractFieldFromEventId } from 'src/json-schema-form/utils/rjsf-utils';
 import type { RootState } from 'src/store';
 import { SchemaEditor } from './components/schema-editor';
 import { ssiFormTemplates } from './components/templates';
@@ -14,7 +15,7 @@ import { SsiFormRoot } from './components/templates/style';
 import ssi_form_ui_schema from './schema/ssi-form-ui-schema.json';
 import ssiFormMockData from './utils/ssi-form-mock.generated.json';
 import type { SsiFormJsonSchema } from './utils/ssi-form-types.generated';
-import { coverPaymentLogic, extractFieldFromEventId } from './utils/ssi-logic';
+import { coverPaymentLogic } from './utils/ssi-logic';
 
 const customTemplates = {
   ...templates,
@@ -70,7 +71,7 @@ export const RSJFDemo = () => {
         </Button>
         <SchemaEditor />
       </Space>
-      <Divider />
+      <br />
       <SsiFormRoot className="ssi-form-root">
         <StyledForm
           ref={formRef}

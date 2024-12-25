@@ -5,8 +5,9 @@
       "Cashflow_Version": 1,
       "Cashflow_State": "WAITING",
       "Payment_Currency": "CNO",
-      "Payment_Date": "2022-01-01",
-      "Payment_Amount": 1000
+      "Payment_Date": "2024-12-05",
+      "Payment_Amount": 1000,
+      "NSTP_Exception": "Pending Affirmation; Missing Vostro"
     }
   },
   {
@@ -15,8 +16,9 @@
       "Cashflow_Version": 1,
       "Cashflow_State": "WAITING",
       "Payment_Currency": "CNO",
-      "Payment_Date": "2022-01-01",
-      "Payment_Amount": 1000
+      "Payment_Date": "2024-12-06",
+      "Payment_Amount": 1000,
+      "NSTP_Exception": "Pending Affirmation; Missing Nostro"
     }
   },
   {
@@ -25,8 +27,9 @@
       "Cashflow_Version": 1,
       "Cashflow_State": "WAITING",
       "Payment_Currency": "CNO",
-      "Payment_Date": "2022-01-01",
-      "Payment_Amount": 1000
+      "Payment_Date": "2024-12-07",
+      "Payment_Amount": 1000,
+      "NSTP_Exception": "Pending Affirmation; Missing Nostro"
     }
   },
   {
@@ -35,8 +38,9 @@
       "Cashflow_Version": 1,
       "Cashflow_State": "WAITING",
       "Payment_Currency": "CNO",
-      "Payment_Date": "2022-01-01",
-      "Payment_Amount": 1000
+      "Payment_Date": "2024-12-08",
+      "Payment_Amount": 1000,
+      "NSTP_Exception": "Pending Affirmation; Missing Nostro"
     }
   },
   {
@@ -45,8 +49,9 @@
       "Cashflow_Version": 1,
       "Cashflow_State": "WAITING",
       "Payment_Currency": "CNO",
-      "Payment_Date": "2022-01-01",
-      "Payment_Amount": 1000
+      "Payment_Date": "2024-12-09",
+      "Payment_Amount": 1000,
+      "NSTP_Exception": "Pending Affirmation; Missing Nostro"
     }
   }
 ]

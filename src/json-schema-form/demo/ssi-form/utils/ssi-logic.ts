@@ -2,6 +2,12 @@ import type { UiSchema } from '@rjsf/utils';
 import { produce } from 'immer';
 import type { SsiFormJsonSchema } from './ssi-form-types.generated';
 
+type FormChangeProps = {
+  formData: SsiFormJsonSchema;
+  uiSchema: UiSchema;
+  touchField: string;
+};
+
 const validateBicCode = (str: string) => {
   return /^(([A-Z0-9]{8})|([A-Z0-9]{11}))$/.test(str);
 };
@@ -10,11 +16,7 @@ export const coverPaymentLogic = ({
   formData,
   uiSchema,
   touchField,
-}: {
-  formData: SsiFormJsonSchema;
-  uiSchema: UiSchema;
-  touchField: string;
-}) => {
+}: FormChangeProps) => {
   const data = {
     formData,
     uiSchema,
@@ -54,15 +56,8 @@ export const coverPaymentLogic = ({
   return newData;
 };
 
-export const extractFieldFromEventId = (id: string, uiSchema: UiSchema) => {
-  const rootId = uiSchema['ui:rootFieldId'];
-
-  if (rootId && id.startsWith(rootId)) {
-    return id
-      .split('_')
-      .filter((i) => i !== rootId)
-      .join('.');
-  }
-
-  return id;
-};
+export const autoPopulateLogic = ({
+  formData,
+  uiSchema,
+  touchField,
+}: FormChangeProps) => {};

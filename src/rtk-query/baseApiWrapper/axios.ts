@@ -1,5 +1,6 @@
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
 import axios, { type AxiosError, type AxiosRequestConfig } from 'axios';
+import { REQUEST_HEADER_USER_ID } from 'src/authentication/const/headers';
 import type { RootState } from 'src/store';
 
 export const axiosBaseQuery =
@@ -21,7 +22,7 @@ export const axiosBaseQuery =
       const store = api.getState() as RootState;
       const newHeaders = {
         ...headers,
-        'x-ratan-user-id': store.authentication.userId,
+        [REQUEST_HEADER_USER_ID]: store.authentication.userInfo.id,
       };
       const result = await axios({
         url: baseUrl + url,

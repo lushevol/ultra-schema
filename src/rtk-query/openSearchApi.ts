@@ -3,11 +3,11 @@ import type {
   OpenSearchResult,
 } from '../blotter-query/types/open-search-query';
 import { baseApi as api } from './baseApi';
-import type { SettlementSchemaRootType } from './types.generated';
+import type { ResultNew } from './types.generated';
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
     queryCashflowBlotter: build.query<
-      OpenSearchResult<SettlementSchemaRootType>,
+      OpenSearchResult<ResultNew>,
       OpenSearchQuery
     >({
       query: (queryArg) => ({

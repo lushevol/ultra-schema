@@ -1,23 +1,16 @@
 export type RatanDashboardPanelSchemaType =
   | 'table'
-  | 'chart'
-  | 'metrics'
+  | 'metric'
   | 'pie'
   | 'timeline';
-export type RatanDashboardDataSource =
-  | 'es'
-  | 'postgres_realtime'
-  | 'postgres_dailydump';
-export type RatanDashboardQueryType = 'esSQL' | 'postgresSQL';
 
 export type RatanDashboardPanelSchema = {
   id: string;
   title: string;
-  description: string;
+  subTitle?: string;
+  unit?: 'percentage' | 'amount';
   type: RatanDashboardPanelSchemaType;
-  datasource: RatanDashboardDataSource;
-  queryType: RatanDashboardQueryType;
-  query: string;
+  query: RatanDashboardQueryType;
   hide?: boolean;
   layout: {
     x: number;
@@ -27,9 +20,21 @@ export type RatanDashboardPanelSchema = {
   };
 };
 
+export type RatanDashboardQueryType = {
+  queries: {
+    queryApi: {
+      endpoint: string;
+      payload: Record<string, unknown>;
+      body: string[];
+    };
+    resultTransform: string;
+  }[];
+  aggregation: string;
+};
+
 export type RatanDashboardSchema = {
   title: string;
-  description: string;
-  refreshInterval: string;
+  description?: string;
+  refreshInterval?: number;
   panels: RatanDashboardPanelSchema[];
 };

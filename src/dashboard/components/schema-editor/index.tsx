@@ -1,6 +1,6 @@
 import Form from '@rjsf/antd';
 import validator from '@rjsf/validator-ajv8';
-import { Button, Drawer } from 'antd';
+import { Button, Divider, Drawer } from 'antd';
 import type { JSONSchema7 } from 'json-schema';
 import { useState } from 'react';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
@@ -14,7 +14,7 @@ export const SchemaEditor = () => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)}>
+      <Button type="text" onClick={() => setOpen(true)}>
         Open Schema Editor
       </Button>
       <Drawer
@@ -23,6 +23,18 @@ export const SchemaEditor = () => {
         onClose={() => setOpen(false)}
         open={open}
       >
+        <Button
+          onClick={() => {
+            dispath(
+              setDashboardSchema(
+                JSON.parse(JSON.stringify(schema)) as RatanDashboardSchema,
+              ),
+            );
+          }}
+        >
+          Refresh
+        </Button>
+        <Divider />
         <Form
           schema={dashboardSchemaJSONSchema as JSONSchema7}
           formData={schema}

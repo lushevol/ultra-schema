@@ -2,7 +2,7 @@ import type { GridReadyEvent } from '@ag-grid-community/core';
 import MyAgGridRoot from '../../aggrid/components/grid-root';
 import FieldsSchemas from '../../database/fields-schema';
 import { useLazyQueryCashflowBlotterQuery } from '../../rtk-query/openSearchApi';
-import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import type { ResultNew } from '../../rtk-query/types.generated';
 import { ratanFields2AgGridCol } from '../../schema-utils/ratan-fields-ag-grid';
 import { useAppDispatch } from '../../store';
 import { setAggridEvent } from '../../store/slices/aggrid';
@@ -17,7 +17,7 @@ export const AgGridWithSchema = () => {
   };
   const [queryCashflow] = useLazyQueryCashflowBlotterQuery();
 
-  const gridOptions = useAgGridOptions<SettlementSchemaRootType>(
+  const gridOptions = useAgGridOptions<ResultNew>(
     (args) => queryCashflow(args).unwrap(),
     ({ data }) => `${data.Cashflow?.Cashflow_Id}`,
   );

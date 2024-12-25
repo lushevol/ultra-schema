@@ -1,0 +1,40 @@
+query SettlementCashflowBlotterQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
+  cashflowsNew(filter: $filter, page: $page, size: $size) {
+    results {
+      Cashflow {
+        Payment_Amount
+        Payment_Date
+        NSTP_Exception
+        Pay_Receive_Indicator
+      }
+      Entity {
+        Counterparty_SCI_FMCODE
+        Counterparty_Client_Type
+      }
+    }
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+
+query SettlementGroupBlotterQuery(
+  $filter: GroupMsgReq
+  $page: Int!
+  $size: Int!
+) {
+  groupMessages(filter: $filter, page: $page, size: $size) {
+    results {
+      Id
+    }
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}

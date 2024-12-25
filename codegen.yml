@@ -1,6 +1,7 @@
 overwrite: true
 # schema: './src/database/business-schema.js'
 schema:
+  - 'src/graphql-schemas/schemas/*.graphqls'
   - 'src/graphql-schemas/schemas/*.graphql'
   - 'apps/spring-service/shuaipoc/src/main/resources/graphql/*.graphql'
 documents: 'src/graphql-schemas/documents/*.graphql'

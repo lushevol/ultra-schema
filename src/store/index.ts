@@ -12,6 +12,7 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { rememberEnhancer, rememberReducer } from 'redux-remember';
 import { graphqlApi } from 'src/rtk-query/baseGraphQLApi';
 import { baseApi } from '../rtk-query/baseApi';
 import { aggridSlice } from './slices/aggrid';
@@ -24,7 +25,7 @@ const listenerMiddlewareInstance = createListenerMiddleware({
 });
 
 const store = configureStore({
-  reducer: {
+  reducer: rememberReducer({
     [aggridSlice.name]: aggridSlice.reducer,
     [dashboardSlice.name]: dashboardSlice.reducer,
     [jsonSchemaFormSlice.name]: jsonSchemaFormSlice.reducer,
@@ -32,7 +33,7 @@ const store = configureStore({
     [authenticationSlice.name]: authenticationSlice.reducer,
     [baseApi.reducerPath]: baseApi.reducer,
     [graphqlApi.reducerPath]: graphqlApi.reducer,
-  },
+  }),
   middleware: (gDM) =>
     gDM({
       serializableCheck: {
@@ -43,6 +44,10 @@ const store = configureStore({
       .prepend(listenerMiddlewareInstance.middleware)
       .concat(baseApi.middleware)
       .concat(graphqlApi.middleware),
+  enhancers: (gDE) =>
+    gDE().concat(
+      rememberEnhancer(window.sessionStorage, [authenticationSlice.name]),
+    ),
 });
 
 export { store };

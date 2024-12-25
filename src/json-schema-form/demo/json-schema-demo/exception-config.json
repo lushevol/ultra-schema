@@ -1,0 +1,8 @@
+[
+  {
+    "exceptionCode": "SWAP_AGENT",
+    "operationLevel": "MAKER_ONLY",
+    "exceptionCategory": "NSTP",
+    "bulkEligible": true
+  }
+]

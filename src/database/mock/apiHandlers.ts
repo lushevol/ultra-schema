@@ -1,46 +1,23 @@
 import { http, HttpResponse } from 'msw';
 import type { WhoIsUsingResponse } from 'packages/ratan-track-using/src';
-import type {
-  ResponseESListData,
-  ResponseListData,
-} from 'src/dashboard/types/query-and-respond-types';
+import {
+  AUTH_REQUEST_HEADER,
+  REFRESH_TOKEN_HEADER,
+} from 'src/authentication/const/headers';
+import type { LoginResponse } from 'src/authentication/types/request';
 import type { OpenSearchResult } from '../../blotter-query/types/open-search-query';
-import type { SettlementSchemaRootType } from '../../rtk-query/types.generated';
+import type { ResultNew } from '../../rtk-query/types.generated';
+import { mockLoginResponse } from '../auth';
 import Cashflows from '../cashflow';
 
 export const apiHandlers = [
   http.post('/opensearch/v1/call-sdk-internal/by-queryParameterSchema', () => {
-    return HttpResponse.json<OpenSearchResult<SettlementSchemaRootType>>({
+    return HttpResponse.json<OpenSearchResult<ResultNew>>({
       totalResult: Cashflows.length,
       pageIndex: 1,
       itemsPerPage: Cashflows.length,
       pagingCursors: null,
       results: Cashflows,
-    });
-  }),
-  http.post('/dashboard/query/pg/real_time', () => {
-    return HttpResponse.json<ResponseListData>([
-      {
-        id: '1',
-        name: 'Cashflow 1',
-      },
-    ]);
-  }),
-  http.post('/dashboard/query/pg/daily_dump', () => {
-    return HttpResponse.json<ResponseListData>([
-      {
-        id: '1',
-        name: 'Cashflow 1',
-      },
-    ]);
-  }),
-  http.post('/dashboard/query/es', () => {
-    return HttpResponse.json<ResponseESListData>({
-      columns: [
-        { name: 'id', type: 'string' },
-        { name: 'name', type: 'string' },
-      ],
-      rows: [['1', 'Cashflow 1']],
     });
   }),
   http.post('/track-using/im-using', () => {
@@ -50,5 +27,77 @@ export const apiHandlers = [
     return HttpResponse.json<WhoIsUsingResponse>({
       users: [],
     });
+  }),
+  http.post('/api/auth/v2/sso/login', () => {
+    return HttpResponse.json<LoginResponse>(mockLoginResponse, {
+      headers: {
+        [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
+      },
+    });
+  }),
+  http.post('/api/auth/v2/sso/logout', () => {
+    return HttpResponse.json<LoginResponse>({
+      entities: [],
+      entitlementsToken: null,
+      errorMessage: null,
+      expiration: null,
+      oud: null,
+      result: true,
+      userInfo: null,
+    });
+  }),
+  http.post('/api/auth/v2/sso/refresh', () => {
+    return HttpResponse.json<LoginResponse>(
+      {
+        entities: [],
+        entitlementsToken: null,
+        errorMessage: null,
+        expiration: null,
+        oud: null,
+        result: true,
+        userInfo: null,
+      },
+      {
+        headers: {
+          [REFRESH_TOKEN_HEADER]: `JWT_TOKEN REFRESH ${Math.random()}`,
+        },
+      },
+    );
+  }),
+  http.post('/api/auth/v2/sso/extend', () => {
+    return HttpResponse.json<LoginResponse>(
+      {
+        entities: [],
+        entitlementsToken: null,
+        errorMessage: null,
+        expiration: null,
+        oud: null,
+        result: true,
+        userInfo: null,
+      },
+      {
+        headers: {
+          [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
+        },
+      },
+    );
+  }),
+  http.post('/api/auth/v2/sso/relogin', () => {
+    return HttpResponse.json<LoginResponse>(
+      {
+        entities: [],
+        entitlementsToken: null,
+        errorMessage: null,
+        expiration: null,
+        oud: null,
+        result: true,
+        userInfo: null,
+      },
+      {
+        headers: {
+          [AUTH_REQUEST_HEADER]: `JWT_TOKEN AUTH ${Math.random()}`,
+        },
+      },
+    );
   }),
 ];
