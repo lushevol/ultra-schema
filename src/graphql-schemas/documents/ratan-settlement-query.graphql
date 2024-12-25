@@ -1,4 +1,4 @@
-query SettlementCashflowsQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
+query SettlementCashflowBlotterQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
   cashflowsNew(filter: $filter, page: $page, size: $size) {
     results {
       Cashflow {

@@ -13,7 +13,7 @@ import type * as Types from '../../rtk-query/types.generated';
 
 import { api } from 'src/rtk-query/baseGraphQLApi';
 module.hot?.accept();
-export type SettlementCashflowsQueryQueryVariables = Types.Exact<{
+export type SettlementCashflowBlotterQueryQueryVariables = Types.Exact<{
   filter?: Types.InputMaybe<
     Array<Types.InputMaybe<Types.FilterArg>> | Types.InputMaybe<Types.FilterArg>
   >;
@@ -21,7 +21,7 @@ export type SettlementCashflowsQueryQueryVariables = Types.Exact<{
   size: Types.Scalars['Int']['input'];
 }>;
 
-export type SettlementCashflowsQueryQuery = {
+export type SettlementCashflowBlotterQueryQuery = {
   __typename?: 'Query';
   cashflowsNew: {
     __typename?: 'GraphCashFlowNew';
@@ -71,8 +71,8 @@ export type SettlementGroupBlotterQueryQuery = {
   };
 };
 
-export const SettlementCashflowsQueryDocument = `
-    query SettlementCashflowsQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
+export const SettlementCashflowBlotterQueryDocument = `
+    query SettlementCashflowBlotterQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
   cashflowsNew(filter: $filter, page: $page, size: $size) {
     results {
       Cashflow {
@@ -114,12 +114,12 @@ export const SettlementGroupBlotterQueryDocument = `
 const injectedRtkApi = api.injectEndpoints({
   overrideExisting: module.hot?.status() === 'apply',
   endpoints: (build) => ({
-    SettlementCashflowsQuery: build.query<
-      SettlementCashflowsQueryQuery,
-      SettlementCashflowsQueryQueryVariables
+    SettlementCashflowBlotterQuery: build.query<
+      SettlementCashflowBlotterQueryQuery,
+      SettlementCashflowBlotterQueryQueryVariables
     >({
       query: (variables) => ({
-        document: SettlementCashflowsQueryDocument,
+        document: SettlementCashflowBlotterQueryDocument,
         variables,
       }),
     }),
@@ -137,8 +137,8 @@ const injectedRtkApi = api.injectEndpoints({
 
 export { injectedRtkApi as api };
 export const {
-  useSettlementCashflowsQueryQuery,
-  useLazySettlementCashflowsQueryQuery,
+  useSettlementCashflowBlotterQueryQuery,
+  useLazySettlementCashflowBlotterQueryQuery,
   useSettlementGroupBlotterQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
 } = injectedRtkApi;

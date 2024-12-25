@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import {
-  useLazySettlementCashflowsQueryQuery,
+  useLazySettlementCashflowBlotterQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
 } from 'src/graphql-schemas/documents/ratan-settlement-query.generated';
 import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
@@ -11,7 +11,7 @@ import {
 } from '../utils/transform-payload';
 
 export const useQueryRouter = () => {
-  const [execSettlementCashflowsQuery] = useLazySettlementCashflowsQueryQuery();
+  const [execSettlementCashflowBlotterQuery] = useLazySettlementCashflowBlotterQueryQuery();
   const [execSettlementGroupBlotterQuery] =
     useLazySettlementGroupBlotterQueryQuery();
 
@@ -21,8 +21,8 @@ export const useQueryRouter = () => {
       for (const queryItem of schema.query.queries) {
         let response = null;
         switch (queryItem.queryApi.endpoint) {
-          case 'SettlementCashflowsQuery':
-            response = await execSettlementCashflowsQuery(
+          case 'SettlementCashflowBlotterQuery':
+            response = await execSettlementCashflowBlotterQuery(
               cashflowQueryPayloadTransform(queryItem.queryApi.payload),
             ).unwrap();
             break;
@@ -50,7 +50,7 @@ export const useQueryRouter = () => {
         schema,
       });
     },
-    [execSettlementCashflowsQuery, execSettlementGroupBlotterQuery],
+    [execSettlementCashflowBlotterQuery, execSettlementGroupBlotterQuery],
   );
 
   return {

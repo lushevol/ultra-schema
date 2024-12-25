@@ -199,7 +199,7 @@ import { DashboardEngine } from '@dashboard/engine';
 
 const engine = new DashboardEngine({
   apiRegistry: {
-    SettlementCashflowsQuery: (payload) => api.get('/settlements/cashflows', payload),
+    SettlementCashflowBlotterQuery: (payload) => api.get('/settlements/cashflows', payload),
     SettlementGroupBlotterQuery: (payload) => api.get('/settlements/blotter', payload)
   }
 });
