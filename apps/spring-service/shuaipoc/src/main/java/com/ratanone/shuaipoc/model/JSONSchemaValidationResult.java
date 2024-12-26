@@ -11,4 +11,12 @@ public class JSONSchemaValidationResult {
     this.valid = valid;
     this.messages = messages;
   }
+
+  public boolean getValid() {
+    return valid;
+  }
+
+  public List<ValidationMessage> getMessages() {
+    return messages;
+  }
 }

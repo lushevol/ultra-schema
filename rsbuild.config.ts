@@ -44,6 +44,10 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      '/api/json-schema/validate': {
+        target: LOCAL_SPRING_SERVICE,
+        secure: false,
+      },
       '/api/auth': {
         target: MFE_UAT,
         secure: false,
