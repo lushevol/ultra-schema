@@ -11,7 +11,8 @@ import {
 } from '../utils/transform-payload';
 
 export const useQueryRouter = () => {
-  const [execSettlementCashflowBlotterQuery] = useLazySettlementCashflowBlotterQueryQuery();
+  const [execSettlementCashflowBlotterQuery] =
+    useLazySettlementCashflowBlotterQueryQuery();
   const [execSettlementGroupBlotterQuery] =
     useLazySettlementGroupBlotterQueryQuery();
 

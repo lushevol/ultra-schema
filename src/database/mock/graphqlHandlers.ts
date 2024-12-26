@@ -16,4 +16,17 @@ export const graphqlHandlers = [
       },
     });
   }),
+  graphql.query('SettlementGroupBlotterQuery', ({ query, variables }) => {
+    return HttpResponse.json({
+      data: {
+        results: [],
+        pageInfo: {
+          totalHits: 0,
+          pageNo: 0,
+          pageSize: 1000,
+          lastPage: true,
+        },
+      },
+    });
+  }),
 ];
