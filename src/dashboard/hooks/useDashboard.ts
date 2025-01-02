@@ -16,12 +16,8 @@ export default function useDashboard(schema: RatanDashboardSchema) {
     [schema.panels, refreshPanelApi],
   );
 
-  const panelsPromiseWithRefresh = useMemo(() => {
-    
-  }, [panelsPromises, refreshPanelIds]);
-
   const { data: panelsData, isLoading: panelsLoading } =
-    usePromiseAll(panelsPromiseWithRefresh);
+    usePromiseAll(panelsPromises);
 
   return {
     title: schema.title,

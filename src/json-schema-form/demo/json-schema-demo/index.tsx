@@ -14,7 +14,9 @@ export default function JsonSchemaDemo() {
     JSON.stringify(userRegisterData, null, 2),
   );
   const [isValid, setIsValid] = useState<boolean | null>(null);
+  const [isValidFromBE, setIsValidFromBE] = useState<boolean | null>(null);
   const [errorMessages, setErrorMessages] = useState('');
+  const [errorMessagesFromBE, setErrorMessagesFromBE] = useState('');
 
   const handleValidate = () => {
     const validate = ajv.compile(JSON.parse(jsonSchema));
@@ -30,6 +32,25 @@ export default function JsonSchemaDemo() {
       ),
     );
     setIsValid(valid);
+  };
+
+  const handleValidateFromBE = async () => {
+    const response = await fetch('/api/json-schema/validate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ jsonSchema: jsonSchema, jsonData: jsonData }),
+    });
+    const data = await response.json();
+    setIsValidFromBE(data.valid);
+    setErrorMessagesFromBE(
+      JSON.stringify(
+        data.messages?.map((message: { message: string }) => message.message),
+        null,
+        2,
+      ),
+    );
   };
 
   return (
@@ -72,16 +93,45 @@ export default function JsonSchemaDemo() {
                 )}
               </div>
             )}
+            {isValidFromBE !== null && (
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h2 className="text-xl font-bold mb-3">
+                  Validation Result From BE
+                </h2>
+                {isValidFromBE ? (
+                  <div className="text-green-500 font-semibold">Valid</div>
+                ) : (
+                  <div className="text-red-500 font-semibold">Invalid</div>
+                )}
+                {!isValidFromBE && (
+                  <pre className="mt-2 p-3 bg-gray-100 rounded overflow-auto max-h-40">
+                    {errorMessagesFromBE}
+                  </pre>
+                )}
+              </div>
+            )}
           </div>
         </Col>
       </Row>
-      <Button
-        type="primary"
-        onClick={handleValidate}
-        className="px-6 py-2 shadow-sm hover:shadow-md transition-shadow"
-      >
-        Validate
-      </Button>
+      <Row gutter={16}>
+        <Col>
+          <Button
+            type="primary"
+            onClick={handleValidate}
+            className="px-6 py-2 shadow-sm hover:shadow-md transition-shadow"
+          >
+            Validate
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            onClick={handleValidateFromBE}
+            className="px-6 py-2 shadow-sm hover:shadow-md transition-shadow"
+          >
+            Validate From BE
+          </Button>
+        </Col>
+      </Row>
     </div>
   );
 }
