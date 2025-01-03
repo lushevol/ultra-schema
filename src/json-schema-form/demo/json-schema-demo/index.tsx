@@ -2,6 +2,7 @@ import { langs } from '@uiw/codemirror-extensions-langs';
 import CodeMirror from '@uiw/react-codemirror';
 import { Button, Col, Row } from 'antd';
 import { useState } from 'react';
+import { StyledForm } from 'src/json-schema-form/components/styled-form';
 import ajv from 'src/json-schema-form/utils/ajv';
 import userRegisterData from './user-register.json';
 import userRegisterSchema from './user-register.schema.json';
@@ -78,39 +79,55 @@ export default function JsonSchemaDemo() {
                 className="border rounded-lg shadow-sm"
               />
             </div>
-            {isValid !== null && (
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-xl font-bold mb-3">Validation Result</h2>
-                {isValid ? (
-                  <div className="text-green-500 font-semibold">Valid</div>
-                ) : (
-                  <div className="text-red-500 font-semibold">Invalid</div>
-                )}
-                {!isValid && (
-                  <pre className="mt-2 p-3 bg-gray-100 rounded overflow-auto max-h-40">
-                    {errorMessages}
-                  </pre>
-                )}
-              </div>
-            )}
-            {isValidFromBE !== null && (
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-xl font-bold mb-3">
-                  Validation Result From BE
-                </h2>
-                {isValidFromBE ? (
-                  <div className="text-green-500 font-semibold">Valid</div>
-                ) : (
-                  <div className="text-red-500 font-semibold">Invalid</div>
-                )}
-                {!isValidFromBE && (
-                  <pre className="mt-2 p-3 bg-gray-100 rounded overflow-auto max-h-40">
-                    {errorMessagesFromBE}
-                  </pre>
-                )}
-              </div>
-            )}
+            <div>
+              <h2 className="text-xl font-bold mb-3">JSON Data</h2>
+              <StyledForm
+                schema={JSON.parse(jsonSchema)}
+                formData={JSON.parse(jsonData)}
+                onChange={(e) =>
+                  setJsonData(JSON.stringify(e.formData, null, 2))
+                }
+              />
+            </div>
           </div>
+        </Col>
+      </Row>
+      <Row gutter={16} className="mb-6">
+        <Col span={12}>
+          {isValid !== null && (
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h2 className="text-xl font-bold mb-3">Validation Result</h2>
+              {isValid ? (
+                <div className="text-green-500 font-semibold">Valid</div>
+              ) : (
+                <div className="text-red-500 font-semibold">Invalid</div>
+              )}
+              {!isValid && (
+                <pre className="mt-2 p-3 bg-gray-100 rounded overflow-auto max-h-40">
+                  {errorMessages}
+                </pre>
+              )}
+            </div>
+          )}
+        </Col>
+        <Col span={12}>
+          {isValidFromBE !== null && (
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h2 className="text-xl font-bold mb-3">
+                Validation Result From BE
+              </h2>
+              {isValidFromBE ? (
+                <div className="text-green-500 font-semibold">Valid</div>
+              ) : (
+                <div className="text-red-500 font-semibold">Invalid</div>
+              )}
+              {!isValidFromBE && (
+                <pre className="mt-2 p-3 bg-gray-100 rounded overflow-auto max-h-40">
+                  {errorMessagesFromBE}
+                </pre>
+              )}
+            </div>
+          )}
         </Col>
       </Row>
       <Row gutter={16}>
