@@ -10,53 +10,51 @@
     "refreshInterval": {
       "type": "number"
     },
-    "context": {
-      "type": "object",
-      "properties": {
-        "globalFilters": {
-          "type": "array",
-          "items": {
+    "globalFilters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["SettlementCashflowBlotter", "SettlementGroupBlotter"]
+            }
+          },
+          "filter": {
             "type": "object",
             "properties": {
-              "domain": {
-                "type": "string",
-                "enum": ["SettlementCashflowBlotter", "SettlementGroupBlotter"]
+              "field": {
+                "type": "string"
               },
-              "filter": {
-                "type": "object",
-                "properties": {
-                  "field": {
-                    "type": "string"
-                  },
-                  "operator": {
-                    "type": "string",
-                    "enum": ["IN", "NOTIN", "EQ", "NE", "GT", "LT"]
-                  },
-                  "values": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
+              "operator": {
+                "type": "string",
+                "enum": ["IN", "NOTIN", "EQ", "NE", "GT", "LT"]
+              },
+              "values": {
+                "type": "array",
+                "items": {
+                  "type": "string"
                 }
               }
             }
           }
-        },
-        "deferredData": {
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "spotRateMap": {
           "type": "object",
           "properties": {
-            "spotRateMap": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "type": "string",
-                  "enum": ["api"]
-                },
-                "endpoint": {
-                  "type": "string"
-                }
-              }
+            "type": {
+              "type": "string",
+              "enum": ["api"]
+            },
+            "endpoint": {
+              "type": "string"
             }
           }
         }

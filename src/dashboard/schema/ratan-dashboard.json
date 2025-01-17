@@ -1,6 +1,22 @@
 {
   "title": "Ratan Dashboard",
   "refreshInterval": 60,
+  "globalFilters": [
+    {
+      "domain": ["SettlementCashflowBlotter"],
+      "filter": {
+        "field": "Cashflow.Cashflow_State",
+        "operator": "EQ",
+        "values": []
+      }
+    }
+  ],
+  "context": {
+    "spotRateMap": {
+      "type": "api",
+      "endpoint": "SpotRateMap"
+    }
+  },
   "panels": [
     {
       "id": "waiting-vd-today",

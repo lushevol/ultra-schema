@@ -179,9 +179,9 @@ type CommentsChange
 
 input FilterArg
 {
-    field: String
-    operator: Operator
-    values: [String]
+    field: String!
+    operator: Operator!
+    values: [String]!
 }
 
 enum Operator

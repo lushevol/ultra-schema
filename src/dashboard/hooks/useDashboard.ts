@@ -5,15 +5,14 @@ import { usePanelQuery } from './usePanel';
 import { usePromiseAll } from './usePromise';
 
 export default function useDashboard(schema: RatanDashboardSchema) {
-  const [refreshPanelIds, setRefreshPanelIds] = useState<string[]>([]);
   const { refreshPanel: refreshPanelApi } = usePanelQuery();
 
   const panelsPromises = useMemo<Promise<RatanDashboardPanel>[]>(
     () =>
       schema.panels
-        .map((panel) => refreshPanelApi(panel))
+        .map((panel) => refreshPanelApi(panel, schema.globalFilters))
         .filter((panel): panel is Promise<RatanDashboardPanel> => !!panel),
-    [schema.panels, refreshPanelApi],
+    [schema, refreshPanelApi],
   );
 
   const { data: panelsData, isLoading: panelsLoading } =
@@ -23,6 +22,7 @@ export default function useDashboard(schema: RatanDashboardSchema) {
     title: schema.title,
     description: schema.description,
     refreshInterval: schema.refreshInterval,
+    globalFilters: schema.globalFilters,
     panels: schema.panels,
     finalPanels: panelsData,
     panelsLoading,

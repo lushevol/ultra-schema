@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   useLazyExtendSessionQuery,
   useLazyLoginQuery,
@@ -46,6 +46,24 @@ export const useMFESession = () => {
     const resp = await reLoginQuery({ entities: [] });
     return resp.data;
   }, [reLoginQuery]);
+
+  // extend session
+  useEffect(() => {
+    let timer = null;
+    if (authToken) {
+      timer = setInterval(
+        () => {
+          extendSession();
+        },
+        10 * 60 * 1000,
+      );
+    }
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [authToken, extendSession]);
 
   return {
     userInfo,

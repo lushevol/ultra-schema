@@ -15,13 +15,19 @@ export const dashboardSlice = createSlice({
     schema: dashboardSchema,
     refreshInterval:
       dashboardSchema.refreshInterval ?? DEFAULT_REFRESH_INTERVAL,
-  } as DashboardRootType,
+  } as unknown as DashboardRootType,
   reducers: {
     setDashboardSchema: (
       state,
       action: PayloadAction<RatanDashboardSchema>,
     ) => {
       state.schema = action.payload;
+    },
+    setDashboardGlobalFilters: (
+      state,
+      action: PayloadAction<RatanDashboardSchema['globalFilters']>,
+    ) => {
+      state.schema.globalFilters = action.payload;
     },
     refreshDashboard: (state) => {
       state.schema = JSON.parse(JSON.stringify(state.schema));
@@ -35,6 +41,7 @@ export const dashboardSlice = createSlice({
 export const {
   setDashboardSchema,
   setDashboardRefreshInterval,
+  setDashboardGlobalFilters,
   refreshDashboard,
 } = dashboardSlice.actions;
 export default dashboardSlice.reducer;

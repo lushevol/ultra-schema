@@ -280,9 +280,9 @@ export type FmoComments = {
 };
 
 export type FilterArg = {
-  field?: InputMaybe<Scalars['String']['input']>;
-  operator?: InputMaybe<Operator>;
-  values?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  field: Scalars['String']['input'];
+  operator: Operator;
+  values: Array<InputMaybe<Scalars['String']['input']>>;
 };
 
 export type GenericConfig = {

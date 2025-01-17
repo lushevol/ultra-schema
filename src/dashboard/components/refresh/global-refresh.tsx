@@ -20,15 +20,15 @@ export const GlobalRefresh = () => {
         }}
         options={[
           {
-            label: '10 seconds',
+            label: '10s',
             value: 10,
           },
           {
-            label: '30 seconds',
+            label: '30s',
             value: 30,
           },
           {
-            label: '60 seconds',
+            label: '60s',
             value: 60,
           },
         ]}

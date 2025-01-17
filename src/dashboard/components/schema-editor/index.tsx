@@ -6,7 +6,7 @@ import { useState } from 'react';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
 import { useAppDispatch, useAppSelector } from 'src/store';
 import { setDashboardSchema } from 'src/store/slices/dashboard';
-import dashboardSchemaJSONSchema from '../../schema/dashboard.schema.json';
+import dashboardSchemaJSONSchema from '../../schema/ratan-dashboard.schema.json';
 
 export const SchemaEditor = () => {
   const schema = useAppSelector((state) => state.dashboard.schema);

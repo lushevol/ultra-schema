@@ -1,3 +1,5 @@
+import type { FilterArg } from 'src/rtk-query/types.generated';
+
 export type RatanDashboardPanelSchemaType =
   | 'table'
   | 'metric'
@@ -36,5 +38,14 @@ export type RatanDashboardSchema = {
   title: string;
   description?: string;
   refreshInterval?: number;
+  globalFilters: Array<RatanDashboardFilter>;
+  context: Record<string, unknown>;
   panels: RatanDashboardPanelSchema[];
 };
+
+export type RatanDashboardFilter = {
+  domain: BusinessDomain[];
+  filter: FilterArg;
+};
+
+type BusinessDomain = 'SettlementCashflowBlotter' | 'SettlementGroupBlotter';

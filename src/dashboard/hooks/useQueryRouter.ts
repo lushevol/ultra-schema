@@ -3,10 +3,13 @@ import {
   useLazySettlementCashflowBlotterQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
 } from 'src/graphql-schemas/documents/ratan-settlement-query.generated';
-import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
+import type {
+  RatanDashboardPanelSchema,
+  RatanDashboardSchema,
+} from '../types/dashboard-types';
 import { aggregationResult, transformResult } from '../utils/aggregation';
 import {
-  cashflowQueryPayloadTransform,
+  cashflowBlotterQueryPayloadTransform,
   groupBlotterQueryPayloadTransform,
 } from '../utils/transform-payload';
 
@@ -17,19 +20,36 @@ export const useQueryRouter = () => {
     useLazySettlementGroupBlotterQueryQuery();
 
   const execQuery = useCallback(
-    async (schema: RatanDashboardPanelSchema) => {
+    async (
+      schema: RatanDashboardPanelSchema,
+      globalFilters: RatanDashboardSchema['globalFilters'],
+    ) => {
       const result: any[] = [];
       for (const queryItem of schema.query.queries) {
         let response = null;
         switch (queryItem.queryApi.endpoint) {
           case 'SettlementCashflowBlotterQuery':
             response = await execSettlementCashflowBlotterQuery(
-              cashflowQueryPayloadTransform(queryItem.queryApi.payload),
+              cashflowBlotterQueryPayloadTransform(
+                queryItem.queryApi.payload,
+                globalFilters
+                  .filter((filter) =>
+                    filter.domain.includes('SettlementCashflowBlotter'),
+                  )
+                  .map((filter) => filter.filter),
+              ),
             ).unwrap();
             break;
           case 'SettlementGroupBlotterQuery':
             response = await execSettlementGroupBlotterQuery(
-              groupBlotterQueryPayloadTransform(queryItem.queryApi.payload),
+              groupBlotterQueryPayloadTransform(
+                queryItem.queryApi.payload,
+                globalFilters
+                  .filter((filter) =>
+                    filter.domain.includes('SettlementGroupBlotter'),
+                  )
+                  .map((filter) => filter.filter),
+              ),
             ).unwrap();
             break;
           default:

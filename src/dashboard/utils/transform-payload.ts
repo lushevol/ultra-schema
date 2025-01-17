@@ -1,6 +1,11 @@
 import dayjs from 'dayjs';
 import { cloneDeep } from 'lodash';
-import type { FilterArg, GroupMsgReq } from 'src/rtk-query/types.generated';
+import {
+  type FilterArg,
+  type GroupMsgReq,
+  Operator,
+} from 'src/rtk-query/types.generated';
+import type { RatanDashboardFilter } from '../types/dashboard-types';
 import { jexl } from './aggregation';
 
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -23,19 +28,28 @@ const transformValue = (val: string) => {
   return jexl.evalSync(val, { $CURRENT_DATE: today });
 };
 
-export const cashflowQueryPayloadTransform = (payload: {
-  filter?: FilterArg[] | FilterArg;
-  page: number;
-  size: number;
-}): typeof payload => {
+export const cashflowBlotterQueryPayloadTransform = (
+  payload: {
+    filter?: FilterArg[] | FilterArg;
+    page: number;
+    size: number;
+  },
+  globalFilters: Array<RatanDashboardFilter['filter']>,
+): typeof payload => {
   const payloadCopy = JSON.parse(JSON.stringify(payload));
+  const globalFiltersCopy = JSON.parse(JSON.stringify(globalFilters));
   if (Array.isArray(payloadCopy.filter)) {
-    (payloadCopy.filter as FilterArg[]).forEach((f) => {
+    payloadCopy.filter = [
+      ...(payloadCopy.filter as FilterArg[]),
+      ...globalFiltersCopy,
+    ].map((f) => {
       if (Array.isArray(f.values)) {
         f.values = f.values.map((i) => transformValue(i));
       } else if (typeof f.values === 'string') {
         f.values = transformValue(f.values);
       }
+
+      return f;
     });
   } else {
     if (Array.isArray(payloadCopy.filter?.values)) {
@@ -50,17 +64,26 @@ export const cashflowQueryPayloadTransform = (payload: {
   return payloadCopy;
 };
 
-export const groupBlotterQueryPayloadTransform = (payload: {
-  filter?: GroupMsgReq;
-  page: number;
-  size: number;
-}): typeof payload => {
+export const groupBlotterQueryPayloadTransform = (
+  payload: {
+    filter?: GroupMsgReq;
+    page: number;
+    size: number;
+  },
+  globalFilters: Array<RatanDashboardFilter['filter']>,
+): typeof payload => {
   const payloadCopy = JSON.parse(JSON.stringify(payload));
   if (payloadCopy.filter?.Value_Date) {
     payloadCopy.filter.Value_Date = transformValue(
       payloadCopy.filter.Value_Date,
     );
   }
+
+  globalFilters.forEach(({ field, operator, values }) => {
+    if ([Operator.Eq, Operator.In].includes(operator)) {
+      payloadCopy.filter[field] = values;
+    }
+  });
 
   return payloadCopy;
 };
