@@ -50,6 +50,28 @@ export type SettlementCashflowBlotterQueryQuery = {
   };
 };
 
+export type SettlementCashflowBlotterCountQueryQueryVariables = Types.Exact<{
+  filter?: Types.InputMaybe<
+    Array<Types.InputMaybe<Types.FilterArg>> | Types.InputMaybe<Types.FilterArg>
+  >;
+  page: Types.Scalars['Int']['input'];
+  size: Types.Scalars['Int']['input'];
+}>;
+
+export type SettlementCashflowBlotterCountQueryQuery = {
+  __typename?: 'Query';
+  cashflowsNew: {
+    __typename?: 'GraphCashFlowNew';
+    pageInfo: {
+      __typename?: 'ResultPageInfo';
+      totalHits: number;
+      pageNo: number;
+      pageSize: number;
+      lastPage: boolean;
+    };
+  };
+};
+
 export type SettlementGroupBlotterQueryQueryVariables = Types.Exact<{
   filter?: Types.InputMaybe<Types.GroupMsgReq>;
   page: Types.Scalars['Int']['input'];
@@ -69,6 +91,50 @@ export type SettlementGroupBlotterQueryQuery = {
       lastPage: boolean;
     };
   };
+};
+
+export type SettlementGroupBlotterCountQueryQueryVariables = Types.Exact<{
+  filter?: Types.InputMaybe<Types.GroupMsgReq>;
+  page: Types.Scalars['Int']['input'];
+  size: Types.Scalars['Int']['input'];
+}>;
+
+export type SettlementGroupBlotterCountQueryQuery = {
+  __typename?: 'Query';
+  groupMessages: {
+    __typename?: 'GroupMessages';
+    pageInfo: {
+      __typename?: 'ResultPageInfo';
+      totalHits: number;
+      pageNo: number;
+      pageSize: number;
+      lastPage: boolean;
+    };
+  };
+};
+
+export type SettlementExceptionCodeStatisticsQueryQueryVariables = Types.Exact<{
+  cashflowIds:
+    | Array<Types.Scalars['String']['input']>
+    | Types.Scalars['String']['input'];
+}>;
+
+export type SettlementExceptionCodeStatisticsQueryQuery = {
+  __typename?: 'Query';
+  exceptionCodeStatisticsByCashflowIds: Array<{
+    __typename?: 'ExceptionCodeStatistics';
+    exceptionCode: string;
+    count: number;
+  }>;
+};
+
+export type Rate2UsdQueryVariables = Types.Exact<{
+  ccy: Types.Scalars['String']['input'];
+}>;
+
+export type Rate2UsdQuery = {
+  __typename?: 'Query';
+  rate2usd?: { __typename?: 'Rate2USDMapping'; rate: number };
 };
 
 export const SettlementCashflowBlotterQueryDocument = `
@@ -95,6 +161,18 @@ export const SettlementCashflowBlotterQueryDocument = `
   }
 }
     `;
+export const SettlementCashflowBlotterCountQueryDocument = `
+    query SettlementCashflowBlotterCountQuery($filter: [FilterArg], $page: Int!, $size: Int!) {
+  cashflowsNew(filter: $filter, page: $page, size: $size) {
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+    `;
 export const SettlementGroupBlotterQueryDocument = `
     query SettlementGroupBlotterQuery($filter: GroupMsgReq, $page: Int!, $size: Int!) {
   groupMessages(filter: $filter, page: $page, size: $size) {
@@ -107,6 +185,33 @@ export const SettlementGroupBlotterQueryDocument = `
       pageSize
       lastPage
     }
+  }
+}
+    `;
+export const SettlementGroupBlotterCountQueryDocument = `
+    query SettlementGroupBlotterCountQuery($filter: GroupMsgReq, $page: Int!, $size: Int!) {
+  groupMessages(filter: $filter, page: $page, size: $size) {
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+    `;
+export const SettlementExceptionCodeStatisticsQueryDocument = `
+    query SettlementExceptionCodeStatisticsQuery($cashflowIds: [String!]!) {
+  exceptionCodeStatisticsByCashflowIds(cashflowIds: $cashflowIds) {
+    exceptionCode
+    count
+  }
+}
+    `;
+export const Rate2UsdDocument = `
+    query Rate2USD($ccy: String!) {
+  rate2usd(ccy: $ccy) {
+    rate
   }
 }
     `;
@@ -123,6 +228,15 @@ const injectedRtkApi = api.injectEndpoints({
         variables,
       }),
     }),
+    SettlementCashflowBlotterCountQuery: build.query<
+      SettlementCashflowBlotterCountQueryQuery,
+      SettlementCashflowBlotterCountQueryQueryVariables
+    >({
+      query: (variables) => ({
+        document: SettlementCashflowBlotterCountQueryDocument,
+        variables,
+      }),
+    }),
     SettlementGroupBlotterQuery: build.query<
       SettlementGroupBlotterQueryQuery,
       SettlementGroupBlotterQueryQueryVariables
@@ -132,6 +246,27 @@ const injectedRtkApi = api.injectEndpoints({
         variables,
       }),
     }),
+    SettlementGroupBlotterCountQuery: build.query<
+      SettlementGroupBlotterCountQueryQuery,
+      SettlementGroupBlotterCountQueryQueryVariables
+    >({
+      query: (variables) => ({
+        document: SettlementGroupBlotterCountQueryDocument,
+        variables,
+      }),
+    }),
+    SettlementExceptionCodeStatisticsQuery: build.query<
+      SettlementExceptionCodeStatisticsQueryQuery,
+      SettlementExceptionCodeStatisticsQueryQueryVariables
+    >({
+      query: (variables) => ({
+        document: SettlementExceptionCodeStatisticsQueryDocument,
+        variables,
+      }),
+    }),
+    Rate2USD: build.query<Rate2UsdQuery, Rate2UsdQueryVariables>({
+      query: (variables) => ({ document: Rate2UsdDocument, variables }),
+    }),
   }),
 });
 
@@ -139,6 +274,14 @@ export { injectedRtkApi as api };
 export const {
   useSettlementCashflowBlotterQueryQuery,
   useLazySettlementCashflowBlotterQueryQuery,
+  useSettlementCashflowBlotterCountQueryQuery,
+  useLazySettlementCashflowBlotterCountQueryQuery,
   useSettlementGroupBlotterQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
+  useSettlementGroupBlotterCountQueryQuery,
+  useLazySettlementGroupBlotterCountQueryQuery,
+  useSettlementExceptionCodeStatisticsQueryQuery,
+  useLazySettlementExceptionCodeStatisticsQueryQuery,
+  useRate2UsdQuery,
+  useLazyRate2UsdQuery,
 } = injectedRtkApi;

@@ -25,6 +25,21 @@ query SettlementCashflowBlotterQuery(
   }
 }
 
+query SettlementCashflowBlotterCountQuery(
+  $filter: [FilterArg]
+  $page: Int!
+  $size: Int!
+) {
+  cashflowsNew(filter: $filter, page: $page, size: $size) {
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+
 query SettlementGroupBlotterQuery(
   $filter: GroupMsgReq
   $page: Int!
@@ -40,5 +55,33 @@ query SettlementGroupBlotterQuery(
       pageSize
       lastPage
     }
+  }
+}
+
+query SettlementGroupBlotterCountQuery(
+  $filter: GroupMsgReq
+  $page: Int!
+  $size: Int!
+) {
+  groupMessages(filter: $filter, page: $page, size: $size) {
+    pageInfo {
+      totalHits
+      pageNo
+      pageSize
+      lastPage
+    }
+  }
+}
+
+query SettlementExceptionCodeStatisticsQuery($cashflowIds: [String!]!) {
+  exceptionCodeStatisticsByCashflowIds(cashflowIds: $cashflowIds) {
+    exceptionCode
+    count
+  }
+}
+
+query Rate2USD($ccy: String!) {
+  rate2usd(ccy: $ccy) {
+    rate
   }
 }

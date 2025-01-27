@@ -1,6 +1,10 @@
 import { useCallback } from 'react';
 import {
+  useLazyRate2UsdQuery,
+  useLazySettlementCashflowBlotterCountQueryQuery,
   useLazySettlementCashflowBlotterQueryQuery,
+  useLazySettlementExceptionCodeStatisticsQueryQuery,
+  useLazySettlementGroupBlotterCountQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
 } from 'src/graphql-schemas/documents/ratan-settlement-query.generated';
 import type {
@@ -16,8 +20,15 @@ import {
 export const useQueryRouter = () => {
   const [execSettlementCashflowBlotterQuery] =
     useLazySettlementCashflowBlotterQueryQuery();
+  const [execSettlementCashflowBlotterCountQuery] =
+    useLazySettlementCashflowBlotterCountQueryQuery();
   const [execSettlementGroupBlotterQuery] =
     useLazySettlementGroupBlotterQueryQuery();
+  const [execSettlementGroupBlotterCountQuery] =
+    useLazySettlementGroupBlotterCountQueryQuery();
+  const [execSettlementExceptionCodeStatisticsQuery] =
+    useLazySettlementExceptionCodeStatisticsQueryQuery();
+  const [execRate2USDQuery] = useLazyRate2UsdQuery();
 
   const execQuery = useCallback(
     async (
@@ -40,8 +51,32 @@ export const useQueryRouter = () => {
               ),
             ).unwrap();
             break;
+          case 'SettlementCashflowBlotterCountQuery':
+            response = await execSettlementCashflowBlotterCountQuery(
+              cashflowBlotterQueryPayloadTransform(
+                queryItem.queryApi.payload,
+                globalFilters
+                  .filter((filter) =>
+                    filter.domain.includes('SettlementCashflowBlotter'),
+                  )
+                  .map((filter) => filter.filter),
+              ),
+            ).unwrap();
+            break;
           case 'SettlementGroupBlotterQuery':
             response = await execSettlementGroupBlotterQuery(
+              groupBlotterQueryPayloadTransform(
+                queryItem.queryApi.payload,
+                globalFilters
+                  .filter((filter) =>
+                    filter.domain.includes('SettlementGroupBlotter'),
+                  )
+                  .map((filter) => filter.filter),
+              ),
+            ).unwrap();
+            break;
+          case 'SettlementGroupBlotterCountQuery':
+            response = await execSettlementGroupBlotterCountQuery(
               groupBlotterQueryPayloadTransform(
                 queryItem.queryApi.payload,
                 globalFilters
@@ -71,7 +106,12 @@ export const useQueryRouter = () => {
         schema,
       });
     },
-    [execSettlementCashflowBlotterQuery, execSettlementGroupBlotterQuery],
+    [
+      execSettlementCashflowBlotterQuery,
+      execSettlementGroupBlotterQuery,
+      execSettlementCashflowBlotterCountQuery,
+      execSettlementGroupBlotterCountQuery,
+    ],
   );
 
   return {

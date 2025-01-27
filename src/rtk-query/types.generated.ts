@@ -120,6 +120,15 @@ export type AffirmationInfo = {
   Phone_Email?: Maybe<Scalars['String']['output']>;
 };
 
+export type CashflowException = {
+  __typename?: 'CashflowException';
+  entityId: Scalars['String']['output'];
+  exceptionCategory: Scalars['String']['output'];
+  exceptionCode: Scalars['String']['output'];
+  exceptionType: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+};
+
 export type CashflowFailedNum = {
   __typename?: 'CashflowFailedNum';
   External_PriorDates_Num?: Maybe<Scalars['Int']['output']>;
@@ -258,6 +267,12 @@ export type EntityInfo = {
   Counterparty_Source_System_Entity_Id?: Maybe<Scalars['String']['output']>;
   General_Ledger_Business_Unit_Name?: Maybe<Scalars['String']['output']>;
   Person?: Maybe<Person>;
+};
+
+export type ExceptionCodeStatistics = {
+  __typename?: 'ExceptionCodeStatistics';
+  count: Scalars['Int']['output'];
+  exceptionCode: Scalars['String']['output'];
 };
 
 export type ExceptionNum = {
@@ -489,10 +504,13 @@ export type Query = {
   cashflowDashboard: GraphCashFlowDashBoard;
   cashflowsNew: GraphCashFlowNew;
   componentCashflow: GraphCashFlowNew;
+  exceptionCodeStatisticsByCashflowIds: Array<ExceptionCodeStatistics>;
+  exceptionsByCashflowIds: Array<CashflowException>;
   genericConfig?: Maybe<GenericConfig>;
   genericConfigs?: Maybe<UltraQueryResult>;
   graphCashFlowDetails: Array<Maybe<GraphCashFlowDetails>>;
   groupMessages: GroupMessages;
+  rate2usd?: Maybe<Rate2UsdMapping>;
   trackingRecords: Array<TrackingRecord>;
 };
 
@@ -518,6 +536,14 @@ export type QueryComponentCashflowArgs = {
   size: Scalars['Int']['input'];
 };
 
+export type QueryExceptionCodeStatisticsByCashflowIdsArgs = {
+  cashflowIds: Array<Scalars['String']['input']>;
+};
+
+export type QueryExceptionsByCashflowIdsArgs = {
+  cashflowIds: Array<Scalars['String']['input']>;
+};
+
 export type QueryGenericConfigArgs = {
   key: Scalars['String']['input'];
 };
@@ -534,6 +560,10 @@ export type QueryGroupMessagesArgs = {
   filter?: InputMaybe<GroupMsgReq>;
   page: Scalars['Int']['input'];
   size: Scalars['Int']['input'];
+};
+
+export type QueryRate2usdArgs = {
+  ccy: Scalars['String']['input'];
 };
 
 export type QueryTrackingRecordsArgs = {
@@ -554,6 +584,11 @@ export type RatanException = {
   Original_Exception_Id?: Maybe<Scalars['String']['output']>;
   Stashing?: Maybe<Stashing>;
   Status?: Maybe<Scalars['String']['output']>;
+};
+
+export type Rate2UsdMapping = {
+  __typename?: 'Rate2USDMapping';
+  rate: Scalars['Float']['output'];
 };
 
 export type ResultNew = {

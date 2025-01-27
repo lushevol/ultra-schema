@@ -1,0 +1,18 @@
+type Query {
+    exceptionsByCashflowIds(cashflowIds: [String!]!): [CashflowException!]!
+    exceptionCodeStatisticsByCashflowIds(cashflowIds: [String!]!): [ExceptionCodeStatistics!]!
+}
+
+type CashflowException {
+    id: String!
+    # Cashflow id
+    entityId: String!
+    exceptionCode: String!
+    exceptionType: String!
+    exceptionCategory: String!
+}
+
+type ExceptionCodeStatistics {
+    exceptionCode: String!
+    count: Int!
+}

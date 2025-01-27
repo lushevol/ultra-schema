@@ -22,10 +22,18 @@ export type RatanDashboardPanelSchema = {
   };
 };
 
+type RatanDashboardQueryEndpoint =
+  | 'SettlementCashflowBlotterQuery'
+  | 'SettlementCashflowBlotterCountQuery'
+  | 'SettlementGroupBlotterQuery'
+  | 'SettlementGroupBlotterCountQuery'
+  | 'SettlementExceptionCodeStatisticsQuery'
+  | 'Rate2USDQuery';
+
 export type RatanDashboardQueryType = {
   queries: {
     queryApi: {
-      endpoint: string;
+      endpoint: RatanDashboardQueryEndpoint;
       payload: Record<string, unknown>;
       body: string[];
     };
@@ -44,8 +52,10 @@ export type RatanDashboardSchema = {
 };
 
 export type RatanDashboardFilter = {
-  domain: BusinessDomain[];
+  domain: FilterBusinessDomain[];
   filter: FilterArg;
 };
 
-type BusinessDomain = 'SettlementCashflowBlotter' | 'SettlementGroupBlotter';
+type FilterBusinessDomain =
+  | 'SettlementCashflowBlotter'
+  | 'SettlementGroupBlotter';

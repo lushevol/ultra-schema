@@ -1,0 +1,7 @@
+type Query {
+    rate2usd(ccy: String!): Rate2USDMapping
+}
+
+type Rate2USDMapping {
+    rate: Float!
+}
