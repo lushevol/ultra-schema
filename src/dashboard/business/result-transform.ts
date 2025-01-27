@@ -60,6 +60,53 @@ type CashflowVolumeAndExceptionTableRowType = {
   vd_rest: number;
 };
 
+export const transformCashflowVolume = (
+  results: number[],
+): ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType> => {
+  if (!Array.isArray(results))
+    return {
+      headers: CashflowVolumeAndExceptionTableHeader,
+      rows: [],
+    };
+
+  return results.reduce<
+    ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType>
+  >(
+    (acc, cur, index) => {
+      switch (index) {
+        case 0:
+          acc.rows[0].vd_today = cur;
+          break;
+        case 1:
+          acc.rows[0].vd_tmr = cur;
+          break;
+        case 2:
+          acc.rows[0].vd_2 = cur;
+          break;
+        case 3:
+          acc.rows[0].vd_rest = cur;
+          break;
+
+        default:
+          break;
+      }
+      return acc;
+    },
+    {
+      headers: CashflowVolumeAndExceptionTableHeader,
+      rows: [
+        {
+          label: 'Cashflow Volume',
+          vd_today: 0,
+          vd_tmr: 0,
+          vd_2: 0,
+          vd_rest: 0,
+        },
+      ],
+    },
+  );
+};
+
 export const transformCashflowVolumeAndException = (
   results: ResultNew[],
 ): ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType> => {
