@@ -1,7 +1,6 @@
 import type { ColumnsType } from 'antd/es/table';
+import type { SimpleJSON } from '../types/base-types';
 import type { PanelTableData } from '../types/panel-types';
-
-type SimpleJSON = Record<string, string | number | boolean>;
 
 export type ArrayDataWithHeader<T extends SimpleJSON = SimpleJSON> = {
   headers: ColumnsType;

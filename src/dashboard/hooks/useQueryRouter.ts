@@ -7,15 +7,22 @@ import {
   useLazySettlementGroupBlotterCountQueryQuery,
   useLazySettlementGroupBlotterQueryQuery,
 } from 'src/graphql-schemas/documents/ratan-settlement-query.generated';
+import type { FilterArg } from 'src/rtk-query/types.generated';
 import type {
+  CashflowBlotterGraphQLPayloadType,
+  GroupBlotterGraphQLPayloadType,
+} from '../business/business-types';
+import {
+  cashflowBlotterQueryPayloadTransform,
+  groupBlotterQueryPayloadTransform,
+} from '../business/payload-transform';
+import type {
+  FilterBusinessDomain,
+  RatanDashboardFilter,
   RatanDashboardPanelSchema,
   RatanDashboardSchema,
 } from '../types/dashboard-types';
 import { aggregationResult, transformResult } from '../utils/aggregation';
-import {
-  cashflowBlotterQueryPayloadTransform,
-  groupBlotterQueryPayloadTransform,
-} from '../utils/transform-payload';
 
 export const useQueryRouter = () => {
   const [execSettlementCashflowBlotterQuery] =
@@ -35,55 +42,39 @@ export const useQueryRouter = () => {
       schema: RatanDashboardPanelSchema,
       globalFilters: RatanDashboardSchema['globalFilters'],
     ) => {
-      const result: any[] = [];
+      const result: unknown[] = [];
       for (const queryItem of schema.query.queries) {
         let response = null;
         switch (queryItem.queryApi.endpoint) {
           case 'SettlementCashflowBlotterQuery':
             response = await execSettlementCashflowBlotterQuery(
               cashflowBlotterQueryPayloadTransform(
-                queryItem.queryApi.payload,
-                globalFilters
-                  .filter((filter) =>
-                    filter.domain.includes('SettlementCashflowBlotter'),
-                  )
-                  .map((filter) => filter.filter),
+                queryItem.queryApi.payload as CashflowBlotterGraphQLPayloadType,
+                filterGlobalFilters(globalFilters, 'SettlementCashflowBlotter'),
               ),
             ).unwrap();
             break;
           case 'SettlementCashflowBlotterCountQuery':
             response = await execSettlementCashflowBlotterCountQuery(
               cashflowBlotterQueryPayloadTransform(
-                queryItem.queryApi.payload,
-                globalFilters
-                  .filter((filter) =>
-                    filter.domain.includes('SettlementCashflowBlotter'),
-                  )
-                  .map((filter) => filter.filter),
+                queryItem.queryApi.payload as CashflowBlotterGraphQLPayloadType,
+                filterGlobalFilters(globalFilters, 'SettlementCashflowBlotter'),
               ),
             ).unwrap();
             break;
           case 'SettlementGroupBlotterQuery':
             response = await execSettlementGroupBlotterQuery(
               groupBlotterQueryPayloadTransform(
-                queryItem.queryApi.payload,
-                globalFilters
-                  .filter((filter) =>
-                    filter.domain.includes('SettlementGroupBlotter'),
-                  )
-                  .map((filter) => filter.filter),
+                queryItem.queryApi.payload as GroupBlotterGraphQLPayloadType,
+                filterGlobalFilters(globalFilters, 'SettlementGroupBlotter'),
               ),
             ).unwrap();
             break;
           case 'SettlementGroupBlotterCountQuery':
             response = await execSettlementGroupBlotterCountQuery(
               groupBlotterQueryPayloadTransform(
-                queryItem.queryApi.payload,
-                globalFilters
-                  .filter((filter) =>
-                    filter.domain.includes('SettlementGroupBlotter'),
-                  )
-                  .map((filter) => filter.filter),
+                queryItem.queryApi.payload as GroupBlotterGraphQLPayloadType,
+                filterGlobalFilters(globalFilters, 'SettlementGroupBlotter'),
               ),
             ).unwrap();
             break;
@@ -102,7 +93,7 @@ export const useQueryRouter = () => {
 
       return await aggregationResult({
         result,
-        aggregation: schema.query.aggregation,
+        resultTransform: schema.query.resultTransform,
         schema,
       });
     },
@@ -117,4 +108,13 @@ export const useQueryRouter = () => {
   return {
     execQuery,
   };
+};
+
+const filterGlobalFilters = (
+  globalFilters: RatanDashboardFilter[],
+  domain: FilterBusinessDomain,
+): FilterArg[] => {
+  return globalFilters
+    .filter((filter) => filter.domain.includes(domain))
+    .map((filter) => filter.filter);
 };

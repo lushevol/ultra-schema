@@ -1,15 +1,24 @@
 import jexl from 'jexl';
+import type { BasicType, SimpleJSON } from '../types/base-types';
 import type { RatanDashboardPanelSchema } from '../types/dashboard-types';
 import type { RatanDashboardPanelDataTypes } from '../types/panel-types';
 import { convertPanelTimelineChartData } from './panelLineChartDataConvertor';
 import { convertPanelMetricsData } from './panelMetricsDataConvertor';
 import { convertPanelPieChartData } from './panelPieDataConvertor';
-import { convertPanelTableData } from './panelTableDataConvertor';
+import {
+  type ArrayDataWithHeader,
+  convertPanelTableData,
+} from './panelTableDataConvertor';
 
+/**
+ * transform result base on the resultTransform
+ * @param params
+ * @returns
+ */
 export const transformResult = (params: {
-  response: any;
+  response: unknown;
   resultTransform: string;
-  previousResults: any[];
+  previousResults: unknown[];
   schema: RatanDashboardPanelSchema;
 }) => {
   return jexl.eval(params.resultTransform, {
@@ -21,13 +30,15 @@ export const transformResult = (params: {
 
 export const panelDataConvertor = (
   panel: RatanDashboardPanelSchema,
-  data: any,
+  data: unknown,
 ): RatanDashboardPanelDataTypes => {
   switch (panel.type) {
     case 'table':
-      return convertPanelTableData(data);
+      return convertPanelTableData(
+        data as ArrayDataWithHeader<SimpleJSON> | SimpleJSON[],
+      );
     case 'metric':
-      return convertPanelMetricsData(data, panel);
+      return convertPanelMetricsData(data as BasicType, panel);
     case 'pie':
       return convertPanelPieChartData(data);
     case 'timeline':
@@ -39,14 +50,14 @@ export const panelDataConvertor = (
 
 export const aggregationResult = ({
   result,
-  aggregation,
+  resultTransform,
   schema,
 }: {
-  result: any[];
-  aggregation: string;
+  result: unknown[];
+  resultTransform: string;
   schema: RatanDashboardPanelSchema;
 }) => {
-  return jexl.eval(aggregation, { result, schema });
+  return jexl.eval(resultTransform, { result, schema });
 };
 
 jexl.addTransform('sortRowsBy', (val, params) => {

@@ -11,6 +11,7 @@ export type RatanDashboardPanelSchema = {
   title: string;
   subTitle?: string;
   unit?: 'percentage' | 'amount';
+  domain: FilterBusinessDomain;
   type: RatanDashboardPanelSchemaType;
   query: RatanDashboardQueryType;
   hide?: boolean;
@@ -39,7 +40,7 @@ export type RatanDashboardQueryType = {
     };
     resultTransform: string;
   }[];
-  aggregation: string;
+  resultTransform: string;
 };
 
 export type RatanDashboardSchema = {
@@ -56,6 +57,6 @@ export type RatanDashboardFilter = {
   filter: FilterArg;
 };
 
-type FilterBusinessDomain =
+export type FilterBusinessDomain =
   | 'SettlementCashflowBlotter'
   | 'SettlementGroupBlotter';

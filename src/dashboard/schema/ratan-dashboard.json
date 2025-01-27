@@ -27,7 +27,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -49,7 +49,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 0,
@@ -67,7 +67,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -89,7 +89,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 1,
@@ -107,7 +107,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -129,7 +129,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 2,
@@ -147,7 +147,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -169,7 +169,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 3,
@@ -187,7 +187,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -216,7 +216,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 4,
@@ -234,7 +234,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -256,7 +256,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 5,
@@ -274,7 +274,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -296,7 +296,7 @@
             "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 6,
@@ -314,7 +314,7 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementGroupBlotterQuery",
+              "endpoint": "SettlementGroupBlotterCountQuery",
               "payload": {
                 "filter": {
                   "Status": ["PENDING"],
@@ -328,7 +328,7 @@
             "resultTransform": "response.groupMessages.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 7,
@@ -346,11 +346,10 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementGroupBlotterQuery",
+              "endpoint": "SettlementGroupBlotterCountQuery",
               "payload": {
                 "filter": {
-                  "Status": ["PENDING"],
-                  "Group_Status": ["PENDING", "PENDING_PRE_GROUP"]
+                  "Status": ["ERROR"]
                 },
                 "page": 0,
                 "size": 1
@@ -360,7 +359,7 @@
             "resultTransform": "response.groupMessages.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 8,
@@ -378,12 +377,12 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementGroupBlotterQuery",
+              "endpoint": "SettlementGroupBlotterCountQuery",
               "payload": {
                 "filter": {
                   "Status": ["PENDING"],
                   "Group_Status": ["PENDING_TRADE_VALIDATION"],
-                  "Value_Date": "$CURRENT_DATE ++ 1"
+                  "Value_Date": "$CURRENT_DATE +wd 1"
                 },
                 "page": 0,
                 "size": 1
@@ -393,7 +392,7 @@
             "resultTransform": "response.groupMessages.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 9,
@@ -411,7 +410,100 @@
         "queries": [
           {
             "queryApi": {
-              "endpoint": "SettlementCashflowBlotterQuery",
+              "endpoint": "SettlementCashflowBlotterCountQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exception"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowBlotterCountQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE +wd 1"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exception"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowBlotterCountQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE +wd 1"]
+                  }
+                ],
+                "page": 0,
+                "size": 1
+              },
+              "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exception"]
+            },
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementCashflowBlotterCountQuery",
               "payload": {
                 "filter": [
                   {
@@ -430,18 +522,18 @@
                   {
                     "field": "Cashflow.Payment_Date",
                     "operator": "BET",
-                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
+                    "values": ["$CURRENT_DATE +wd 3", "$CURRENT_DATE +wd 5"]
                   }
                 ],
                 "page": 0,
-                "size": 1000
+                "size": 1
               },
               "body": ["Cashflow.Payment_Date", "Cashflow.NSTP_Exception"]
             },
-            "resultTransform": "response.cashflowsNew.results|transformCashflowVolumeAndException"
+            "resultTransform": "response.cashflowsNew.pageInfo.totalHits"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result|transformCashflowVolume"
       },
       "layout": {
         "x": 0,
@@ -494,7 +586,7 @@
             "resultTransform": "response.cashflowsNew.results|transformTopExposure|sortRowsBy('amount')|firstRows(5)"
           }
         ],
-        "aggregation": "result[0]"
+        "resultTransform": "result[0]"
       },
       "layout": {
         "x": 0,
