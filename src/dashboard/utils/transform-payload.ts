@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import { cloneDeep } from 'lodash';
 import {
   type FilterArg,
   type GroupMsgReq,
@@ -7,21 +6,27 @@ import {
 } from 'src/rtk-query/types.generated';
 import type { RatanDashboardFilter } from '../types/dashboard-types';
 import { jexl } from './aggregation';
+import { getDateByWorkdayOffset } from './utils';
 
-const DATE_FORMAT = 'YYYY-MM-DD';
+export const DATE_FORMAT = 'YYYY-MM-DD';
 
-jexl.addBinaryOp('++', 20, (left, right) => {
-  return dayjs(left)
-    .add(right as number, 'day')
-    .format(DATE_FORMAT);
+jexl.addBinaryOp('+d', 20, (left, right) => {
+  return dayjs(left).add(Number(right), 'day').format(DATE_FORMAT);
 });
 
-jexl.addBinaryOp('--', 20, (left, right) => {
-  return dayjs(left)
-    .subtract(right as number, 'day')
-    .format(DATE_FORMAT);
+jexl.addBinaryOp('-d', 20, (left, right) => {
+  return dayjs(left).subtract(Number(right), 'day').format(DATE_FORMAT);
 });
 
+jexl.addBinaryOp('+wd', 20, (left, right) => {
+  return getDateByWorkdayOffset(Number(right), left);
+});
+
+jexl.addBinaryOp('-wd', 20, (left, right) => {
+  return getDateByWorkdayOffset(-Number(right), left);
+});
+
+// convert $CURRENT_DATE to current date
 const transformValue = (val: string) => {
   if (!val.includes('$')) return val;
   const today = dayjs().format(DATE_FORMAT);
@@ -44,7 +49,7 @@ export const cashflowBlotterQueryPayloadTransform = (
       ...globalFiltersCopy,
     ].map((f) => {
       if (Array.isArray(f.values)) {
-        f.values = f.values.map((i) => transformValue(i));
+        f.values = f.values.map((i: string) => transformValue(i));
       } else if (typeof f.values === 'string') {
         f.values = transformValue(f.values);
       }
@@ -53,7 +58,7 @@ export const cashflowBlotterQueryPayloadTransform = (
     });
   } else {
     if (Array.isArray(payloadCopy.filter?.values)) {
-      payloadCopy.filter.values = payloadCopy.filter.values.map((i) =>
+      payloadCopy.filter.values = payloadCopy.filter.values.map((i: string) =>
         transformValue(i),
       );
     } else if (typeof payloadCopy.filter?.values === 'string') {

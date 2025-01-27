@@ -10,6 +10,7 @@ import {
   type ArrayDataWithHeader,
   convertPanelTableData,
 } from './panelTableDataConvertor';
+import { getDateByWorkdayOffset } from './utils';
 
 export const transformResult = (params: {
   response: any;
@@ -52,28 +53,6 @@ export const aggregationResult = ({
   schema: RatanDashboardPanelSchema;
 }) => {
   return jexl.eval(aggregation, { result, schema });
-};
-
-/**
- * Return the date string by the workday offset from today
- * @param offset - The offset of the workday
- * @returns The date string
- * @description offset = 0: today, offset > 0: future workday, offset < 0: past workday
- * @example today is Friday, getDateByWorkdayOffset(1) => next Monday
- * @example today is Tuesday, getDateByWorkdayOffset(-2) => last Friday
- */
-export const getDateByWorkdayOffset = (offset: number) => {
-  let currentDate = dayjs().startOf('day');
-  let remainingDays = Math.abs(offset);
-  while (remainingDays > 0) {
-    currentDate =
-      offset > 0 ? currentDate.add(1, 'day') : currentDate.subtract(1, 'day');
-    const dayOfWeek = currentDate.day();
-    if (![0, 6].includes(dayOfWeek)) {
-      remainingDays--;
-    }
-  }
-  return currentDate.format('YYYY-MM-DD');
 };
 
 const getVDCategory = (
