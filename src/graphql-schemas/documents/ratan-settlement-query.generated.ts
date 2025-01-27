@@ -114,25 +114,23 @@ export type SettlementGroupBlotterCountQueryQuery = {
 };
 
 export type SettlementExceptionCodeStatisticsQueryQueryVariables = Types.Exact<{
-  cashflowIds:
-    | Array<Types.Scalars['String']['input']>
-    | Types.Scalars['String']['input'];
+  filter: Array<Types.FilterArg> | Types.FilterArg;
 }>;
 
 export type SettlementExceptionCodeStatisticsQueryQuery = {
   __typename?: 'Query';
-  exceptionCodeStatisticsByCashflowIds: Array<{
+  exceptionCodeStatisticsByFilter: Array<{
     __typename?: 'ExceptionCodeStatistics';
     exceptionCode: string;
     count: number;
   }>;
 };
 
-export type Rate2UsdQueryVariables = Types.Exact<{
+export type Rate2usdQueryVariables = Types.Exact<{
   ccy: Types.Scalars['String']['input'];
 }>;
 
-export type Rate2UsdQuery = {
+export type Rate2usdQuery = {
   __typename?: 'Query';
   rate2usd?: { __typename?: 'Rate2USDMapping'; rate: number };
 };
@@ -201,15 +199,15 @@ export const SettlementGroupBlotterCountQueryDocument = `
 }
     `;
 export const SettlementExceptionCodeStatisticsQueryDocument = `
-    query SettlementExceptionCodeStatisticsQuery($cashflowIds: [String!]!) {
-  exceptionCodeStatisticsByCashflowIds(cashflowIds: $cashflowIds) {
+    query SettlementExceptionCodeStatisticsQuery($filter: [FilterArg!]!) {
+  exceptionCodeStatisticsByFilter(filter: $filter) {
     exceptionCode
     count
   }
 }
     `;
-export const Rate2UsdDocument = `
-    query Rate2USD($ccy: String!) {
+export const Rate2usdDocument = `
+    query Rate2usd($ccy: String!) {
   rate2usd(ccy: $ccy) {
     rate
   }
@@ -264,8 +262,8 @@ const injectedRtkApi = api.injectEndpoints({
         variables,
       }),
     }),
-    Rate2USD: build.query<Rate2UsdQuery, Rate2UsdQueryVariables>({
-      query: (variables) => ({ document: Rate2UsdDocument, variables }),
+    Rate2usd: build.query<Rate2usdQuery, Rate2usdQueryVariables>({
+      query: (variables) => ({ document: Rate2usdDocument, variables }),
     }),
   }),
 });
@@ -282,6 +280,6 @@ export const {
   useLazySettlementGroupBlotterCountQueryQuery,
   useSettlementExceptionCodeStatisticsQueryQuery,
   useLazySettlementExceptionCodeStatisticsQueryQuery,
-  useRate2UsdQuery,
-  useLazyRate2UsdQuery,
+  useRate2usdQuery,
+  useLazyRate2usdQuery,
 } = injectedRtkApi;

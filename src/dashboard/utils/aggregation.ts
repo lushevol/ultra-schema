@@ -9,6 +9,7 @@ import {
   type ArrayDataWithHeader,
   convertPanelTableData,
 } from './panelTableDataConvertor';
+import '../business/result-transform';
 
 /**
  * transform result base on the resultTransform

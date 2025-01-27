@@ -1,26 +1,22 @@
-import dayjs from 'dayjs';
-import type { ResultNew } from 'src/rtk-query/types.generated';
+import type {
+  ExceptionCodeStatistics,
+  ResultNew,
+} from 'src/rtk-query/types.generated';
 import { jexl } from '../utils/aggregation';
 import type { ArrayDataWithHeader } from '../utils/panelTableDataConvertor';
-import { getDateByWorkdayOffset } from '../utils/utils';
 
 const getVDCategory = (
-  paymentDate: string,
-  vdToday: string,
-  vdTomorrow: string,
-  vdDayAfterTomorrow: string,
-) => {
-  switch (true) {
-    case dayjs(paymentDate).isSame(vdToday, 'day'):
+  index: number,
+): 'vd_today' | 'vd_tmr' | 'vd_2' | 'vd_rest' => {
+  switch (index) {
+    case 0:
       return 'vd_today';
-    case dayjs(paymentDate).isSame(vdTomorrow, 'day'):
+    case 1:
       return 'vd_tmr';
-    case dayjs(paymentDate).isSame(vdDayAfterTomorrow, 'day'):
+    case 2:
       return 'vd_2';
-    case dayjs(paymentDate).isAfter(vdDayAfterTomorrow, 'day'):
-      return 'vd_rest';
     default:
-      return null;
+      return 'vd_rest';
   }
 };
 
@@ -73,23 +69,7 @@ export const transformCashflowVolume = (
     ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType>
   >(
     (acc, cur, index) => {
-      switch (index) {
-        case 0:
-          acc.rows[0].vd_today = cur;
-          break;
-        case 1:
-          acc.rows[0].vd_tmr = cur;
-          break;
-        case 2:
-          acc.rows[0].vd_2 = cur;
-          break;
-        case 3:
-          acc.rows[0].vd_rest = cur;
-          break;
-
-        default:
-          break;
-      }
+      acc.rows[0][getVDCategory(index)] = cur;
       return acc;
     },
     {
@@ -107,65 +87,39 @@ export const transformCashflowVolume = (
   );
 };
 
-export const transformCashflowVolumeAndException = (
-  results: ResultNew[],
+export const transformCashflowExceptionStatistics = (
+  results: Array<Array<ExceptionCodeStatistics>>,
 ): ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType> => {
   if (!Array.isArray(results))
     return {
       headers: CashflowVolumeAndExceptionTableHeader,
       rows: [],
     };
-  const vdToday = getDateByWorkdayOffset(0);
-  const vdTomorrow = getDateByWorkdayOffset(1);
-  const vdDayAfterTomorrow = getDateByWorkdayOffset(2);
+
   return results.reduce<
     ArrayDataWithHeader<CashflowVolumeAndExceptionTableRowType>
   >(
-    (acc, cur) => {
-      const paymentDate = cur.Cashflow?.Payment_Date;
-      const exception = cur.Cashflow?.NSTP_Exception;
-      if (paymentDate) {
-        const vdc = getVDCategory(
-          paymentDate,
-          vdToday,
-          vdTomorrow,
-          vdDayAfterTomorrow,
-        );
-        if (vdc) {
-          acc.rows[0][vdc] += 1;
-          if (exception) {
-            const exceptions = exception.split(';').map((e) => e.trim());
-            exceptions.forEach((e) => {
-              const row = acc.rows.find((row) => row.label === e);
-              if (row) {
-                row[vdc] += 1;
-              } else {
-                acc.rows.push({
-                  label: e,
-                  vd_rest: 0,
-                  vd_today: 0,
-                  vd_tmr: 0,
-                  vd_2: 0,
-                  [vdc]: 1,
-                });
-              }
-            });
-          }
+    (acc, cur, index) => {
+      cur.forEach(({ exceptionCode, count }) => {
+        const row = acc.rows.find((row) => row.label === exceptionCode);
+        if (row) {
+          row[getVDCategory(index)] = count;
+        } else {
+          acc.rows.push({
+            label: exceptionCode,
+            vd_rest: 0,
+            vd_today: 0,
+            vd_tmr: 0,
+            vd_2: 0,
+            [getVDCategory(index)]: count,
+          });
         }
-      }
+      });
       return acc;
     },
     {
       headers: CashflowVolumeAndExceptionTableHeader,
-      rows: [
-        {
-          label: 'Cashflow Volume',
-          vd_today: 0,
-          vd_tmr: 0,
-          vd_2: 0,
-          vd_rest: 0,
-        },
-      ],
+      rows: [],
     },
   );
 };
@@ -187,6 +141,7 @@ const TopExposureTableHeader = [
     key: 'amount',
   },
 ];
+
 type TopExposureTableRowType = {
   counterpartyFMCODE: string;
   clientType: string;
@@ -245,9 +200,9 @@ const transformTopExposure = (
   );
 };
 
+jexl.addTransform('transformCashflowVolume', transformCashflowVolume);
 jexl.addTransform(
-  'transformCashflowVolumeAndException',
-  transformCashflowVolumeAndException,
+  'transformCashflowExceptionStatistics',
+  transformCashflowExceptionStatistics,
 );
-
 jexl.addTransform('transformTopExposure', transformTopExposure);

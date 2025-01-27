@@ -73,14 +73,14 @@ query SettlementGroupBlotterCountQuery(
   }
 }
 
-query SettlementExceptionCodeStatisticsQuery($cashflowIds: [String!]!) {
-  exceptionCodeStatisticsByCashflowIds(cashflowIds: $cashflowIds) {
+query SettlementExceptionCodeStatisticsQuery($filter: [FilterArg!]!) {
+  exceptionCodeStatisticsByFilter(filter: $filter) {
     exceptionCode
     count
   }
 }
 
-query Rate2USD($ccy: String!) {
+query Rate2usd($ccy: String!) {
   rate2usd(ccy: $ccy) {
     rate
   }

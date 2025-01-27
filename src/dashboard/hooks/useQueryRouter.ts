@@ -1,6 +1,7 @@
+import { filter } from 'lodash';
 import { useCallback } from 'react';
 import {
-  useLazyRate2UsdQuery,
+  useLazyRate2usdQuery,
   useLazySettlementCashflowBlotterCountQueryQuery,
   useLazySettlementCashflowBlotterQueryQuery,
   useLazySettlementExceptionCodeStatisticsQueryQuery,
@@ -35,7 +36,7 @@ export const useQueryRouter = () => {
     useLazySettlementGroupBlotterCountQueryQuery();
   const [execSettlementExceptionCodeStatisticsQuery] =
     useLazySettlementExceptionCodeStatisticsQueryQuery();
-  const [execRate2USDQuery] = useLazyRate2UsdQuery();
+  const [execRate2USDQuery] = useLazyRate2usdQuery();
 
   const execQuery = useCallback(
     async (
@@ -78,6 +79,13 @@ export const useQueryRouter = () => {
               ),
             ).unwrap();
             break;
+          case 'SettlementExceptionCodeStatisticsQuery':
+            response = await execSettlementExceptionCodeStatisticsQuery(
+              queryItem.queryApi.payload as {
+                filter: FilterArg[];
+              },
+            ).unwrap();
+            break;
           default:
             break;
         }
@@ -102,6 +110,7 @@ export const useQueryRouter = () => {
       execSettlementGroupBlotterQuery,
       execSettlementCashflowBlotterCountQuery,
       execSettlementGroupBlotterCountQuery,
+      execSettlementExceptionCodeStatisticsQuery,
     ],
   );
 

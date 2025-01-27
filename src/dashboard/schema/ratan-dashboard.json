@@ -285,7 +285,7 @@
                   {
                     "field": "Cashflow.Payment_Date",
                     "operator": "BET",
-                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 7"]
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE +wd 5"]
                   }
                 ],
                 "page": 0,
@@ -543,6 +543,135 @@
       }
     },
     {
+      "id": "cashflow-exception-today-table",
+      "title": "Exceptions Statistics",
+      "type": "table",
+      "domain": "SettlementCashflowBlotter",
+      "query": {
+        "queries": [
+          {
+            "queryApi": {
+              "endpoint": "SettlementExceptionCodeStatisticsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE"]
+                  }
+                ]
+              }
+            },
+            "resultTransform": "response.exceptionCodeStatisticsByFilter"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementExceptionCodeStatisticsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE +wd 1"]
+                  }
+                ]
+              }
+            },
+            "resultTransform": "response.exceptionCodeStatisticsByFilter"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementExceptionCodeStatisticsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "EQ",
+                    "values": ["$CURRENT_DATE +wd 2"]
+                  }
+                ]
+              }
+            },
+            "resultTransform": "response.exceptionCodeStatisticsByFilter"
+          },
+          {
+            "queryApi": {
+              "endpoint": "SettlementExceptionCodeStatisticsQuery",
+              "payload": {
+                "filter": [
+                  {
+                    "field": "Cashflow.Cashflow_State",
+                    "operator": "NOTIN",
+                    "values": [
+                      "NETTED",
+                      "SETTLED",
+                      "CANCELLED",
+                      "RELEASED",
+                      "DEAD",
+                      "SWIFT_SUPPRESSED",
+                      "CASHFLOW_SUPPRESSED"
+                    ]
+                  },
+                  {
+                    "field": "Cashflow.Payment_Date",
+                    "operator": "BET",
+                    "values": ["$CURRENT_DATE +wd 3", "$CURRENT_DATE +wd 5"]
+                  }
+                ]
+              }
+            },
+            "resultTransform": "response.exceptionCodeStatisticsByFilter"
+          }
+        ],
+        "resultTransform": "result|transformCashflowExceptionStatistics"
+      },
+      "layout": {
+        "x": 0,
+        "y": 3,
+        "w": 6,
+        "h": 2
+      }
+    },
+    {
       "id": "top-exposure-table",
       "title": "Top Exposure Table",
       "type": "table",
@@ -570,7 +699,7 @@
                   {
                     "field": "Cashflow.Payment_Date",
                     "operator": "BET",
-                    "values": ["$CURRENT_DATE", "$CURRENT_DATE ++ 1"]
+                    "values": ["$CURRENT_DATE", "$CURRENT_DATE +wd 1"]
                   }
                 ],
                 "page": 0,
@@ -589,7 +718,7 @@
         "resultTransform": "result[0]"
       },
       "layout": {
-        "x": 0,
+        "x": 6,
         "y": 1,
         "w": 6,
         "h": 2

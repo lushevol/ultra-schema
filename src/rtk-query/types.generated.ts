@@ -505,6 +505,7 @@ export type Query = {
   cashflowsNew: GraphCashFlowNew;
   componentCashflow: GraphCashFlowNew;
   exceptionCodeStatisticsByCashflowIds: Array<ExceptionCodeStatistics>;
+  exceptionCodeStatisticsByFilter: Array<ExceptionCodeStatistics>;
   exceptionsByCashflowIds: Array<CashflowException>;
   genericConfig?: Maybe<GenericConfig>;
   genericConfigs?: Maybe<UltraQueryResult>;
@@ -538,6 +539,10 @@ export type QueryComponentCashflowArgs = {
 
 export type QueryExceptionCodeStatisticsByCashflowIdsArgs = {
   cashflowIds: Array<Scalars['String']['input']>;
+};
+
+export type QueryExceptionCodeStatisticsByFilterArgs = {
+  filter: Array<FilterArg>;
 };
 
 export type QueryExceptionsByCashflowIdsArgs = {

@@ -1,6 +1,7 @@
 type Query {
     exceptionsByCashflowIds(cashflowIds: [String!]!): [CashflowException!]!
     exceptionCodeStatisticsByCashflowIds(cashflowIds: [String!]!): [ExceptionCodeStatistics!]!
+    exceptionCodeStatisticsByFilter(filter:[FilterArg!]!): [ExceptionCodeStatistics!]!
 }
 
 type CashflowException {
