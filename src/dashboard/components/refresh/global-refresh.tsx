@@ -1,5 +1,6 @@
 import { ReloadOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
+import { useRatanDashboardContext } from 'src/dashboard/hooks/useContext';
 import { useAppDispatch, useAppSelector } from 'src/store';
 import {
   refreshDashboard,
@@ -7,9 +8,9 @@ import {
 } from 'src/store/slices/dashboard';
 
 export const GlobalRefresh = () => {
-  const refreshInterval = useAppSelector(
-    (state) => state.dashboard.refreshInterval,
-  );
+  const {
+    schema: { refreshInterval },
+  } = useRatanDashboardContext();
   const dispatch = useAppDispatch();
   return (
     <div>

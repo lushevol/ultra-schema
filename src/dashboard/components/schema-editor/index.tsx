@@ -3,13 +3,14 @@ import validator from '@rjsf/validator-ajv8';
 import { Button, Divider, Drawer } from 'antd';
 import type { JSONSchema7 } from 'json-schema';
 import { useState } from 'react';
+import { useRatanDashboardContext } from 'src/dashboard/hooks/useContext';
 import type { RatanDashboardSchema } from 'src/dashboard/types/dashboard-types';
-import { useAppDispatch, useAppSelector } from 'src/store';
+import { useAppDispatch } from 'src/store';
 import { setDashboardSchema } from 'src/store/slices/dashboard';
 import dashboardSchemaJSONSchema from '../../schema/ratan-dashboard.schema.json';
 
 export const SchemaEditor = () => {
-  const schema = useAppSelector((state) => state.dashboard.schema);
+  const { schema } = useRatanDashboardContext();
   const dispath = useAppDispatch();
   const [open, setOpen] = useState(false);
   return (

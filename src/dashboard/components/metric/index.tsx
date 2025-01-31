@@ -1,5 +1,4 @@
-import { Statistic } from 'antd';
-import { usePanelClick } from 'src/dashboard/hooks/usePanel';
+import { useRatanDashboardContext } from 'src/dashboard/hooks/useContext';
 import type {
   PanelMetricData,
   RatanDashboardPanel,
@@ -9,7 +8,7 @@ export const MetricPanel = ({
   data,
   schema,
 }: { data: PanelMetricData; schema: RatanDashboardPanel }) => {
-  const { onPanelClick } = usePanelClick();
+  const { onPanelClick } = useRatanDashboardContext();
   return (
     <div>
       <div className="metric-sub-title">{data.subTitle}</div>

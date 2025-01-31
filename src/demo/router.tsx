@@ -27,7 +27,7 @@ export const DemoRouter = () => {
             path="/dashboard-demo"
             element={
               <RequireAuth>
-                <DashboardDemo onPanelClick={console.log} />
+                <DashboardDemo />
               </RequireAuth>
             }
           />
