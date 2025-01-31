@@ -20,9 +20,9 @@
   "panels": [
     {
       "id": "waiting-vd-today",
-      "title": "Waiting VD Today",
       "type": "metric",
       "domain": "SettlementCashflowBlotter",
+      "subTitle": "Waiting VD Today",
       "query": {
         "queries": [
           {

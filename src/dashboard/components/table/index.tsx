@@ -1,8 +1,14 @@
 import { Table } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import type { PanelTableData } from 'src/dashboard/types/panel-types';
+import type {
+  PanelTableData,
+  RatanDashboardPanel,
+} from 'src/dashboard/types/panel-types';
 
-export const TablePanel = ({ columns, rows }: PanelTableData) => {
+export const TablePanel = ({
+  columns,
+  rows,
+  schema,
+}: PanelTableData & { schema: RatanDashboardPanel }) => {
   return (
     <Table
       columns={columns}

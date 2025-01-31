@@ -1,4 +1,5 @@
 import { TrackUsingDemo } from 'packages/ratan-track-using/src/demo';
+import type { JSX } from 'react';
 import {
   BrowserRouter,
   Navigate,
@@ -26,7 +27,7 @@ export const DemoRouter = () => {
             path="/dashboard-demo"
             element={
               <RequireAuth>
-                <DashboardDemo />
+                <DashboardDemo onPanelClick={console.log} />
               </RequireAuth>
             }
           />

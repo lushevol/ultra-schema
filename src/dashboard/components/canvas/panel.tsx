@@ -36,10 +36,13 @@ const PanelContent = ({ panel }: { panel: RatanDashboardPanel }) => {
         <TablePanel
           rows={(panel.data as PanelTableData).rows}
           columns={(panel.data as PanelTableData).columns}
+          schema={panel}
         />
       );
     case 'metric':
-      return <MetricPanel data={panel.data as PanelMetricData} />;
+      return (
+        <MetricPanel data={panel.data as PanelMetricData} schema={panel} />
+      );
     case 'pie':
       return (
         <div className="panel-pie-chart">

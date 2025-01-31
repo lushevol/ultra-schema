@@ -1,4 +1,5 @@
-import { useCallback } from 'react';
+import { createContext, useCallback, useContext } from 'react';
+import type { ClickMetadata } from '../types/click';
 import type {
   RatanDashboardPanelSchema,
   RatanDashboardSchema,
@@ -22,5 +23,22 @@ export const usePanelQuery = () => {
 
   return {
     refreshPanel,
+  };
+};
+
+export const PanelClickContext = createContext<
+  (schema: RatanDashboardPanel, metadata: ClickMetadata) => void
+>(() => {});
+
+const usePanelClickContext = () => {
+  const onPanelClick = useContext(PanelClickContext);
+  return onPanelClick;
+};
+
+export const usePanelClick = () => {
+  const onPanelClick = usePanelClickContext();
+
+  return {
+    onPanelClick,
   };
 };
